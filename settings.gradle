@@ -1,1 +1,1 @@
-include ':app', ':generatingmain'
+include ':app', ':generatingmain', ':MultImPick'

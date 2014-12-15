@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="@color/bg_light_blue"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
+
+    <include
+        layout="@layout/titlebar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/image_id"
+        android:layout_marginTop="20dp"
+        android:layout_width="@dimen/image_width"
+        android:layout_height="@dimen/image_height"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rec_test"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/photo_width"
+        android:layout_marginTop="20dp"
+        android:scrollbars="vertical"/>
+
+    <Button
+        android:id="@+id/btnGalleryPickMul"
+        style="@style/btn"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/add"/>
+
+</LinearLayout><!-- From: file:/Users/intern/Downloads/MultipleImagePick-master1/MultipleImagePick-master1/MultipleImagePick-master1/app/src/main/res/layout/main.xml -->

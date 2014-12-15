@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- From: file:/Users/intern/Downloads/MultipleImagePick-master1/MultipleImagePick-master1/MultipleImagePick-master1/app/src/main/res/values-hdpi/dimens.xml -->
-    <eat-comment/>
-    <dimen name="image_height">220dp</dimen>
-    <dimen name="image_width">220dp</dimen>
-    <dimen name="photo_height">110dp</dimen>
-    <dimen name="photo_width">110dp</dimen>
-</resources>

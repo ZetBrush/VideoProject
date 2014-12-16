@@ -17,7 +17,48 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: zetbrush.com.generatingmain" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72fc5020-b0b6-4323-a8d2-c9b1ff08b9ab" name="Default" comment="˚">
+    <list default="true" id="72fc5020-b0b6-4323-a8d2-c9b1ff08b9ab" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-hdpi/add.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-ldpi/add.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-mdpi/add.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-hdpi/document.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-ldpi/document.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-mdpi/document.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-hdpi/document_gray.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-ldpi/document_gray.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-mdpi/document_gray.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-hdpi/folder.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-ldpi/folder.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-mdpi/folder.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-hdpi/ic_launcher.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-ldpi/ic_launcher.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-mdpi/ic_launcher.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-hdpi/no.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-ldpi/no.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-mdpi/no.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-hdpi/tick.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-ldpi/tick.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-mdpi/tick.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/AndroidManifest.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/build/generated/source/buildConfig/debug/ar/com/daidalos/afiledialog/BuildConfig.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/build/generated/source/buildConfig/release/ar/com/daidalos/afiledialog/BuildConfig.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/build/generated/source/buildConfig/test/debug/ar/com/daidalos/afiledialog/test/BuildConfig.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/java/ar/com/daidalos/afiledialog/FileChooser.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/java/ar/com/daidalos/afiledialog/FileChooserActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/java/ar/com/daidalos/afiledialog/FileChooserCore.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/java/ar/com/daidalos/afiledialog/FileChooserDialog.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/java/ar/com/daidalos/afiledialog/FileChooserLabels.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/java/ar/com/daidalos/afiledialog/view/FileItem.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/build/generated/source/r/debug/ar/com/daidalos/afiledialog/R.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/build/generated/source/r/release/ar/com/daidalos/afiledialog/R.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/build/generated/source/r/test/debug/ar/com/daidalos/afiledialog/R.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/build/generated/source/r/test/debug/ar/com/daidalos/afiledialog/test/R.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/build.gradle" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/layout/daidalos_file_chooser.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/layout/daidalos_file_item.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/values/strings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/values-es/strings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/aFileDialog/src/main/res/values-fr/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="jcodec-2.iws" />
@@ -2861,7 +2902,11 @@
       <created>1418744472003</created>
       <updated>1418744472003</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="˚">
+      <created>1418744613621</created>
+      <updated>1418744613621</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -2886,10 +2931,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="25" y="22" width="1636" height="973" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905483" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32905483" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905483" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -2900,16 +2945,16 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905483" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32905483" sideWeight="0.5683814" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905483" sideWeight="0.5683814" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905483" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23337516" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23337516" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905483" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32905483" sideWeight="0.4309912" order="14" side_tool="true" content_ui="tabs" />
+      <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32905483" sideWeight="0.5" order="14" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />

@@ -8,30 +8,18 @@ should evaluate whether these are still needed in your project and if
 so manually move them:
 
 * .DS_Store
-* android/
-* android/.DS_Store
-* android/org/
-* android/org/.DS_Store
-* android/org/jcodec/
-* android/org/jcodec/api/
-* android/org/jcodec/api/android/
-* android/org/jcodec/api/android/FrameGrab.java
-* android/org/jcodec/api/android/SequenceEncoder.java
-* android/org/jcodec/api/android/SequenceMuxer.java
-* android/org/jcodec/common/
-* android/org/jcodec/common/AndroidUtil.java
-* android/org/jcodec/scale/
-* android/org/jcodec/scale/BitmapUtil.java
-* proguard-project.txt
+* lgpl-3.0.txt
+* proguard.cfg
 
 Moved Files:
 ------------
 Android Gradle projects use a different directory structure than ADT
 Eclipse projects. Here's how the projects were restructured:
 
-* AndroidManifest.xml => app/src/main/AndroidManifest.xml
-* res/ => app/src/main/res/
-* src/ => app/src/main/java/
+* AndroidManifest.xml => aFileDialog/src/main/AndroidManifest.xml
+* lint.xml => aFileDialog/lint.xml
+* res/ => aFileDialog/src/main/res/
+* src/ => aFileDialog/src/main/java/
 
 Next Steps:
 -----------

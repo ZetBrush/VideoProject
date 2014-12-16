@@ -42,10 +42,13 @@ public class SequenceEncoder {
         this.ch = NIOUtils.writableFileChannel(out);
 
         // Muxer that will store the encoded frames
-        muxer = new MP4Muxer(ch, Brand.MP4);
+        muxer = new MP4Muxer(ch, Brand.MOV);
 
         // Add video track to muxer
-        outTrack = muxer.addTrackForCompressed(TrackType.VIDEO, 25);
+        outTrack = muxer.addTrackForCompressed(TrackType.VIDEO, 3);
+
+
+
 
         // Allocate a buffer big enough to hold output frames
         _out = ByteBuffer.allocate(1920 * 1080 * 6);
@@ -81,6 +84,7 @@ public class SequenceEncoder {
         H264Utils.wipePS(result, spsList, ppsList);
         H264Utils.encodeMOVPacket(result);
 
+
         // Add packet to video track
         outTrack.addFrame(new MP4Packet(result, frameNo, 25, 1, frameNo, true, null, frameNo, 0));
 
@@ -90,7 +94,6 @@ public class SequenceEncoder {
     public void finish() throws IOException {
         // Push saved SPS/PPS to a special storage in MP4
         outTrack.addSampleEntry(H264Utils.createMOVSampleEntry(spsList, ppsList));
-
         // Write MP4 header and finalize recording
         muxer.writeHeader();
         NIOUtils.closeQuietly(ch);

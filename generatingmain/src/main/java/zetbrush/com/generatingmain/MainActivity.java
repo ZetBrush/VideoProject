@@ -1,42 +1,43 @@
 package zetbrush.com.generatingmain;
 
+import android.app.Dialog;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import org.jcodec.codecs.h264.H264Encoder;
-import org.jcodec.codecs.h264.H264Utils;
+
+import org.jcodec.api.JCodecException;
+import org.jcodec.api.android.FrameGrab;
+import org.jcodec.api.android.SequenceEncoder;
 import org.jcodec.common.FileChannelWrapper;
 import org.jcodec.common.NIOUtils;
-import org.jcodec.common.model.ColorSpace;
 
-
-import org.jcodec.common.model.Picture;
-import org.jcodec.containers.mp4.TrackType;
-import org.jcodec.containers.mp4.Brand;
-import org.jcodec.containers.mp4.MP4Packet;
-import org.jcodec.containers.mp4.muxer.FramesMP4MuxerTrack;
-import org.jcodec.containers.mp4.muxer.MP4Muxer;
-import org.jcodec.scale.RgbToYuv420p;
-
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
+import ar.com.daidalos.afiledialog.FileChooserDialog;
+import ar.com.daidalos.afiledialog.FileChooserDialog.OnFileSelectedListener;
 
 public class MainActivity extends ActionBarActivity {
 
     Button makeVideoButton;
     Button playButton;
-
+    private volatile boolean flag;
 
 
     @Override
@@ -63,9 +64,66 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    private class Encoder extends AsyncTask<File, Integer, Integer> {
+        private static final String TAG = "ENCODER";
+
+        protected Integer doInBackground(File... params) {
+            SequenceEncoder se = null;
+            try {
+                se = new SequenceEncoder(new File(params[0].getParentFile(),
+                        "vid_enc.mp4"));
+                for (int i = 0; !flag; i++) {
+                    File img = new File(params[0].getParentFile(),
+                            String.format(params[0].getName(), i));
+                    if (!img.exists())
+                        break;
+                    Bitmap frame = BitmapFactory.decodeFile(img
+                            .getAbsolutePath());
+                    se.encodeImage(frame);
+
+                    publishProgress(i);
+
+                }
+                se.finish();
+            } catch (IOException e) {
+                Log.e(TAG, "IO", e);
+            }
+
+            return 0;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            //progress.setText(String.valueOf(values[0]));
+        }
+    }
+
+
     public void makevideoClick(View v){
 
-        try{
+        FileChooserDialog dialog = new FileChooserDialog(v.getContext());
+        dialog.addListener(new FileChooserDialog.OnFileSelectedListener() {
+            @Override
+            public void onFileSelected(Dialog source, File folder, String name) {
+            }
+
+            @Override
+            public void onFileSelected(Dialog source, File file) {
+                source.hide();
+                String digits = file.getName().replaceAll("\\D+(\\d+)\\D+",
+                        "$1");
+                String mask = file.getName().replaceAll("(\\D+)\\d+(\\D+)",
+                        "$1%0" + digits.length() + "d$2");
+
+                new Encoder().execute(new File(file.getParentFile(), mask));
+            }
+        });
+        dialog.show();
+    }
+
+
+
+       /* try{
 
             int fps=24;
             RgbToYuv420p transform = new RgbToYuv420p(0, 0);
@@ -89,7 +147,7 @@ public class MainActivity extends ActionBarActivity {
 
             final int numberOfimage = 2;
 
-            String path= "assets/me";
+            String path= "src/main/";
             int num = 0;
             Picture rgb = null;
 
@@ -103,7 +161,8 @@ public class MainActivity extends ActionBarActivity {
                 try {
 
                     AssetManager assetMgr = this.getAssets();
-                    InputStream istr = assetMgr.open("image_"+"/"+String.format("%03d", i + 1)+".png");
+
+                    InputStream istr = assetMgr.open("image_" + String.format("%03d", i + 1) + ".png");
                     bitmap = BitmapFactory.decodeStream(istr);
                     //  bitmap=bitmap.copy(Bitmap.Config.ARGB_8888,true);
                 }
@@ -145,13 +204,13 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-                // ByteBuffer result = encoder.encodeFrame(_out, yuv); //toEncode
+              // ByteBuffer result = encoder.encodeFrame(_out, yuv); //toEncode
 
                 //  yuv = null;
                 spsList.clear();
                 ppsList.clear();
 
-                H264Utils.encodeMOVPacket(result, spsList, ppsList);
+                H264Utils.encodeMOVPacket(result,spsList,ppsList);
                 outTrack.addFrame(new MP4Packet(result,num,(int)fps, 1, num, true, null, num, 0));
                 result = null;
                 System.gc();
@@ -169,20 +228,12 @@ public class MainActivity extends ActionBarActivity {
         } catch (Exception e) {
             e.printStackTrace();
 
-        }
-
-    }
-
-
-    }
+        }*/
 
 
 
 
-
-
-
-    static void makeDirectory(String dir)
+  /*  static void makeDirectory(String dir)
     {
         File extBaseDir = Environment.getExternalStorageDirectory();
         File file = new File(extBaseDir.getAbsoluteFile()+"/"+dir);
@@ -201,7 +252,7 @@ public class MainActivity extends ActionBarActivity {
         makeDirectory(filePatho);
         File file = new File(extBaseDir.getAbsoluteFile()+filePatho);
         return new File(file.getAbsolutePath()+"/"+fileName);//file;
-    }
+    }*/
 
 
 
@@ -227,5 +278,53 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+
+    private class Decoder extends AsyncTask<File, Integer, Integer> {
+        private static final String TAG = "DECODER";
+
+        protected Integer doInBackground(File... params) {
+            FileChannelWrapper ch = null;
+            try {
+                ch = NIOUtils.readableFileChannel(params[0]);
+                FrameGrab frameGrab = new FrameGrab(ch);
+                FrameGrab.MediaInfo mi = frameGrab.getMediaInfo();
+                Bitmap frame = Bitmap.createBitmap(mi.getDim().getWidth(), mi
+                        .getDim().getHeight(), Bitmap.Config.ARGB_8888);
+
+                for (int i = 0; !flag; i++) {
+                    frameGrab.getFrame(frame);
+                    if (frame == null)
+                        break;
+                    OutputStream os = null;
+                    try {
+                        os = new BufferedOutputStream(new FileOutputStream(
+                                new File(params[0].getParentFile(),
+                                        String.format("img%08d.jpg", i))));
+                        frame.compress(Bitmap.CompressFormat.JPEG, 90, os);
+                    } finally {
+                        if (os != null)
+                            os.close();
+                    }
+                    publishProgress(i);
+
+                }
+            } catch (IOException e) {
+                Log.e(TAG, "IO", e);
+            } catch (JCodecException e) {
+                Log.e(TAG, "JCodec", e);
+
+            } finally {
+                NIOUtils.closeQuietly(ch);
+            }
+            return 0;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            //progress.setText(String.valueOf(values[0]));
+        }
     }
 }

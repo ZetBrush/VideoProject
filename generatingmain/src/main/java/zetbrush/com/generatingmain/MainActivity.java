@@ -1,19 +1,17 @@
 package zetbrush.com.generatingmain;
 
 import android.app.Dialog;
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.os.Environment;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-
+import android.widget.TextView;
 
 import org.jcodec.api.JCodecException;
 import org.jcodec.api.android.FrameGrab;
@@ -25,18 +23,15 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
 
 import ar.com.daidalos.afiledialog.FileChooserDialog;
-import ar.com.daidalos.afiledialog.FileChooserDialog.OnFileSelectedListener;
 
 public class MainActivity extends ActionBarActivity {
 
-    Button makeVideoButton;
-    Button playButton;
+    private Button makeVideoButton;
+    private  Button playButton;
+    private TextView progress;
     private volatile boolean flag;
 
 
@@ -46,7 +41,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
        makeVideoButton = (Button)findViewById(R.id.makeVideoBut);
-
+        progress = (TextView)findViewById(R.id.progress);
 
 
 
@@ -63,15 +58,17 @@ public class MainActivity extends ActionBarActivity {
 
 
     }
-
+    private static int count =0;
     private class Encoder extends AsyncTask<File, Integer, Integer> {
         private static final String TAG = "ENCODER";
 
         protected Integer doInBackground(File... params) {
+
             SequenceEncoder se = null;
             try {
                 se = new SequenceEncoder(new File(params[0].getParentFile(),
                         "vid_enc.mp4"));
+
                 for (int i = 0; !flag; i++) {
                     File img = new File(params[0].getParentFile(),
                             String.format(params[0].getName(), i));
@@ -89,13 +86,16 @@ public class MainActivity extends ActionBarActivity {
                 Log.e(TAG, "IO", e);
             }
 
+            progress.setText("done!");
             return 0;
         }
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-            //progress.setText(String.valueOf(values[0]));
+            progress.setText("processed "+String.valueOf(values[0]));
         }
+
+
     }
 
 
@@ -120,7 +120,6 @@ public class MainActivity extends ActionBarActivity {
         });
         dialog.show();
     }
-
 
 
        /* try{

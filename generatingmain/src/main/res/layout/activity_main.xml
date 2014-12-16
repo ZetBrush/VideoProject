@@ -16,9 +16,11 @@
             android:layout_gravity="center_horizontal|bottom"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true" />
+
     </FrameLayout>
-    
+
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
@@ -41,7 +43,13 @@
             android:onClick="makevideoClick"
             android:layout_weight="1"/>
 
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progress"
+            android:textSize="15sp"
+            android:text="ready"
+            android:layout_marginRight="0dp"/>
         </LinearLayout>
 
 

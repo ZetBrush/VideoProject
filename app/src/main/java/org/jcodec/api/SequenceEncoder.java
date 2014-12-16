@@ -1,10 +1,5 @@
 package org.jcodec.api;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
-
 import org.jcodec.codecs.h264.H264Encoder;
 import org.jcodec.codecs.h264.H264Utils;
 import org.jcodec.common.NIOUtils;
@@ -18,6 +13,11 @@ import org.jcodec.containers.mp4.muxer.FramesMP4MuxerTrack;
 import org.jcodec.containers.mp4.muxer.MP4Muxer;
 import org.jcodec.scale.ColorUtil;
 import org.jcodec.scale.Transform;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
 
 /**
  * This class is part of JCodec ( www.jcodec.org ) This software is distributed
@@ -38,6 +38,7 @@ public class SequenceEncoder {
     private int frameNo;
     private MP4Muxer muxer;
 
+
     public SequenceEncoder(File out) throws IOException {
         this.ch = NIOUtils.writableFileChannel(out);
 
@@ -45,9 +46,7 @@ public class SequenceEncoder {
         muxer = new MP4Muxer(ch, Brand.MOV);
 
         // Add video track to muxer
-        outTrack = muxer.addTrackForCompressed(TrackType.VIDEO, 3);
-
-
+        outTrack = muxer.addTrackForCompressed(TrackType.VIDEO, 1);
 
 
         // Allocate a buffer big enough to hold output frames

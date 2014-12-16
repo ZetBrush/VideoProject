@@ -1,7 +1,7 @@
 package org.jcodec.api.android;
 
-import java.io.File;
-import java.io.IOException;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import org.jcodec.common.NIOUtils;
 import org.jcodec.common.SeekableByteChannel;
@@ -12,8 +12,8 @@ import org.jcodec.containers.mp4.TrackType;
 import org.jcodec.containers.mp4.muxer.FramesMP4MuxerTrack;
 import org.jcodec.containers.mp4.muxer.MP4Muxer;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * This class is part of JCodec ( www.jcodec.org ) This software is distributed

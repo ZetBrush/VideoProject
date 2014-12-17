@@ -1,5 +1,12 @@
 package org.jcodec.api;
 
+import com.coremedia.iso.boxes.Container;
+import com.googlecode.mp4parser.FileDataSourceImpl;
+import com.googlecode.mp4parser.authoring.Movie;
+import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
+import com.googlecode.mp4parser.authoring.tracks.AACTrackImpl;
+import com.googlecode.mp4parser.authoring.tracks.H264TrackImpl;
+
 import org.jcodec.codecs.h264.H264Encoder;
 import org.jcodec.codecs.h264.H264Utils;
 import org.jcodec.common.NIOUtils;
@@ -15,8 +22,10 @@ import org.jcodec.scale.ColorUtil;
 import org.jcodec.scale.Transform;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 
 /**
@@ -47,6 +56,7 @@ public class SequenceEncoder {
 
         // Add video track to muxer
         outTrack = muxer.addTrackForCompressed(TrackType.VIDEO, 1);
+        outTrack = muxer.addTrackForCompressed(TrackType.SOUND, 1);
 
 
         // Allocate a buffer big enough to hold output frames
@@ -93,8 +103,29 @@ public class SequenceEncoder {
     public void finish() throws IOException {
         // Push saved SPS/PPS to a special storage in MP4
         outTrack.addSampleEntry(H264Utils.createMOVSampleEntry(spsList, ppsList));
+
+        //outTrack.
         // Write MP4 header and finalize recording
+
         muxer.writeHeader();
         NIOUtils.closeQuietly(ch);
+    }
+
+    public void addAudioTrack(){
+        try {
+            AACTrackImpl aacTrack = new AACTrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/DCIM/100ANDRO/newfold/strangeclouds.aac"));
+
+            H264TrackImpl h264Track = new H264TrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/DCIM/100ANDRO/newfold/vid_enc.mp4"));
+            Movie movie = new Movie();
+            movie.addTrack(h264Track);
+            movie.addTrack(aacTrack);
+            Container mp4file = new DefaultMp4Builder().build(movie);
+            FileChannel fc = new FileOutputStream(new File("myoutput.mp4")).getChannel();
+            mp4file.writeContainer(fc);
+            fc.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -13,19 +14,41 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.coremedia.iso.IsoFile;
+import com.coremedia.iso.boxes.XmlBox;
+import com.googlecode.mp4parser.util.Path;
+
 import org.jcodec.api.JCodecException;
 import org.jcodec.api.android.FrameGrab;
 import org.jcodec.api.android.SequenceEncoder;
 import org.jcodec.common.FileChannelWrapper;
 import org.jcodec.common.NIOUtils;
+import org.jcodec.common.SeekableByteChannel;
+import org.jcodec.containers.mp4.Brand;
+import org.jcodec.containers.mp4.MP4Packet;
+import org.jcodec.containers.mp4.boxes.AudioSampleEntry;
+import org.jcodec.containers.mp4.demuxer.AbstractMP4DemuxerTrack;
+import org.jcodec.containers.mp4.demuxer.MP4Demuxer;
+import org.jcodec.containers.mp4.muxer.FramesMP4MuxerTrack;
+import org.jcodec.containers.mp4.muxer.MP4Muxer;
+import org.jcodec.containers.mp4.muxer.PCMMP4MuxerTrack;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URI;
+import java.nio.channels.Channels;
+import java.util.ArrayList;
+import java.util.List;
 
 import ar.com.daidalos.afiledialog.FileChooserDialog;
+
+import static org.jcodec.common.NIOUtils.readableFileChannel;
+import static org.jcodec.common.NIOUtils.writableFileChannel;
+import static org.jcodec.containers.mp4.TrackType.VIDEO;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -82,11 +105,12 @@ public class MainActivity extends ActionBarActivity {
 
                 }
                 se.finish();
+                se.addAudioTrack();
             } catch (IOException e) {
                 Log.e(TAG, "IO", e);
             }
 
-            progress.setText("done!");
+           // progress.setText("done!");
             return 0;
         }
 
@@ -119,6 +143,27 @@ public class MainActivity extends ActionBarActivity {
             }
         });
         dialog.show();
+
+        File sdCard = Environment.getExternalStorageDirectory();
+        for (int i = 0; i < 100; i++) {
+            try {
+                FileInputStream fileInputStream = new FileInputStream(new File(sdCard, "DCIM/"));
+                IsoFile isoFile = new IsoFile(String.valueOf(fileInputStream.getChannel()));
+               // IsoFile isoFile = new IsoFile(Channels.newChannel(new FileInputStream(this.filePath)));
+                //Path path = new Path(isoFile);
+                XmlBox xmlBox = (XmlBox) Path.getPath(isoFile, "/moov/meta/xml ");
+                String xml = xmlBox.getXml();
+                //System.err.println(xml;
+            } catch (IOException e) {
+
+            }
+        }
+
+
+
+
+
+
     }
 
 
@@ -252,8 +297,6 @@ public class MainActivity extends ActionBarActivity {
         File file = new File(extBaseDir.getAbsoluteFile()+filePatho);
         return new File(file.getAbsolutePath()+"/"+fileName);//file;
     }*/
-
-
 
 
 

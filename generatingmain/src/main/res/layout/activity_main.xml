@@ -32,6 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="play"
+            android:id="@+id/playButtn"
             android:layout_weight="1"
             android:onClick="onPlayClick"/>
 
@@ -52,6 +53,11 @@
             android:layout_marginRight="0dp"/>
         </LinearLayout>
 
-
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekbar"
+        android:layout_alignParentBottom="true"
+        />
 
 </RelativeLayout>

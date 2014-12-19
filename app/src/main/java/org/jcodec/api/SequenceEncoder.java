@@ -13,6 +13,8 @@ import org.jcodec.common.NIOUtils;
 import org.jcodec.common.SeekableByteChannel;
 import org.jcodec.common.model.ColorSpace;
 import org.jcodec.common.model.Picture;
+import org.jcodec.containers.mkv.MKVDemuxer;
+import org.jcodec.containers.mkv.MKVMuxer;
 import org.jcodec.containers.mp4.Brand;
 import org.jcodec.containers.mp4.MP4Packet;
 import org.jcodec.containers.mp4.TrackType;
@@ -22,6 +24,7 @@ import org.jcodec.scale.ColorUtil;
 import org.jcodec.scale.Transform;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -37,6 +40,7 @@ import java.util.ArrayList;
  */
 public class SequenceEncoder {
     private SeekableByteChannel ch;
+    private SeekableByteChannel chm;
     private Picture toEncode;
     private Transform transform;
     private H264Encoder encoder;
@@ -48,15 +52,18 @@ public class SequenceEncoder {
     private MP4Muxer muxer;
 
 
-    public SequenceEncoder(File out) throws IOException {
+    public SequenceEncoder(File out ) throws IOException {
         this.ch = NIOUtils.writableFileChannel(out);
 
+       // this.chm = NIOUtils.writableFileChannel(mus);
         // Muxer that will store the encoded frames
         muxer = new MP4Muxer(ch, Brand.MOV);
+      //  muxer.addTrackForCompressed(TrackType.SOUND, 5);
 
+      //  muxer.addCompressedAudioTrack("acc",10, 2, 256,44100,null);
         // Add video track to muxer
         outTrack = muxer.addTrackForCompressed(TrackType.VIDEO, 1);
-        outTrack = muxer.addTrackForCompressed(TrackType.SOUND, 1);
+        // outTrack = muxer.addTrackForCompressed(TrackType.SOUND, 1);
 
 
         // Allocate a buffer big enough to hold output frames
@@ -110,12 +117,20 @@ public class SequenceEncoder {
         muxer.writeHeader();
         NIOUtils.closeQuietly(ch);
     }
+    }
 
-    public void addAudioTrack(){
-        try {
+
+    //public void addAudioTrack(ByteBuffer result){
+
+
+
+
+        /*try {
+
+
+
             AACTrackImpl aacTrack = new AACTrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/DCIM/100ANDRO/newfold/strangeclouds.aac"));
-
-            H264TrackImpl h264Track = new H264TrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/DCIM/100ANDRO/newfold/vid_enc.mp4"));
+            H264TrackImpl h264Track = new H264TrackImpl(new FileDataSourceImpl( new FileInputStream(result).getChannel()));
             Movie movie = new Movie();
             movie.addTrack(h264Track);
             movie.addTrack(aacTrack);
@@ -127,5 +142,5 @@ public class SequenceEncoder {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-}
+    }*/
+

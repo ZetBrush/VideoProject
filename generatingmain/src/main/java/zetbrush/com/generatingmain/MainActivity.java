@@ -3,6 +3,7 @@ package zetbrush.com.generatingmain;
 import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.AudioTrack;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -12,11 +13,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.XmlBox;
 import com.googlecode.mp4parser.util.Path;
+
+import net.pocketmagic.android.openmxplayer.OpenMXPlayer;
+import net.pocketmagic.android.openmxplayer.PlayerEvents;
 
 import org.jcodec.api.JCodecException;
 import org.jcodec.api.android.FrameGrab;
@@ -56,7 +62,7 @@ public class MainActivity extends ActionBarActivity {
     private  Button playButton;
     private TextView progress;
     private volatile boolean flag;
-
+    private SeekBar seekbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +71,8 @@ public class MainActivity extends ActionBarActivity {
 
        makeVideoButton = (Button)findViewById(R.id.makeVideoBut);
         progress = (TextView)findViewById(R.id.progress);
-
-
+        playButton = (Button)findViewById(R.id.playButtn);
+        seekbar = (SeekBar)findViewById(R.id.seekbar);
 
     }
 
@@ -77,7 +83,17 @@ public class MainActivity extends ActionBarActivity {
         super.onResume();
 
 
+        seekbar = (SeekBar)findViewById(R.id.seekbar);
+        seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
+            @Override public void onStopTrackingTouch(SeekBar seekBar) {}
+
+            @Override public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+                if (fromUser) player.seek(progress);
+            }
+        });
 
 
     }
@@ -105,7 +121,7 @@ public class MainActivity extends ActionBarActivity {
 
                 }
                 se.finish();
-                se.addAudioTrack();
+               // se.addAudioTrack();
             } catch (IOException e) {
                 Log.e(TAG, "IO", e);
             }
@@ -116,9 +132,72 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-            progress.setText("processed "+String.valueOf(values[0]));
+            if(!values[0].equals(null))
+            progress.setText("processed "+ String.valueOf(values[0]));
         }
 
+
+    }
+
+
+    PlayerEvents events = new PlayerEvents() {
+        @Override public void onStop() {
+            seekbar.setProgress(0);
+
+        }
+        @Override public void onStart(String mime, int sampleRate, int channels, long duration) {
+            Log.d("on startplay" , "onStart called: " + mime + " sampleRate:" + sampleRate + " channels:"+ channels);
+            if (duration == 0)
+            {
+
+            }
+            else{
+
+            }
+
+           // .setText("Playing content:" + mime + " " + sampleRate + "Hz " + (duration/1000000) + "sec");
+        }
+        @Override public void onPlayUpdate(int percent, long currentms, long totalms) {
+            seekbar.setProgress(percent);
+        }
+        @Override public void onPlay() {
+        }
+        @Override public void onError() {
+            seekbar.setProgress(0);
+            Toast.makeText(MainActivity.this, "Error!",  Toast.LENGTH_SHORT).show();
+            //.setText("An error has been encountered");
+        }
+    };
+
+
+
+
+    boolean isplaying = false;
+        OpenMXPlayer player = null;
+
+    public void onPlayClick(View v){
+        if (player == null) {
+            player = new OpenMXPlayer(events);
+
+        }
+
+        if(isplaying) {
+            player.stop();
+            isplaying = false;
+        }
+        else{
+            player.setDataSource("/storage/removable/sdcard1/DCIM/100ANDRO/newfold/strangeclouds.aac");
+
+            player.play();
+            isplaying=true;
+        }
+
+
+       /* try {
+            aacMp3Player.play(new FileInputStream(new File(sdCard, "DCIM/100ANDRO/newfold/Remix.mp3")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
 
     }
 
@@ -139,12 +218,13 @@ public class MainActivity extends ActionBarActivity {
                 String mask = file.getName().replaceAll("(\\D+)\\d+(\\D+)",
                         "$1%0" + digits.length() + "d$2");
 
+
                 new Encoder().execute(new File(file.getParentFile(), mask));
             }
         });
         dialog.show();
 
-        File sdCard = Environment.getExternalStorageDirectory();
+       /* File sdCard = Environment.getExternalStorageDirectory();
         for (int i = 0; i < 100; i++) {
             try {
                 FileInputStream fileInputStream = new FileInputStream(new File(sdCard, "DCIM/"));
@@ -157,7 +237,7 @@ public class MainActivity extends ActionBarActivity {
             } catch (IOException e) {
 
             }
-        }
+        }*/
 
 
 

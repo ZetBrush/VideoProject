@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/aFileDialog/aFileDialog.iml" filepath="$PROJECT_DIR$/aFileDialog/aFileDialog.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/generatingmain/generatingmain.iml" filepath="$PROJECT_DIR$/generatingmain/generatingmain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oMXPlayer/oMXPlayer.iml" filepath="$PROJECT_DIR$/oMXPlayer/oMXPlayer.iml" />
     </modules>
   </component>
 </project>

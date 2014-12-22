@@ -2,20 +2,15 @@ package zetbrush.com.generatingmain;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.res.AssetFileDescriptor;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.AudioFormat;
-import android.media.AudioManager;
-import android.media.AudioTrack;
 import android.media.MediaCodec;
 import android.media.MediaExtractor;
 import android.media.MediaFormat;
 import android.media.MediaMuxer;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -27,10 +22,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.coremedia.iso.IsoFile;
-import com.coremedia.iso.boxes.XmlBox;
-import com.googlecode.mp4parser.util.Path;
-
 import net.pocketmagic.android.openmxplayer.OpenMXPlayer;
 import net.pocketmagic.android.openmxplayer.PlayerEvents;
 import net.pocketmagic.android.openmxplayer.PlayerStates;
@@ -40,35 +31,16 @@ import org.jcodec.api.android.FrameGrab;
 import org.jcodec.api.android.SequenceEncoder;
 import org.jcodec.common.FileChannelWrapper;
 import org.jcodec.common.NIOUtils;
-import org.jcodec.common.SeekableByteChannel;
-import org.jcodec.containers.mkv.MKVDemuxer;
-import org.jcodec.containers.mp4.Brand;
-import org.jcodec.containers.mp4.MP4Packet;
-import org.jcodec.containers.mp4.boxes.AudioSampleEntry;
-import org.jcodec.containers.mp4.demuxer.AbstractMP4DemuxerTrack;
-import org.jcodec.containers.mp4.demuxer.MP4Demuxer;
-import org.jcodec.containers.mp4.muxer.FramesMP4MuxerTrack;
-import org.jcodec.containers.mp4.muxer.MP4Muxer;
-import org.jcodec.containers.mp4.muxer.PCMMP4MuxerTrack;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.URI;
 import java.nio.ByteBuffer;
-import java.nio.channels.Channels;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import ar.com.daidalos.afiledialog.FileChooserDialog;
-
-import static org.jcodec.common.NIOUtils.readableFileChannel;
-import static org.jcodec.common.NIOUtils.writableFileChannel;
-import static org.jcodec.containers.mp4.TrackType.VIDEO;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -255,7 +227,7 @@ public class MainActivity extends ActionBarActivity {
     public void onCompositionClick(View v) throws IOException {
         // MediaMuxer muxer = new MediaMuxer("/storage/removable/sdcard1/DCIM/100ANDRO/newfold/outt.mp4", MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
 
-        cloneMediaUsingMuxer(R.raw.sampleaac,R.raw.samplemp3,"/storage/removable/sdcard1/DCIM/100ANDRO/newfold/vidasas_enc.mp4",4,4);
+        cloneMediaUsingMuxer("/storage/removable/sdcard1/DCIM/100ANDRO/newfold/vid_enc.mp4","/storage/removable/sdcard1/DCIM/100ANDRO/newfold/Honor.mp3","/storage/removable/sdcard1/DCIM/100ANDRO/newfold/vidasas_enc.mp4",4,4);
 
 
        /* String outputFile = "/sdcard/muxerExceptions.mp4";
@@ -645,18 +617,17 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    private void cloneMediaUsingMuxer(int srcMedia, int srcAud, String dstMediaPath,
+    private void cloneMediaUsingMuxer(String srcvid, String srcAud, String dstMediaPath,
                                       int expectedTrackCount, int degrees) throws IOException {
-        // Set up MediaExtractor to read from the source.
-        AssetFileDescriptor srcFd = mResources.openRawResourceFd(srcMedia);
-        MediaExtractor extractor = new MediaExtractor();
-        extractor.setDataSource(srcFd.getFileDescriptor(), srcFd.getStartOffset(),
-                srcFd.getLength());
 
-        AssetFileDescriptor srcAudFd = mResources.openRawResourceFd(srcAud);
+        // Set up MediaExtractor to read from the source.
+
+        MediaExtractor extractor = new MediaExtractor();
+        extractor.setDataSource(srcvid);
+
+
         MediaExtractor extractorAud = new MediaExtractor();
-        extractor.setDataSource(srcAudFd.getFileDescriptor(), srcAudFd.getStartOffset(),
-                srcAudFd.getLength());
+        extractorAud.setDataSource(srcAud);
 
         int trackCount = extractor.getTrackCount();
         int trackCountAud = extractorAud.getTrackCount();
@@ -668,6 +639,9 @@ public class MainActivity extends ActionBarActivity {
         MediaMuxer muxer;
         muxer = new MediaMuxer(dstMediaPath, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
 
+      //  muxer.addTrack(MediaFormat.createVideoFormat("video/avc", 480, 320));
+      //  muxer.addTrack(MediaFormat.createAudioFormat("audio/mp4a-latm", 48000, 2));
+
         // Set up the tracks.
         HashMap<Integer, Integer> indexMap = new HashMap<Integer, Integer>(trackCount);
         HashMap<Integer, Integer> indexMapAud = new HashMap<Integer, Integer>(trackCountAud);
@@ -678,20 +652,14 @@ public class MainActivity extends ActionBarActivity {
             indexMap.put(i, dstIndex);
         }
 
-        for (int i = 0 + trackCount; i < 2 * trackCount; i++) {
-            extractorAud.selectTrack(i);
-            MediaFormat format = extractorAud.getTrackFormat(i);
-            int dstIndex = muxer.addTrack(format);
-            indexMap.put(i, dstIndex);
-        }
-
-
-        for (int i = 0; i < trackCountAud; i++) {
+        for (int i = 0; i < trackCount; i++) {
             extractorAud.selectTrack(i);
             MediaFormat format = extractorAud.getTrackFormat(i);
             int dstIndex = muxer.addTrack(format);
             indexMapAud.put(i, dstIndex);
+
         }
+        Log.d("IndexMaps", "sizes IndexMap "+ indexMap.size() + "IndexMapAud "+ indexMapAud.size(), null);
 
 
     // Copy the samples from MediaExtractor to MediaMuxer.
@@ -727,16 +695,55 @@ public class MainActivity extends ActionBarActivity {
         boolean secondstage = false;
 
         while (!sawEOS) {
+            if(secondstage){
+                break;
+            }
             bufferInfo.offset = offset;
             bufferInfo.size = extractor.readSampleData(dstBuf, offset);
 
-            if (bufferInfo.size < 0) {
-                if (VERBOSE) {
-                    Log.d(TAG, "saw input EOS.");
-                }
-                sawEOS = true;
-                bufferInfo.size = 0;
-            } else {
+
+            if (bufferInfo.size < 0 ) {
+
+               Log.d(TAG, "saw input EOS.");
+
+               // sawEOS = true;
+                (bufferInfo.size) = 0;
+                frameCount = 0;
+                while(!sawEOS){
+
+                    if (bufferInfo.size < 0) {
+                        sawEOS = true;
+                        secondstage = true;
+                        bufferInfo.size =0;
+                        muxer.stop();
+                        break;
+                    }
+                   else{
+                        bufferInfo.presentationTimeUs = extractorAud.getSampleTime();
+                        bufferInfo.flags = extractorAud.getSampleFlags();
+                        int trackIndex = extractorAud.getSampleTrackIndex();
+
+                        muxer.writeSampleData(indexMapAud.get(trackIndex), dstBuf,
+                                bufferInfo);
+                        extractorAud.advance();
+
+                        frameCount++;
+
+                        Log.d(TAG, "Frame (" + frameCount + ") " +
+                                "PresentationTimeUs:" + bufferInfo.presentationTimeUs +
+                                " Flags:" + bufferInfo.flags +
+                                " TrackIndex:" + trackIndex +
+                                " Size(KB) " + bufferInfo.size / 1024);
+
+                        }
+
+                    }
+
+
+                    }
+
+
+             else {
                 bufferInfo.presentationTimeUs = extractor.getSampleTime();
                 bufferInfo.flags = extractor.getSampleFlags();
                 int trackIndex = extractor.getSampleTrackIndex();
@@ -746,50 +753,20 @@ public class MainActivity extends ActionBarActivity {
                 extractor.advance();
 
                 frameCount++;
-                if (VERBOSE) {
+
                     Log.d(TAG, "Frame (" + frameCount + ") " +
                             "PresentationTimeUs:" + bufferInfo.presentationTimeUs +
                             " Flags:" + bufferInfo.flags +
                             " TrackIndex:" + trackIndex +
                             " Size(KB) " + bufferInfo.size / 1024);
-                }
+
             }
+
         }
 
-        sawEOS = false;
-        while (!sawEOS) {
-            bufferInfo.offset = offset;
-            bufferInfo.size = extractorAud.readSampleData(dstBuf, offset);
 
-            if (bufferInfo.size < 0) {
-                if (VERBOSE) {
-                    Log.d(TAG, "saw input EOS.");
-                }
-                sawEOS = true;
-                bufferInfo.size = 0;
-            } else {
-                bufferInfo.presentationTimeUs = extractorAud.getSampleTime();
-                bufferInfo.flags = extractorAud.getSampleFlags();
-                int trackIndex = extractorAud.getSampleTrackIndex();
+       // muxer.release();
 
-                muxer.writeSampleData(indexMapAud.get(trackIndex), dstBuf,
-                        bufferInfo);
-                extractor.advance();
-
-                frameCount++;
-                if (VERBOSE) {
-                    Log.d(TAG, "Frame (" + frameCount + ") " +
-                            "PresentationTimeUs:" + bufferInfo.presentationTimeUs +
-                            " Flags:" + bufferInfo.flags +
-                            " TrackIndex:" + trackIndex +
-                            " Size(KB) " + bufferInfo.size / 1024);
-                }
-            }
-        }
-        muxer.stop();
-        //  muxer.release();
-        srcFd.close();
-        srcAudFd.close();
         return;
     }
 

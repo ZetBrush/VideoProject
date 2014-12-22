@@ -249,7 +249,7 @@ public class MediaMuxerTest extends AndroidTestCase {
         }
 
         muxer.stop();
-      //  muxer.release();
+        muxer.release();
         srcFd.close();
         return;
     }

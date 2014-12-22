@@ -1,12 +1,22 @@
 package zetbrush.com.generatingmain;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.res.AssetFileDescriptor;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.AudioFormat;
+import android.media.AudioManager;
 import android.media.AudioTrack;
+import android.media.MediaCodec;
+import android.media.MediaExtractor;
+import android.media.MediaFormat;
+import android.media.MediaMuxer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -23,6 +33,7 @@ import com.googlecode.mp4parser.util.Path;
 
 import net.pocketmagic.android.openmxplayer.OpenMXPlayer;
 import net.pocketmagic.android.openmxplayer.PlayerEvents;
+import net.pocketmagic.android.openmxplayer.PlayerStates;
 
 import org.jcodec.api.JCodecException;
 import org.jcodec.api.android.FrameGrab;
@@ -30,6 +41,7 @@ import org.jcodec.api.android.SequenceEncoder;
 import org.jcodec.common.FileChannelWrapper;
 import org.jcodec.common.NIOUtils;
 import org.jcodec.common.SeekableByteChannel;
+import org.jcodec.containers.mkv.MKVDemuxer;
 import org.jcodec.containers.mp4.Brand;
 import org.jcodec.containers.mp4.MP4Packet;
 import org.jcodec.containers.mp4.boxes.AudioSampleEntry;
@@ -46,8 +58,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
+import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import ar.com.daidalos.afiledialog.FileChooserDialog;
@@ -59,45 +73,77 @@ import static org.jcodec.containers.mp4.TrackType.VIDEO;
 public class MainActivity extends ActionBarActivity {
 
     private Button makeVideoButton;
-    private  Button playButton;
+    private Button playButton;
     private TextView progress;
     private volatile boolean flag;
     private SeekBar seekbar;
+    private Button compositionButton;
+    MediaExtractor extractor;
+    private PlayerStates state = new PlayerStates();
+    private String sourcePath = null;
+    private int sourceRawResId = -1;
+    private Context mContext;
+    private boolean stop = false;
+    private MediaCodec codec;
+    private static int filecount = 0;
+    private static final String TAG = "MediaMuxerTest";
+    private static final boolean VERBOSE = false;
+    private static final int MAX_SAMPLE_SIZE = 256 * 1024;
+    private static final float LATITUDE = 0.0000f;
+    private static final float LONGITUDE = -180.0f;
+    private static final float BAD_LATITUDE = 91.0f;
+    private static final float BAD_LONGITUDE = -181.0f;
+    private static final float TOLERANCE = 0.0002f;
+    private Resources mResources;
+
+    Handler handler = new Handler();
+
+    String mime = null;
+    int sampleRate = 0, channels = 0, bitrate = 0;
+    long presentationTimeUs = 0, duration = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       makeVideoButton = (Button)findViewById(R.id.makeVideoBut);
-        progress = (TextView)findViewById(R.id.progress);
-        playButton = (Button)findViewById(R.id.playButtn);
-        seekbar = (SeekBar)findViewById(R.id.seekbar);
+        makeVideoButton = (Button) findViewById(R.id.makeVideoBut);
+        progress = (TextView) findViewById(R.id.progress);
+        playButton = (Button) findViewById(R.id.playButtn);
+        seekbar = (SeekBar) findViewById(R.id.seekbar);
+        compositionButton = (Button) findViewById(R.id.compositionButton);
 
     }
 
 
-
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
 
 
-        seekbar = (SeekBar)findViewById(R.id.seekbar);
+        seekbar = (SeekBar) findViewById(R.id.seekbar);
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
-            @Override public void onStopTrackingTouch(SeekBar seekBar) {}
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
 
-            @Override public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
 
-            @Override public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (fromUser) player.seek(progress);
             }
         });
 
 
     }
-    private static int count =0;
+
+
+    private static int count = 0;
+
     private class Encoder extends AsyncTask<File, Integer, Integer> {
         private static final String TAG = "ENCODER";
 
@@ -121,19 +167,19 @@ public class MainActivity extends ActionBarActivity {
 
                 }
                 se.finish();
-               // se.addAudioTrack();
+                // se.addAudioTrack();
             } catch (IOException e) {
                 Log.e(TAG, "IO", e);
             }
 
-           // progress.setText("done!");
+            // progress.setText("done!");
             return 0;
         }
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-            if(!values[0].equals(null))
-            progress.setText("processed "+ String.valueOf(values[0]));
+            if (!values[0].equals(null))
+                progress.setText("processed " + String.valueOf(values[0]));
         }
 
 
@@ -141,55 +187,59 @@ public class MainActivity extends ActionBarActivity {
 
 
     PlayerEvents events = new PlayerEvents() {
-        @Override public void onStop() {
+        @Override
+        public void onStop() {
             seekbar.setProgress(0);
 
         }
-        @Override public void onStart(String mime, int sampleRate, int channels, long duration) {
-            Log.d("on startplay" , "onStart called: " + mime + " sampleRate:" + sampleRate + " channels:"+ channels);
-            if (duration == 0)
-            {
+
+        @Override
+        public void onStart(String mime, int sampleRate, int channels, long duration) {
+            Log.d("on startplay", "onStart called: " + mime + " sampleRate:" + sampleRate + " channels:" + channels);
+            if (duration == 0) {
+
+            } else {
 
             }
-            else{
 
-            }
-
-           // .setText("Playing content:" + mime + " " + sampleRate + "Hz " + (duration/1000000) + "sec");
+            // .setText("Playing content:" + mime + " " + sampleRate + "Hz " + (duration/1000000) + "sec");
         }
-        @Override public void onPlayUpdate(int percent, long currentms, long totalms) {
+
+        @Override
+        public void onPlayUpdate(int percent, long currentms, long totalms) {
             seekbar.setProgress(percent);
         }
-        @Override public void onPlay() {
+
+        @Override
+        public void onPlay() {
         }
-        @Override public void onError() {
+
+        @Override
+        public void onError() {
             seekbar.setProgress(0);
-            Toast.makeText(MainActivity.this, "Error!",  Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Error!", Toast.LENGTH_SHORT).show();
             //.setText("An error has been encountered");
         }
     };
 
 
-
-
     boolean isplaying = false;
-        OpenMXPlayer player = null;
+    OpenMXPlayer player = null;
 
-    public void onPlayClick(View v){
+    public void onPlayClick(View v) {
         if (player == null) {
             player = new OpenMXPlayer(events);
 
         }
 
-        if(isplaying) {
+        if (isplaying) {
             player.stop();
             isplaying = false;
-        }
-        else{
+        } else {
             player.setDataSource("/storage/removable/sdcard1/DCIM/100ANDRO/newfold/strangeclouds.aac");
 
             player.play();
-            isplaying=true;
+            isplaying = true;
         }
 
 
@@ -202,7 +252,158 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    public void makevideoClick(View v){
+    public void onCompositionClick(View v) throws IOException {
+        // MediaMuxer muxer = new MediaMuxer("/storage/removable/sdcard1/DCIM/100ANDRO/newfold/outt.mp4", MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
+
+        cloneMediaUsingMuxer(R.raw.sampleaac,R.raw.samplemp3,"/storage/removable/sdcard1/DCIM/100ANDRO/newfold/vidasas_enc.mp4",4,4);
+
+
+       /* String outputFile = "/sdcard/muxerExceptions.mp4";
+        MediaMuxer muxer;
+
+        // Throws exception b/c start() is not called.
+        muxer = new MediaMuxer(outputFile, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
+        muxer.start();
+        muxer.addTrack(MediaFormat.createVideoFormat("video/avc", 480, 320));
+        muxer.addTrack(MediaFormat.createAudioFormat("audio/mp4a-latm", 44100, 2));
+
+        muxer.stop();
+
+
+        try {
+
+        } catch (IllegalStateException e) {
+            // expected
+        }
+
+        //  MediaFormat audioFormat = new MediaFormat(...);
+        //  MediaFormat videoFormat = new MediaFormat(...);
+        MediaFormat audioFormat = new MediaFormat();
+        MediaFormat videoFormat = new MediaFormat();
+        int audioTrackIndex = muxer.addTrack(audioFormat);
+        int videoTrackIndex = muxer.addTrack(videoFormat);
+
+
+        int bufferSize = (640 * 480 * 6);
+        boolean isAudioSample = false;
+        ByteBuffer inputBuffer = ByteBuffer.allocate(bufferSize);
+        boolean finished = false;
+        MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
+
+
+        for (; filecount < 2; ) {
+            finished = false;
+            if (filecount == 1)
+                sourcePath = "/storage/removable/sdcard1/DCIM/100ANDRO/newfold/vid_enc.mp4";
+            else if (filecount == 0) {
+                sourcePath = "/storage/removable/sdcard1/DCIM/100ANDRO/newfold/strangeclouds.aac";
+            }
+            filecount++;
+
+
+            // sourcePath = "/storage/removable/sdcard1/DCIM/100ANDRO/newfold/strangeclouds.aac";
+            // getInputBuffer() will fill the inputBuffer with one frame of encoded
+            // sample from either MediaCodec or MediaExtractor, set isAudioSample to
+            // true when the sample is audio data, set up all the fields of bufferInfo,
+            // and return true if there are no more samples.
+
+            extractor = new MediaExtractor();
+            // try to set the source, this might fail
+            try {
+                if (sourcePath != null) extractor.setDataSource(this.sourcePath);
+
+            } catch (Exception e) {
+                Log.e("asasas", "exception:" + e.getMessage());
+
+                return;
+            }
+
+            // Read track header
+            MediaFormat format = null;
+            try {
+
+                format = extractor.getTrackFormat(0);
+                mime = format.getString(MediaFormat.KEY_MIME);
+                sampleRate = format.getInteger(MediaFormat.KEY_SAMPLE_RATE);
+                channels = format.getInteger(MediaFormat.KEY_CHANNEL_COUNT);
+                // if duration is 0, we are probably playing a live stream
+                duration = format.getLong(MediaFormat.KEY_DURATION);
+                bitrate = format.getInteger(MediaFormat.KEY_BIT_RATE);
+
+
+                //bufferInfo.set();
+
+            } catch (Exception e) {
+                Log.e("except params", "Reading format parameters exception:" + e.getMessage());
+                // don't exit, tolerate this error, we'll fail later if this is critical
+            }
+            Log.d("Info", "Track info: mime:" + mime + " sampleRate:" + sampleRate + " channels:" + channels + " bitrate:" + bitrate + " duration:" + duration);
+
+            while (!finished) {
+                // check we have audio content we know
+                if (format != null || mime.startsWith("audio/")) {
+                    isAudioSample = true;
+                    if (events != null) handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            events.onError();
+                        }
+                    });
+                    return;
+                }
+                if (format != null || mime.startsWith("video/")) {
+                    isAudioSample = false;
+                    //  if (events != null) handler.post(new Runnable() { @Override public void run() { events.onError();  } });
+                    return;
+                }
+                muxer.start();
+                // create the actual decoder, using the mime to select
+                codec = MediaCodec.createDecoderByType(mime);
+
+
+                // check we have a valid codec instance
+                if (codec == null) {
+                    if (events != null) handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            events.onError();
+                        }
+                    });
+                    return;
+                }
+
+
+                codec.configure(format, null, null, 0);
+                codec.start();
+                ByteBuffer[] codecInputBuffers = codec.getInputBuffers();
+                ByteBuffer[] codecOutputBuffers = codec.getOutputBuffers();
+                if (codecInputBuffers == null) {
+                    finished = true; // getInputBuffer(inputBuffer, isAudioSample, bufferInfo);
+                }
+                if (!finished) {
+
+
+                    int currentTrackIndex = isAudioSample ? audioTrackIndex : videoTrackIndex;
+                    for (ByteBuffer btbuf : codecInputBuffers) {
+                        muxer.writeSampleData(currentTrackIndex, btbuf, bufferInfo);
+                    }
+                }
+            }
+            ;
+        }
+        muxer.stop();
+        muxer.release();*/
+
+    }
+
+  /*  public boolean getInputBuffer(ByteBuffer inputBuffer, boolean isAudioSample,MediaCodec.BufferInfo bufferInfo){
+
+
+
+    }*/
+
+
+    public void makevideoClick(View v) {
 
         FileChooserDialog dialog = new FileChooserDialog(v.getContext());
         dialog.addListener(new FileChooserDialog.OnFileSelectedListener() {
@@ -238,10 +439,6 @@ public class MainActivity extends ActionBarActivity {
 
             }
         }*/
-
-
-
-
 
 
     }
@@ -379,7 +576,6 @@ public class MainActivity extends ActionBarActivity {
     }*/
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -401,8 +597,6 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
 
     private class Decoder extends AsyncTask<File, Integer, Integer> {
         private static final String TAG = "DECODER";
@@ -449,4 +643,155 @@ public class MainActivity extends ActionBarActivity {
             //progress.setText(String.valueOf(values[0]));
         }
     }
+
+
+    private void cloneMediaUsingMuxer(int srcMedia, int srcAud, String dstMediaPath,
+                                      int expectedTrackCount, int degrees) throws IOException {
+        // Set up MediaExtractor to read from the source.
+        AssetFileDescriptor srcFd = mResources.openRawResourceFd(srcMedia);
+        MediaExtractor extractor = new MediaExtractor();
+        extractor.setDataSource(srcFd.getFileDescriptor(), srcFd.getStartOffset(),
+                srcFd.getLength());
+
+        AssetFileDescriptor srcAudFd = mResources.openRawResourceFd(srcAud);
+        MediaExtractor extractorAud = new MediaExtractor();
+        extractor.setDataSource(srcAudFd.getFileDescriptor(), srcAudFd.getStartOffset(),
+                srcAudFd.getLength());
+
+        int trackCount = extractor.getTrackCount();
+        int trackCountAud = extractorAud.getTrackCount();
+
+
+        //assertEquals("wrong number of tracks", expectedTrackCount, trackCount);
+
+        // Set up MediaMuxer for the destination.
+        MediaMuxer muxer;
+        muxer = new MediaMuxer(dstMediaPath, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
+
+        // Set up the tracks.
+        HashMap<Integer, Integer> indexMap = new HashMap<Integer, Integer>(trackCount);
+        HashMap<Integer, Integer> indexMapAud = new HashMap<Integer, Integer>(trackCountAud);
+        for (int i = 0; i < trackCount; i++) {
+            extractor.selectTrack(i);
+            MediaFormat format = extractor.getTrackFormat(i);
+            int dstIndex = muxer.addTrack(format);
+            indexMap.put(i, dstIndex);
+        }
+
+        for (int i = 0 + trackCount; i < 2 * trackCount; i++) {
+            extractorAud.selectTrack(i);
+            MediaFormat format = extractorAud.getTrackFormat(i);
+            int dstIndex = muxer.addTrack(format);
+            indexMap.put(i, dstIndex);
+        }
+
+
+        for (int i = 0; i < trackCountAud; i++) {
+            extractorAud.selectTrack(i);
+            MediaFormat format = extractorAud.getTrackFormat(i);
+            int dstIndex = muxer.addTrack(format);
+            indexMapAud.put(i, dstIndex);
+        }
+
+
+    // Copy the samples from MediaExtractor to MediaMuxer.
+    boolean sawEOS = false;
+    int bufferSize = MAX_SAMPLE_SIZE;
+    int frameCount = 0;
+    int offset = 100;
+
+    ByteBuffer dstBuf = ByteBuffer.allocate(bufferSize);
+    MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
+
+
+
+        // Test setLocation out of bound cases
+       /* try {
+            muxer.setLocation(BAD_LATITUDE, LONGITUDE);
+            fail("setLocation succeeded with bad argument: [" + BAD_LATITUDE + "," + LONGITUDE
+                    + "]");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+        try {
+            muxer.setLocation(LATITUDE, BAD_LONGITUDE);
+            fail("setLocation succeeded with bad argument: [" + LATITUDE + "," + BAD_LONGITUDE
+                    + "]");
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+
+        muxer.setLocation(LATITUDE, LONGITUDE);  */
+
+        muxer.start();
+        boolean secondstage = false;
+
+        while (!sawEOS) {
+            bufferInfo.offset = offset;
+            bufferInfo.size = extractor.readSampleData(dstBuf, offset);
+
+            if (bufferInfo.size < 0) {
+                if (VERBOSE) {
+                    Log.d(TAG, "saw input EOS.");
+                }
+                sawEOS = true;
+                bufferInfo.size = 0;
+            } else {
+                bufferInfo.presentationTimeUs = extractor.getSampleTime();
+                bufferInfo.flags = extractor.getSampleFlags();
+                int trackIndex = extractor.getSampleTrackIndex();
+
+                muxer.writeSampleData(indexMap.get(trackIndex), dstBuf,
+                        bufferInfo);
+                extractor.advance();
+
+                frameCount++;
+                if (VERBOSE) {
+                    Log.d(TAG, "Frame (" + frameCount + ") " +
+                            "PresentationTimeUs:" + bufferInfo.presentationTimeUs +
+                            " Flags:" + bufferInfo.flags +
+                            " TrackIndex:" + trackIndex +
+                            " Size(KB) " + bufferInfo.size / 1024);
+                }
+            }
+        }
+
+        sawEOS = false;
+        while (!sawEOS) {
+            bufferInfo.offset = offset;
+            bufferInfo.size = extractorAud.readSampleData(dstBuf, offset);
+
+            if (bufferInfo.size < 0) {
+                if (VERBOSE) {
+                    Log.d(TAG, "saw input EOS.");
+                }
+                sawEOS = true;
+                bufferInfo.size = 0;
+            } else {
+                bufferInfo.presentationTimeUs = extractorAud.getSampleTime();
+                bufferInfo.flags = extractorAud.getSampleFlags();
+                int trackIndex = extractorAud.getSampleTrackIndex();
+
+                muxer.writeSampleData(indexMapAud.get(trackIndex), dstBuf,
+                        bufferInfo);
+                extractor.advance();
+
+                frameCount++;
+                if (VERBOSE) {
+                    Log.d(TAG, "Frame (" + frameCount + ") " +
+                            "PresentationTimeUs:" + bufferInfo.presentationTimeUs +
+                            " Flags:" + bufferInfo.flags +
+                            " TrackIndex:" + trackIndex +
+                            " Size(KB) " + bufferInfo.size / 1024);
+                }
+            }
+        }
+        muxer.stop();
+        //  muxer.release();
+        srcFd.close();
+        srcAudFd.close();
+        return;
+    }
+
+
 }

@@ -24,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
+        android:id="@+id/buttons"
         android:layout_below="@id/imageframe"
         >
 
@@ -51,7 +52,22 @@
             android:textSize="15sp"
             android:text="ready"
             android:layout_marginRight="0dp"/>
+
         </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/buttons">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Composition"
+            android:id="@+id/compositionButton"
+            android:onClick="onCompositionClick"/>
+    </LinearLayout>
 
     <SeekBar
         android:layout_width="match_parent"

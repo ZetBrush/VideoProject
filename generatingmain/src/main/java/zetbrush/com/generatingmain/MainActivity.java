@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.media.MediaCodec;
 import android.media.MediaExtractor;
 import android.media.MediaFormat;
@@ -13,11 +14,17 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,9 +74,11 @@ public class MainActivity extends ActionBarActivity {
     private static final float BAD_LONGITUDE = -181.0f;
     private static final float TOLERANCE = 0.0002f;
     private Resources mResources;
-
+    TextView interval ;
+    SeekBar timeinterval;
     Handler handler = new Handler();
-
+    String outputName = null;
+    EditText outputEditText;
     String mime = null;
     int sampleRate = 0, channels = 0, bitrate = 0;
     long presentationTimeUs = 0, duration = 0;
@@ -124,7 +133,7 @@ public class MainActivity extends ActionBarActivity {
             SequenceEncoder se = null;
             try {
                 se = new SequenceEncoder(new File(params[0].getParentFile(),
-                        "vid_enc.mp4"));
+                        name[0]+".mp4"));
 
                 for (int i = 0; !flag; i++) {
                     File img = new File(params[0].getParentFile(),
@@ -222,6 +231,90 @@ public class MainActivity extends ActionBarActivity {
         }*/
 
     }
+
+    final int[] scale= new int [2];
+    final String[] name = new String[2];
+
+    public void onSettingsButtonClick(View v){
+        View popupView = getLayoutInflater().inflate(R.layout.popup_settings, null);
+
+        PopupWindow popupWindow = new PopupWindow(popupView,
+                RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+          interval = (TextView) popupView.findViewById(R.id.textInterval);
+          timeinterval = (SeekBar)popupView.findViewById(R.id.tIntervalSeekBar);
+            outputEditText = (EditText)popupView.findViewById(R.id.videoName);
+          Button okbutton = (Button)popupView.findViewById(R.id.MakeVideoPopClick);
+
+        timeinterval.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if(progress==0)
+                    progress=1;
+                scale[0] = progress;
+
+                interval = (TextView) findViewById(R.id.textInterval);
+                //Log.d("value of frametime", "val "+ scale[0]);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                int s=0;
+                s = scale[0];
+                String ss = String.valueOf(s);
+                String full = "The Interval is "+ ss;
+                Log.d("value of frametime", "val "+ scale[0]);
+                org.jcodec.api.SequenceEncoder.setFrameDuration(scale[0]);
+
+
+
+            }
+
+        });
+
+        outputEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                name[0]=s.toString();
+            }
+        });
+
+        popupWindow.setFocusable(true);
+        popupWindow.setBackgroundDrawable(new ColorDrawable());
+
+        int location[] = new int[2];
+
+        // Get the View's(the one that was clicked in the Fragment) location
+        v.getLocationOnScreen(location);
+
+        // Using location, the PopupWindow will be displayed right under anchorView
+        popupWindow.showAtLocation(v, Gravity.NO_GRAVITY,
+                location[0]-v.getHeight()*3,   location[1]-v.getWidth()*3);
+
+
+
+
+
+    }
+
+
+
 
 
     public void onCompositionClick(View v) throws IOException {
@@ -376,26 +469,28 @@ public class MainActivity extends ActionBarActivity {
 
 
     public void makevideoClick(View v) {
+        if (name[0]!=null) {
+            FileChooserDialog dialog = new FileChooserDialog(v.getContext());
+            dialog.addListener(new FileChooserDialog.OnFileSelectedListener() {
+                @Override
+                public void onFileSelected(Dialog source, File folder, String name) {
+                }
 
-        FileChooserDialog dialog = new FileChooserDialog(v.getContext());
-        dialog.addListener(new FileChooserDialog.OnFileSelectedListener() {
-            @Override
-            public void onFileSelected(Dialog source, File folder, String name) {
-            }
-
-            @Override
-            public void onFileSelected(Dialog source, File file) {
-                source.hide();
-                String digits = file.getName().replaceAll("\\D+(\\d+)\\D+",
-                        "$1");
-                String mask = file.getName().replaceAll("(\\D+)\\d+(\\D+)",
-                        "$1%0" + digits.length() + "d$2");
+                @Override
+                public void onFileSelected(Dialog source, File file) {
+                    source.hide();
+                    String digits = file.getName().replaceAll("\\D+(\\d+)\\D+",
+                            "$1");
+                    String mask = file.getName().replaceAll("(\\D+)\\d+(\\D+)",
+                            "$1%0" + digits.length() + "d$2");
 
 
-                new Encoder().execute(new File(file.getParentFile(), mask));
-            }
-        });
-        dialog.show();
+                    new Encoder().execute(new File(file.getParentFile(), mask));
+                }
+            });
+            dialog.show();
+
+
 
        /* File sdCard = Environment.getExternalStorageDirectory();
         for (int i = 0; i < 100; i++) {
@@ -413,9 +508,12 @@ public class MainActivity extends ActionBarActivity {
         }*/
 
 
+        }
+
+        else
+            Toast.makeText(getApplicationContext(),"Please configure output settings",Toast.LENGTH_SHORT).show();
+
     }
-
-
        /* try{
 
             int fps=24;
@@ -670,7 +768,6 @@ public class MainActivity extends ActionBarActivity {
 
     ByteBuffer dstBuf = ByteBuffer.allocate(bufferSize);
     MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
-
 
 
         // Test setLocation out of bound cases

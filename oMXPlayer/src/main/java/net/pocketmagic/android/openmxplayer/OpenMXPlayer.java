@@ -35,7 +35,7 @@ import android.os.Handler;
 import android.util.Log;
 
 public class OpenMXPlayer implements Runnable {
-	public final String LOG_TAG = "OpenMXPlayer";
+	public final String LOG_TAG = "MXPlayer";
 	
 	private MediaExtractor extractor;
 	private MediaCodec codec;

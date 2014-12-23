@@ -50,7 +50,11 @@ public class SequenceEncoder {
     private ByteBuffer _out;
     private int frameNo;
     private MP4Muxer muxer;
+    private static int framesec =1;
 
+    public static void setFrameDuration(int sec){
+       framesec = sec;
+    }
 
     public SequenceEncoder(File out ) throws IOException {
         this.ch = NIOUtils.writableFileChannel(out);
@@ -102,7 +106,16 @@ public class SequenceEncoder {
 
 
         // Add packet to video track
-        outTrack.addFrame(new MP4Packet(result, frameNo, 25, 1, frameNo, true, null, frameNo, 0));
+        outTrack.addFrame(new MP4Packet(
+                result,
+                frameNo*framesec,
+                1,
+                framesec,
+                frameNo,
+                true,
+                null,
+                frameNo*framesec,
+                0));
 
         frameNo++;
     }

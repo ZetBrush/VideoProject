@@ -29,6 +29,13 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.coremedia.iso.boxes.Container;
+import com.googlecode.mp4parser.FileDataSourceImpl;
+import com.googlecode.mp4parser.authoring.Movie;
+import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
+import com.googlecode.mp4parser.authoring.tracks.AACTrackImpl;
+import com.googlecode.mp4parser.authoring.tracks.H264TrackImpl;
+
 import net.pocketmagic.android.openmxplayer.OpenMXPlayer;
 import net.pocketmagic.android.openmxplayer.PlayerEvents;
 import net.pocketmagic.android.openmxplayer.PlayerStates;
@@ -41,10 +48,12 @@ import org.jcodec.common.NIOUtils;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.HashMap;
 
 import ar.com.daidalos.afiledialog.FileChooserDialog;
@@ -153,7 +162,6 @@ public class MainActivity extends ActionBarActivity {
                 Log.e(TAG, "IO", e);
             }
 
-            // progress.setText("done!");
             return 0;
         }
 
@@ -162,7 +170,12 @@ public class MainActivity extends ActionBarActivity {
             if (!values[0].equals(null))
                 progress.setText("processed " + String.valueOf(values[0]));
         }
-
+        @Override
+        protected void onPostExecute(Integer result){
+            progress.setText("Ready!");
+           outputName=null;
+            name[0]=null;
+        }
 
     }
 
@@ -203,7 +216,6 @@ public class MainActivity extends ActionBarActivity {
         }
     };
 
-
     boolean isplaying = false;
     OpenMXPlayer player = null;
 
@@ -224,12 +236,6 @@ public class MainActivity extends ActionBarActivity {
         }
 
 
-       /* try {
-            aacMp3Player.play(new FileInputStream(new File(sdCard, "DCIM/100ANDRO/newfold/Remix.mp3")));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
-
     }
 
     final int[] scale= new int [2];
@@ -243,8 +249,8 @@ public class MainActivity extends ActionBarActivity {
 
           interval = (TextView) popupView.findViewById(R.id.textInterval);
           timeinterval = (SeekBar)popupView.findViewById(R.id.tIntervalSeekBar);
-            outputEditText = (EditText)popupView.findViewById(R.id.videoName);
-          Button okbutton = (Button)popupView.findViewById(R.id.MakeVideoPopClick);
+          outputEditText = (EditText)popupView.findViewById(R.id.videoName);
+
 
         timeinterval.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -252,9 +258,8 @@ public class MainActivity extends ActionBarActivity {
                 if(progress==0)
                     progress=1;
                 scale[0] = progress;
+                interval.setText(String.valueOf(scale[0]));
 
-                interval = (TextView) findViewById(R.id.textInterval);
-                //Log.d("value of frametime", "val "+ scale[0]);
             }
 
             @Override
@@ -264,14 +269,9 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                int s=0;
-                s = scale[0];
-                String ss = String.valueOf(s);
-                String full = "The Interval is "+ ss;
+
                 Log.d("value of frametime", "val "+ scale[0]);
                 org.jcodec.api.SequenceEncoder.setFrameDuration(scale[0]);
-
-
 
             }
 
@@ -280,12 +280,10 @@ public class MainActivity extends ActionBarActivity {
         outputEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
 
             }
 
@@ -297,30 +295,46 @@ public class MainActivity extends ActionBarActivity {
 
         popupWindow.setFocusable(true);
         popupWindow.setBackgroundDrawable(new ColorDrawable());
-
         int location[] = new int[2];
 
-        // Get the View's(the one that was clicked in the Fragment) location
         v.getLocationOnScreen(location);
 
-        // Using location, the PopupWindow will be displayed right under anchorView
         popupWindow.showAtLocation(v, Gravity.NO_GRAVITY,
                 location[0]-v.getHeight()*3,   location[1]-v.getWidth()*3);
-
-
-
 
 
     }
 
 
 
-
-
     public void onCompositionClick(View v) throws IOException {
         // MediaMuxer muxer = new MediaMuxer("/storage/removable/sdcard1/DCIM/100ANDRO/newfold/outt.mp4", MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
 
-        cloneMediaUsingMuxer("/storage/removable/sdcard1/DCIM/100ANDRO/newfold/vid_enc.mp4","/storage/removable/sdcard1/DCIM/100ANDRO/newfold/Honor.mp3","/storage/removable/sdcard1/DCIM/100ANDRO/newfold/vidasas_enc.mp4",4,4);
+        File source = new File("/storage/removable/sdcard1/vid_enc.mp4");
+        File out = new File("/storage/removable/sdcard1/DCIM/100ANDRO/newfold/vidos.mp4");
+
+
+        try {
+           // String baseDir = Environment.getExternalStorageDirectory().getAbsolutePath();
+            H264TrackImpl h264Track = new H264TrackImpl(new FileDataSourceImpl(source));
+            AACTrackImpl aacTrack = new AACTrackImpl(new FileDataSourceImpl( "/storage/removable/sdcard1/strangeclouds.aac" ));
+
+            Movie movie = new Movie();
+            movie.addTrack(h264Track);
+            movie.addTrack(aacTrack);
+            Container mp4file = new DefaultMp4Builder().build(movie);
+
+            FileChannel fc = new FileOutputStream(new File("/storage/removable/sdcard1" +"/vidosik_output.mp4")).getChannel();
+            mp4file.writeContainer(fc);
+            fc.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+       // cloneMediaUsingMuxer("/storage/removable/sdcard1/DCIM/100ANDRO/newfold/vid_enc.mp4","/storage/removable/sdcard1/DCIM/100ANDRO/newfold/Honor.mp3","/storage/removable/sdcard1/DCIM/100ANDRO/newfold/vidasas_enc.mp4",4,4);
 
 
        /* String outputFile = "/sdcard/muxerExceptions.mp4";

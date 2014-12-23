@@ -43,6 +43,7 @@ public class Remux {
             MP4Demuxer demuxer = new MP4Demuxer(input);
             MP4Muxer muxer = new MP4Muxer(output, Brand.MOV);
 
+
             List<AbstractMP4DemuxerTrack> at = demuxer.getAudioTracks();
             List<PCMMP4MuxerTrack> audioTracks = new ArrayList<PCMMP4MuxerTrack>();
             for (AbstractMP4DemuxerTrack demuxerTrack : at) {

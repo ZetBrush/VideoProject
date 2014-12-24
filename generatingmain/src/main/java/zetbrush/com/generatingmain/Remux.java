@@ -11,6 +11,7 @@ import org.jcodec.containers.mp4.muxer.MP4Muxer;
 import org.jcodec.containers.mp4.muxer.PCMMP4MuxerTrack;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,69 @@ public class Remux {
        public  Remux(){
 
        }
+
+
+    public void remuxcustom(File tgt, File audiosrcmp4, File videosourcemp4) throws IOException {
+        SeekableByteChannel inputForAudio = null;
+        SeekableByteChannel inputForVideo = null;
+        SeekableByteChannel output = null;
+        try {
+            inputForAudio = readableFileChannel(audiosrcmp4);
+            inputForVideo = readableFileChannel(videosourcemp4);
+
+            output = writableFileChannel(tgt);
+
+
+            MP4Demuxer demuxerForAudio = new MP4Demuxer(inputForAudio);
+            MP4Demuxer demuxerForVideo = new MP4Demuxer(inputForVideo);
+
+            MP4Muxer muxer = new MP4Muxer(output, Brand.MOV);
+
+            List<AbstractMP4DemuxerTrack> at = demuxerForAudio.getAudioTracks();
+            List<PCMMP4MuxerTrack> audioTracks = new ArrayList<PCMMP4MuxerTrack>();
+            for (AbstractMP4DemuxerTrack demuxerTrack : at) {
+                PCMMP4MuxerTrack att = muxer.addUncompressedAudioTrack(((AudioSampleEntry) demuxerTrack
+                        .getSampleEntries()[0]).getFormat());
+                audioTracks.add(att);
+                att.setEdits(demuxerTrack.getEdits());
+                att.setName(demuxerTrack.getName());
+
+            }
+
+            AbstractMP4DemuxerTrack vt = demuxerForVideo.getVideoTrack();
+            FramesMP4MuxerTrack video = muxer.addTrackForCompressed(VIDEO, (int) vt.getTimescale());
+            video.setTimecode(muxer.addTimecodeTrack((int) vt.getTimescale()));
+            video.setEdits(vt.getEdits());
+            video.addSampleEntries(vt.getSampleEntries());
+            MP4Packet pkt = null;
+
+            while ((pkt = (MP4Packet) vt.nextFrame()) != null) {
+                pkt = processFrame(pkt);
+                video.addFrame(pkt);
+
+                for (int i = 0; i < at.size(); i++) {
+                    AudioSampleEntry ase = (AudioSampleEntry) at.get(i).getSampleEntries()[0];
+                    int frames = (int) (ase.getSampleRate() * pkt.getDuration() / vt.getTimescale());
+                    MP4Packet apkt = (MP4Packet) at.get(i).nextFrame();
+                    audioTracks.get(i).addSamples(apkt.getData());
+                }
+            }
+
+            muxer.writeHeader();
+
+
+
+        } finally {
+            if (inputForAudio != null)
+                inputForAudio.close();
+            if (inputForVideo != null)
+                inputForVideo.close();
+            if (output != null)
+                output.close();
+        }
+
+
+    }
 
 
     public void remux(File tgt, File src) throws IOException {

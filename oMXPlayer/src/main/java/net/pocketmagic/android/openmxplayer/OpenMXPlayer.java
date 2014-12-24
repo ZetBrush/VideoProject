@@ -53,7 +53,12 @@ public class OpenMXPlayer implements Runnable {
 	String mime = null;
     int sampleRate = 0, channels = 0, bitrate = 0;
     long presentationTimeUs = 0, duration = 0;
-	
+
+    public AudioTrack getAudioTrack(){
+        return audioTrack;
+    }
+
+
 	public void setEventsListener(PlayerEvents events) {
 		this.events = events;
 	}
@@ -196,7 +201,7 @@ public class OpenMXPlayer implements Runnable {
 		int channelConfiguration = channels == 1 ? AudioFormat.CHANNEL_OUT_MONO : AudioFormat.CHANNEL_OUT_STEREO;
         int minSize = AudioTrack.getMinBufferSize( sampleRate, channelConfiguration, AudioFormat.ENCODING_PCM_16BIT);
         audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC, sampleRate, channelConfiguration, 
-        		AudioFormat.ENCODING_PCM_16BIT, minSize, AudioTrack.MODE_STREAM);
+        		AudioFormat.ENCODING_PCM_16BIT, minSize, AudioTrack.MODE_STATIC);
       
 		// start playing, we will feed the AudioTrack later
         audioTrack.play();

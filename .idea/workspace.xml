@@ -6,6 +6,10 @@
         <option name="name" value="app: zetbrush.com.generatingmain" />
         <option name="packageNamePattern" value="zetbrush.com.generatingmain" />
       </filter>
+      <filter>
+        <option name="name" value="app: com.luminous.pick" />
+        <option name="packageNamePattern" value="com.luminous.pick" />
+      </filter>
     </filters>
   </component>
   <component name="AndroidLayouts">
@@ -18,90 +22,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72fc5020-b0b6-4323-a8d2-c9b1ff08b9ab" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable/add.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable/add1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable/back.jpeg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable-hdpi/btn.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable-mdpi/btn.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable-xhdpi/btn.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable-hdpi/btn_hover.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable-mdpi/btn_hover.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable-xhdpi/btn_hover.9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable/check.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable-hdpi/checkbox_selected.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable-mdpi/checkbox_selected.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable-xhdpi/checkbox_selected.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable-hdpi/checkbox_up.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable-mdpi/checkbox_up.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable-xhdpi/checkbox_up.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.2/classes.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/classes.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable/del.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable/emp.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable-hdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable-mdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable-xhdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable/icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/libs/internal_impl-21.0.2.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable-hdpi/top_bar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable-mdpi/top_bar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable-xhdpi/top_bar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/libs/universal-image-loader-1.9.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/java/com/luminous/pick/Action.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.2/AndroidManifest.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/AndroidManifest.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/AndroidManifest.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/build/generated/source/buildConfig/debug/com/luminous/pick/BuildConfig.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/build/generated/source/buildConfig/test/debug/com/luminous/pick/test/BuildConfig.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/java/com/luminous/pick/CustomGallery.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/java/com/luminous/pick/CustomGalleryActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/java/com/luminous/pick/GalAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/java/com/luminous/pick/GalleryAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/aidl/android/support/v4/app/INotificationSideChannel.aidl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/java/com/luminous/pick/ImageEditActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/java/com/luminous/pick/MainActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/MultiImPick.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/java/com/luminous/pick/MyRecyclerViewAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/build/generated/source/r/debug/com/luminous/pick/R.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/layout/activity_image_edit.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/app.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable/btn_sel.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/values-mdpi/colors.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/values-mdpi/dimen.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/values/dimens.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/values-hdpi/dimens.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/values-sw600dp/dimens.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/values-sw720dp-land/dimens.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/values-w820dp/dimens.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/values-xhdpi/dimens.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/layout/gallery.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/layout/gallery_item.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/layout-land/gallery_item.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/layout-xlarge/gallery_item.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/build/intermediates/tmp/dex/debug/inputList.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/layout/main.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/menu/menu_image_edit.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/layout/my_item.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/drawable/on_focus_checkbox.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_21_0_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/values/strings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/values-mdpi/strings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/values/styles.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/values-mdpi/styles.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/values-v11/styles.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/values-v14/styles.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_annotations_21_0_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_21_0_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultiImPick/src/main/res/layout/titlebar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/universal_image_loader_1_9_0.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/MultImPick/MultipleImagePick-master1/app/build.gradle" afterPath="$PROJECT_DIR$/MultiImPick/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_21_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_21_0_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultipleImagePick-master1/MultipleImagePick-master1.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/generatingmain/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/generatingmain/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MultiImPick/src/main/java/com/luminous/pick/CustomGalleryActivity.java" afterPath="$PROJECT_DIR$/MultiImPick/src/main/java/com/luminous/pick/CustomGalleryActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/MainActivity.java" afterPath="$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/oMXPlayer/src/main/java/net/pocketmagic/android/openmxplayer/OpenMXPlayer.java" afterPath="$PROJECT_DIR$/oMXPlayer/src/main/java/net/pocketmagic/android/openmxplayer/OpenMXPlayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/Remux.java" afterPath="$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/Remux.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/jcodec/api/SequenceEncoder.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/jcodec/api/SequenceEncoder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MultiImPick/build.gradle" afterPath="$PROJECT_DIR$/MultiImPick/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MultiImPick/build/intermediates/tmp/dex/debug/inputList.txt" afterPath="$PROJECT_DIR$/MultiImPick/build/intermediates/tmp/dex/debug/inputList.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/oMXPlayer/oMXPlayer.iml" afterPath="$PROJECT_DIR$/oMXPlayer/oMXPlayer.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_21_0_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_21_0_2.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_21_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_annotations_21_0_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_21_0_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_annotations_21_0_2.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_21_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_21_0_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_21_0_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_21_0_2.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="jcodec-2.iws" />
@@ -128,72 +65,100 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4305" max-vertical-offset="13335">
-              <caret line="308" column="0" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
+            <state vertical-scroll-proportion="-6.9615383" vertical-offset="4203" max-vertical-offset="16144">
+              <caret line="274" column="0" selection-start-line="274" selection-start-column="0" selection-end-line="274" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#12655#12662#0" expanded="true" />
+                <element signature="e#12714#12721#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VidGen.iml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/VidGen.iml">
+      <file leaf-file-name="PropertyBoxParserImpl.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/PropertyBoxParserImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="405">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="-0.78367347" vertical-offset="640" max-vertical-offset="2480">
+              <caret line="40" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build.gradle">
+      <file leaf-file-name="IsoFile.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/IsoFile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="317" max-vertical-offset="1472">
+              <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.gradle" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/settings.gradle">
+      <file leaf-file-name="MovieCreator.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/container/mp4/MovieCreator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="120">
-              <caret line="0" column="68" selection-start-line="0" selection-start-column="68" selection-end-line="0" selection-end-column="68" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build.gradle" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MultiImPick/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="465">
-              <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/MultiImPick/src/main/java/com/luminous/pick/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.77374786" vertical-offset="1172" max-vertical-offset="4800">
-              <caret line="114" column="0" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="137" max-vertical-offset="688">
+              <caret line="47" column="37" selection-start-line="47" selection-start-column="37" selection-end-line="47" selection-end-column="37" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#1313#1314#0" expanded="true" />
+                <element signature="e#1381#1382#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MultiImPick/src/main/AndroidManifest.xml">
+        <entry file="file://$PROJECT_DIR$/generatingmain/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.4" vertical-offset="0" max-vertical-offset="780">
-              <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
+              <caret line="11" column="40" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SequenceEncoder.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/api/SequenceEncoder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1796" max-vertical-offset="2688">
+              <caret line="135" column="21" selection-start-line="135" selection-start-column="21" selection-end-line="135" selection-end-column="21" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SequenceEncoder.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/org/jcodec/api/android/SequenceEncoder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="384">
+              <caret line="16" column="58" selection-start-line="16" selection-start-column="58" selection-end-line="16" selection-end-column="58" />
+              <folding>
+                <element signature="e#428#429#0" expanded="true" />
+                <element signature="e#445#446#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NIOUtils.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/common/NIOUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3556" max-vertical-offset="5488">
+              <caret line="264" column="23" selection-start-line="264" selection-start-column="23" selection-end-line="264" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SequenceMuxer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/org/jcodec/api/android/SequenceMuxer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="880">
+              <caret line="60" column="5" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -220,7 +185,7 @@
         <entry>
           <key>
             <ExternalProjectPojo>
-              <option name="name" value="VidGen" />
+              <option name="name" value="VideoGenerationJC" />
               <option name="path" value="$PROJECT_DIR$" />
             </ExternalProjectPojo>
           </key>
@@ -231,11 +196,11 @@
                 <option name="path" value="$PROJECT_DIR$/app" />
               </ExternalProjectPojo>
               <ExternalProjectPojo>
-                <option name="name" value=":oMXPlayer" />
-                <option name="path" value="$PROJECT_DIR$/oMXPlayer" />
+                <option name="name" value=":generatingmain" />
+                <option name="path" value="$PROJECT_DIR$/generatingmain" />
               </ExternalProjectPojo>
               <ExternalProjectPojo>
-                <option name="name" value="VidGen" />
+                <option name="name" value="VideoGenerationJC" />
                 <option name="path" value="$PROJECT_DIR$" />
               </ExternalProjectPojo>
               <ExternalProjectPojo>
@@ -243,16 +208,16 @@
                 <option name="path" value="$PROJECT_DIR$/aFileDialog" />
               </ExternalProjectPojo>
               <ExternalProjectPojo>
-                <option name="name" value=":generatingmain" />
-                <option name="path" value="$PROJECT_DIR$/generatingmain" />
-              </ExternalProjectPojo>
-              <ExternalProjectPojo>
-                <option name="name" value=":MultiImPick" />
-                <option name="path" value="$PROJECT_DIR$/MultiImPick" />
+                <option name="name" value=":oMXPlayer" />
+                <option name="path" value="$PROJECT_DIR$/oMXPlayer" />
               </ExternalProjectPojo>
               <ExternalProjectPojo>
                 <option name="name" value=":MultipleImagePick-master1" />
                 <option name="path" value="$PROJECT_DIR$/MultipleImagePick-master1" />
+              </ExternalProjectPojo>
+              <ExternalProjectPojo>
+                <option name="name" value=":MultiImPick" />
+                <option name="path" value="$PROJECT_DIR$/MultiImPick" />
               </ExternalProjectPojo>
             </list>
           </value>
@@ -1798,19 +1763,19 @@
                 <option name="name" value="prepareReleaseDependencies" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare VidGen:aFileDialog:unspecified" />
+                <option name="description" value="Prepare VideoGenerationJC:aFileDialog:unspecified" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/generatingmain" />
-                <option name="name" value="prepareVidGenAFileDialogUnspecifiedLibrary" />
+                <option name="name" value="prepareVideoGenerationJCAFileDialogUnspecifiedLibrary" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare VidGen:app:unspecified" />
+                <option name="description" value="Prepare VideoGenerationJC:app:unspecified" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/generatingmain" />
-                <option name="name" value="prepareVidGenAppUnspecifiedLibrary" />
+                <option name="name" value="prepareVideoGenerationJCAppUnspecifiedLibrary" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare VidGen:oMXPlayer:unspecified" />
+                <option name="description" value="Prepare VideoGenerationJC:oMXPlayer:unspecified" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/generatingmain" />
-                <option name="name" value="prepareVidGenOMXPlayerUnspecifiedLibrary" />
+                <option name="name" value="prepareVideoGenerationJCOMXPlayerUnspecifiedLibrary" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/generatingmain" />
@@ -2292,7 +2257,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="9935946271000" />
+        <entry key="$PROJECT_DIR$" value="9933557499000" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -2307,11 +2272,11 @@
                       <ExternalModuleBuildClasspathPojo>
                         <option name="entries">
                           <list>
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.0.0/gradle-1.0.0-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.0.0/gradle-1.0.0.jar" />
                           </list>
                         </option>
@@ -2324,11 +2289,11 @@
                       <ExternalModuleBuildClasspathPojo>
                         <option name="entries">
                           <list>
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.0.0/gradle-1.0.0-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.0.0/gradle-1.0.0.jar" />
                           </list>
                         </option>
@@ -2341,11 +2306,11 @@
                       <ExternalModuleBuildClasspathPojo>
                         <option name="entries">
                           <list>
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.0.0/gradle-1.0.0-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.0.0/gradle-1.0.0.jar" />
                           </list>
                         </option>
@@ -2358,11 +2323,11 @@
                       <ExternalModuleBuildClasspathPojo>
                         <option name="entries">
                           <list>
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.0.0/gradle-1.0.0-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.0.0/gradle-1.0.0.jar" />
                           </list>
                         </option>
@@ -2375,11 +2340,11 @@
                       <ExternalModuleBuildClasspathPojo>
                         <option name="entries">
                           <list>
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.0.0/gradle-1.0.0-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.0.0/gradle-1.0.0.jar" />
                           </list>
                         </option>
@@ -2392,11 +2357,11 @@
                       <ExternalModuleBuildClasspathPojo>
                         <option name="entries">
                           <list>
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.0.0/gradle-1.0.0-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.0.0/gradle-1.0.0.jar" />
                           </list>
                         </option>
@@ -2409,11 +2374,11 @@
                       <ExternalModuleBuildClasspathPojo>
                         <option name="entries">
                           <list>
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.0.0/gradle-1.0.0-sources.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0-sources.jar" />
-                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder/1.0.0/builder-1.0.0.jar" />
+                            <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/builder-model/1.0.0/builder-model-1.0.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.0.0/gradle-1.0.0.jar" />
                           </list>
                         </option>
@@ -2542,6 +2507,7 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/MultImPick/MultipleImagePick-master1/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/settings.gradle" />
         <option value="$PROJECT_DIR$/MultImPick/MultipleImagePick-master1/build.gradle" />
         <option value="$PROJECT_DIR$/MultImPick/MultipleImagePick-master1/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
@@ -2554,31 +2520,29 @@
         <option value="$PROJECT_DIR$/aFileDialog/src/main/java/ar/com/daidalos/afiledialog/FileChooserDialog.java" />
         <option value="$PROJECT_DIR$/aFileDialog/src/main/java/ar/com/daidalos/afiledialog/FileChooserLabels.java" />
         <option value="$PROJECT_DIR$/aFileDialog/src/main/java/ar/com/daidalos/afiledialog/view/FileItem.java" />
-        <option value="$PROJECT_DIR$/generatingmain/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/jcodec/containers/mxf/MXFConst.java" />
         <option value="$PROJECT_DIR$/aFileDialog/build.gradle" />
         <option value="$PROJECT_DIR$/generatingmain/build.gradle" />
         <option value="$PROJECT_DIR$/generatingmain/src/main/java/org/jcodec/api/android/SequenceMuxer.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/jcodec/api/SequenceEncoder.java" />
         <option value="$PROJECT_DIR$/generatingmain/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/oMXPlayer/build.gradle" />
         <option value="$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/MediaMuxerTest.java" />
-        <option value="$PROJECT_DIR$/oMXPlayer/src/main/java/net/pocketmagic/android/openmxplayer/OpenMXPlayer.java" />
         <option value="$PROJECT_DIR$/generatingmain/src/main/res/layout/popup_settings.xml" />
+        <option value="$PROJECT_DIR$/oMXPlayer/src/main/java/net/pocketmagic/android/openmxplayer/OpenMXPlayer.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/jcodec/api/SequenceEncoder.java" />
         <option value="$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/Remux.java" />
-        <option value="$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/MainActivity.java" />
-        <option value="$PROJECT_DIR$/MultipleImagePick-master1/build.gradle" />
-        <option value="$PROJECT_DIR$/MultipleImagePick-master1/app/build.gradle" />
-        <option value="$PROJECT_DIR$/settings.gradle" />
-        <option value="$PROJECT_DIR$/MultiImPick/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/MultiImPick/build.gradle" />
+        <option value="$PROJECT_DIR$/MultiImPick/src/main/java/com/luminous/pick/CustomGalleryActivity.java" />
+        <option value="$PROJECT_DIR$/generatingmain/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/MainActivity.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="22" />
-    <option name="width" value="1920" />
-    <option name="height" value="980" />
+    <option name="x" value="1" />
+    <option name="y" value="25" />
+    <option name="width" value="1896" />
+    <option name="height" value="970" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -2606,6 +2570,16 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="AndroidView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VidGen" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -2620,7 +2594,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
+              <option name="myItemId" value="VideoGenerationJC" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2630,7 +2604,73 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="VideoGenerationJC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="oMXPlayer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
               <option name="myItemId" value="VidGen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VideoGenerationJC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="oMXPlayer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VidGen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VideoGenerationJC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="oMXPlayer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="openmxplayer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VidGen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VideoGenerationJC" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -2644,7 +2684,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
+              <option name="myItemId" value="VideoGenerationJC" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -2666,7 +2706,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
+              <option name="myItemId" value="VideoGenerationJC" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -2696,7 +2736,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
+              <option name="myItemId" value="VideoGenerationJC" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -2710,29 +2750,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="generatingmain" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
+              <option name="myItemId" value="VideoGenerationJC" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -2747,10 +2765,6 @@
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -2758,67 +2772,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="generatingmain" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="raw" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="generatingmain" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
+              <option name="myItemId" value="VideoGenerationJC" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -2848,7 +2802,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
+              <option name="myItemId" value="VideoGenerationJC" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -2878,7 +2832,41 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="VideoGenerationJC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="generatingmain" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jcodec" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
               <option name="myItemId" value="VidGen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VideoGenerationJC" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -2912,7 +2900,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
+              <option name="myItemId" value="VideoGenerationJC" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -2930,7 +2918,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
+              <option name="myItemId" value="VideoGenerationJC" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -2944,7 +2932,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
+              <option name="myItemId" value="VideoGenerationJC" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -2966,7 +2954,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
+              <option name="myItemId" value="VideoGenerationJC" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -2992,7 +2980,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
+              <option name="myItemId" value="VideoGenerationJC" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -3022,25 +3010,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
+              <option name="myItemId" value="VideoGenerationJC" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="aFileDialog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="aFileDialog" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -3051,39 +3025,23 @@
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
+              <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="aFileDialog" />
+              <option name="myItemId" value="com" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="build" />
+              <option name="myItemId" value="mp4parser" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="AndroidView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -3098,11 +3056,12 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
     <property name="recentsLimit" value="5" />
-    <property name="android.project.structure.last.selected" value="MultiImPick" />
+    <property name="android.project.structure.last.selected" value="generatingmain" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="YT910AB4PX" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="MonoForAndroid_API_10" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Android_Wear_Square_API_20" />
     <property name="FullScreen" value="false" />
+    <property name="restartRequiresConfirmation" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -3111,22 +3070,12 @@
       <recent name="$PROJECT_DIR$/generatingmain/src/main/res/drawable" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/generatingmain/src/main/assets" />
       <recent name="$PROJECT_DIR$/generatingmain/src/main" />
       <recent name="$PROJECT_DIR$/generatingmain/src/main/res/assets/me" />
     </key>
   </component>
-  <component name="RunManager" selected="Android Application.MultiImPick">
-    <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy">
-      <module name="" />
-      <setting name="path" value="" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="workDir" value="file://$PROJECT_DIR$" />
-      <setting name="debug" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Android Application.generatingmain">
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
       <module name="" />
       <option name="TESTING_TYPE" value="0" />
@@ -3297,6 +3246,8 @@
       <option name="CLEAR_LOGCAT" value="true" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <RunnerSettings RunnerId="AndroidDebugRunner" />
+      <ConfigurationWrapper RunnerId="AndroidDebugRunner" />
       <method />
     </configuration>
     <list size="3">
@@ -3388,70 +3339,39 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1920" height="980" extended-state="0" />
+    <frame x="1" y="25" width="1896" height="970" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32786885" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905483" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39438203" sideWeight="0.61739594" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39344263" sideWeight="0.6170442" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905483" sideWeight="0.16562107" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905483" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2974537" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2974537" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39699075" sideWeight="0.60596377" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2974239" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4531616" sideWeight="0.61057174" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905483" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19542067" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3280899" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2974537" sideWeight="0.5" order="14" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19039914" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32786885" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39344263" sideWeight="0.3824164" order="14" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28764045" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
-    <layout-to-restore>
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905483" sideWeight="0.16562107" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298611" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905483" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905483" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19542067" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3280899" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2974537" sideWeight="0.5" order="14" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905483" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28764045" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39438203" sideWeight="0.61739594" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2974537" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39699075" sideWeight="0.60596377" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -3479,340 +3399,137 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="18" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/IsoFile.java</url>
+          <line>58</line>
+          <properties />
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="21" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/Remux.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/model/VUIParameters.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="855" max-vertical-offset="1575">
-          <caret line="57" column="25" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1504">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/codecs/vp8/VP8Decoder.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/model/AspectRatio.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="28" max-vertical-offset="6400">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="656">
           <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/containers/mkv/MKVMuxer.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/model/BitstreamElement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4020" max-vertical-offset="8080">
-          <caret line="200" column="33" selection-start-line="200" selection-start-column="33" selection-end-line="200" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240">
+          <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/containers/mkv/MKVRemuxer.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/model/ChromaFormat.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1020" max-vertical-offset="5180">
-          <caret line="48" column="13" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="441" max-vertical-offset="928">
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/containers/mkv/Reader.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/model/HRDParameters.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="868" max-vertical-offset="10360">
-          <caret line="77" column="13" selection-start-line="77" selection-start-column="13" selection-end-line="77" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="640">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/containers/mxf/model/WaveAudioDescriptor.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/model/PictureParameterSet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="28" max-vertical-offset="2360">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="6144">
+          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/containers/mxf/model/UL.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso14496/part12/SampleAuxiliaryInformationSizesBox.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="1700">
-          <caret line="12" column="3" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2032">
+          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/aFileDialog/src/main/AndroidManifest.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso14496/part12/SampleAuxiliaryInformationOffsetsBox.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="320">
-          <caret line="14" column="11" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1161" max-vertical-offset="1648">
+          <caret line="50" column="13" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oMXPlayer/src/main/java/net/pocketmagic/android/openmxplayer/PlayerEvents.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="256">
+          <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/res/layout/activity_main.xml">
+    <entry file="file://$PROJECT_DIR$/oMXPlayer/src/main/java/net/pocketmagic/android/openmxplayer/PlayerStates.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="631" max-vertical-offset="1260">
-          <caret line="48" column="37" selection-start-line="48" selection-start-column="29" selection-end-line="48" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="976">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
           <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/generatingmain/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.52" vertical-offset="97" max-vertical-offset="700">
-          <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oMXPlayer/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="440">
-          <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/res/layout/popup_settings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.774194" vertical-offset="0" max-vertical-offset="777">
-          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/containers/mp4/MP4Util.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2520" max-vertical-offset="3024">
-          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/containers/mp4/demuxer/AbstractMP4DemuxerTrack.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4200">
-          <caret line="0" column="8" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/codecs/aac/ObjectType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="609" max-vertical-offset="1113">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/codecs/aac/Profile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="378">
-          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/codecs/aac/ChannelPosition.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="378">
-          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/codecs/aac/BlockWriter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="630">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/codecs/aac/BlockType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="588">
-          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/codecs/aac/BlockReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="651">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/codecs/aac/AACConts.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="273">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/codecs/aac/AACUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="1701">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/codecs/wav/WavInput.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="399" max-vertical-offset="966">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/codecs/wav/WavOutput.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="777">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/codecs/wav/WriterLE.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="882">
-          <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/containers/mps/MPSDemuxer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="6258">
-          <caret line="28" column="3" selection-start-line="28" selection-start-column="3" selection-end-line="28" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/containers/mps/MTSDemuxer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="504" max-vertical-offset="3171">
-          <caret line="20" column="29" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/api/specific/AVCMP4Adaptor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1050" max-vertical-offset="1974">
-          <caret line="33" column="28" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/api/specific/ContainerAdaptor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="441">
-          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/api/specific/GenericAdaptor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="231" max-vertical-offset="861">
-          <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/containers/mp4/demuxer/MP4Demuxer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="693" max-vertical-offset="2751">
-          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/oMXPlayer/src/main/java/net/pocketmagic/android/openmxplayer/OpenMXPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3272" max-vertical-offset="6447">
-          <caret line="196" column="32" selection-start-line="196" selection-start-column="32" selection-end-line="196" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="620" max-vertical-offset="4992">
+          <caret line="65" column="11" selection-start-line="65" selection-start-column="11" selection-end-line="65" selection-end-column="11" />
+          <folding>
+            <element signature="e#1983#1984#0" expanded="true" />
+            <element signature="e#2016#2017#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/H264TrackImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="5027" max-vertical-offset="12112">
+          <caret line="349" column="25" selection-start-line="349" selection-start-column="25" selection-end-line="349" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/MediaMuxerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3789" max-vertical-offset="7460">
-          <caret line="252" column="22" selection-start-line="252" selection-start-column="22" selection-end-line="252" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1520" max-vertical-offset="5968">
+          <caret line="128" column="67" selection-start-line="128" selection-start-column="67" selection-end-line="128" selection-end-column="67" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/Remux.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/Track.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1260" max-vertical-offset="1806">
-          <caret line="57" column="25" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1104">
+          <caret line="15" column="42" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/org/jcodec/api/android/SequenceMuxer.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/FullContainerBox.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="523" max-vertical-offset="1155">
-          <caret line="46" column="36" selection-start-line="46" selection-start-column="36" selection-end-line="46" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1360">
+          <caret line="33" column="22" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/common/NIOUtils.java">
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4914" max-vertical-offset="7203">
-          <caret line="264" column="23" selection-start-line="264" selection-start-column="23" selection-end-line="264" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/containers/mp4/muxer/MP4Muxer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2163" max-vertical-offset="4515">
-          <caret line="143" column="16" selection-start-line="143" selection-start-column="16" selection-end-line="143" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/H264TrackImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1979" max-vertical-offset="15897">
-          <caret line="129" column="21" selection-start-line="129" selection-start-column="21" selection-end-line="129" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/containers/mp4/muxer/AbstractMP4MuxerTrack.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="3045">
-          <caret line="63" column="32" selection-start-line="63" selection-start-column="32" selection-end-line="63" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/org/jcodec/api/android/SequenceEncoder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
-          <caret line="25" column="1" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/api/SequenceEncoder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1764" max-vertical-offset="2814">
-          <caret line="124" column="25" selection-start-line="124" selection-start-column="25" selection-end-line="124" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/codecs/h264/H264Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1125" max-vertical-offset="8970">
-          <caret line="329" column="0" selection-start-line="329" selection-start-column="0" selection-end-line="329" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4305" max-vertical-offset="13335">
-          <caret line="308" column="0" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VidGen.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="493">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="826">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -3820,7 +3537,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="440">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="826">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -3828,35 +3545,295 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/settings.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="120">
-          <caret line="0" column="68" selection-start-line="0" selection-start-column="68" selection-end-line="0" selection-end-column="68" />
+        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="128">
+          <caret line="0" column="32" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MultiImPick/src/main/AndroidManifest.xml">
+    <entry file="file://$PROJECT_DIR$/generatingmain/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.4" vertical-offset="0" max-vertical-offset="780">
-          <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
+        <state vertical-scroll-proportion="-16.0" vertical-offset="0" max-vertical-offset="560">
+          <caret line="25" column="27" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oMXPlayer/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="826">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MultiImPick/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="465">
-          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="512">
+          <caret line="24" column="43" selection-start-line="24" selection-start-column="43" selection-end-line="24" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/Remux.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="179" max-vertical-offset="2416">
+          <caret line="56" column="100" selection-start-line="56" selection-start-column="100" selection-end-line="56" selection-end-column="100" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/DataSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1456">
+          <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Documents/adt-bundle-mac-x86_64-20140624/sdk/sources/android-18/java/io/Closeable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="400">
+          <caret line="21" column="41" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Documents/adt-bundle-mac-x86_64-20140624/sdk/sources/android-18/java/lang/AutoCloseable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="118" max-vertical-offset="592">
+          <caret line="35" column="17" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Documents/adt-bundle-mac-x86_64-20140624/sdk/sources/android-21/android/os/StrictMode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="16141" max-vertical-offset="35344">
+          <caret line="1141" column="33" selection-start-line="1141" selection-start-column="33" selection-end-line="1141" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/FileDataSourceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="77" max-vertical-offset="960">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/AbstractBox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="701" max-vertical-offset="4464">
+          <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/BasicContainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="173" max-vertical-offset="3968">
+          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/util/AndroidLogger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding>
+            <element signature="e#245#246#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Documents/adt-bundle-mac-x86_64-20140624/sdk/sources/android-18/com/android/internal/os/RuntimeInit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33265308" vertical-offset="717" max-vertical-offset="6048">
+          <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Documents/adt-bundle-mac-x86_64-20140624/sdk/sources/android-21/com/android/internal/os/ZygoteInit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33265308" vertical-offset="10989" max-vertical-offset="13920">
+          <caret line="746" column="0" selection-start-line="746" selection-start-column="0" selection-end-line="746" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Documents/adt-bundle-mac-x86_64-20140624/sdk/sources/android-21/android/view/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33265308" vertical-offset="59101" max-vertical-offset="327424">
+          <caret line="3813" column="0" selection-start-line="3813" selection-start-column="0" selection-end-line="3813" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MultiImPick/src/main/java/com/luminous/pick/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.77374786" vertical-offset="1172" max-vertical-offset="4800">
-          <caret line="114" column="0" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="848" max-vertical-offset="4512">
+          <caret line="116" column="74" selection-start-line="116" selection-start-column="74" selection-end-line="116" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MultiImPick/src/main/java/com/luminous/pick/GalAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="864" max-vertical-offset="2512">
+          <caret line="71" column="67" selection-start-line="71" selection-start-column="67" selection-end-line="71" selection-end-column="67" />
+          <folding>
+            <element signature="e#2198#2581#0" expanded="true" />
+            <element signature="e#2558#2559#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/util/Logger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="400">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MultiImPick/src/main/java/com/luminous/pick/CustomGalleryActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="978" max-vertical-offset="4672">
+          <caret line="81" column="32" selection-start-line="81" selection-start-column="32" selection-end-line="81" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/org/jcodec/scale/BitmapUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="274" max-vertical-offset="1168">
+          <caret line="20" column="51" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/codecs/h264/H264Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4178" max-vertical-offset="9568">
+          <caret line="309" column="58" selection-start-line="309" selection-start-column="58" selection-end-line="309" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Documents/adt-bundle-mac-x86_64-20140624/sdk/sources/android-21/android/os/AsyncTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="7698" max-vertical-offset="10080">
+          <caret line="533" column="53" selection-start-line="533" selection-start-column="53" selection-end-line="533" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/containers/mp4/muxer/MP4Muxer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1476" max-vertical-offset="3440">
+          <caret line="137" column="16" selection-start-line="137" selection-start-column="16" selection-end-line="137" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/api/SequenceEncoder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1796" max-vertical-offset="2688">
+          <caret line="135" column="21" selection-start-line="135" selection-start-column="21" selection-end-line="135" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/common/NIOUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3556" max-vertical-offset="5488">
+          <caret line="264" column="23" selection-start-line="264" selection-start-column="23" selection-end-line="264" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/org/jcodec/api/android/SequenceEncoder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="384">
+          <caret line="16" column="58" selection-start-line="16" selection-start-column="58" selection-end-line="16" selection-end-column="58" />
+          <folding>
+            <element signature="e#428#429#0" expanded="true" />
+            <element signature="e#445#446#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/org/jcodec/api/android/SequenceMuxer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="439" max-vertical-offset="880">
+          <caret line="60" column="5" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/container/mp4/MovieCreator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="137" max-vertical-offset="688">
+          <caret line="47" column="37" selection-start-line="47" selection-start-column="37" selection-end-line="47" selection-end-column="37" />
+          <folding>
+            <element signature="e#1313#1314#0" expanded="true" />
+            <element signature="e#1381#1382#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.9615383" vertical-offset="4203" max-vertical-offset="16144">
+          <caret line="274" column="0" selection-start-line="274" selection-start-column="0" selection-end-line="274" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#12655#12662#0" expanded="true" />
+            <element signature="e#12714#12721#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
+          <caret line="11" column="40" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/AbstractBoxParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33265308" vertical-offset="13" max-vertical-offset="1536">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding>
+            <element signature="e#1194#1349#0" expanded="true" />
+            <element signature="e#1342#1343#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/IsoFile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="317" max-vertical-offset="1472">
+          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/PropertyBoxParserImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.78367347" vertical-offset="640" max-vertical-offset="2480">
+          <caret line="40" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>

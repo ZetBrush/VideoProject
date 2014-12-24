@@ -1,11 +1,14 @@
 package org.jcodec.api;
 
 import com.coremedia.iso.boxes.Container;
+import com.coremedia.iso.boxes.sampleentry.SampleEntry;
 import com.googlecode.mp4parser.FileDataSourceImpl;
 import com.googlecode.mp4parser.authoring.Movie;
 import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
 import com.googlecode.mp4parser.authoring.tracks.AACTrackImpl;
 import com.googlecode.mp4parser.authoring.tracks.H264TrackImpl;
+
+
 
 import org.jcodec.codecs.h264.H264Encoder;
 import org.jcodec.codecs.h264.H264Utils;
@@ -122,12 +125,14 @@ public class SequenceEncoder {
 
     public void finish() throws IOException {
         // Push saved SPS/PPS to a special storage in MP4
+
+      //  org.jcodec.containers.mp4.boxes.SampleEntry smpentry = H264Utils.createMOVSampleEntry(spsList, ppsList);
         outTrack.addSampleEntry(H264Utils.createMOVSampleEntry(spsList, ppsList));
 
-        //outTrack.
         // Write MP4 header and finalize recording
 
         muxer.writeHeader();
+
         NIOUtils.closeQuietly(ch);
     }
     }

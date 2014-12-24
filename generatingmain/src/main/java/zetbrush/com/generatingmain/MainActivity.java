@@ -2,6 +2,7 @@ package zetbrush.com.generatingmain;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,6 +13,7 @@ import android.media.MediaFormat;
 import android.media.MediaMuxer;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -29,11 +31,16 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.Container;
 import com.googlecode.mp4parser.FileDataSourceImpl;
 import com.googlecode.mp4parser.authoring.Movie;
+import com.googlecode.mp4parser.authoring.Mp4TrackImpl;
+import com.googlecode.mp4parser.authoring.Track;
 import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
+import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
 import com.googlecode.mp4parser.authoring.tracks.AACTrackImpl;
+import com.googlecode.mp4parser.authoring.tracks.AppendTrack;
 import com.googlecode.mp4parser.authoring.tracks.H264TrackImpl;
 
 import net.pocketmagic.android.openmxplayer.OpenMXPlayer;
@@ -52,10 +59,20 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
+import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.util.HashMap;
-
+import java.util.LinkedList;
+import java.util.List;
+import com.coremedia.iso.boxes.Container;
+import com.googlecode.mp4parser.authoring.Movie;
+import com.googlecode.mp4parser.authoring.Track;
+import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
+import com.googlecode.mp4parser.authoring.builder.FragmentedMp4Builder;
+import com.googlecode.mp4parser.authoring.builder.SyncSampleIntersectFinderImpl;
+import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
 import ar.com.daidalos.afiledialog.FileChooserDialog;
 
 public class MainActivity extends ActionBarActivity {
@@ -91,7 +108,7 @@ public class MainActivity extends ActionBarActivity {
     String mime = null;
     int sampleRate = 0, channels = 0, bitrate = 0;
     long presentationTimeUs = 0, duration = 0;
-
+     String path = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +119,15 @@ public class MainActivity extends ActionBarActivity {
         playButton = (Button) findViewById(R.id.playButtn);
         seekbar = (SeekBar) findViewById(R.id.seekbar);
         compositionButton = (Button) findViewById(R.id.compositionButton);
+
+        try {
+            Intent intent = getIntent();
+            if (intent != null) {
+                path = intent.getExtras().getString("myimagespath");
+
+            }
+        }catch (Exception e){}
+
 
     }
 
@@ -251,7 +277,6 @@ public class MainActivity extends ActionBarActivity {
           timeinterval = (SeekBar)popupView.findViewById(R.id.tIntervalSeekBar);
           outputEditText = (EditText)popupView.findViewById(R.id.videoName);
 
-
         timeinterval.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -269,7 +294,6 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
                 Log.d("value of frametime", "val "+ scale[0]);
                 org.jcodec.api.SequenceEncoder.setFrameDuration(scale[0]);
 
@@ -310,11 +334,102 @@ public class MainActivity extends ActionBarActivity {
     public void onCompositionClick(View v) throws IOException {
         // MediaMuxer muxer = new MediaMuxer("/storage/removable/sdcard1/DCIM/100ANDRO/newfold/outt.mp4", MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
 
-        File source = new File("/storage/removable/sdcard1/vid_enc.mp4");
-        File out = new File("/storage/removable/sdcard1/DCIM/100ANDRO/newfold/vidos.mp4");
+        File sourceAudio = new File("/storage/removable/sdcard1/outputaaac.mp4");
+        File sourceVieo = new File("/storage/removable/sdcard1//vid_enc.mp4");
+        File outt = new File("/storage/removable/sdcard1/viiddos.mp4");
+        String sourceAudiop = "/storage/removable/sdcard1/outputaaac.mp4";
+        String sorcevideo= "/storage/removable/sdcard1//vid_enc.mp4";
+
+       // Remux remuxer = new Remux();
+
+        //remuxer.remuxcustom(out,sourceAudio,sourceVieo);
+
+      /*  MovieCreator mc = new MovieCreator();
+        Movie video = mc.build(Channels.newChannel(AppendExample.class.getResourceAsStream("/count-video.mp4")));
+        Movie audio = mc.build(Channels.newChannel(AppendExample.class.getResourceAsStream("/count-english-audio.mp4")));
 
 
-        try {
+        List<Track> videoTracks = video.getTracks();
+        video.setTracks(new LinkedList<Track>());
+
+        List<Track> audioTracks = audio.getTracks();
+
+
+        for (Track videoTrack : videoTracks) {
+            video.addTrack(new AppendTrack(videoTrack, videoTrack));
+        }
+        for (Track audioTrack : audioTracks) {
+            video.addTrack(new AppendTrack(audioTrack, audioTrack));
+        }
+
+        IsoFile out = new DefaultMp4Builder().build(video);
+        FileOutputStream fos = new FileOutputStream(new File(String.format("output.mp4")));
+        out.getBox(fos.getChannel());
+        fos.close();*/
+
+        String f1 = "/storage/removable/sdcard1/outputaaac.mp4";
+        String f2 = "/storage/removable/sdcard1//vid_enc.mp4";
+        //String f3 = AppendExample.class.getProtectionDomain().getCodeSource().getLocation().getFile() + "/1365070453555.mp4";
+
+
+        Movie[] inMovies = new Movie[]{
+                MovieCreator.build(f1),
+                MovieCreator.build(f2),
+               /* MovieCreator.build(f3)*/  };
+
+        List<Track> videoTracks = new LinkedList<Track>();
+        List<Track> audioTracks = new LinkedList<Track>();
+
+        for (Movie m : inMovies) {
+            for (Track t : m.getTracks()) {
+                if (t.getHandler().equals("soun")) {
+                    audioTracks.add(t);
+                }
+                if (t.getHandler().equals("vide")) {
+                    videoTracks.add(t);
+                }
+            }
+        }
+
+        Movie result = new Movie();
+
+
+        if (audioTracks.size() > 0) {
+            result.addTrack(new AppendTrack(audioTracks.toArray(new Track[audioTracks.size()])));
+        }
+        if (videoTracks.size() > 0) {
+            result.addTrack(new AppendTrack(videoTracks.toArray(new Track[videoTracks.size()])));
+        }
+
+        Container out = new DefaultMp4Builder().build(result);
+
+        FileChannel fc = new RandomAccessFile(String.format("audioVideo.mp4"), "rw").getChannel();
+        out.writeContainer(fc);
+        fc.close();
+
+
+
+
+    }
+
+
+       /* AACTrackImpl aacTrack = new AACTrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/strangeclouds.aac"));
+        H264TrackImpl mp4track = new H264TrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/vid_enc.mp4"));
+        Movie m = new Movie();
+        m.addTrack(aacTrack);
+        m.addTrack(mp4track);
+        DefaultMp4Builder mp4Builder = new DefaultMp4Builder();
+        Container out = mp4Builder.build(m);
+        FileOutputStream fos = new FileOutputStream("/storage/removable/sdcard1/outputaactmp4.mp4");
+        FileChannel fc = fos.getChannel();
+        out.writeContainer(fc);
+
+        fos.close();*/
+
+
+
+
+       /* try {
            // String baseDir = Environment.getExternalStorageDirectory().getAbsolutePath();
             H264TrackImpl h264Track = new H264TrackImpl(new FileDataSourceImpl(source));
             AACTrackImpl aacTrack = new AACTrackImpl(new FileDataSourceImpl( "/storage/removable/sdcard1/strangeclouds.aac" ));
@@ -332,7 +447,12 @@ public class MainActivity extends ActionBarActivity {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
+
+
+
+
+
 
        // cloneMediaUsingMuxer("/storage/removable/sdcard1/DCIM/100ANDRO/newfold/vid_enc.mp4","/storage/removable/sdcard1/DCIM/100ANDRO/newfold/Honor.mp3","/storage/removable/sdcard1/DCIM/100ANDRO/newfold/vidasas_enc.mp4",4,4);
 
@@ -473,7 +593,7 @@ public class MainActivity extends ActionBarActivity {
         muxer.stop();
         muxer.release();*/
 
-    }
+
 
   /*  public boolean getInputBuffer(ByteBuffer inputBuffer, boolean isAudioSample,MediaCodec.BufferInfo bufferInfo){
 
@@ -484,25 +604,25 @@ public class MainActivity extends ActionBarActivity {
 
     public void makevideoClick(View v) {
         if (name[0]!=null) {
-            FileChooserDialog dialog = new FileChooserDialog(v.getContext());
-            dialog.addListener(new FileChooserDialog.OnFileSelectedListener() {
-                @Override
-                public void onFileSelected(Dialog source, File folder, String name) {
-                }
-
-                @Override
-                public void onFileSelected(Dialog source, File file) {
-                    source.hide();
-                    String digits = file.getName().replaceAll("\\D+(\\d+)\\D+",
-                            "$1");
-                    String mask = file.getName().replaceAll("(\\D+)\\d+(\\D+)",
-                            "$1%0" + digits.length() + "d$2");
 
 
-                    new Encoder().execute(new File(file.getParentFile(), mask));
-                }
-            });
-            dialog.show();
+
+            if(path!=null) {
+
+                File file = new File( path + "/image_0.png");
+
+                String digits = file.getName().replaceAll("\\D+(\\d+)\\D+",
+                        "$1");
+                String mask = file.getName().replaceAll("(\\D+)\\d+(\\D+)",
+                        "$1%0" + digits.length() + "d$2");
+
+                new Encoder().execute(new File( path + "/", mask));
+            }
+
+
+
+
+
 
 
 

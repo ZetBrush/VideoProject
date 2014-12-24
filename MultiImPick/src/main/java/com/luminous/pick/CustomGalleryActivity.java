@@ -71,7 +71,7 @@ public class CustomGalleryActivity extends Activity {
             finish();
         }
 
-        File file = new File("/storage/external_SD/pictures");
+        /*File file = new File("/storage/external_SD/pictures");
         File imageFiles[] = file.listFiles();
 
         for (int i = 0; i < imageFiles.length; i++) {
@@ -85,7 +85,7 @@ public class CustomGalleryActivity extends Activity {
             bt.eraseColor(Color.GRAY);
             arr.add(bt);
 
-        }
+        }*/
 
 
         initImageLoader();

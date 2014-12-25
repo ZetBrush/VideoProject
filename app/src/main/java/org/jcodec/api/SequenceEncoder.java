@@ -129,6 +129,7 @@ public class SequenceEncoder {
       //  org.jcodec.containers.mp4.boxes.SampleEntry smpentry = H264Utils.createMOVSampleEntry(spsList, ppsList);
         outTrack.addSampleEntry(H264Utils.createMOVSampleEntry(spsList, ppsList));
 
+
         // Write MP4 header and finalize recording
 
         muxer.writeHeader();

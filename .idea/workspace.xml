@@ -22,23 +22,402 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="72fc5020-b0b6-4323-a8d2-c9b1ff08b9ab" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MultipleImagePick-master1/MultipleImagePick-master1.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/generatingmain/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/generatingmain/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MultiImPick/src/main/java/com/luminous/pick/CustomGalleryActivity.java" afterPath="$PROJECT_DIR$/MultiImPick/src/main/java/com/luminous/pick/CustomGalleryActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/libs/aspectjrt-1.7.3.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/libs/isoparser-1.0.4.2.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/intermediates/model_data.bin" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/AACTrackImple.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/build/generated/source/r/release/com/example/jcodec/R.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/aspectjrt_1_7_3.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/isoparser_1_0_4_2.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/aspectjweaver_1_6_6.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MultipleImagePick-master1/MultipleImagePick-master1.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/aFileDialog.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/build.gradle" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/build/generated/source/buildConfig/debug/ar/com/daidalos/afiledialog/BuildConfig.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/build/generated/source/buildConfig/test/debug/ar/com/daidalos/afiledialog/test/BuildConfig.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/build/generated/source/r/debug/ar/com/daidalos/afiledialog/R.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/build/generated/source/r/release/ar/com/daidalos/afiledialog/R.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/build/generated/source/r/test/debug/ar/com/daidalos/afiledialog/R.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/build/generated/source/r/test/debug/ar/com/daidalos/afiledialog/test/R.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/java/ar/com/daidalos/afiledialog/FileChooser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/java/ar/com/daidalos/afiledialog/FileChooserActivity.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/java/ar/com/daidalos/afiledialog/FileChooserCore.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/java/ar/com/daidalos/afiledialog/FileChooserDialog.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/java/ar/com/daidalos/afiledialog/FileChooserLabels.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/java/ar/com/daidalos/afiledialog/view/FileItem.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-hdpi/add.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-hdpi/document.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-hdpi/document_gray.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-hdpi/folder.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-hdpi/ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-hdpi/no.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-hdpi/tick.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-ldpi/add.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-ldpi/document.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-ldpi/document_gray.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-ldpi/folder.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-ldpi/ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-ldpi/no.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-ldpi/tick.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-mdpi/add.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-mdpi/document.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-mdpi/document_gray.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-mdpi/folder.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-mdpi/ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-mdpi/no.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/drawable-mdpi/tick.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/layout/daidalos_file_chooser.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/layout/daidalos_file_item.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/values-es/strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/values-fr/strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/aFileDialog/src/main/res/values/strings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/libs/aspectjweaver-1.6.6.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/AbstractBoxParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/Ascii.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/BoxParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/BoxReplacer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/Hex.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/IsoFile.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/IsoTypeReader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/IsoTypeReaderVariable.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/IsoTypeWriter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/IsoTypeWriterVariable.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/PropertyBoxParserImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/Utf8.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/AbstractMediaHeaderBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/AlbumBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/AuthorBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/Box.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/ChunkOffset64BitBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/ChunkOffsetBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/ClassificationBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/CompositionShiftLeastGreatestAtom.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/CompositionTimeToSample.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/Container.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/CopyrightBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/DataEntryUrlBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/DataEntryUrnBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/DataInformationBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/DataReferenceBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/DescriptionBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/EditBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/EditListBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/FileTypeBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/FreeBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/FreeSpaceBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/FullBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/GenreBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/HandlerBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/HintMediaHeaderBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/ItemDataBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/ItemLocationBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/ItemProtectionBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/KeywordsBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/MediaBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/MediaHeaderBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/MediaInformationBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/MetaBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/MovieBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/MovieHeaderBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/NullMediaHeaderBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/ObjectDescriptorBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/OmaDrmAccessUnitFormatBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/OriginalFormatBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/PerformerBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/ProgressiveDownloadInformationBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/ProtectionSchemeInformationBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/RatingBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/RecordingYearBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/SampleDependencyTypeBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/SampleDescriptionBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/SampleSizeBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/SampleTableBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/SampleToChunkBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/SchemeInformationBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/SchemeTypeBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/SoundMediaHeaderBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/StaticChunkOffsetBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/SubSampleInformationBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/SubtitleMediaHeaderBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/SyncSampleBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/TimeToSampleBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/TitleBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/TrackBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/TrackHeaderBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/TrackReferenceBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/TrackReferenceTypeBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/UnknownBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/UserBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/UserDataBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/VideoMediaHeaderBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/XmlBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/apple/AppleDataRateBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/apple/AppleDataReferenceBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/apple/AppleItemListBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/apple/AppleLosslessSpecificBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/apple/AppleReferenceMovieBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/apple/AppleReferenceMovieDescriptorBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/apple/AppleWaveBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/dece/TrickPlayBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/fragment/MovieExtendsBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/fragment/MovieExtendsHeaderBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/fragment/MovieFragmentBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/fragment/MovieFragmentHeaderBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/fragment/MovieFragmentRandomAccessBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/fragment/MovieFragmentRandomAccessOffsetBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/fragment/SampleFlags.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/fragment/SegmentTypeBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/fragment/TrackExtendsBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/fragment/TrackFragmentBaseMediaDecodeTimeBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/fragment/TrackFragmentBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/fragment/TrackFragmentHeaderBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/fragment/TrackFragmentRandomAccessBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/fragment/TrackRunBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/mdat/MediaDataBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/mdat/SampleList.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/sampleentry/AbstractSampleEntry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/sampleentry/AmrSpecificBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/sampleentry/AudioSampleEntry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/sampleentry/DashHelper.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/sampleentry/MpegSampleEntry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/sampleentry/Ovc1VisualSampleEntryImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/sampleentry/SampleEntry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/sampleentry/TextSampleEntry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/sampleentry/VisualSampleEntry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/threegpp26244/LocationInformationBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/vodafone/AlbumArtistBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/vodafone/ContentDistributorIdBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/vodafone/CoverUriBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/boxes/vodafone/LyricsUriBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/AbstractBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/AbstractContainerBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/AbstractFullBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/BasicContainer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/DataSource.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/DirectFileReadDataSource.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/FileDataSourceImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/FullContainerBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/MemoryDataSourceImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/RequiresParseDetailAspect.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/Version.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/annotations/DoNotParseDetail.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/annotations/ParseDetail.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/AbstractTrack.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/CencMp4TrackImplImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/Edit.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/Movie.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/Mp4TrackImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/Sample.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/SampleImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/Track.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/TrackMetaData.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/WrappingTrack.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/builder/ByteBufferHelper.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/builder/DefaultMp4Builder.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/builder/FragmentIntersectionFinder.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/builder/FragmentedMp4Builder.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/builder/Mp4Builder.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/builder/StaticFragmentIntersectionFinderImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/builder/SyncSampleIntersectFinderImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/builder/TwoSecondIntersectionFinder.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/container/mp4/MovieCreator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/samples/DefaultMp4SampleList.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/samples/FragmentedMp4SampleList.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/AACTrackImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/AC3TrackImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/Amf0Track.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/AppendTrack.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/CencDecryptingTrackImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/CencEncryptedTrack.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/CencEncryptingTrackImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/ChangeTimeScaleTrack.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/CleanInputStream.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/CroppedTrack.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/DTSTrackImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/DivideTimeScaleTrack.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/EC3TrackImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/H264TrackImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/H265TrackImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/MP3TrackImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/MultiplyTimeScaleTrack.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/ReplaceSampleTrack.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/SMPTETTTrackImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/SilenceTrackImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/TextTrackImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/AC3SpecificBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/AbstractSampleEncryptionBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/AbstractTrackEncryptionBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/DTSSpecificBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/EC3SpecificBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/MLPSpecificBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/adobe/ActionMessageFormat0SampleEntryBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleAlbumBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleAppleIdBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleArtist2Box.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleArtistBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleCommentBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleCompilationBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleCopyrightBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleCountryTypeBoxBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleCoverBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleDataBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleDescriptionBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleDiskNumberBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleEncoderBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleGaplessPlaybackBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleGenreBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleGenreIDBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleGroupingBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleLongDescriptionBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleLyricsBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleMediaTypeBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleNameBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/ApplePurchaseDateBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleRecordingYear2Box.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleRecordingYearBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleShortDescriptionBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleSortAlbumBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleTVEpisodeBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleTVEpisodeNumberBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleTVNetworkBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleTVSeasonBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleTVShowBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleTempoBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleTrackAuthorBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleTrackNumberBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/AppleVariableSignedIntegerBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/Apple_atIDBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/Apple_flvr_Box.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/Apple_geIDBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/Apple_xid_Box.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/BaseMediaInfoAtom.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/CleanApertureAtom.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/GenericMediaHeaderAtom.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/GenericMediaHeaderTextAtom.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/PixelAspectRationAtom.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/QuicktimeTextSampleEntry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/TimeCodeBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/TrackApertureModeDimensionAtom.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/TrackEncodedPixelsDimensionsAtom.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/TrackLoadSettingsAtom.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/TrackProductionApertureDimensionsAtom.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/apple/Utf8AppleDataBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/basemediaformat/AvcNalUnitStorageBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/cenc/CencDecryptingSampleList.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/cenc/CencEncryptingSampleList.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/dece/AssetInformationBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/dece/BaseLocationBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/dece/ContentInformationBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/dece/SampleEncryptionBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4-boxes.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/AbstractDescriptorBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/ESDescriptorBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/ObjectDescriptorBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/objectdescriptors/AudioSpecificConfig.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/objectdescriptors/BaseDescriptor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/objectdescriptors/BitReaderBuffer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/objectdescriptors/BitWriterBuffer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/objectdescriptors/DecoderConfigDescriptor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/objectdescriptors/DecoderSpecificInfo.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/objectdescriptors/Descriptor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/objectdescriptors/ESDescriptor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/objectdescriptors/ExtensionDescriptor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/objectdescriptors/ExtensionProfileLevelDescriptor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/objectdescriptors/InitialObjectDescriptor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/objectdescriptors/ObjectDescriptor.java_bak" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/objectdescriptors/ObjectDescriptorBase.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/objectdescriptors/ObjectDescriptorFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/objectdescriptors/ProfileLevelIndicationDescriptor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/objectdescriptors/SLConfigDescriptor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/objectdescriptors/UnknownDescriptor.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/samplegrouping/CencSampleEncryptionInformationGroupEntry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/samplegrouping/GroupEntry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/samplegrouping/RateShareEntry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/samplegrouping/RollRecoveryEntry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/samplegrouping/SampleGroupDescriptionBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/samplegrouping/SampleToGroupBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/samplegrouping/TemporalLevelEntry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/samplegrouping/UnknownEntry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/mp4/samplegrouping/VisualRandomAccessEntry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/piff/PiffSampleEncryptionBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/piff/PiffTrackEncryptionBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/piff/ProtectionSpecificHeader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/piff/TfrfBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/piff/TfxdBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/piff/UuidBasedProtectionSystemSpecificHeaderBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/threegpp26244/SegmentIndexBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/boxes/threegpp26245/FontTableBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/contentprotection/GenericHeader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/contentprotection/PlayReadyHeader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/BTree.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/CharCache.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/Debug.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/model/AspectRatio.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/model/BitstreamElement.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/model/ChromaFormat.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/model/HRDParameters.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/model/PictureParameterSet.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/model/ScalingList.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/model/ScalingMatrix.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/model/SeqParameterSet.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/model/VUIParameters.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/read/BitstreamReader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/read/CAVLCReader.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/write/BitstreamWriter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/write/CAVLCWriter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/srt/SrtParser.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/util/AndroidLogger.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/util/ByteBufferByteChannel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/util/CastUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/util/ChannelHelper.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/util/DateHelper.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/util/IntHashMap.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/util/Iso639.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/util/JuliLogger.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/util/LazyList.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/util/Logger.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/util/Math.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/util/Matrix.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/util/Path.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/util/RangeStartMap.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/util/UUIDConverter.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso14496/part12/BitRateBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso14496/part12/SampleAuxiliaryInformationOffsetsBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso14496/part12/SampleAuxiliaryInformationSizesBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso14496/part15/AvcConfigurationBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso14496/part15/AvcDecoderConfigurationRecord.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso14496/part15/HevcConfigurationBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso14496/part15/HevcDecoderConfigurationRecord.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso14496/part15/PriotityRangeBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso14496/part15/StepwiseTemporalLayerEntry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso14496/part15/SyncSampleEntry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso14496/part15/TemporalLayerSampleGroup.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso14496/part15/TemporalSubLayerSampleGroup.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso14496/part15/TierBitRateBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso14496/part15/TierInfoBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso14496/part30/WebVTTConfigurationBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso14496/part30/WebVTTSampleEntry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso14496/part30/WebVTTSourceLabelBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso14496/part30/XMLSubtitleSampleEntry.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso23001/part7/CencSampleAuxiliaryDataFormat.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso23001/part7/ProtectionSystemSpecificHeaderBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso23001/part7/TrackEncryptionBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso23009/part1/EventMessageBox.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/generatingmain/src/main/res/raw/sampleaac.m4p" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/generatingmain/src/main/res/raw/samplemp3.mp3" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/generatingmain/src/main/res/raw/strangeclouds.aac" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/aFileDialog/build/generated/source/buildConfig/release/ar/com/daidalos/afiledialog/BuildConfig.java" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/release/com/example/jcodec/BuildConfig.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/MainActivity.java" afterPath="$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/oMXPlayer/src/main/java/net/pocketmagic/android/openmxplayer/OpenMXPlayer.java" afterPath="$PROJECT_DIR$/oMXPlayer/src/main/java/net/pocketmagic/android/openmxplayer/OpenMXPlayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/Remux.java" afterPath="$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/Remux.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/org/jcodec/api/SequenceEncoder.java" afterPath="$PROJECT_DIR$/app/src/main/java/org/jcodec/api/SequenceEncoder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MultiImPick/build.gradle" afterPath="$PROJECT_DIR$/MultiImPick/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MultiImPick/build/intermediates/tmp/dex/debug/inputList.txt" afterPath="$PROJECT_DIR$/MultiImPick/build/intermediates/tmp/dex/debug/inputList.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/oMXPlayer/oMXPlayer.iml" afterPath="$PROJECT_DIR$/oMXPlayer/oMXPlayer.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_21_0_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_21_0_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_21_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_annotations_21_0_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_21_0_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_annotations_21_0_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_21_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_21_0_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_21_0_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_21_0_2.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/generatingmain/build.gradle" afterPath="$PROJECT_DIR$/generatingmain/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/generatingmain/generatingmain.iml" afterPath="$PROJECT_DIR$/generatingmain/generatingmain.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="jcodec-2.iws" />
@@ -65,55 +444,103 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.9615383" vertical-offset="4203" max-vertical-offset="16144">
-              <caret line="274" column="0" selection-start-line="274" selection-start-column="0" selection-end-line="274" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="7083" max-vertical-offset="14832">
+              <caret line="479" column="20" selection-start-line="479" selection-start-column="20" selection-end-line="479" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#12655#12662#0" expanded="true" />
-                <element signature="e#12714#12721#0" expanded="true" />
+                <element signature="e#10060#10061#0" expanded="true" />
+                <element signature="e#10112#10113#0" expanded="true" />
+                <element signature="e#27939#27957#0" expanded="true" />
+                <element signature="e#28030#28048#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PropertyBoxParserImpl.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/PropertyBoxParserImpl.java">
+      <file leaf-file-name="settings.gradle" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/settings.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.78367347" vertical-offset="640" max-vertical-offset="2480">
-              <caret line="40" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="128">
+              <caret line="0" column="49" selection-start-line="0" selection-start-column="49" selection-end-line="0" selection-end-column="49" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IsoFile.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/IsoFile.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="317" max-vertical-offset="1472">
-              <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MovieCreator.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/container/mp4/MovieCreator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="137" max-vertical-offset="688">
-              <caret line="47" column="37" selection-start-line="47" selection-start-column="37" selection-end-line="47" selection-end-column="37" />
-              <folding>
-                <element signature="e#1313#1314#0" expanded="true" />
-                <element signature="e#1381#1382#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/generatingmain/src/main/AndroidManifest.xml">
+      <file leaf-file-name="build.gradle" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/generatingmain/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
-              <caret line="11" column="40" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
+              <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AACTrackImple.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/AACTrackImple.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.69242656" vertical-offset="3056" max-vertical-offset="5936">
+              <caret line="219" column="27" selection-start-line="219" selection-start-column="27" selection-end-line="219" selection-end-column="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1387#1404#0" expanded="true" />
+                <element signature="e#4120#4138#0" expanded="true" />
+                <element signature="e#6033#6034#0" expanded="true" />
+                <element signature="e#6072#6073#0" expanded="true" />
+                <element signature="e#6564#6573#0" expanded="true" />
+                <element signature="e#9676#9677#0" expanded="true" />
+                <element signature="e#9719#9720#0" expanded="true" />
+                <element signature="e#9761#9762#0" expanded="true" />
+                <element signature="e#9792#9793#0" expanded="true" />
+                <element signature="e#9870#9871#0" expanded="true" />
+                <element signature="e#9897#9898#0" expanded="true" />
+                <element signature="e#9935#9936#0" expanded="true" />
+                <element signature="e#9962#9963#0" expanded="true" />
+                <element signature="e#10036#10037#0" expanded="true" />
+                <element signature="e#10063#10064#0" expanded="true" />
+                <element signature="e#10110#10111#0" expanded="true" />
+                <element signature="e#10146#10147#0" expanded="true" />
+                <element signature="e#10180#10181#0" expanded="true" />
+                <element signature="e#10209#10210#0" expanded="true" />
+                <element signature="e#10249#10250#0" expanded="true" />
+                <element signature="e#10279#10280#0" expanded="true" />
+                <element signature="e#10346#10347#0" expanded="true" />
+                <element signature="e#10373#10374#0" expanded="true" />
+                <element signature="e#10421#10422#0" expanded="true" />
+                <element signature="e#10487#10488#0" expanded="true" />
+                <element signature="e#13254#13255#0" expanded="true" />
+                <element signature="e#13310#13311#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AACTrackImpl.class" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/app/libs/isoparser-1.0.4.2.jar!/com/googlecode/mp4parser/authoring/tracks/AACTrackImpl.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.68" vertical-offset="48" max-vertical-offset="1200">
+              <caret line="16" column="59" selection-start-line="16" selection-start-column="59" selection-end-line="16" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="448">
+              <caret line="20" column="41" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LICENSE.txt" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/app/libs/isoparser-1.0.4.2.jar!/LICENSE.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2538" max-vertical-offset="3312">
+              <caret line="169" column="24" selection-start-line="169" selection-start-column="24" selection-end-line="169" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -122,11 +549,19 @@
       <file leaf-file-name="SequenceEncoder.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/api/SequenceEncoder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1796" max-vertical-offset="2688">
-              <caret line="135" column="21" selection-start-line="135" selection-start-column="21" selection-end-line="135" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="1526" max-vertical-offset="2192">
+              <caret line="155" column="42" selection-start-line="155" selection-start-column="42" selection-end-line="155" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SampleEntry.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/containers/mp4/boxes/SampleEntry.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="214" max-vertical-offset="832">
+              <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -134,31 +569,8 @@
       <file leaf-file-name="SequenceEncoder.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/org/jcodec/api/android/SequenceEncoder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="384">
-              <caret line="16" column="58" selection-start-line="16" selection-start-column="58" selection-end-line="16" selection-end-column="58" />
-              <folding>
-                <element signature="e#428#429#0" expanded="true" />
-                <element signature="e#445#446#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NIOUtils.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/common/NIOUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3556" max-vertical-offset="5488">
-              <caret line="264" column="23" selection-start-line="264" selection-start-column="23" selection-end-line="264" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SequenceMuxer.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/org/jcodec/api/android/SequenceMuxer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="880">
-              <caret line="60" column="5" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="352">
+              <caret line="16" column="59" selection-start-line="16" selection-start-column="59" selection-end-line="16" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -204,16 +616,8 @@
                 <option name="path" value="$PROJECT_DIR$" />
               </ExternalProjectPojo>
               <ExternalProjectPojo>
-                <option name="name" value=":aFileDialog" />
-                <option name="path" value="$PROJECT_DIR$/aFileDialog" />
-              </ExternalProjectPojo>
-              <ExternalProjectPojo>
                 <option name="name" value=":oMXPlayer" />
                 <option name="path" value="$PROJECT_DIR$/oMXPlayer" />
-              </ExternalProjectPojo>
-              <ExternalProjectPojo>
-                <option name="name" value=":MultipleImagePick-master1" />
-                <option name="path" value="$PROJECT_DIR$/MultipleImagePick-master1" />
               </ExternalProjectPojo>
               <ExternalProjectPojo>
                 <option name="name" value=":MultiImPick" />
@@ -1763,11 +2167,6 @@
                 <option name="name" value="prepareReleaseDependencies" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare VideoGenerationJC:aFileDialog:unspecified" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/generatingmain" />
-                <option name="name" value="prepareVideoGenerationJCAFileDialogUnspecifiedLibrary" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="description" value="Prepare VideoGenerationJC:app:unspecified" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/generatingmain" />
                 <option name="name" value="prepareVideoGenerationJCAppUnspecifiedLibrary" />
@@ -2257,7 +2656,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="9933557499000" />
+        <entry key="$PROJECT_DIR$" value="8516127508000" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -2507,10 +2906,8 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/MultImPick/MultipleImagePick-master1/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/settings.gradle" />
         <option value="$PROJECT_DIR$/MultImPick/MultipleImagePick-master1/build.gradle" />
         <option value="$PROJECT_DIR$/MultImPick/MultipleImagePick-master1/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/org/jcodec/api/FrameGrab.java" />
         <option value="$PROJECT_DIR$/generatingmain/src/main/java/org/jcodec/api/android/FrameGrab.java" />
@@ -2529,18 +2926,22 @@
         <option value="$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/MediaMuxerTest.java" />
         <option value="$PROJECT_DIR$/generatingmain/src/main/res/layout/popup_settings.xml" />
         <option value="$PROJECT_DIR$/oMXPlayer/src/main/java/net/pocketmagic/android/openmxplayer/OpenMXPlayer.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/org/jcodec/api/SequenceEncoder.java" />
         <option value="$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/Remux.java" />
         <option value="$PROJECT_DIR$/MultiImPick/build.gradle" />
         <option value="$PROJECT_DIR$/MultiImPick/src/main/java/com/luminous/pick/CustomGalleryActivity.java" />
         <option value="$PROJECT_DIR$/generatingmain/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/org/jcodec/api/SequenceEncoder.java" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/AACTrackImpl.java" />
         <option value="$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/MainActivity.java" />
+        <option value="$PROJECT_DIR$/settings.gradle" />
+        <option value="$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/AACTrackImple.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1" />
-    <option name="y" value="25" />
+    <option name="x" value="12" />
+    <option name="y" value="26" />
     <option name="width" value="1896" />
     <option name="height" value="970" />
   </component>
@@ -2570,6 +2971,26 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VidGen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VidGen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="generatingmain" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2595,72 +3016,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="VideoGenerationJC" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VideoGenerationJC" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="oMXPlayer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VideoGenerationJC" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="oMXPlayer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VideoGenerationJC" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="oMXPlayer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openmxplayer" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2821,78 +3176,6 @@
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jcodec" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VideoGenerationJC" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="generatingmain" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jcodec" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VideoGenerationJC" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="generatingmain" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jcodec" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="android" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -2922,126 +3205,17 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VideoGenerationJC" />
+              <option name="myItemId" value="generatingmain" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VideoGenerationJC" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VideoGenerationJC" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VidGen" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VideoGenerationJC" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mp4parser" />
+              <option name="myItemId" value="build" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -3062,17 +3236,22 @@
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Android_Wear_Square_API_20" />
     <property name="FullScreen" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
+    <property name="SearchEverywhereHistoryKey" value="expres&#9;ACTION&#9;EvaluateExpression&#10;exp&#9;ACTION&#9;EvaluateExpression&#10;eval&#9;ACTION&#9;EvaluateExpression" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/generatingmain/src/main/res" />
+      <recent name="$PROJECT_DIR$/generatingmain/src/main/res/raw" />
       <recent name="$PROJECT_DIR$/generatingmain/src/main/java" />
       <recent name="$PROJECT_DIR$/app/src/main/java/org/jcodec/api" />
       <recent name="$PROJECT_DIR$/generatingmain/src/main/res/drawable" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain" />
+      <recent name="$PROJECT_DIR$/app/libs" />
+      <recent name="$PROJECT_DIR$/generatingmain/src/main/res/raw" />
       <recent name="$PROJECT_DIR$/generatingmain/src/main/assets" />
       <recent name="$PROJECT_DIR$/generatingmain/src/main" />
-      <recent name="$PROJECT_DIR$/generatingmain/src/main/res/assets/me" />
     </key>
   </component>
   <component name="RunManager" selected="Android Application.generatingmain">
@@ -3315,7 +3494,11 @@
       <created>1419285555392</created>
       <updated>1419285555392</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="some changes">
+      <created>1419433958059</created>
+      <updated>1419433958059</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -3339,37 +3522,37 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="25" width="1896" height="970" extended-state="0" />
+    <frame x="12" y="26" width="1896" height="970" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32786885" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905483" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39344263" sideWeight="0.6170442" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2857143" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20960188" sideWeight="0.61272925" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905483" sideWeight="0.16562107" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905483" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2974239" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4531616" sideWeight="0.61057174" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37236533" sideWeight="0.61272925" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32955772" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905483" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19039914" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32786885" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39344263" sideWeight="0.3824164" order="14" side_tool="true" content_ui="tabs" />
+      <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20960188" sideWeight="0.38727078" order="14" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28764045" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -3395,87 +3578,23 @@
     <MESSAGE value="˚" />
     <MESSAGE value="frame rete changes 1sec per frame progress indicator" />
     <MESSAGE value="some changes audio part" />
-    <option name="LAST_COMMIT_MESSAGE" value="some changes audio part" />
+    <MESSAGE value="some changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="some changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/IsoFile.java</url>
-          <line>58</line>
+          <url>file://$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/MainActivity.java</url>
+          <line>460</line>
           <properties />
-          <option name="timeStamp" value="20" />
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="21" />
+      <option name="time" value="29" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/model/VUIParameters.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1504">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/model/AspectRatio.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="656">
-          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/model/BitstreamElement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240">
-          <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/model/ChromaFormat.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="441" max-vertical-offset="928">
-          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/model/HRDParameters.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="640">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/h264/model/PictureParameterSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="6144">
-          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso14496/part12/SampleAuxiliaryInformationSizesBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2032">
-          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/mp4parser/iso14496/part12/SampleAuxiliaryInformationOffsetsBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1161" max-vertical-offset="1648">
-          <caret line="50" column="13" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oMXPlayer/src/main/java/net/pocketmagic/android/openmxplayer/PlayerEvents.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="256">
-          <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/oMXPlayer/src/main/java/net/pocketmagic/android/openmxplayer/PlayerStates.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="976">
@@ -3495,66 +3614,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/tracks/H264TrackImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5027" max-vertical-offset="12112">
-          <caret line="349" column="25" selection-start-line="349" selection-start-column="25" selection-end-line="349" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/MediaMuxerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1520" max-vertical-offset="5968">
-          <caret line="128" column="67" selection-start-line="128" selection-start-column="67" selection-end-line="128" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/Track.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1104">
-          <caret line="15" column="42" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/FullContainerBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1360">
-          <caret line="33" column="22" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="826">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="826">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/settings.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="128">
-          <caret line="0" column="32" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/generatingmain/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.0" vertical-offset="0" max-vertical-offset="560">
-          <caret line="25" column="27" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -3575,27 +3638,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/Remux.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="179" max-vertical-offset="2416">
-          <caret line="56" column="100" selection-start-line="56" selection-start-column="100" selection-end-line="56" selection-end-column="100" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/DataSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1456">
-          <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Documents/adt-bundle-mac-x86_64-20140624/sdk/sources/android-18/java/io/Closeable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="400">
           <caret line="21" column="41" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3603,73 +3649,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="118" max-vertical-offset="592">
           <caret line="35" column="17" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/adt-bundle-mac-x86_64-20140624/sdk/sources/android-21/android/os/StrictMode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="16141" max-vertical-offset="35344">
-          <caret line="1141" column="33" selection-start-line="1141" selection-start-column="33" selection-end-line="1141" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/FileDataSourceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="77" max-vertical-offset="960">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/AbstractBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="701" max-vertical-offset="4464">
-          <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/BasicContainer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="173" max-vertical-offset="3968">
-          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/util/AndroidLogger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding>
-            <element signature="e#245#246#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/adt-bundle-mac-x86_64-20140624/sdk/sources/android-18/com/android/internal/os/RuntimeInit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33265308" vertical-offset="717" max-vertical-offset="6048">
-          <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/adt-bundle-mac-x86_64-20140624/sdk/sources/android-21/com/android/internal/os/ZygoteInit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33265308" vertical-offset="10989" max-vertical-offset="13920">
-          <caret line="746" column="0" selection-start-line="746" selection-start-column="0" selection-end-line="746" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/adt-bundle-mac-x86_64-20140624/sdk/sources/android-21/android/view/View.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33265308" vertical-offset="59101" max-vertical-offset="327424">
-          <caret line="3813" column="0" selection-start-line="3813" selection-start-column="0" selection-end-line="3813" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3686,17 +3665,9 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="864" max-vertical-offset="2512">
           <caret line="71" column="67" selection-start-line="71" selection-start-column="67" selection-end-line="71" selection-end-column="67" />
           <folding>
-            <element signature="e#2198#2581#0" expanded="true" />
-            <element signature="e#2558#2559#0" expanded="true" />
+            <element signature="e#2198#2581#0" expanded="false" />
+            <element signature="e#2558#2559#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/util/Logger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="400">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3705,7 +3676,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="978" max-vertical-offset="4672">
           <caret line="81" column="32" selection-start-line="81" selection-start-column="32" selection-end-line="81" selection-end-column="32" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3714,7 +3685,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="274" max-vertical-offset="1168">
           <caret line="20" column="51" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3730,7 +3700,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334" vertical-offset="7698" max-vertical-offset="10080">
           <caret line="533" column="53" selection-start-line="533" selection-start-column="53" selection-end-line="533" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3738,17 +3707,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1476" max-vertical-offset="3440">
           <caret line="137" column="16" selection-start-line="137" selection-start-column="16" selection-end-line="137" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/api/SequenceEncoder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1796" max-vertical-offset="2688">
-          <caret line="135" column="21" selection-start-line="135" selection-start-column="21" selection-end-line="135" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3760,48 +3718,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/org/jcodec/api/android/SequenceEncoder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="384">
-          <caret line="16" column="58" selection-start-line="16" selection-start-column="58" selection-end-line="16" selection-end-column="58" />
-          <folding>
-            <element signature="e#428#429#0" expanded="true" />
-            <element signature="e#445#446#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/org/jcodec/api/android/SequenceMuxer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="439" max-vertical-offset="880">
-          <caret line="60" column="5" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/googlecode/mp4parser/authoring/container/mp4/MovieCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="137" max-vertical-offset="688">
-          <caret line="47" column="37" selection-start-line="47" selection-start-column="37" selection-end-line="47" selection-end-column="37" />
-          <folding>
-            <element signature="e#1313#1314#0" expanded="true" />
-            <element signature="e#1381#1382#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.9615383" vertical-offset="4203" max-vertical-offset="16144">
-          <caret line="274" column="0" selection-start-line="274" selection-start-column="0" selection-end-line="274" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#12655#12662#0" expanded="true" />
-            <element signature="e#12714#12721#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/generatingmain/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
@@ -3810,30 +3726,608 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/AbstractBoxParser.java">
+    <entry file="file://$USER_HOME$/Documents/adt-bundle-mac-x86_64-20140624/sdk/sources/android-21/android/content/Context.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33265308" vertical-offset="13" max-vertical-offset="1536">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3591" max-vertical-offset="53824">
+          <caret line="288" column="30" selection-start-line="288" selection-start-column="30" selection-end-line="288" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Documents/adt-bundle-mac-x86_64-20140624/sdk/sources/android-21/android/os/StrictMode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="16189" max-vertical-offset="35344">
+          <caret line="1133" column="0" selection-start-line="1133" selection-start-column="0" selection-end-line="1133" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Documents/adt-bundle-mac-x86_64-20140624/sdk/sources/android-21/android/util/Log.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3248">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#1194#1349#0" expanded="true" />
-            <element signature="e#1342#1343#0" expanded="true" />
+            <element signature="e#0#7896#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/IsoFile.java">
+    <entry file="file://$USER_HOME$/Documents/adt-bundle-mac-x86_64-20140624/sdk/sources/android-18/android/util/Slog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="317" max-vertical-offset="1472">
-          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="694" max-vertical-offset="1184">
+          <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/coremedia/iso/PropertyBoxParserImpl.java">
+    <entry file="file://$USER_HOME$/Documents/adt-bundle-mac-x86_64-20140624/sdk/sources/android-18/com/android/internal/os/RuntimeInit.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.78367347" vertical-offset="640" max-vertical-offset="2480">
-          <caret line="40" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.6265306" vertical-offset="717" max-vertical-offset="6048">
+          <caret line="94" column="15" selection-start-line="94" selection-start-column="15" selection-end-line="94" selection-end-column="15" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Documents/adt-bundle-mac-x86_64-20140624/sdk/sources/android-21/com/android/internal/os/ZygoteInit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.6993127" vertical-offset="9613" max-vertical-offset="13920">
+          <caret line="748" column="22" selection-start-line="748" selection-start-column="22" selection-end-line="748" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/MediaMuxerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1520" max-vertical-offset="5968">
+          <caret line="128" column="67" selection-start-line="128" selection-start-column="67" selection-end-line="128" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/Remux.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="179" max-vertical-offset="2416">
+          <caret line="56" column="100" selection-start-line="56" selection-start-column="100" selection-end-line="56" selection-end-column="100" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Documents/adt-bundle-mac-x86_64-20140624/sdk/sources/android-21/android/view/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="68877" max-vertical-offset="327424">
+          <caret line="4424" column="0" selection-start-line="4424" selection-start-column="0" selection-end-line="4424" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Documents/adt-bundle-mac-x86_64-20140624/sdk/sources/android-18/android/view/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="279261" max-vertical-offset="293488">
+          <caret line="17903" column="0" selection-start-line="17903" selection-start-column="0" selection-end-line="17903" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#726889#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#58817#58823#0" expanded="false" />
+            <element signature="e#124076#124077#0" expanded="false" />
+            <element signature="e#124115#124116#0" expanded="false" />
+            <element signature="e#146951#146952#0" expanded="false" />
+            <element signature="e#146984#146985#0" expanded="false" />
+            <element signature="e#158371#158372#0" expanded="false" />
+            <element signature="e#158420#158421#0" expanded="false" />
+            <element signature="e#166011#166012#0" expanded="false" />
+            <element signature="e#166075#166076#0" expanded="false" />
+            <element signature="e#166495#166496#0" expanded="false" />
+            <element signature="e#166535#166536#0" expanded="false" />
+            <element signature="e#167310#167311#0" expanded="false" />
+            <element signature="e#167362#167363#0" expanded="false" />
+            <element signature="e#167575#167576#0" expanded="false" />
+            <element signature="e#167629#167630#0" expanded="false" />
+            <element signature="e#168151#168152#0" expanded="false" />
+            <element signature="e#168205#168206#0" expanded="false" />
+            <element signature="e#168650#168651#0" expanded="false" />
+            <element signature="e#168703#168704#0" expanded="false" />
+            <element signature="e#175161#175162#0" expanded="false" />
+            <element signature="e#175220#175221#0" expanded="false" />
+            <element signature="e#199551#199552#0" expanded="false" />
+            <element signature="e#199595#199596#0" expanded="false" />
+            <element signature="e#202348#202349#0" expanded="false" />
+            <element signature="e#202393#202394#0" expanded="false" />
+            <element signature="e#205444#205445#0" expanded="false" />
+            <element signature="e#205486#205487#0" expanded="false" />
+            <element signature="e#206926#206927#0" expanded="false" />
+            <element signature="e#206960#206961#0" expanded="false" />
+            <element signature="e#207987#207988#0" expanded="false" />
+            <element signature="e#208022#208023#0" expanded="false" />
+            <element signature="e#208536#208537#0" expanded="false" />
+            <element signature="e#208595#208596#0" expanded="false" />
+            <element signature="e#208846#208847#0" expanded="false" />
+            <element signature="e#208919#208920#0" expanded="false" />
+            <element signature="e#210837#210838#0" expanded="false" />
+            <element signature="e#210899#210900#0" expanded="false" />
+            <element signature="e#211860#211861#0" expanded="false" />
+            <element signature="e#211917#211918#0" expanded="false" />
+            <element signature="e#212649#212650#0" expanded="false" />
+            <element signature="e#212688#212689#0" expanded="false" />
+            <element signature="e#213028#213029#0" expanded="false" />
+            <element signature="e#213078#213079#0" expanded="false" />
+            <element signature="e#213379#213380#0" expanded="false" />
+            <element signature="e#213419#213420#0" expanded="false" />
+            <element signature="e#213764#213765#0" expanded="false" />
+            <element signature="e#213816#213817#0" expanded="false" />
+            <element signature="e#214108#214109#0" expanded="false" />
+            <element signature="e#214145#214146#0" expanded="false" />
+            <element signature="e#214475#214476#0" expanded="false" />
+            <element signature="e#214521#214522#0" expanded="false" />
+            <element signature="e#214819#214820#0" expanded="false" />
+            <element signature="e#214858#214859#0" expanded="false" />
+            <element signature="e#215198#215199#0" expanded="false" />
+            <element signature="e#215248#215249#0" expanded="false" />
+            <element signature="e#215555#215556#0" expanded="false" />
+            <element signature="e#215597#215598#0" expanded="false" />
+            <element signature="e#223835#223836#0" expanded="false" />
+            <element signature="e#223880#223881#0" expanded="false" />
+            <element signature="e#224844#224845#0" expanded="false" />
+            <element signature="e#224895#224896#0" expanded="false" />
+            <element signature="e#225583#225584#0" expanded="false" />
+            <element signature="e#225644#225645#0" expanded="false" />
+            <element signature="e#234019#234020#0" expanded="false" />
+            <element signature="e#234088#234089#0" expanded="false" />
+            <element signature="e#237506#237507#0" expanded="false" />
+            <element signature="e#237570#237571#0" expanded="false" />
+            <element signature="e#238802#238803#0" expanded="false" />
+            <element signature="e#238862#238863#0" expanded="false" />
+            <element signature="e#239327#239328#0" expanded="false" />
+            <element signature="e#239389#239390#0" expanded="false" />
+            <element signature="e#239692#239693#0" expanded="false" />
+            <element signature="e#239762#239763#0" expanded="false" />
+            <element signature="e#241707#241708#0" expanded="false" />
+            <element signature="e#241778#241779#0" expanded="false" />
+            <element signature="e#242151#242152#0" expanded="false" />
+            <element signature="e#242224#242225#0" expanded="false" />
+            <element signature="e#245772#245773#0" expanded="false" />
+            <element signature="e#245837#245838#0" expanded="false" />
+            <element signature="e#247619#247620#0" expanded="false" />
+            <element signature="e#247647#247648#0" expanded="false" />
+            <element signature="e#249287#249288#0" expanded="false" />
+            <element signature="e#249369#249370#0" expanded="false" />
+            <element signature="e#250234#250240#0" expanded="false" />
+            <element signature="e#253811#253817#0" expanded="false" />
+            <element signature="e#259441#259442#0" expanded="false" />
+            <element signature="e#259493#259494#0" expanded="false" />
+            <element signature="e#260446#260447#0" expanded="false" />
+            <element signature="e#260498#260499#0" expanded="false" />
+            <element signature="e#278410#278411#0" expanded="false" />
+            <element signature="e#278456#278457#0" expanded="false" />
+            <element signature="e#278662#278663#0" expanded="false" />
+            <element signature="e#278690#278691#0" expanded="false" />
+            <element signature="e#278770#278771#0" expanded="false" />
+            <element signature="e#278821#278822#0" expanded="false" />
+            <element signature="e#278899#278900#0" expanded="false" />
+            <element signature="e#278954#278955#0" expanded="false" />
+            <element signature="e#282587#282588#0" expanded="false" />
+            <element signature="e#282628#282629#0" expanded="false" />
+            <element signature="e#291072#291073#0" expanded="false" />
+            <element signature="e#291100#291101#0" expanded="false" />
+            <element signature="e#291535#291536#0" expanded="false" />
+            <element signature="e#291563#291564#0" expanded="false" />
+            <element signature="e#291992#291993#0" expanded="false" />
+            <element signature="e#292020#292021#0" expanded="false" />
+            <element signature="e#293178#293179#0" expanded="false" />
+            <element signature="e#293224#293225#0" expanded="false" />
+            <element signature="e#294634#294635#0" expanded="false" />
+            <element signature="e#294707#294708#0" expanded="false" />
+            <element signature="e#296361#296362#0" expanded="false" />
+            <element signature="e#296396#296397#0" expanded="false" />
+            <element signature="e#303180#303181#0" expanded="false" />
+            <element signature="e#303211#303212#0" expanded="false" />
+            <element signature="e#303915#303916#0" expanded="false" />
+            <element signature="e#303943#303944#0" expanded="false" />
+            <element signature="e#305947#305948#0" expanded="false" />
+            <element signature="e#305975#305976#0" expanded="false" />
+            <element signature="e#308212#308213#0" expanded="false" />
+            <element signature="e#308240#308241#0" expanded="false" />
+            <element signature="e#308875#308876#0" expanded="false" />
+            <element signature="e#308903#308904#0" expanded="false" />
+            <element signature="e#309873#309874#0" expanded="false" />
+            <element signature="e#309901#309902#0" expanded="false" />
+            <element signature="e#310554#310555#0" expanded="false" />
+            <element signature="e#310581#310582#0" expanded="false" />
+            <element signature="e#311153#311154#0" expanded="false" />
+            <element signature="e#311181#311182#0" expanded="false" />
+            <element signature="e#312903#312904#0" expanded="false" />
+            <element signature="e#312930#312931#0" expanded="false" />
+            <element signature="e#313862#313863#0" expanded="false" />
+            <element signature="e#313890#313891#0" expanded="false" />
+            <element signature="e#315690#315691#0" expanded="false" />
+            <element signature="e#315718#315719#0" expanded="false" />
+            <element signature="e#320800#320801#0" expanded="false" />
+            <element signature="e#320859#320860#0" expanded="false" />
+            <element signature="e#330489#330490#0" expanded="false" />
+            <element signature="e#330530#330531#0" expanded="false" />
+            <element signature="e#330638#330639#0" expanded="false" />
+            <element signature="e#330675#330676#0" expanded="false" />
+            <element signature="e#340184#340185#0" expanded="false" />
+            <element signature="e#340214#340215#0" expanded="false" />
+            <element signature="e#340496#340497#0" expanded="false" />
+            <element signature="e#340537#340538#0" expanded="false" />
+            <element signature="e#340817#340818#0" expanded="false" />
+            <element signature="e#340858#340859#0" expanded="false" />
+            <element signature="e#341238#341239#0" expanded="false" />
+            <element signature="e#341269#341270#0" expanded="false" />
+            <element signature="e#341635#341636#0" expanded="false" />
+            <element signature="e#341666#341667#0" expanded="false" />
+            <element signature="e#341869#341870#0" expanded="false" />
+            <element signature="e#341906#341907#0" expanded="false" />
+            <element signature="e#342108#342109#0" expanded="false" />
+            <element signature="e#342145#342146#0" expanded="false" />
+            <element signature="e#343090#343091#0" expanded="false" />
+            <element signature="e#343148#343149#0" expanded="false" />
+            <element signature="e#343687#343688#0" expanded="false" />
+            <element signature="e#343724#343725#0" expanded="false" />
+            <element signature="e#344012#344013#0" expanded="false" />
+            <element signature="e#344071#344072#0" expanded="false" />
+            <element signature="e#344613#344614#0" expanded="false" />
+            <element signature="e#344651#344652#0" expanded="false" />
+            <element signature="e#366088#366089#0" expanded="false" />
+            <element signature="e#366171#366172#0" expanded="false" />
+            <element signature="e#367145#367146#0" expanded="false" />
+            <element signature="e#367172#367173#0" expanded="false" />
+            <element signature="e#370756#370757#0" expanded="false" />
+            <element signature="e#370783#370784#0" expanded="false" />
+            <element signature="e#373226#373227#0" expanded="false" />
+            <element signature="e#373256#373257#0" expanded="false" />
+            <element signature="e#373426#373427#0" expanded="false" />
+            <element signature="e#373488#373489#0" expanded="false" />
+            <element signature="e#375874#375875#0" expanded="false" />
+            <element signature="e#375902#375903#0" expanded="false" />
+            <element signature="e#378369#378370#0" expanded="false" />
+            <element signature="e#378398#378399#0" expanded="false" />
+            <element signature="e#381409#381410#0" expanded="false" />
+            <element signature="e#381451#381452#0" expanded="false" />
+            <element signature="e#382292#382293#0" expanded="false" />
+            <element signature="e#382333#382334#0" expanded="false" />
+            <element signature="e#387929#387930#0" expanded="false" />
+            <element signature="e#387962#387963#0" expanded="false" />
+            <element signature="e#389266#389267#0" expanded="false" />
+            <element signature="e#389318#389319#0" expanded="false" />
+            <element signature="e#394289#394290#0" expanded="false" />
+            <element signature="e#394325#394326#0" expanded="false" />
+            <element signature="e#396492#396493#0" expanded="false" />
+            <element signature="e#396544#396545#0" expanded="false" />
+            <element signature="e#408131#408132#0" expanded="false" />
+            <element signature="e#408163#408164#0" expanded="false" />
+            <element signature="e#422035#422036#0" expanded="false" />
+            <element signature="e#422075#422076#0" expanded="false" />
+            <element signature="e#440872#440873#0" expanded="false" />
+            <element signature="e#440929#440930#0" expanded="false" />
+            <element signature="e#441616#441617#0" expanded="false" />
+            <element signature="e#441649#441650#0" expanded="false" />
+            <element signature="e#442418#442419#0" expanded="false" />
+            <element signature="e#442449#442450#0" expanded="false" />
+            <element signature="e#443216#443217#0" expanded="false" />
+            <element signature="e#443249#443250#0" expanded="false" />
+            <element signature="e#443897#443898#0" expanded="false" />
+            <element signature="e#443931#443932#0" expanded="false" />
+            <element signature="e#444684#444685#0" expanded="false" />
+            <element signature="e#444715#444716#0" expanded="false" />
+            <element signature="e#445467#445468#0" expanded="false" />
+            <element signature="e#445501#445502#0" expanded="false" />
+            <element signature="e#452509#452510#0" expanded="false" />
+            <element signature="e#452537#452538#0" expanded="false" />
+            <element signature="e#457069#457070#0" expanded="false" />
+            <element signature="e#457118#457119#0" expanded="false" />
+            <element signature="e#457751#457752#0" expanded="false" />
+            <element signature="e#457819#457820#0" expanded="false" />
+            <element signature="e#464728#464729#0" expanded="false" />
+            <element signature="e#464786#464787#0" expanded="false" />
+            <element signature="e#465882#465883#0" expanded="false" />
+            <element signature="e#465923#465924#0" expanded="false" />
+            <element signature="e#467970#467971#0" expanded="false" />
+            <element signature="e#468042#468043#0" expanded="false" />
+            <element signature="e#477979#477980#0" expanded="false" />
+            <element signature="e#478052#478053#0" expanded="false" />
+            <element signature="e#484944#484945#0" expanded="false" />
+            <element signature="e#484971#484972#0" expanded="false" />
+            <element signature="e#485649#485650#0" expanded="false" />
+            <element signature="e#485682#485683#0" expanded="false" />
+            <element signature="e#490841#490842#0" expanded="false" />
+            <element signature="e#490875#490876#0" expanded="false" />
+            <element signature="e#501188#501189#0" expanded="false" />
+            <element signature="e#501233#501234#0" expanded="false" />
+            <element signature="e#504718#504719#0" expanded="false" />
+            <element signature="e#504769#504770#0" expanded="false" />
+            <element signature="e#504969#504970#0" expanded="false" />
+            <element signature="e#505009#505010#0" expanded="false" />
+            <element signature="e#516073#516074#0" expanded="false" />
+            <element signature="e#516101#516102#0" expanded="false" />
+            <element signature="e#516818#516819#0" expanded="false" />
+            <element signature="e#516846#516847#0" expanded="false" />
+            <element signature="e#517168#517169#0" expanded="false" />
+            <element signature="e#517192#517193#0" expanded="false" />
+            <element signature="e#517517#517518#0" expanded="false" />
+            <element signature="e#517541#517542#0" expanded="false" />
+            <element signature="e#517860#517861#0" expanded="false" />
+            <element signature="e#517884#517885#0" expanded="false" />
+            <element signature="e#518212#518213#0" expanded="false" />
+            <element signature="e#518236#518237#0" expanded="false" />
+            <element signature="e#521046#521047#0" expanded="false" />
+            <element signature="e#521121#521122#0" expanded="false" />
+            <element signature="e#551991#551992#0" expanded="false" />
+            <element signature="e#552015#552016#0" expanded="false" />
+            <element signature="e#561933#561934#0" expanded="false" />
+            <element signature="e#561966#561967#0" expanded="false" />
+            <element signature="e#565539#565540#0" expanded="false" />
+            <element signature="e#565598#565599#0" expanded="false" />
+            <element signature="e#566592#566593#0" expanded="false" />
+            <element signature="e#566633#566634#0" expanded="false" />
+            <element signature="e#578722#578723#0" expanded="false" />
+            <element signature="e#578756#578757#0" expanded="false" />
+            <element signature="e#583536#583537#0" expanded="false" />
+            <element signature="e#583570#583571#0" expanded="false" />
+            <element signature="e#583856#583857#0" expanded="false" />
+            <element signature="e#583893#583894#0" expanded="false" />
+            <element signature="e#588570#588571#0" expanded="false" />
+            <element signature="e#588630#588631#0" expanded="false" />
+            <element signature="e#590165#590166#0" expanded="false" />
+            <element signature="e#590226#590227#0" expanded="false" />
+            <element signature="e#599744#599745#0" expanded="false" />
+            <element signature="e#599811#599812#0" expanded="false" />
+            <element signature="e#600157#600158#0" expanded="false" />
+            <element signature="e#600183#600184#0" expanded="false" />
+            <element signature="e#600415#600416#0" expanded="false" />
+            <element signature="e#600442#600443#0" expanded="false" />
+            <element signature="e#600886#600887#0" expanded="false" />
+            <element signature="e#600912#600913#0" expanded="false" />
+            <element signature="e#603360#603361#0" expanded="false" />
+            <element signature="e#603384#603385#0" expanded="false" />
+            <element signature="e#606489#606490#0" expanded="false" />
+            <element signature="e#606514#606515#0" expanded="false" />
+            <element signature="e#619340#619341#0" expanded="false" />
+            <element signature="e#619373#619374#0" expanded="false" />
+            <element signature="e#620148#620149#0" expanded="false" />
+            <element signature="e#620180#620181#0" expanded="false" />
+            <element signature="e#620913#620914#0" expanded="false" />
+            <element signature="e#620953#620954#0" expanded="false" />
+            <element signature="e#623151#623152#0" expanded="false" />
+            <element signature="e#623207#623208#0" expanded="false" />
+            <element signature="e#623545#623546#0" expanded="false" />
+            <element signature="e#623602#623603#0" expanded="false" />
+            <element signature="e#624279#624280#0" expanded="false" />
+            <element signature="e#624307#624308#0" expanded="false" />
+            <element signature="e#631814#631815#0" expanded="false" />
+            <element signature="e#631856#631857#0" expanded="false" />
+            <element signature="e#636840#636841#0" expanded="false" />
+            <element signature="e#636901#636902#0" expanded="false" />
+            <element signature="e#637420#637421#0" expanded="false" />
+            <element signature="e#637481#637482#0" expanded="false" />
+            <element signature="e#638014#638015#0" expanded="false" />
+            <element signature="e#638056#638057#0" expanded="false" />
+            <element signature="e#646759#646760#0" expanded="false" />
+            <element signature="e#646787#646788#0" expanded="false" />
+            <element signature="e#647956#647957#0" expanded="false" />
+            <element signature="e#648025#648026#0" expanded="false" />
+            <element signature="e#655822#655823#0" expanded="false" />
+            <element signature="e#655860#655861#0" expanded="false" />
+            <element signature="e#676059#676060#0" expanded="false" />
+            <element signature="e#676105#676106#0" expanded="false" />
+            <element signature="e#676164#676165#0" expanded="false" />
+            <element signature="e#676212#676213#0" expanded="false" />
+            <element signature="e#676594#676595#0" expanded="false" />
+            <element signature="e#676647#676648#0" expanded="false" />
+            <element signature="e#676714#676715#0" expanded="false" />
+            <element signature="e#676769#676770#0" expanded="false" />
+            <element signature="e#677151#677152#0" expanded="false" />
+            <element signature="e#677204#677205#0" expanded="false" />
+            <element signature="e#677263#677264#0" expanded="false" />
+            <element signature="e#677318#677319#0" expanded="false" />
+            <element signature="e#677644#677645#0" expanded="false" />
+            <element signature="e#677686#677687#0" expanded="false" />
+            <element signature="e#677745#677746#0" expanded="false" />
+            <element signature="e#677789#677790#0" expanded="false" />
+            <element signature="e#678115#678116#0" expanded="false" />
+            <element signature="e#678157#678158#0" expanded="false" />
+            <element signature="e#678216#678217#0" expanded="false" />
+            <element signature="e#678260#678261#0" expanded="false" />
+            <element signature="e#678621#678622#0" expanded="false" />
+            <element signature="e#678670#678671#0" expanded="false" />
+            <element signature="e#678729#678730#0" expanded="false" />
+            <element signature="e#678780#678781#0" expanded="false" />
+            <element signature="e#679147#679148#0" expanded="false" />
+            <element signature="e#679197#679198#0" expanded="false" />
+            <element signature="e#679256#679257#0" expanded="false" />
+            <element signature="e#679308#679309#0" expanded="false" />
+            <element signature="e#679675#679676#0" expanded="false" />
+            <element signature="e#679725#679726#0" expanded="false" />
+            <element signature="e#679784#679785#0" expanded="false" />
+            <element signature="e#679836#679837#0" expanded="false" />
+            <element signature="e#680188#680189#0" expanded="false" />
+            <element signature="e#680235#680236#0" expanded="false" />
+            <element signature="e#680294#680295#0" expanded="false" />
+            <element signature="e#680343#680344#0" expanded="false" />
+            <element signature="e#680695#680696#0" expanded="false" />
+            <element signature="e#680742#680743#0" expanded="false" />
+            <element signature="e#680801#680802#0" expanded="false" />
+            <element signature="e#680850#680851#0" expanded="false" />
+            <element signature="e#684444#684445#0" expanded="false" />
+            <element signature="e#684500#684501#0" expanded="false" />
+            <element signature="e#684824#684825#0" expanded="false" />
+            <element signature="e#684881#684882#0" expanded="false" />
+            <element signature="e#686356#686357#0" expanded="false" />
+            <element signature="e#686427#686428#0" expanded="false" />
+            <element signature="e#686768#686769#0" expanded="false" />
+            <element signature="e#686806#686807#0" expanded="false" />
+            <element signature="e#695846#695847#0" expanded="false" />
+            <element signature="e#695887#695888#0" expanded="false" />
+            <element signature="e#696314#696315#0" expanded="false" />
+            <element signature="e#696351#696352#0" expanded="false" />
+            <element signature="e#696600#696601#0" expanded="false" />
+            <element signature="e#696641#696642#0" expanded="false" />
+            <element signature="e#696838#696839#0" expanded="false" />
+            <element signature="e#696899#696900#0" expanded="false" />
+            <element signature="e#696957#696958#0" expanded="false" />
+            <element signature="e#697020#697021#0" expanded="false" />
+            <element signature="e#697986#698002#0" expanded="false" />
+            <element signature="e#701344#701350#0" expanded="false" />
+            <element signature="e#705882#705888#0" expanded="false" />
+            <element signature="e#723362#723363#0" expanded="false" />
+            <element signature="e#723397#723398#0" expanded="false" />
+            <element signature="e#724774#724775#0" expanded="false" />
+            <element signature="e#724822#724823#0" expanded="false" />
+            <element signature="e#724992#724993#0" expanded="false" />
+            <element signature="e#725055#725056#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Documents/adt-bundle-mac-x86_64-20140624/sdk/sources/android-21/android/os/Looper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33265308" vertical-offset="2861" max-vertical-offset="4464">
+          <caret line="212" column="0" selection-start-line="212" selection-start-column="0" selection-end-line="212" selection-end-column="0" />
+          <folding>
+            <element signature="e#6792#6793#0" expanded="false" />
+            <element signature="e#6848#6849#0" expanded="false" />
+            <element signature="e#9466#9467#0" expanded="false" />
+            <element signature="e#9542#9543#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Documents/adt-bundle-mac-x86_64-20140624/sdk/sources/android-21/android/os/Handler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1165" max-vertical-offset="11952">
+          <caret line="100" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/org/jcodec/api/android/SequenceMuxer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="880">
+          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/org/jcodec/api/android/SequenceEncoder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="352">
+          <caret line="16" column="59" selection-start-line="16" selection-start-column="59" selection-end-line="16" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/containers/mp4/boxes/SampleEntry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="214" max-vertical-offset="832">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/org/jcodec/api/SequenceEncoder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1526" max-vertical-offset="2192">
+          <caret line="155" column="42" selection-start-line="155" selection-start-column="42" selection-end-line="155" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="448">
+          <caret line="20" column="41" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/app/libs/isoparser-1.0.4.2.jar!/LICENSE.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2538" max-vertical-offset="3312">
+          <caret line="169" column="24" selection-start-line="169" selection-start-column="24" selection-end-line="169" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/app/libs/isoparser-1.0.4.2.jar!/com/googlecode/mp4parser/authoring/builder/DefaultMp4Builder.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.8851063" vertical-offset="266" max-vertical-offset="1520">
+          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/app/libs/isoparser-1.0.4.2.jar!/com/googlecode/mp4parser/authoring/tracks/AACTrackImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.68" vertical-offset="48" max-vertical-offset="1200">
+          <caret line="16" column="59" selection-start-line="16" selection-start-column="59" selection-end-line="16" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="7083" max-vertical-offset="14832">
+          <caret line="479" column="20" selection-start-line="479" selection-start-column="20" selection-end-line="479" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#10060#10061#0" expanded="true" />
+            <element signature="e#10112#10113#0" expanded="true" />
+            <element signature="e#27939#27957#0" expanded="true" />
+            <element signature="e#28030#28048#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="465">
+          <caret line="0" column="49" selection-start-line="0" selection-start-column="49" selection-end-line="0" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generatingmain/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
+          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/generatingmain/src/main/java/zetbrush/com/generatingmain/AACTrackImple.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.69242656" vertical-offset="3056" max-vertical-offset="5936">
+          <caret line="219" column="27" selection-start-line="219" selection-start-column="27" selection-end-line="219" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1387#1404#0" expanded="true" />
+            <element signature="e#4120#4138#0" expanded="true" />
+            <element signature="e#6033#6034#0" expanded="true" />
+            <element signature="e#6072#6073#0" expanded="true" />
+            <element signature="e#6564#6573#0" expanded="true" />
+            <element signature="e#9676#9677#0" expanded="true" />
+            <element signature="e#9719#9720#0" expanded="true" />
+            <element signature="e#9761#9762#0" expanded="true" />
+            <element signature="e#9792#9793#0" expanded="true" />
+            <element signature="e#9870#9871#0" expanded="true" />
+            <element signature="e#9897#9898#0" expanded="true" />
+            <element signature="e#9935#9936#0" expanded="true" />
+            <element signature="e#9962#9963#0" expanded="true" />
+            <element signature="e#10036#10037#0" expanded="true" />
+            <element signature="e#10063#10064#0" expanded="true" />
+            <element signature="e#10110#10111#0" expanded="true" />
+            <element signature="e#10146#10147#0" expanded="true" />
+            <element signature="e#10180#10181#0" expanded="true" />
+            <element signature="e#10209#10210#0" expanded="true" />
+            <element signature="e#10249#10250#0" expanded="true" />
+            <element signature="e#10279#10280#0" expanded="true" />
+            <element signature="e#10346#10347#0" expanded="true" />
+            <element signature="e#10373#10374#0" expanded="true" />
+            <element signature="e#10421#10422#0" expanded="true" />
+            <element signature="e#10487#10488#0" expanded="true" />
+            <element signature="e#13254#13255#0" expanded="true" />
+            <element signature="e#13310#13311#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

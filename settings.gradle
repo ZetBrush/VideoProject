@@ -1,2 +1,2 @@
-include ':app', ':generatingmain', ':oMXPlayer', ':MultipleImagePick-master1', ':MultiImPick'
-include ':aFileDialog'
+include ':app', ':generatingmain', ':oMXPlayer',  ':MultiImPick'
+

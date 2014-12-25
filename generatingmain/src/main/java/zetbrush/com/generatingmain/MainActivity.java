@@ -1,6 +1,5 @@
 package zetbrush.com.generatingmain;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -31,18 +30,14 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.Container;
 import com.googlecode.mp4parser.FileDataSourceImpl;
 import com.googlecode.mp4parser.authoring.Movie;
-import com.googlecode.mp4parser.authoring.Mp4TrackImpl;
+import com.googlecode.mp4parser.authoring.Sample;
 import com.googlecode.mp4parser.authoring.Track;
 import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
 import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
-import com.googlecode.mp4parser.authoring.tracks.AACTrackImpl;
-import com.googlecode.mp4parser.authoring.tracks.AppendTrack;
-import com.googlecode.mp4parser.authoring.tracks.H264TrackImpl;
-
+import zetbrush.com.generatingmain.AACTrackImple;
 import net.pocketmagic.android.openmxplayer.OpenMXPlayer;
 import net.pocketmagic.android.openmxplayer.PlayerEvents;
 import net.pocketmagic.android.openmxplayer.PlayerStates;
@@ -55,17 +50,18 @@ import org.jcodec.common.NIOUtils;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
-import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+
+import com.googlecode.mp4parser.authoring.builder.FragmentedMp4Builder;
+import com.googlecode.mp4parser.authoring.builder.SyncSampleIntersectFinderImpl;
 import com.coremedia.iso.boxes.Container;
 import com.googlecode.mp4parser.authoring.Movie;
 import com.googlecode.mp4parser.authoring.Track;
@@ -73,7 +69,7 @@ import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
 import com.googlecode.mp4parser.authoring.builder.FragmentedMp4Builder;
 import com.googlecode.mp4parser.authoring.builder.SyncSampleIntersectFinderImpl;
 import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
-import ar.com.daidalos.afiledialog.FileChooserDialog;
+import com.googlecode.mp4parser.authoring.tracks.AACTrackImpl;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -334,13 +330,13 @@ public class MainActivity extends ActionBarActivity {
     public void onCompositionClick(View v) throws IOException {
         // MediaMuxer muxer = new MediaMuxer("/storage/removable/sdcard1/DCIM/100ANDRO/newfold/outt.mp4", MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
 
-        File sourceAudio = new File("/storage/removable/sdcard1/outputaaac.mp4");
-        File sourceVieo = new File("/storage/removable/sdcard1//vid_enc.mp4");
-        File outt = new File("/storage/removable/sdcard1/viiddos.mp4");
+        // File sourceAudio = new File("/storage/removable/sdcard1/outputaaac.mp4");
+        // File sourceVieo = new File("/storage/removable/sdcard1//vid_enc.mp4");
+        //  File outt = new File("/storage/removable/sdcard1/viiddos.mp4");
         String sourceAudiop = "/storage/removable/sdcard1/outputaaac.mp4";
-        String sorcevideo= "/storage/removable/sdcard1//vid_enc.mp4";
+        String sorcevideo = "/storage/removable/sdcard1//vid_enc.mp4";
 
-       // Remux remuxer = new Remux();
+        // Remux remuxer = new Remux();
 
         //remuxer.remuxcustom(out,sourceAudio,sourceVieo);
 
@@ -367,15 +363,15 @@ public class MainActivity extends ActionBarActivity {
         out.getBox(fos.getChannel());
         fos.close();*/
 
-        String f1 = "/storage/removable/sdcard1/outputaaac.mp4";
-        String f2 = "/storage/removable/sdcard1//vid_enc.mp4";
+        String f1 = "/storage/removable/sdcard1/DCIM/100ANDO/newfold/strangeclouds.aac";
+        String f2 = "/storage/removable/sdcard1//newoutput.mp4";
         //String f3 = AppendExample.class.getProtectionDomain().getCodeSource().getLocation().getFile() + "/1365070453555.mp4";
 
-
+/*
         Movie[] inMovies = new Movie[]{
                 MovieCreator.build(f1),
                 MovieCreator.build(f2),
-               /* MovieCreator.build(f3)*/  };
+               *//* MovieCreator.build(f3)*//*};
 
         List<Track> videoTracks = new LinkedList<Track>();
         List<Track> audioTracks = new LinkedList<Track>();
@@ -405,29 +401,98 @@ public class MainActivity extends ActionBarActivity {
 
         FileChannel fc = new RandomAccessFile(String.format("audioVideo.mp4"), "rw").getChannel();
         out.writeContainer(fc);
-        fc.close();
+        fc.close();*/
+
+
+        String audioDeutsch = "/storage/removable/sdcard1/countdeutchaudio.mp4";
+        String audioEnglish = "/storage/removable/sdcard1/countenglishaudio.mp4";
+        String video = "/storage/removable/sdcard1/countvideo.mp4";
+
+
+       /* Movie countVideo = MovieCreator.build(video);
+        Movie countAudioDeutsch = MovieCreator.build(audioDeutsch);
+        Movie countAudioEnglish = MovieCreator.build(audioEnglish);
+
+        Track audioTrackDeutsch = countAudioDeutsch.getTracks().get(0);
+        audioTrackDeutsch.getTrackMetaData().setLanguage("deu");
+        Track audioTrackEnglish = countAudioEnglish.getTracks().get(0);
+        audioTrackEnglish.getTrackMetaData().setLanguage("eng");
+
+        countVideo.addTrack(audioTrackDeutsch);
+        countVideo.addTrack(audioTrackEnglish);
+
+        {
+            Container out = new DefaultMp4Builder().build(countVideo);
+            FileOutputStream fos = new FileOutputStream(new File("/storage/removable/sdcard1/ouuuuutput.mp4"));
+            out.writeContainer(fos.getChannel());
+            fos.close();
+        }
+        {
+            FragmentedMp4Builder fragmentedMp4Builder = new FragmentedMp4Builder();
+            fragmentedMp4Builder.setIntersectionFinder(new SyncSampleIntersectFinderImpl(countVideo, null, -1));
+            Container out = fragmentedMp4Builder.build(countVideo);
+            FileOutputStream fos = new FileOutputStream(new File("/storage/removable/sdcard1/output-frag.mp4"));
+            out.writeContainer(fos.getChannel());
+            fos.close();
+        }
+*/
+
+        MovieCreator mc = new MovieCreator();
+        // Movie videoin = MovieCreator.build("/storage/removable/sdcard1/outputaaac.mp4");
+        Movie countVideo = mc.build(video);
+        AACTrackImple aacTrack = new AACTrackImple(new FileDataSourceImpl("/storage/removable/sdcard1/strangeclouds.aac"));
+        //  H264TrackImpl mp4track = new H264TrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/vid_enc.mp4"));
+        //  Movie videoin = MovieCreator.build("/storage/removable/sdcard1/countvideo.mp4");
+        // Container out2 = new DefaultMp4Builder().build(videoin);
+        // videoin.addTrack(aacTrack);
+        // Movie m = new Movie();
+        // m.addTrack(aacTrack);
+        //  m.addTrack(mp4track);
+
+
+        List<Sample> audioSamples = aacTrack.getSamples();
+
+
+        if (countVideo.getTimescale() < aacTrack.getDuration()) {
+            long time = aacTrack.getDuration() - countVideo.getTimescale();
+            int toRemove = (int) time * 1024 + 1;
+
+            List<Sample> newSamples = null;
+            int i = audioSamples.size();
+            for (int j = toRemove; j > 0; j--) {
+                audioSamples.remove(i - 1);
+                i--;
+
+            }
+            aacTrack.setSamples(audioSamples);
+        }
 
 
 
 
-    }
 
 
-       /* AACTrackImpl aacTrack = new AACTrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/strangeclouds.aac"));
-        H264TrackImpl mp4track = new H264TrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/vid_enc.mp4"));
-        Movie m = new Movie();
-        m.addTrack(aacTrack);
-        m.addTrack(mp4track);
+        countVideo.addTrack(aacTrack);
+
+
+      /*  long starttime2 = System.currentTimeMillis();
+        FileChannel fc2 = new RandomAccessFile("/storage/removable/sdcard1/countvideo.mp4", "rw").getChannel();
+        out2.writeContainer(fc2);
+        long size2 = fc2.size();
+        fc2.truncate(fc2.position());
+        fc2.close();
+        System.err.println("Writing " + size2 / 1024 / 1024 + "MB took " + (System.currentTimeMillis() - starttime2));
+        */
         DefaultMp4Builder mp4Builder = new DefaultMp4Builder();
-        Container out = mp4Builder.build(m);
-        FileOutputStream fos = new FileOutputStream("/storage/removable/sdcard1/outputaactmp4.mp4");
+        Container out = mp4Builder.build(countVideo);
+        FileOutputStream fos = new FileOutputStream("/storage/removable/sdcard1/outputasactmp4.mp4");
         FileChannel fc = fos.getChannel();
         out.writeContainer(fc);
 
-        fos.close();*/
+        fos.close();
 
 
-
+    }
 
        /* try {
            // String baseDir = Environment.getExternalStorageDirectory().getAbsolutePath();
@@ -622,162 +687,13 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-
-
-
-
-       /* File sdCard = Environment.getExternalStorageDirectory();
-        for (int i = 0; i < 100; i++) {
-            try {
-                FileInputStream fileInputStream = new FileInputStream(new File(sdCard, "DCIM/"));
-                IsoFile isoFile = new IsoFile(String.valueOf(fileInputStream.getChannel()));
-               // IsoFile isoFile = new IsoFile(Channels.newChannel(new FileInputStream(this.filePath)));
-                //Path path = new Path(isoFile);
-                XmlBox xmlBox = (XmlBox) Path.getPath(isoFile, "/moov/meta/xml ");
-                String xml = xmlBox.getXml();
-                //System.err.println(xml;
-            } catch (IOException e) {
-
-            }
-        }*/
-
-
         }
 
         else
             Toast.makeText(getApplicationContext(),"Please configure output settings",Toast.LENGTH_SHORT).show();
 
     }
-       /* try{
 
-            int fps=24;
-            RgbToYuv420p transform = new RgbToYuv420p(0, 0);
-
-            FileChannelWrapper ch = NIOUtils.writableFileChannel(SDPathToFile("", "out.mp4"));
-            final MP4Muxer muxer = new MP4Muxer(ch, Brand.MP4);
-
-            // Add a video track
-            FramesMP4MuxerTrack outTrack = muxer.addTrackForCompressed(TrackType.VIDEO, (int)fps);
-
-            // Create H.264 encoder
-            H264Encoder encoder = new H264Encoder(); // not we could use a rate control in the constructor
-
-            // Allocate a buffer that would hold an encoded frame
-            ByteBuffer _out = ByteBuffer.allocate(640 * 480 * 6); //Not sur about RGB
-
-            // Allocate storage for SPS/PPS, they need to be stored separately in a special place of MP4 file
-            ArrayList<ByteBuffer> spsList = new ArrayList<ByteBuffer>();
-            ArrayList<ByteBuffer> ppsList = new ArrayList<ByteBuffer>();
-
-
-            final int numberOfimage = 2;
-
-            String path= "src/main/";
-            int num = 0;
-            Picture rgb = null;
-
-            Picture yuv=null;
-            //for (File file : directory.listFiles()) {
-
-            int[] packed = null;
-            for (int i=0; i<numberOfimage; i++) {
-                System.out.println("Num"+num);
-                Bitmap bitmap=null;
-                try {
-
-                    AssetManager assetMgr = this.getAssets();
-
-                    InputStream istr = assetMgr.open("image_" + String.format("%03d", i + 1) + ".png");
-                    bitmap = BitmapFactory.decodeStream(istr);
-                    //  bitmap=bitmap.copy(Bitmap.Config.ARGB_8888,true);
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                    //System.out.println("Could not read image "+file);
-                }
-                if(rgb == null) {
-                    rgb = Picture.create((int)bitmap.getWidth(), (int)bitmap.getHeight(), ColorSpace.RGB);//YUV420);//RGB);
-                }
-
-                int[] dstData = rgb.getPlaneData(0);
-                if (packed==null)
-                    packed = new int[bitmap.getWidth() * bitmap.getHeight()];
-
-                bitmap.getPixels(packed, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(),
-                        bitmap.getHeight());
-
-                for (int iu = 0, srcOff = 0, dstOff = 0; iu < bitmap.getHeight(); iu++) {
-                    for (int j = 0; j < bitmap.getWidth(); j++, srcOff++, dstOff += 3) {
-                        int rgbo = packed[srcOff];
-                        dstData[dstOff] = (rgbo >> 16) & 0xff;
-                        dstData[dstOff + 1] = (rgbo >> 8) & 0xff;
-                        dstData[dstOff + 2] = rgbo & 0xff;
-                    }
-                }
-                bitmap.recycle();
-
-
-                if (yuv==null)
-                    yuv = Picture.create(rgb.getWidth(), rgb.getHeight(), ColorSpace.YUV420);
-                transform.transform(rgb, yuv);
-
-                // rgb = null;
-
-                ByteBuffer result = encoder.encodeFrame(yuv,_out); //toEncode
-                _out.clear();
-                // yuv = null;
-
-
-
-              // ByteBuffer result = encoder.encodeFrame(_out, yuv); //toEncode
-
-                //  yuv = null;
-                spsList.clear();
-                ppsList.clear();
-
-                H264Utils.encodeMOVPacket(result,spsList,ppsList);
-                outTrack.addFrame(new MP4Packet(result,num,(int)fps, 1, num, true, null, num, 0));
-                result = null;
-                System.gc();
-
-                num++;
-
-            }
-            yuv=null;
-            packed=null;
-            System.gc();
-            outTrack.addSampleEntry(H264Utils.createMOVSampleEntry(spsList, ppsList));
-            // Write MP4 header and finalize recording
-            muxer.writeHeader();
-            NIOUtils.closeQuietly(ch);
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }*/
-
-
-
-
-  /*  static void makeDirectory(String dir)
-    {
-        File extBaseDir = Environment.getExternalStorageDirectory();
-        File file = new File(extBaseDir.getAbsoluteFile()+"/"+dir);
-        if(!file.exists()){
-            if(!file.mkdirs()){
-                //  throw new Exception("Could not create directories, "+file.getAbsolutePath());
-            }
-        }
-    }
-
-    static File SDPathToFile(String filePatho, String fileName)
-    {
-        File extBaseDir = Environment.getExternalStorageDirectory();
-        if (filePatho==null||filePatho.length()==0||filePatho.charAt(0)!='/')
-            filePatho="/"+filePatho;
-        makeDirectory(filePatho);
-        File file = new File(extBaseDir.getAbsoluteFile()+filePatho);
-        return new File(file.getAbsolutePath()+"/"+fileName);//file;
-    }*/
 
 
     @Override

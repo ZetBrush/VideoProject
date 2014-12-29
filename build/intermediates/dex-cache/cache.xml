@@ -12,7 +12,7 @@
         jar="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/exploded-aar/VideoGenerationJC/app/unspecified/classes.jar"
         jumboMode="false"
         revision="21.1.1"
-        sha1="60cdb3db5e7fc1cf36020b548f09720678c1f5a4">
+        sha1="6c100e07e92566438a2d651cf30700273fdd079a">
         <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/classes-962095e3cc7599f3065013909022a70ea9664cb1.jar" />
     </item>
     <item
@@ -23,18 +23,18 @@
         <dex dex="/Users/intern/Downloads/VideoGenerationJC/MultiImPick/build/intermediates/pre-dexed/debug/support-annotations-21.0.2-2bb0ea5d4f7b8521116516ede3ac116717cd3d28.jar" />
     </item>
     <item
+        jar="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/exploded-aar/VideoGenerationJC/app/unspecified/libs/aspectjrt-1.8.2.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="7dede91c0c36b1265fc99c55283b90ed2be144c8">
+        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/aspectjrt-1.8.2-f9c5d8d85e16c6738a7fff904de013be5e54835b.jar" />
+    </item>
+    <item
         jar="/Users/intern/Downloads/VideoGenerationJC/MultiImPick/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.2/classes.jar"
         jumboMode="false"
         revision="21.1.1"
         sha1="4796f18d3750bf2bfa078407a94a7f9db35b440d">
         <dex dex="/Users/intern/Downloads/VideoGenerationJC/MultiImPick/build/intermediates/pre-dexed/debug/classes-ac91384a2312791d642703ccfc4568482a63fc6e.jar" />
-    </item>
-    <item
-        jar="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/exploded-aar/VideoGenerationJC/app/unspecified/libs/aspectjrt-1.7.3.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="a1efcd30e7c12f0c0d5b0df412c7304c735035ed">
-        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/aspectjrt-1.7.3-17d3f002886170bbfc509d0a66758c868195f4f8.jar" />
     </item>
     <item
         jar="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/classes.jar"
@@ -47,7 +47,7 @@
         jar="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/exploded-aar/VideoGenerationJC/oMXPlayer/unspecified/classes.jar"
         jumboMode="false"
         revision="21.1.1"
-        sha1="fde0a94b3ea06fca08f854b3bb267907bd8a0ab4">
+        sha1="a3ddd7c31f3e2b46e70577294985f31680eb2090">
         <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/classes-8ac67e3b73d5c3691e96892b9862cbc9b1264c4c.jar" />
     </item>
     <item
@@ -56,6 +56,13 @@
         revision="21.1.1"
         sha1="962e8b12569c56dbdcf8367eb4eac8bb129cd18f">
         <dex dex="/Users/intern/Downloads/VideoGenerationJC/MultiImPick/build/intermediates/pre-dexed/debug/internal_impl-21.0.2-eb0ce9ab0ccaa2fa8b2626fe4720f015ef61409a.jar" />
+    </item>
+    <item
+        jar="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/exploded-aar/VideoGenerationJC/app/unspecified/libs/isoparser-1.0.5.4.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="232e5130b709e6cc2ac4c4e5c5212a89929ab592">
+        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/isoparser-1.0.5.4-efafdf7257512cdbd629fed37bd515f064354405.jar" />
     </item>
     <item
         jar="/Users/intern/Downloads/VideoGenerationJC/MultiImPick/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/classes.jar"
@@ -77,20 +84,6 @@
         revision="21.1.1"
         sha1="1a578b9607b36266c63d43a4fa0ab5664dbe911e">
         <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/support-annotations-21.0.0-2a968ebb3a4b4e979b81012b66bc444b77fb48ad.jar" />
-    </item>
-    <item
-        jar="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/exploded-aar/VideoGenerationJC/aFileDialog/unspecified/classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="b0fce79eb776db70bb2f12db65532a4304f267ec">
-        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/classes-bbd065f53ab93a975e96fcd38e0574666d82c207.jar" />
-    </item>
-    <item
-        jar="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/exploded-aar/VideoGenerationJC/app/unspecified/libs/isoparser-1.0.4.2.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="ffcfce6102c0a1a253ed40cc3717f6b0f45f391d">
-        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/isoparser-1.0.4.2-6a9ebc4701dd82d0a4a6d18a8534ca8d855a955e.jar" />
     </item>
     <item
         jar="/Users/intern/Downloads/VideoGenerationJC/MultiImPick/libs/universal-image-loader-1.9.0.jar"

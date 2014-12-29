@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="isoparser-1.0.4.2">
+  <library name="aspectjrt-1.8.2">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/libs/isoparser-1.0.4.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/app/libs/aspectjrt-1.8.2.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

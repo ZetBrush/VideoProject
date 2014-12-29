@@ -201,7 +201,7 @@ public class OpenMXPlayer implements Runnable {
 		int channelConfiguration = channels == 1 ? AudioFormat.CHANNEL_OUT_MONO : AudioFormat.CHANNEL_OUT_STEREO;
         int minSize = AudioTrack.getMinBufferSize( sampleRate, channelConfiguration, AudioFormat.ENCODING_PCM_16BIT);
         audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC, sampleRate, channelConfiguration, 
-        		AudioFormat.ENCODING_PCM_16BIT, minSize, AudioTrack.MODE_STATIC);
+        		AudioFormat.ENCODING_PCM_16BIT, minSize, AudioTrack.MODE_STREAM);
       
 		// start playing, we will feed the AudioTrack later
         audioTrack.play();

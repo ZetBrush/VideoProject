@@ -56,6 +56,8 @@ import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -70,6 +72,9 @@ import com.googlecode.mp4parser.authoring.builder.FragmentedMp4Builder;
 import com.googlecode.mp4parser.authoring.builder.SyncSampleIntersectFinderImpl;
 import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
 import com.googlecode.mp4parser.authoring.tracks.AACTrackImpl;
+import com.googlecode.mp4parser.authoring.tracks.AppendTrack;
+import com.googlecode.mp4parser.authoring.tracks.CroppedTrack;
+import com.googlecode.mp4parser.authoring.tracks.MP3TrackImpl;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -96,15 +101,13 @@ public class MainActivity extends ActionBarActivity {
     private static final float BAD_LONGITUDE = -181.0f;
     private static final float TOLERANCE = 0.0002f;
     private Resources mResources;
-    TextView interval ;
-    SeekBar timeinterval;
-    Handler handler = new Handler();
-    String outputName = null;
-    EditText outputEditText;
-    String mime = null;
-    int sampleRate = 0, channels = 0, bitrate = 0;
-    long presentationTimeUs = 0, duration = 0;
-     String path = null;
+    private TextView interval ;
+    private SeekBar timeinterval;
+    private Handler handler = new Handler();
+    private String outputName = null;
+    private EditText outputEditText;
+    private String mime = null;
+    private String path = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -336,32 +339,6 @@ public class MainActivity extends ActionBarActivity {
         String sourceAudiop = "/storage/removable/sdcard1/outputaaac.mp4";
         String sorcevideo = "/storage/removable/sdcard1//vid_enc.mp4";
 
-        // Remux remuxer = new Remux();
-
-        //remuxer.remuxcustom(out,sourceAudio,sourceVieo);
-
-      /*  MovieCreator mc = new MovieCreator();
-        Movie video = mc.build(Channels.newChannel(AppendExample.class.getResourceAsStream("/count-video.mp4")));
-        Movie audio = mc.build(Channels.newChannel(AppendExample.class.getResourceAsStream("/count-english-audio.mp4")));
-
-
-        List<Track> videoTracks = video.getTracks();
-        video.setTracks(new LinkedList<Track>());
-
-        List<Track> audioTracks = audio.getTracks();
-
-
-        for (Track videoTrack : videoTracks) {
-            video.addTrack(new AppendTrack(videoTrack, videoTrack));
-        }
-        for (Track audioTrack : audioTracks) {
-            video.addTrack(new AppendTrack(audioTrack, audioTrack));
-        }
-
-        IsoFile out = new DefaultMp4Builder().build(video);
-        FileOutputStream fos = new FileOutputStream(new File(String.format("output.mp4")));
-        out.getBox(fos.getChannel());
-        fos.close();*/
 
         String f1 = "/storage/removable/sdcard1/DCIM/100ANDO/newfold/strangeclouds.aac";
         String f2 = "/storage/removable/sdcard1//newoutput.mp4";
@@ -406,41 +383,19 @@ public class MainActivity extends ActionBarActivity {
 
         String audioDeutsch = "/storage/removable/sdcard1/countdeutchaudio.mp4";
         String audioEnglish = "/storage/removable/sdcard1/countenglishaudio.mp4";
-        String video = "/storage/removable/sdcard1/countvideo.mp4";
+        String video = "/storage/removable/sdcard1/ggg.mp4";
 
 
-       /* Movie countVideo = MovieCreator.build(video);
-        Movie countAudioDeutsch = MovieCreator.build(audioDeutsch);
-        Movie countAudioEnglish = MovieCreator.build(audioEnglish);
 
-        Track audioTrackDeutsch = countAudioDeutsch.getTracks().get(0);
-        audioTrackDeutsch.getTrackMetaData().setLanguage("deu");
-        Track audioTrackEnglish = countAudioEnglish.getTracks().get(0);
-        audioTrackEnglish.getTrackMetaData().setLanguage("eng");
-
-        countVideo.addTrack(audioTrackDeutsch);
-        countVideo.addTrack(audioTrackEnglish);
-
-        {
-            Container out = new DefaultMp4Builder().build(countVideo);
-            FileOutputStream fos = new FileOutputStream(new File("/storage/removable/sdcard1/ouuuuutput.mp4"));
-            out.writeContainer(fos.getChannel());
-            fos.close();
-        }
-        {
-            FragmentedMp4Builder fragmentedMp4Builder = new FragmentedMp4Builder();
-            fragmentedMp4Builder.setIntersectionFinder(new SyncSampleIntersectFinderImpl(countVideo, null, -1));
-            Container out = fragmentedMp4Builder.build(countVideo);
-            FileOutputStream fos = new FileOutputStream(new File("/storage/removable/sdcard1/output-frag.mp4"));
-            out.writeContainer(fos.getChannel());
-            fos.close();
-        }
-*/
 
         MovieCreator mc = new MovieCreator();
         // Movie videoin = MovieCreator.build("/storage/removable/sdcard1/outputaaac.mp4");
         Movie countVideo = mc.build(video);
-        AACTrackImple aacTrack = new AACTrackImple(new FileDataSourceImpl("/storage/removable/sdcard1/strangeclouds.aac"));
+          AACTrackImple aacTrack = new AACTrackImple(new FileDataSourceImpl("/storage/removable/sdcard1/strangeclouds.aac"));
+         Movie audiomovie = new Movie();
+            audiomovie.addTrack(aacTrack);
+
+        //  MP3TrackImpl mp3Track = new MP3TrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/Music/StrangeClouds.mp3"));
         //  H264TrackImpl mp4track = new H264TrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/vid_enc.mp4"));
         //  Movie videoin = MovieCreator.build("/storage/removable/sdcard1/countvideo.mp4");
         // Container out2 = new DefaultMp4Builder().build(videoin);
@@ -449,223 +404,42 @@ public class MainActivity extends ActionBarActivity {
         // m.addTrack(aacTrack);
         //  m.addTrack(mp4track);
 
+        Movie[] clips = new Movie[2];
+        clips[0] = countVideo;
+        clips[1] = audiomovie;
 
-        List<Sample> audioSamples = aacTrack.getSamples();
+        List<Track> videoTracks = new LinkedList<Track>();
+        List<Track> audioTracks = new LinkedList<Track>();
+        int videotrackcount = 0;
 
+        for (Movie movie : clips) {
+            for (Track track : movie.getTracks()) {
+                if (track.getHandler().equals("soun"))
+                    audioTracks.add(track);
 
-        if (countVideo.getTimescale() < aacTrack.getDuration()) {
-            long time = aacTrack.getDuration() - countVideo.getTimescale();
-            int toRemove = (int) time * 1024 + 1;
-
-            List<Sample> newSamples = null;
-            int i = audioSamples.size();
-            for (int j = toRemove; j > 0; j--) {
-                audioSamples.remove(i - 1);
-                i--;
-
+                if (track.getHandler().equals("vide"))
+                    videoTracks.add(track);
             }
-            aacTrack.setSamples(audioSamples);
         }
+        videotrackcount = videoTracks.get(0).getSamples().size() * 90;
+        CroppedTrack dd = new CroppedTrack(audioTracks.get(0), 0, videotrackcount);
 
+        if (videoTracks.size() > 0)
+            // result.addTrack(new AppendTrack(videoTracks.toArray(new Track[videoTracks.size()])));
 
+            if (audioTracks.size() > 0)
+                //  result.addTrack(new AppendTrack(audioTracks.toArray(new Track[audioTracks.size()])));
+                countVideo.addTrack(dd);
 
-
-
-
-        countVideo.addTrack(aacTrack);
-
-
-      /*  long starttime2 = System.currentTimeMillis();
-        FileChannel fc2 = new RandomAccessFile("/storage/removable/sdcard1/countvideo.mp4", "rw").getChannel();
-        out2.writeContainer(fc2);
-        long size2 = fc2.size();
-        fc2.truncate(fc2.position());
-        fc2.close();
-        System.err.println("Writing " + size2 / 1024 / 1024 + "MB took " + (System.currentTimeMillis() - starttime2));
-        */
-        DefaultMp4Builder mp4Builder = new DefaultMp4Builder();
-        Container out = mp4Builder.build(countVideo);
-        FileOutputStream fos = new FileOutputStream("/storage/removable/sdcard1/outputasactmp4.mp4");
-        FileChannel fc = fos.getChannel();
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String outputLocation = "/storage/removable/sdcard1/" + timeStamp + ".mp4";
+        Container out = new DefaultMp4Builder().build(countVideo);
+        FileChannel fc = new RandomAccessFile(String.format(outputLocation), "rw").getChannel();
         out.writeContainer(fc);
-
-        fos.close();
-
-
-    }
-
-       /* try {
-           // String baseDir = Environment.getExternalStorageDirectory().getAbsolutePath();
-            H264TrackImpl h264Track = new H264TrackImpl(new FileDataSourceImpl(source));
-            AACTrackImpl aacTrack = new AACTrackImpl(new FileDataSourceImpl( "/storage/removable/sdcard1/strangeclouds.aac" ));
-
-            Movie movie = new Movie();
-            movie.addTrack(h264Track);
-            movie.addTrack(aacTrack);
-            Container mp4file = new DefaultMp4Builder().build(movie);
-
-            FileChannel fc = new FileOutputStream(new File("/storage/removable/sdcard1" +"/vidosik_output.mp4")).getChannel();
-            mp4file.writeContainer(fc);
-            fc.close();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
-
-
-
-
-
-       // cloneMediaUsingMuxer("/storage/removable/sdcard1/DCIM/100ANDRO/newfold/vid_enc.mp4","/storage/removable/sdcard1/DCIM/100ANDRO/newfold/Honor.mp3","/storage/removable/sdcard1/DCIM/100ANDRO/newfold/vidasas_enc.mp4",4,4);
-
-
-       /* String outputFile = "/sdcard/muxerExceptions.mp4";
-        MediaMuxer muxer;
-
-        // Throws exception b/c start() is not called.
-        muxer = new MediaMuxer(outputFile, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
-        muxer.start();
-        muxer.addTrack(MediaFormat.createVideoFormat("video/avc", 480, 320));
-        muxer.addTrack(MediaFormat.createAudioFormat("audio/mp4a-latm", 44100, 2));
-
-        muxer.stop();
-
-
-        try {
-
-        } catch (IllegalStateException e) {
-            // expected
+        fc.close();
         }
 
-        //  MediaFormat audioFormat = new MediaFormat(...);
-        //  MediaFormat videoFormat = new MediaFormat(...);
-        MediaFormat audioFormat = new MediaFormat();
-        MediaFormat videoFormat = new MediaFormat();
-        int audioTrackIndex = muxer.addTrack(audioFormat);
-        int videoTrackIndex = muxer.addTrack(videoFormat);
-
-
-        int bufferSize = (640 * 480 * 6);
-        boolean isAudioSample = false;
-        ByteBuffer inputBuffer = ByteBuffer.allocate(bufferSize);
-        boolean finished = false;
-        MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
-
-
-        for (; filecount < 2; ) {
-            finished = false;
-            if (filecount == 1)
-                sourcePath = "/storage/removable/sdcard1/DCIM/100ANDRO/newfold/vid_enc.mp4";
-            else if (filecount == 0) {
-                sourcePath = "/storage/removable/sdcard1/DCIM/100ANDRO/newfold/strangeclouds.aac";
-            }
-            filecount++;
-
-
-            // sourcePath = "/storage/removable/sdcard1/DCIM/100ANDRO/newfold/strangeclouds.aac";
-            // getInputBuffer() will fill the inputBuffer with one frame of encoded
-            // sample from either MediaCodec or MediaExtractor, set isAudioSample to
-            // true when the sample is audio data, set up all the fields of bufferInfo,
-            // and return true if there are no more samples.
-
-            extractor = new MediaExtractor();
-            // try to set the source, this might fail
-            try {
-                if (sourcePath != null) extractor.setDataSource(this.sourcePath);
-
-            } catch (Exception e) {
-                Log.e("asasas", "exception:" + e.getMessage());
-
-                return;
-            }
-
-            // Read track header
-            MediaFormat format = null;
-            try {
-
-                format = extractor.getTrackFormat(0);
-                mime = format.getString(MediaFormat.KEY_MIME);
-                sampleRate = format.getInteger(MediaFormat.KEY_SAMPLE_RATE);
-                channels = format.getInteger(MediaFormat.KEY_CHANNEL_COUNT);
-                // if duration is 0, we are probably playing a live stream
-                duration = format.getLong(MediaFormat.KEY_DURATION);
-                bitrate = format.getInteger(MediaFormat.KEY_BIT_RATE);
-
-
-                //bufferInfo.set();
-
-            } catch (Exception e) {
-                Log.e("except params", "Reading format parameters exception:" + e.getMessage());
-                // don't exit, tolerate this error, we'll fail later if this is critical
-            }
-            Log.d("Info", "Track info: mime:" + mime + " sampleRate:" + sampleRate + " channels:" + channels + " bitrate:" + bitrate + " duration:" + duration);
-
-            while (!finished) {
-                // check we have audio content we know
-                if (format != null || mime.startsWith("audio/")) {
-                    isAudioSample = true;
-                    if (events != null) handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            events.onError();
-                        }
-                    });
-                    return;
-                }
-                if (format != null || mime.startsWith("video/")) {
-                    isAudioSample = false;
-                    //  if (events != null) handler.post(new Runnable() { @Override public void run() { events.onError();  } });
-                    return;
-                }
-                muxer.start();
-                // create the actual decoder, using the mime to select
-                codec = MediaCodec.createDecoderByType(mime);
-
-
-                // check we have a valid codec instance
-                if (codec == null) {
-                    if (events != null) handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            events.onError();
-                        }
-                    });
-                    return;
-                }
-
-
-                codec.configure(format, null, null, 0);
-                codec.start();
-                ByteBuffer[] codecInputBuffers = codec.getInputBuffers();
-                ByteBuffer[] codecOutputBuffers = codec.getOutputBuffers();
-                if (codecInputBuffers == null) {
-                    finished = true; // getInputBuffer(inputBuffer, isAudioSample, bufferInfo);
-                }
-                if (!finished) {
-
-
-                    int currentTrackIndex = isAudioSample ? audioTrackIndex : videoTrackIndex;
-                    for (ByteBuffer btbuf : codecInputBuffers) {
-                        muxer.writeSampleData(currentTrackIndex, btbuf, bufferInfo);
-                    }
-                }
-            }
-            ;
-        }
-        muxer.stop();
-        muxer.release();*/
-
-
-
-  /*  public boolean getInputBuffer(ByteBuffer inputBuffer, boolean isAudioSample,MediaCodec.BufferInfo bufferInfo){
-
-
-
-    }*/
-
+        ////////////
 
     public void makevideoClick(View v) {
         if (name[0]!=null) {
@@ -683,9 +457,6 @@ public class MainActivity extends ActionBarActivity {
 
                 new Encoder().execute(new File( path + "/", mask));
             }
-
-
-
 
         }
 
@@ -820,24 +591,6 @@ public class MainActivity extends ActionBarActivity {
     MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
 
 
-        // Test setLocation out of bound cases
-       /* try {
-            muxer.setLocation(BAD_LATITUDE, LONGITUDE);
-            fail("setLocation succeeded with bad argument: [" + BAD_LATITUDE + "," + LONGITUDE
-                    + "]");
-        } catch (IllegalArgumentException e) {
-            // Expected
-        }
-        try {
-            muxer.setLocation(LATITUDE, BAD_LONGITUDE);
-            fail("setLocation succeeded with bad argument: [" + LATITUDE + "," + BAD_LONGITUDE
-                    + "]");
-        } catch (IllegalArgumentException e) {
-            // Expected
-        }
-
-        muxer.setLocation(LATITUDE, LONGITUDE);  */
-
         muxer.start();
         boolean secondstage = false;
 
@@ -910,7 +663,6 @@ public class MainActivity extends ActionBarActivity {
             }
 
         }
-
 
        // muxer.release();
 

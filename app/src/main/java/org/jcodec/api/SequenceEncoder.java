@@ -130,6 +130,7 @@ public class SequenceEncoder {
         outTrack.addSampleEntry(H264Utils.createMOVSampleEntry(spsList, ppsList));
 
 
+
         // Write MP4 header and finalize recording
 
         muxer.writeHeader();

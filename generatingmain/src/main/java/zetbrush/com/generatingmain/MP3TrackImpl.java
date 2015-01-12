@@ -30,8 +30,8 @@ import java.util.List;
  * @author Roman Elizarov
  */
 public class MP3TrackImpl extends AbstractTrack {
-    private static final int MPEG_V1 = 0x3; // only support V1
-    private static final int MPEG_L3 = 1; // only support L3
+    private static final int MPEG_V1 = 3; // only support V1
+    private static final int MPEG_L3 = 3; // only support L3
     private static final int[] SAMPLE_RATE = {44100, 48000, 32000, 0};
     private static final int[] BIT_RATE = {0, 32000, 40000, 48000, 56000, 64000, 80000, 96000, 112000, 128000, 160000, 192000, 224000, 256000, 320000, 0};
     private static final int SAMPLES_PER_FRAME = 1152; // Samples per L3 frame
@@ -163,6 +163,10 @@ public class MP3TrackImpl extends AbstractTrack {
 
         int channelMode;
         int channelCount;
+        int mode;
+        int copyright;
+        int original;
+        int emphasis;
 
         int getFrameLength() {
             return 144 * bitRate / sampleRate + padding;
@@ -197,20 +201,21 @@ public class MP3TrackImpl extends AbstractTrack {
         }
 
         BitReaderBuffer brb = new BitReaderBuffer((ByteBuffer) bb.rewind());
+        Log.d(" bits brb", brb.toString());
         int sync = brb.readBits(11); // A
         if (sync != 0x7ff){
             Log.d("Sync bits", String.valueOf(sync));
-            throw new IOException("Expected Start Word 0x7ff");
+            //throw new IOException("Expected Start Word 0x7ff");
         }
-        hdr.mpegVersion = brb.readBits(1); // B
+        hdr.mpegVersion = brb.readBits(2); // B
 
         if (hdr.mpegVersion != MPEG_V1)
-           throw new IOException("Expected MPEG Version 1 (ISO/IEC 11172-3)");
+           //throw new IOException("Expected MPEG Version 1 (ISO/IEC 11172-3)");
 
         hdr.layer = brb.readBits(2); // C
 
         if (hdr.layer != MPEG_L3)
-           throw new IOException("Expected Layer III");
+          // throw new IOException("Expected Layer III");
 
         hdr.protectionAbsent = brb.readBits(1); // D
 
@@ -229,6 +234,11 @@ public class MP3TrackImpl extends AbstractTrack {
 
         hdr.channelMode = brb.readBits(2); // I
         hdr.channelCount = hdr.channelMode == 3 ? 1 : 2;
+
+        hdr.mode = brb.readBits(2); // J
+        hdr.copyright = brb.readBits(1); //K
+        hdr.original = brb.readBits(1); //L
+        hdr.emphasis = brb.readBits(2); //M
         return hdr;
     }
 

@@ -118,7 +118,7 @@ public class MainActivity extends ActionBarActivity {
         playButton = (Button) findViewById(R.id.playButtn);
         seekbar = (SeekBar) findViewById(R.id.seekbar);
         compositionButton = (Button) findViewById(R.id.compositionButton);
-
+        testmp3 = (Button)findViewById(R.id.TestMp3);
         try {
             Intent intent = getIntent();
             if (intent != null) {
@@ -328,6 +328,24 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    ////////////////////////////TEST MP3 ///////////////////////////////
+
+    Button testmp3;
+
+    public void onTestMp3Click(View v){
+        File mp3file = new File("/storage/removable/sdcard1/Wyat.mp3");
+        try {
+            MPEGAudioFrameHeader mpaframe = new MPEGAudioFrameHeader(mp3file);
+            Log.d("MP3Info", mpaframe.toString());
+
+
+        } catch (NoMPEGFramesException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
     public void onCompositionClick(View v) throws IOException {
@@ -391,14 +409,14 @@ public class MainActivity extends ActionBarActivity {
         MovieCreator mc = new MovieCreator();
         // Movie videoin = MovieCreator.build("/storage/removable/sdcard1/outputaaac.mp4");
         Movie countVideo = mc.build(video);
-          AACTrackImple aacTrack = new AACTrackImple(new FileDataSourceImpl("/storage/removable/sdcard1/strangeclouds.aac"));
-       // MP3TrackImpl mp3 = new MP3TrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/KD_minu.mp3"));
+        AACTrackImple aacTrack = new AACTrackImple(new FileDataSourceImpl("/storage/removable/sdcard1/strangeclouds.aac"));
+       MP3TrackImpl mp3 = new MP3TrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/Wyat.mp3"));
       //  Log.d("mp3Info", mp3.toString());
          Movie audiomovie = new Movie();
             audiomovie.addTrack(aacTrack);
 
 
-        //  MP3TrackImpl mp3Track = new MP3TrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/Music/StrangeClouds.mp3"));
+          MP3TrackImpl mp3Track = new MP3TrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/Music/StrangeClouds.mp3"));
         //  H264TrackImpl mp4track = new H264TrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/vid_enc.mp4"));
         //  Movie videoin = MovieCreator.build("/storage/removable/sdcard1/countvideo.mp4");
         // Container out2 = new DefaultMp4Builder().build(videoin);

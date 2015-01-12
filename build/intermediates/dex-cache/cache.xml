@@ -2,60 +2,60 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Arman\Documents\GitHub\VidGen\generatingmain\build\intermediates\exploded-aar\VidGen\app\unspecified\libs\isoparser-1.0.5.4.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="232e5130b709e6cc2ac4c4e5c5212a89929ab592">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VidGen\generatingmain\build\intermediates\pre-dexed\debug\isoparser-1.0.5.4-41965fe19840b4a8d586163100a2d53e49374421.jar" />
-    </item>
-    <item
-        jar="C:\Users\Arman\Documents\GitHub\VidGen\generatingmain\build\intermediates\exploded-aar\VidGen\app\unspecified\libs\aspectjrt-1.8.2.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="7dede91c0c36b1265fc99c55283b90ed2be144c8">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VidGen\generatingmain\build\intermediates\pre-dexed\debug\aspectjrt-1.8.2-4bf1e0adae97ace81e0a23d70532c34f9657b3de.jar" />
-    </item>
-    <item
-        jar="C:\Users\Arman\Documents\GitHub\VidGen\generatingmain\build\intermediates\exploded-aar\VidGen\app\unspecified\classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="63027cc6a0d5cb5cbf849c847272c0b61a2617bb">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VidGen\generatingmain\build\intermediates\pre-dexed\debug\classes-d67e405dcd09bb3efc8ab652b0d6d1cb1beccac1.jar" />
-    </item>
-    <item
-        jar="C:\Users\Arman\Documents\GitHub\VidGen\generatingmain\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="686344a780033e4ba22b926cd225f8d4941247e6">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VidGen\generatingmain\build\intermediates\pre-dexed\debug\classes-42f7e287e88f55889695bf448d52c65e390ac372.jar" />
-    </item>
-    <item
-        jar="C:\Users\Arman\Documents\GitHub\VidGen\generatingmain\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.0\classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="95fd37732ec852e99f07eeb516a3650172f1d136">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VidGen\generatingmain\build\intermediates\pre-dexed\debug\classes-073c1ef5f7d0a11a27041473183b6c334cbfa123.jar" />
-    </item>
-    <item
-        jar="D:\adt-bundle-windows-x86_64-20140702\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.0\support-annotations-21.0.0.jar"
+        jar="/Users/intern/Documents/adt-bundle-mac-x86_64-20140624/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.0/support-annotations-21.0.0.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="1a578b9607b36266c63d43a4fa0ab5664dbe911e">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VidGen\generatingmain\build\intermediates\pre-dexed\debug\support-annotations-21.0.0-b76b65b1fe9276422260c698604a040d15a30153.jar" />
+        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/support-annotations-21.0.0-2a968ebb3a4b4e979b81012b66bc444b77fb48ad.jar" />
     </item>
     <item
-        jar="C:\Users\Arman\Documents\GitHub\VidGen\generatingmain\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\libs\internal_impl-21.0.0.jar"
+        jar="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="686344a780033e4ba22b926cd225f8d4941247e6">
+        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/classes-7ce3a594d9026addd903d99ddf79a0d18ed0458a.jar" />
+    </item>
+    <item
+        jar="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/libs/internal_impl-21.0.0.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="1609e6d42d0480b0f4188e2c29f75388fa12a8f0">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VidGen\generatingmain\build\intermediates\pre-dexed\debug\internal_impl-21.0.0-61f0afaf2eeff3715190249c98aac36eec14d1f5.jar" />
+        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/internal_impl-21.0.0-5a51904238046c132982c9b29dfb9e99f8d5be4d.jar" />
     </item>
     <item
-        jar="C:\Users\Arman\Documents\GitHub\VidGen\generatingmain\build\intermediates\exploded-aar\VidGen\oMXPlayer\unspecified\classes.jar"
+        jar="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/exploded-aar/VideoGenerationJC/app/unspecified/libs/isoparser-1.0.5.4.jar"
         jumboMode="false"
         revision="20.0.0"
-        sha1="f7292abda37c5c2fbc381d2be944d6082d3a626b">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VidGen\generatingmain\build\intermediates\pre-dexed\debug\classes-59c3281267a76a824941b69dd41fb238d69e526d.jar" />
+        sha1="232e5130b709e6cc2ac4c4e5c5212a89929ab592">
+        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/isoparser-1.0.5.4-efafdf7257512cdbd629fed37bd515f064354405.jar" />
+    </item>
+    <item
+        jar="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/exploded-aar/VideoGenerationJC/app/unspecified/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="6c100e07e92566438a2d651cf30700273fdd079a">
+        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/classes-962095e3cc7599f3065013909022a70ea9664cb1.jar" />
+    </item>
+    <item
+        jar="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="95fd37732ec852e99f07eeb516a3650172f1d136">
+        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/classes-804a0b2b4dbfd777be1491b48fc815f3e1a5b975.jar" />
+    </item>
+    <item
+        jar="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/exploded-aar/VideoGenerationJC/app/unspecified/libs/aspectjrt-1.8.2.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="7dede91c0c36b1265fc99c55283b90ed2be144c8">
+        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/aspectjrt-1.8.2-f9c5d8d85e16c6738a7fff904de013be5e54835b.jar" />
+    </item>
+    <item
+        jar="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/exploded-aar/VideoGenerationJC/oMXPlayer/unspecified/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="a3ddd7c31f3e2b46e70577294985f31680eb2090">
+        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/classes-8ac67e3b73d5c3691e96892b9862cbc9b1264c4c.jar" />
     </item>
 
 </items>

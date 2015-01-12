@@ -10,6 +10,7 @@ import android.media.MediaCodec;
 import android.media.MediaExtractor;
 import android.media.MediaFormat;
 import android.media.MediaMuxer;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -74,7 +75,6 @@ import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
 import com.googlecode.mp4parser.authoring.tracks.AACTrackImpl;
 import com.googlecode.mp4parser.authoring.tracks.AppendTrack;
 import com.googlecode.mp4parser.authoring.tracks.CroppedTrack;
-import com.googlecode.mp4parser.authoring.tracks.MP3TrackImpl;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -392,8 +392,11 @@ public class MainActivity extends ActionBarActivity {
         // Movie videoin = MovieCreator.build("/storage/removable/sdcard1/outputaaac.mp4");
         Movie countVideo = mc.build(video);
           AACTrackImple aacTrack = new AACTrackImple(new FileDataSourceImpl("/storage/removable/sdcard1/strangeclouds.aac"));
+       // MP3TrackImpl mp3 = new MP3TrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/KD_minu.mp3"));
+      //  Log.d("mp3Info", mp3.toString());
          Movie audiomovie = new Movie();
             audiomovie.addTrack(aacTrack);
+
 
         //  MP3TrackImpl mp3Track = new MP3TrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/Music/StrangeClouds.mp3"));
         //  H264TrackImpl mp4track = new H264TrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/vid_enc.mp4"));
@@ -421,6 +424,7 @@ public class MainActivity extends ActionBarActivity {
                     videoTracks.add(track);
             }
         }
+
         videotrackcount = videoTracks.get(0).getSamples().size() * 90;
         CroppedTrack dd = new CroppedTrack(audioTracks.get(0), 0, videotrackcount);
 
@@ -443,8 +447,6 @@ public class MainActivity extends ActionBarActivity {
 
     public void makevideoClick(View v) {
         if (name[0]!=null) {
-
-
 
             if(path!=null) {
 
@@ -476,9 +478,7 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement

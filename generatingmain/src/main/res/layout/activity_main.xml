@@ -82,11 +82,44 @@
 
     </LinearLayout>
 
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true">
+    <TextView
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:id="@+id/musicNameText"
+        android:textSize="15sp"
+        android:text="No music selected"
+
+        />
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:background="@drawable/delete"
+        android:clickable="true"
+        android:id="@+id/deleteMusicImg"
+        android:onClick="onDeleteMusicPathClick"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="300dp" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pick Music"
+        android:onClick="onPickMusicClick"
+        android:id="@+id/pickMusicbtn"
+
+        />
     <SeekBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/seekbar"
-        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="45pt"
         />
+
+</FrameLayout>
 
 </RelativeLayout>

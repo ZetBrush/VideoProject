@@ -104,7 +104,7 @@ public class MainActivity extends ActionBarActivity {
     private TextView musicNameText;
     private String videoPath = null;
     private TextView musicTimeText;
-
+    private long musictotalTime =0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,7 +142,6 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-
     }
 
     @Override
@@ -157,6 +156,49 @@ public class MainActivity extends ActionBarActivity {
             musicPath = message.getPath();
             if(musicPath!=null)
             musicNameText.setText(musicPath);
+            PlayerEvents events1 = new PlayerEvents() {
+                @Override
+                public void onStart(String mime, int sampleRate, int channels, long duration) {
+
+                }
+
+                @Override
+                public void onPlay() {
+
+                }
+
+                @Override
+                public void onPlayUpdate(int percent, long currentms, long totalms) {
+                    musictotalTime = totalms;
+                }
+
+                @Override
+                public void onStop() {
+
+                }
+
+                @Override
+                public void onError() {
+
+                }
+            };
+            OpenMXPlayer mplyr = new OpenMXPlayer(events1);
+            mplyr.setDataSource(musicPath);
+            try{
+                mplyr.play();
+                try {
+                    wait(20);
+                } catch (InterruptedException e) {
+                    mplyr.stop();
+                }
+                mplyr.stop();
+
+            }
+            catch (Exception e){
+
+            }
+            mplyr.stop();
+            mplyr = null;
 
         }
     }
@@ -165,6 +207,10 @@ public class MainActivity extends ActionBarActivity {
 
     public void onDeleteMusicPathClick(View v){
         musicPath = null;
+        if(player.isLive())
+         ////TODO
+        player.stop();
+        player = null;
         musicNameText.setText("No music Selected");
 
     }
@@ -310,7 +356,7 @@ public class MainActivity extends ActionBarActivity {
                     TimeUnit.MILLISECONDS.toSeconds(totalms-currentms) -
                             TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(totalms-currentms))
             ));
-
+            musictotalTime = totalms;
 
         }
 
@@ -424,15 +470,10 @@ public class MainActivity extends ActionBarActivity {
         long start =0;
         long minv = 20;
 
-        rengeSeekbar.setRangeValues(start, tottime);
+        rengeSeekbar.setRangeValues(start, musictotalTime);
         rengeSeekbar.setSelectedMinValue(minv);
-        rengeSeekbar.setSelectedMaxValue(tottime);
+        rengeSeekbar.setSelectedMaxValue(musictotalTime);
       if(musicPath!=null) {
-          player = new OpenMXPlayer(events);
-
-          player.setDataSource(musicPath);
-
-
 
           rengeSeekbar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Long>() {
               @Override

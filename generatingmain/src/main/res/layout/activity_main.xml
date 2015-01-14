@@ -60,13 +60,7 @@
         android:orientation="horizontal"
         android:layout_below="@+id/buttons">
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Composition"
-            android:id="@+id/compositionButton"
-            android:onClick="onCompositionClick"/>
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -87,11 +81,11 @@
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true">
     <TextView
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="45dp"
         android:layout_width="match_parent"
         android:layout_height="15dp"
         android:id="@+id/musicNameText"
-        android:textSize="15sp"
+        android:textSize="14sp"
         android:text="No music selected"
 
         />
@@ -114,10 +108,19 @@
 
         />
     <SeekBar
-        android:layout_width="match_parent"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:id="@+id/seekbar"
-        android:layout_marginLeft="45pt"
+        android:layout_marginLeft="100dp"
+        />
+    <TextView
+        android:layout_marginLeft="300dp"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/musicTimeText"
+        android:textSize="12sp"
+
+
         />
 
 </FrameLayout>

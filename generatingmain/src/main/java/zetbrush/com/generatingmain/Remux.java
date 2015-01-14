@@ -45,7 +45,6 @@ public class Remux {
 
             output = writableFileChannel(tgt);
 
-
             MP4Demuxer demuxerForAudio = new MP4Demuxer(inputForAudio);
             MP4Demuxer demuxerForVideo = new MP4Demuxer(inputForVideo);
 

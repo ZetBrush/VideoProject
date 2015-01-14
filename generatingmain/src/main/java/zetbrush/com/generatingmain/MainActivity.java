@@ -35,11 +35,9 @@ import android.widget.Toast;
 import com.coremedia.iso.boxes.Container;
 import com.googlecode.mp4parser.FileDataSourceImpl;
 import com.googlecode.mp4parser.authoring.Movie;
-import com.googlecode.mp4parser.authoring.Sample;
 import com.googlecode.mp4parser.authoring.Track;
 import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
 import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
-import zetbrush.com.generatingmain.AACTrackImple;
 import net.pocketmagic.android.openmxplayer.OpenMXPlayer;
 import net.pocketmagic.android.openmxplayer.PlayerEvents;
 import net.pocketmagic.android.openmxplayer.PlayerStates;
@@ -64,18 +62,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-import com.googlecode.mp4parser.authoring.builder.FragmentedMp4Builder;
-import com.googlecode.mp4parser.authoring.builder.SyncSampleIntersectFinderImpl;
-import com.coremedia.iso.boxes.Container;
-import com.googlecode.mp4parser.authoring.Movie;
-import com.googlecode.mp4parser.authoring.Track;
-import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
-import com.googlecode.mp4parser.authoring.builder.FragmentedMp4Builder;
-import com.googlecode.mp4parser.authoring.builder.SyncSampleIntersectFinderImpl;
-import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
-import com.googlecode.mp4parser.authoring.tracks.AACTrackImpl;
-import com.googlecode.mp4parser.authoring.tracks.AppendTrack;
+
 import com.googlecode.mp4parser.authoring.tracks.CroppedTrack;
 
 public class MainActivity extends ActionBarActivity {
@@ -85,7 +74,6 @@ public class MainActivity extends ActionBarActivity {
     private TextView progress;
     private volatile boolean flag;
     private SeekBar seekbar;
-    private Button compositionButton;
     MediaExtractor extractor;
     private PlayerStates state = new PlayerStates();
     private String sourcePath = null;
@@ -114,6 +102,7 @@ public class MainActivity extends ActionBarActivity {
     private Button pickMusicbtn;
     private TextView musicNameText;
     private String videoPath = null;
+    private TextView musicTimeText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,10 +113,10 @@ public class MainActivity extends ActionBarActivity {
         progress = (TextView) findViewById(R.id.progress);
         playButton = (Button) findViewById(R.id.playButtn);
         seekbar = (SeekBar) findViewById(R.id.seekbar);
-        compositionButton = (Button) findViewById(R.id.compositionButton);
         testmp3 = (Button)findViewById(R.id.TestMp3);
         pickMusicbtn = (Button)findViewById(R.id.pickMusicbtn);
         musicNameText = (TextView)findViewById(R.id.musicNameText);
+        musicTimeText = (TextView)findViewById(R.id.musicTimeText);
         try {
             Intent intent = getIntent();
             if (intent != null) {
@@ -293,8 +282,11 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public void onStop() {
             seekbar.setProgress(0);
-
+            playButton.setText("Play");
+            isplaying = false;
         }
+
+
 
         @Override
         public void onStart(String mime, int sampleRate, int channels, long duration) {
@@ -311,17 +303,25 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public void onPlayUpdate(int percent, long currentms, long totalms) {
             seekbar.setProgress(percent);
+            musicTimeText.setText(String.format("%d:%d",
+                    TimeUnit.MILLISECONDS.toMinutes(totalms-currentms),
+                    TimeUnit.MILLISECONDS.toSeconds(totalms-currentms) -
+                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(totalms-currentms))
+            ));
+
+
         }
 
         @Override
         public void onPlay() {
+            playButton.setText("Pause");
         }
 
         @Override
         public void onError() {
             seekbar.setProgress(0);
-            Toast.makeText(MainActivity.this, "Error!", Toast.LENGTH_SHORT).show();
-            //.setText("An error has been encountered");
+            Toast.makeText(MainActivity.this, "Not supported content..", Toast.LENGTH_SHORT).show();
+            player = new OpenMXPlayer(events);
         }
     };
 
@@ -335,13 +335,14 @@ public class MainActivity extends ActionBarActivity {
         }
 
         if (isplaying) {
-            player.stop();
+            player.pause();
+            playButton.setText("Play");
             isplaying = false;
         } else {
             if(musicPath!=null) {
                 player.setDataSource(musicPath);   //"/storage/removable/sdcard1/DCIM/100ANDRO/newfold/strangeclouds.aac");
-
                 player.play();
+                playButton.setText("Pause");
                 isplaying = true;
             }
             else{
@@ -439,10 +440,7 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-    public void onCompositionClick(View v)  {
 
-
-    }
 
     private void concatWithAudio(String audiopath, String videopath) throws IOException{
 
@@ -479,7 +477,7 @@ public class MainActivity extends ActionBarActivity {
                     }
                 }
 
-                videotrackcount = videoTracks.get(0).getSamples().size() * 90;
+                videotrackcount = videoTracks.get(0).getSamples().size() * 88;
                 CroppedTrack dd = new CroppedTrack(audioTracks.get(0), 0, videotrackcount);
 
                 if (videoTracks.size() > 0)
@@ -490,7 +488,7 @@ public class MainActivity extends ActionBarActivity {
                         countVideo.addTrack(dd);
 
                 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-                String outputLocation = "/storage/removable/sdcard1/" + timeStamp + ".mp4";
+                String outputLocation = "/storage/removable/sdcard1/" + "VidGen-"+timeStamp + ".mp4";
                 Container out = new DefaultMp4Builder().build(countVideo);
                 FileChannel fc = new RandomAccessFile(String.format(outputLocation), "rw").getChannel();
                 out.writeContainer(fc);
@@ -548,7 +546,7 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class Decoder extends AsyncTask<File, Integer, Integer> {
+    /*private class Decoder extends AsyncTask<File, Integer, Integer> {
         private static final String TAG = "DECODER";
 
         protected Integer doInBackground(File... params) {
@@ -593,7 +591,7 @@ public class MainActivity extends ActionBarActivity {
             //progress.setText(String.valueOf(values[0]));
         }
     }
-
+*/
 
     private void cloneMediaUsingMuxer(String srcvid, String srcAud, String dstMediaPath,
                                       int expectedTrackCount, int degrees) throws IOException {
@@ -699,7 +697,7 @@ public class MainActivity extends ActionBarActivity {
                     }
 
 
-                    }
+                 }
 
 
              else {

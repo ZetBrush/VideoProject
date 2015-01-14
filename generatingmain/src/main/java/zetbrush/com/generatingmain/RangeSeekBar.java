@@ -506,12 +506,12 @@ public class RangeSeekBar<T extends Number> extends ImageView {
             Long maxval = Long.valueOf(String.valueOf(getSelectedMaxValue()));
             Long minval = Long.valueOf(String.valueOf(getSelectedMinValue()));
 
-             String maxx = String.format("%d:%d",
+             String maxx = String.format("%02d:%02d",
                     TimeUnit.MILLISECONDS.toMinutes(maxval),
                     TimeUnit.MILLISECONDS.toSeconds(maxval) -
                             TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(maxval))
             );
-            String minn = String.format("%d:%d",
+            String minn = String.format("%02d:%02d",
                     TimeUnit.MILLISECONDS.toMinutes(minval),
                     TimeUnit.MILLISECONDS.toSeconds(minval) -
                             TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(minval))

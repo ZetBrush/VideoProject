@@ -17,6 +17,6 @@ android {
 }
 
 dependencies {
-    compile files('libs/aspectjrt-1.8.2.jar')
+    compile files('libs/aspectjrt-1.8.4.jar')
     compile files('libs/isoparser-1.0.5.4.jar')
 }

@@ -10,11 +10,9 @@ import android.media.MediaCodec;
 import android.media.MediaExtractor;
 import android.media.MediaFormat;
 import android.media.MediaMuxer;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -38,23 +36,17 @@ import com.googlecode.mp4parser.authoring.Movie;
 import com.googlecode.mp4parser.authoring.Track;
 import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
 import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
+import com.googlecode.mp4parser.authoring.tracks.CroppedTrack;
+
 import net.pocketmagic.android.openmxplayer.OpenMXPlayer;
 import net.pocketmagic.android.openmxplayer.PlayerEvents;
 import net.pocketmagic.android.openmxplayer.PlayerStates;
 
-import org.jcodec.api.JCodecException;
-import org.jcodec.api.android.FrameGrab;
 import org.jcodec.api.android.SequenceEncoder;
-import org.jcodec.common.FileChannelWrapper;
-import org.jcodec.common.NIOUtils;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.RandomAccessFile;
-import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
@@ -63,10 +55,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-
-
-import com.googlecode.mp4parser.authoring.tracks.CroppedTrack;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -105,6 +93,9 @@ public class MainActivity extends ActionBarActivity {
     private String videoPath = null;
     private TextView musicTimeText;
     private long musictotalTime =0;
+    private String newMusicPath = null;
+    private Long startMiliSc = null;
+    private Long endMiliSc = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -153,13 +144,22 @@ public class MainActivity extends ActionBarActivity {
         {
 
             Uri message=data.getData();
+            newMusicPath=musicPath;
             musicPath = message.getPath();
             if(musicPath!=null)
             musicNameText.setText(musicPath);
+            if(!musicPath.equals(newMusicPath)){
+                try {
+                    player.stop();
+                    player.setDataSource("");
+                }
+                catch(NullPointerException e){}
+            }
+
             PlayerEvents events1 = new PlayerEvents() {
                 @Override
                 public void onStart(String mime, int sampleRate, int channels, long duration) {
-
+                    musictotalTime  = duration/1000;
                 }
 
                 @Override
@@ -169,7 +169,7 @@ public class MainActivity extends ActionBarActivity {
 
                 @Override
                 public void onPlayUpdate(int percent, long currentms, long totalms) {
-                    musictotalTime = totalms;
+
                 }
 
                 @Override
@@ -186,10 +186,11 @@ public class MainActivity extends ActionBarActivity {
             mplyr.setDataSource(musicPath);
             try{
                 mplyr.play();
+                mplyr.seek(2);
                 try {
-                    wait(20);
+                    Thread.currentThread().wait(20);
                 } catch (InterruptedException e) {
-                    mplyr.stop();
+
                 }
                 mplyr.stop();
 
@@ -207,10 +208,8 @@ public class MainActivity extends ActionBarActivity {
 
     public void onDeleteMusicPathClick(View v){
         musicPath = null;
-        if(player.isLive())
-         ////TODO
         player.stop();
-        player = null;
+        musictotalTime = 0;
         musicNameText.setText("No music Selected");
 
     }
@@ -338,7 +337,7 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         public void onStart(String mime, int sampleRate, int channels, long duration) {
-            Log.d("on startplay", "onStart called: " + mime + " sampleRate:" + sampleRate + " channels:" + channels);
+            Log.d("on startplay", "onStart called: " + mime + " sampleRate:" + sampleRate + " channels:" + channels );
             if (duration == 0) {
 
             } else {
@@ -351,12 +350,17 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public void onPlayUpdate(int percent, long currentms, long totalms) {
             seekbar.setProgress(percent);
-            musicTimeText.setText(String.format("%d:%d",
-                    TimeUnit.MILLISECONDS.toMinutes(totalms-currentms),
-                    TimeUnit.MILLISECONDS.toSeconds(totalms-currentms) -
-                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(totalms-currentms))
+            musicTimeText.setText(String.format("%02d:%02d",
+                    TimeUnit.MILLISECONDS.toMinutes(currentms),
+                    TimeUnit.MILLISECONDS.toSeconds(currentms) -
+                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(currentms))
             ));
             musictotalTime = totalms;
+            if(musicPath==null){
+                player.stop();
+                player.setDataSource("");
+
+            }
 
         }
 
@@ -466,7 +470,7 @@ public class MainActivity extends ActionBarActivity {
                 location[0]-v.getHeight()*3,   location[1]-v.getWidth()*3);
 
 
-        long tottime =85000;
+
         long start =0;
         long minv = 20;
 
@@ -478,7 +482,8 @@ public class MainActivity extends ActionBarActivity {
           rengeSeekbar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Long>() {
               @Override
               public void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar, Long minValue, Long maxValue) {
-
+                    startMiliSc = minValue;
+                    endMiliSc = maxValue;
                   //Log.i(TAG, "selected new range values: MIN=" + minValue + ", MAX=" + maxValue);
 
 
@@ -538,7 +543,7 @@ public class MainActivity extends ActionBarActivity {
 
                 List<Track> videoTracks = new LinkedList<Track>();
                 List<Track> audioTracks = new LinkedList<Track>();
-                int videotrackcount = 0;
+                long videotrackcount = 0;
 
                 for (Movie movie : clips) {
                     for (Track track : movie.getTracks()) {
@@ -550,18 +555,47 @@ public class MainActivity extends ActionBarActivity {
                     }
                 }
 
-                videotrackcount = videoTracks.get(0).getSamples().size() * 88;
-                CroppedTrack dd = new CroppedTrack(audioTracks.get(0), 0, videotrackcount);
 
+                CroppedTrack ct = null;
+                long endmilis =0;
+                long startmilis =0;
+                if(endMiliSc == null) {
+                   endmilis = videotrackcount;
+                }
+                else
+                    endmilis=endMiliSc;
+
+                if(startMiliSc == null) {
+                    startmilis = 1;
+                }
+                else startmilis = startMiliSc;
+                    //TODO stuff
+                Log.d("value of sliders", "  Min "+startMiliSc + ", Max "+endmilis);
+                Log.d("value of audiotrack total sample size", "Value "+audioTracks.get(0).getSamples().size());
+                videotrackcount = (videoTracks.get(0).getSamples().size() -1 )*(scale[0]);
+                Log.d("scale[0]", "Value "+scale[0]);
+                CroppedTrack dd = new CroppedTrack(audioTracks.get(0), 1, (int)(videotrackcount*1000/23.3)-1);
+                Log.d("value of videotrack /88", "Value "+ videoTracks.get(0).getSamples().size());
+                Log.d("value of sample max to cut", "Value "+ ((int)(videotrackcount*1000/23.3)-1));
+                Log.d("value of sample*88", "Value "+ (videoTracks.get(0).getSamples().size() * 88));
+              /*  if((long)((float)endmilis/24) >=videotrackcount ) {
+
+                     ct = new CroppedTrack(audioTracks.get(0), (long)((float)startmilis/24), videotrackcount);
+                }
+                else  {
+                   ct = new CroppedTrack(audioTracks.get(0), (long)((float)startmilis/24), (long)((float)endmilis/24));
+                }*/
+                Log.d("value of audiotrack total sample sizeafter crop", "Value "+audioTracks.get(0).getSamples().size());
                 if (videoTracks.size() > 0)
                     // result.addTrack(new AppendTrack(videoTracks.toArray(new Track[videoTracks.size()])));
 
-                    if (audioTracks.size() > 0)
+                    if (audioTracks.size() > 0 && dd !=null)
                         //  result.addTrack(new AppendTrack(audioTracks.toArray(new Track[audioTracks.size()])));
+
                         countVideo.addTrack(dd);
 
                 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-                String outputLocation = "/storage/removable/sdcard1/" + "VidGen-"+timeStamp + ".mp4";
+                String outputLocation = "/storage/removable/sdcard1/" + "VidGen_"+timeStamp + ".mp4";
                 Container out = new DefaultMp4Builder().build(countVideo);
                 FileChannel fc = new RandomAccessFile(String.format(outputLocation), "rw").getChannel();
                 out.writeContainer(fc);

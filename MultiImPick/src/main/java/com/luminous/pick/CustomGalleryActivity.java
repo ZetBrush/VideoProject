@@ -55,11 +55,6 @@ public class CustomGalleryActivity extends Activity {
 
     private ArrayList<Bitmap> arr = new ArrayList<>();
 
-    private int width;
-    private int height;
-
-    Bitmap bmUpRightPartial;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,23 +65,6 @@ public class CustomGalleryActivity extends Activity {
         if (action == null) {
             finish();
         }
-
-        /*File file = new File("/storage/external_SD/pictures");
-        File imageFiles[] = file.listFiles();
-
-        for (int i = 0; i < imageFiles.length; i++) {
-            getDropboxIMGSize(imageFiles[i].toString());
-
-            float a = width / 370.0f;
-
-            int halfWidth = 370;
-            float halfHeight = height / a;
-            Bitmap bt = Bitmap.createBitmap(halfWidth, (int) halfHeight, Bitmap.Config.RGB_565);
-            bt.eraseColor(Color.GRAY);
-            arr.add(bt);
-
-        }*/
-
 
         initImageLoader();
         init();
@@ -129,7 +107,7 @@ public class CustomGalleryActivity extends Activity {
 
         RecyclerView recyc = (RecyclerView) findViewById(R.id.gal_rec);
         recyc.setHasFixedSize(true);
-        myAdat = new GalAdapter(this,imageLoader, arr);
+        myAdat = new GalAdapter(this, imageLoader, arr);
         StaggeredGridLayoutManager sglm = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         recyc.setClipToPadding(true);
         RecyclerView.ItemAnimator ra = new DefaultItemAnimator();
@@ -219,87 +197,4 @@ public class CustomGalleryActivity extends Activity {
         Collections.reverse(galleryList);
         return galleryList;
     }
-
-    public Bitmap currectlyOrientation(String file) throws IOException {
-
-        BitmapFactory.Options bounds = new BitmapFactory.Options();
-        bounds.inJustDecodeBounds = true;
-        bounds.inPurgeable = true;
-        bounds.inInputShareable = true;
-        BitmapFactory.decodeFile(file, bounds);
-
-
-        BitmapFactory.Options opts = new BitmapFactory.Options();
-        Bitmap bm = BitmapFactory.decodeFile(file, opts);
-        ExifInterface exif = null;
-        try {
-            exif = new ExifInterface(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String orientString = exif.getAttribute(ExifInterface.TAG_ORIENTATION);
-        int orientation = orientString != null ? Integer.parseInt(orientString) : ExifInterface.ORIENTATION_NORMAL;
-
-        int rotationAngle = 0;
-        if (orientation == ExifInterface.ORIENTATION_ROTATE_90) rotationAngle = 90;
-        if (orientation == ExifInterface.ORIENTATION_ROTATE_180) rotationAngle = 180;
-        if (orientation == ExifInterface.ORIENTATION_ROTATE_270) rotationAngle = 270;
-
-        Matrix matrix = new Matrix();
-        matrix.setRotate(rotationAngle, (float) bm.getWidth() / 2, (float) bm.getHeight() / 2);
-        Bitmap rotatedBitmap = Bitmap.createBitmap(bm, 0, 0, bounds.outWidth, bounds.outHeight, matrix, true);
-
-        return rotatedBitmap;
-    }
-
-    private class DownloadFilesTask extends AsyncTask<File[], Integer, ArrayList<Bitmap>> {
-        protected ArrayList<Bitmap> doInBackground(File[]... path) {
-            ArrayList<Bitmap> arr1 = new ArrayList<Bitmap>();
-
-
-            if (path[0].length > 0) {
-                for (int i = 0; i < path[0].length; i++) {
-
-                    Bitmap bg = null;
-                    try {
-                        bg = currectlyOrientation(path[0][i].toString());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    int width = bg.getWidth();
-                    int height = bg.getHeight();
-
-                    float x = width / 370.0f;
-
-                    int halfWidth = 370;
-                    float halfHeight = height / x;
-
-                    bmUpRightPartial = Bitmap.createScaledBitmap(bg, halfWidth, (int) halfHeight, true);
-                    arr1.add(bmUpRightPartial);
-                    publishProgress(i);
-                }
-            }
-            return arr1;
-        }
-
-        protected void onProgressUpdate(Integer... progress) {
-            arr.set(progress[0],bmUpRightPartial);
-            myAdat.notifyDataSetChanged();
-        }
-
-        protected void onPostExecute(ArrayList<Bitmap> result) {
-
-        }
-    }
-
-    private void getDropboxIMGSize(String path) {
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(path, options);
-        height = options.outHeight;
-        width = options.outWidth;
-
-    }
-
 }

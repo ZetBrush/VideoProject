@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
@@ -27,6 +28,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -39,6 +41,9 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.assist.ImageSize;
+import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
+import com.nostra13.universalimageloader.core.assist.SyncImageLoadingListener;
 
 public class MainActivity extends Activity {
 
@@ -114,7 +119,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
 
                 Intent startChatUntent = new Intent("android.intent.action.videogen");
-                startChatUntent.putExtra("myimagespath",Environment.getExternalStorageDirectory().toString()+"/req_images");
+                startChatUntent.putExtra("myimagespath", Environment.getExternalStorageDirectory().toString() + "/req_images");
                 //Toast.makeText(getApplicationContext(), "" + recyclerView.getWidth(), Toast.LENGTH_LONG).show();
                 startActivity(startChatUntent);
                 finish();
@@ -131,11 +136,11 @@ public class MainActivity extends Activity {
                 lastItemPos = staggeredGridLayoutManager.findLastVisibleItemPositions(lastItemPos);
 
                 currentImage.setImageBitmap(arrayList.get(firstItemPos[0]));
-                if(newState==0) {
+                /*if (newState == 0) {
                     DownloadFilesTask aft = new DownloadFilesTask();
                     aft.execute(all_path[lastItemPos[0]]);
 
-                }
+                }*/
             }
         });
 
@@ -154,66 +159,49 @@ public class MainActivity extends Activity {
         if (requestCode == 200 && resultCode == Activity.RESULT_OK) {
             all_path = data.getStringArrayExtra("all_path");
 
-           // Bitmap bm=decodeSampledBitmapFromResource(file1[0],0,200,200);
+            if (all_path.length > 0) {
+
+                Bitmap bm = Bitmap.createBitmap(400, 400, Bitmap.Config.RGB_565);
+                bm.eraseColor(Color.GRAY);
+
+                String root = Environment.getExternalStorageDirectory().toString();
+                File myDir = new File(root + "/req_images");
+                myDir.mkdirs();
+
+                for (int i = 0; i < all_path.length; i++) {
+
+                    /*String fname = "Image_" + i + ".png";
+                    File file = new File(myDir, fname);
+
+                    Bitmap bitmap = null;
+                    Log.i("gag", "" + file);
+                    if (file.exists())
+                        file.delete();
+                    try {
+                        //bitmap = currectlyOrientation(all_path[i], 100, 100);
+                        bitmap = imageLoader.loadImageSync("file://" + all_path[i]);
+                        //bitmap = Utils.(bitmap, 500, 500);
+                        FileOutputStream out = new FileOutputStream(file);
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 50, out);
+
+                        out.flush();
+                        out.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }*/
 
 
+                    arrayList.add(bm);
 
-
-            String root = Environment.getExternalStorageDirectory().toString();
-            File myDir = new File(root + "/req_images");
-            myDir.mkdirs();
-
-            for (int i=0;i<all_path.length;i++) {
-
-                String fname = "Image_" + i + ".png";
-                File file = new File(myDir, fname);
-
-                Bitmap bitmap = null;
-                Log.i("gag", "" + file);
-                if (file.exists())
-                    file.delete();
-                try {
-                    bitmap = currectlyOrientation(all_path[i], 100, 100);
-                    FileOutputStream out = new FileOutputStream(file);
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 50, out);
-                    out.flush();
-                    out.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                arrayList.add(bitmap);
-
-            }
-
-            /*for (String string : all_path) {
-
-                final int THUMBSIZE = 100;
-
-                Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(string),
-                        THUMBSIZE, THUMBSIZE);
-
-
-                Bitmap bitmap = null;
-                try {
-                    bitmap = currectlyOrientation(string, 100, 100);
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
 
-                arrayList.add(bitmap);
-            }*/
+                DownloadFilesTask dtt = new DownloadFilesTask();
+                dtt.execute(all_path);
 
-            Bitmap tk = null;
-            try {
-                tk = currectlyOrientation(all_path[0], 400, 400);
-            } catch (IOException e) {
-                e.printStackTrace();
+                //myRecyclerViewAdapter.notifyDataSetChanged();
+                btnGalleryPickMul.setBackgroundResource(R.drawable.add1);
+                //Toast.makeText(getApplicationContext(),""+all_path.length,Toast.LENGTH_LONG).show();
             }
-
-            currentImage.setImageBitmap(tk);
-            myRecyclerViewAdapter.notifyDataSetChanged();
-            btnGalleryPickMul.setBackgroundResource(R.drawable.add1);
-            //Toast.makeText(getApplicationContext(),""+all_path.length,Toast.LENGTH_LONG).show();
         }
     }
 
@@ -221,28 +209,18 @@ public class MainActivity extends Activity {
         int sourceWidth = source.getWidth();
         int sourceHeight = source.getHeight();
 
-        // Compute the scaling factors to fit the new height and width, respectively.
-        // To cover the final image, the final scaling will be the bigger
-        // of these two.
         float xScale = (float) newWidth / sourceWidth;
         float yScale = (float) newHeight / sourceHeight;
         float scale = Math.max(xScale, yScale);
 
-        // Now get the size of the source bitmap when scaled
         float scaledWidth = scale * sourceWidth;
         float scaledHeight = scale * sourceHeight;
 
-        // Let's find out the upper left coordinates if the scaled bitmap
-        // should be centered in the new size give by the parameters
         float left = (newWidth - scaledWidth) / 2;
         float top = (newHeight - scaledHeight) / 2;
 
-        // The target rectangle for the new, scaled version of the source bitmap will now
-        // be
         RectF targetRect = new RectF(left, top, left + scaledWidth, top + scaledHeight);
 
-        // Finally, we create a new bitmap of the specified size and draw our new,
-        // scaled bitmap onto it.
         Bitmap dest = Bitmap.createBitmap(newWidth, newHeight, source.getConfig());
         Canvas canvas = new Canvas(dest);
         canvas.drawBitmap(source, null, targetRect, null);
@@ -250,77 +228,39 @@ public class MainActivity extends Activity {
         return dest;
     }
 
-    public Bitmap currectlyOrientation(String file, int newHeight, int newWidth) throws IOException {
+    private class DownloadFilesTask extends AsyncTask<String[], Integer, ArrayList<Bitmap>> {
+        protected ArrayList<Bitmap> doInBackground(String[]... path) {
+            ArrayList<Bitmap> arr1 = new ArrayList<Bitmap>();
 
-        BitmapFactory.Options bounds = new BitmapFactory.Options();
-        bounds.inJustDecodeBounds = true;
-        bounds.inPurgeable = true;
-        bounds.inInputShareable = true;
-        BitmapFactory.decodeFile(file, bounds);
+            if (path[0].length > 0) {
+                for (int i = 0; i < path[0].length; i++) {
 
+                    BitmapFactory.Options opt = new BitmapFactory.Options();
+                    opt.inSampleSize = 4;
+                    Bitmap bg = null;
+                    try {
+                        bg = Utils.currectlyOrientation(path[0][i]);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
-        BitmapFactory.Options opts = new BitmapFactory.Options();
-        Bitmap bm = BitmapFactory.decodeFile(file, opts);
-        ExifInterface exif = null;
-        try {
-            exif = new ExifInterface(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String orientString = exif.getAttribute(ExifInterface.TAG_ORIENTATION);
-        int orientation = orientString != null ? Integer.parseInt(orientString) : ExifInterface.ORIENTATION_NORMAL;
-
-        int rotationAngle = 0;
-        if (orientation == ExifInterface.ORIENTATION_ROTATE_90) rotationAngle = 90;
-        if (orientation == ExifInterface.ORIENTATION_ROTATE_180) rotationAngle = 180;
-        if (orientation == ExifInterface.ORIENTATION_ROTATE_270) rotationAngle = 270;
-
-        Matrix matrix = new Matrix();
-        matrix.setRotate(rotationAngle, (float) bm.getWidth() / 2, (float) bm.getHeight() / 2);
-        Bitmap rotatedBitmap = Bitmap.createBitmap(bm, 0, 0, bounds.outWidth, bounds.outHeight, matrix, true);
-        rotatedBitmap = scaleCenterCrop(rotatedBitmap, newHeight, newWidth);
-
-        return rotatedBitmap;
-    }
-
-    private class DownloadFilesTask extends AsyncTask<String, Integer, Bitmap> {
-        protected Bitmap doInBackground(String... path) {
-            Bitmap tk = null;
-            try {
-                tk = currectlyOrientation(path[0], 400, 400);
-            } catch (IOException e) {
-                e.printStackTrace();
+                    arrayList.add(Bitmap.createScaledBitmap(bg, 500, 500, true));
+                    //Example.addBitmap(String.valueOf(i), bmUpRightPartial);
+                    publishProgress(i);
+                    //bg.recycle();
+                }
             }
-
-            return tk;
+            return arrayList;
         }
-
-        @Override
 
         protected void onProgressUpdate(Integer... progress) {
 
+            Bitmap bitmap = arrayList.get(progress[0]);
+            arrayList.set(progress[0], bitmap);
+            myRecyclerViewAdapter.notifyDataSetChanged();
         }
 
-        @Override
-        protected void onPostExecute(Bitmap result) {
-            currentImage.setImageBitmap(result);
+        protected void onPostExecute(ArrayList<Bitmap> result) {
         }
     }
-
-    public static String encodeTobase64(Bitmap image) {
-        Bitmap immagex = image;
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        immagex.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        byte[] b = baos.toByteArray();
-        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
-
-        Log.e("LOOK", imageEncoded);
-        return imageEncoded;
-    }
-
-    public static Bitmap decodeBase64(String input) {
-        byte[] decodedByte = Base64.decode(input, 0);
-        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
-    }
-
 }

@@ -727,4 +727,15 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        File dir = new File(Environment.getExternalStorageDirectory()+"/req_images");
+        if (dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                new File(dir, children[i]).delete();
+            }
+        }
+    }
 }

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="100dp"
-    android:layout_height="80dp"
-    android:layout_marginTop="5dp">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:id="@+id/popupLayout">
 
     <SeekBar
         android:layout_width="match_parent"
@@ -26,7 +27,21 @@
         android:layout_below="@+id/tIntervalSeekBar"
         android:id = "@+id/videoName"
       />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select music starting ending"
+        android:id="@+id/captionmusic"
+        android:layout_below="@id/videoName"
+        android:layout_marginTop="5dp"/>
 
+    <zetbrush.com.generatingmain.RangeSeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rangeSeekbar"
+        android:layout_below="@id/captionmusic"
+
+        />Range
 
 
 </RelativeLayout>

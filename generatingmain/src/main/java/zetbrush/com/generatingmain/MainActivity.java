@@ -65,6 +65,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
+
 import com.googlecode.mp4parser.authoring.tracks.CroppedTrack;
 
 public class MainActivity extends ActionBarActivity {
@@ -278,6 +279,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
+
     PlayerEvents events = new PlayerEvents() {
         @Override
         public void onStop() {
@@ -366,6 +368,7 @@ public class MainActivity extends ActionBarActivity {
           interval = (TextView) popupView.findViewById(R.id.textInterval);
           timeinterval = (SeekBar)popupView.findViewById(R.id.tIntervalSeekBar);
           outputEditText = (EditText)popupView.findViewById(R.id.videoName);
+          RangeSeekBar<Long> rengeSeekbar = (RangeSeekBar)popupView.findViewById(R.id.rangeSeekbar);
 
           timeinterval.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -415,6 +418,35 @@ public class MainActivity extends ActionBarActivity {
 
         popupWindow.showAtLocation(v, Gravity.NO_GRAVITY,
                 location[0]-v.getHeight()*3,   location[1]-v.getWidth()*3);
+
+
+        long tottime =85000;
+        long start =0;
+        long minv = 20;
+
+        rengeSeekbar.setRangeValues(start, tottime);
+        rengeSeekbar.setSelectedMinValue(minv);
+        rengeSeekbar.setSelectedMaxValue(tottime);
+      if(musicPath!=null) {
+          player = new OpenMXPlayer(events);
+
+          player.setDataSource(musicPath);
+
+
+
+          rengeSeekbar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Long>() {
+              @Override
+              public void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar, Long minValue, Long maxValue) {
+
+                  //Log.i(TAG, "selected new range values: MIN=" + minValue + ", MAX=" + maxValue);
+
+
+              }
+          });
+      }
+
+
+
 
 
     }

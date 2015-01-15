@@ -30,14 +30,11 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.Container;
 import com.googlecode.mp4parser.FileDataSourceImpl;
 import com.googlecode.mp4parser.authoring.Movie;
-import com.googlecode.mp4parser.authoring.Track;
 import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
 import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
-import com.googlecode.mp4parser.authoring.tracks.AppendTrack;
 import com.googlecode.mp4parser.authoring.tracks.CroppedTrack;
 
 import net.pocketmagic.android.openmxplayer.OpenMXPlayer;
@@ -47,7 +44,6 @@ import net.pocketmagic.android.openmxplayer.PlayerStates;
 import org.jcodec.api.android.SequenceEncoder;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
@@ -55,8 +51,6 @@ import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends ActionBarActivity {
@@ -526,7 +520,7 @@ public class MainActivity extends ActionBarActivity {
                 //MP3TrackImpl mp3 = new MP3TrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/Wyat.mp3"));
 
                 int videotrackcount = 0;
-                videotrackcount = (int)(long)( (countVideo.getTracks().get(0).getSamples().size()*scale[0] *(1000 /23.2)) );
+                videotrackcount = (int)(long)( (countVideo.getTracks().get(0).getSamples().size()*scale[0] *(44100/1024)) );
                 CroppedTrack ct = null;
                 long endmilis =0;
                 long startmilis =0;
@@ -543,8 +537,8 @@ public class MainActivity extends ActionBarActivity {
 
                 /////cutting
                 Log.d("value of videotrackcunt ", "Value " + videotrackcount + "ending time cont "+ ((int)((float)endmilis/23.2)) );
-                ct = new CroppedTrack(aacTrack, (long)((float)startmilis/23.2), (long)((float)endmilis/23.2));
-               /* if(  (long)((float)endmilis/23.2) - (long)((float)startmilis/23.2 ) >=videotrackcount ) {
+               // ct = new CroppedTrack(aacTrack, (long)((float)startmilis/23.2), (long)((float)endmilis/23.2));
+                if(  (long)((float)endmilis/23.2) - (long)((float)startmilis/23.2 ) >=videotrackcount ) {
 
                     ct = new CroppedTrack(aacTrack, (long)((float)startmilis/23.2), ( (int)((float)startmilis/23.2) +videotrackcount));
                 }
@@ -552,7 +546,7 @@ public class MainActivity extends ActionBarActivity {
                 else  {
 
                     ct = new CroppedTrack(aacTrack, (long)((float)startmilis/23.2), (long)((float)endmilis/23.2));
-                }*/
+                }
 
                     Movie newmovie = new Movie();
                         newmovie.addTrack(countVideo.getTracks().get(0));

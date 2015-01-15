@@ -170,7 +170,7 @@ public class AACTrackImple extends AbstractTrack {
 
         avgBitRate = (int) (8 * dataSize / duration);
 
-        bufferSizeDB = 1536; /* TODO: Calcultate this somehow! */
+        bufferSizeDB = 1536; // Calcultate this somehow!
 
         sampleDescriptionBox = new SampleDescriptionBox();
         AudioSampleEntry audioSampleEntry = new AudioSampleEntry("mp4a");

@@ -30,12 +30,14 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.Container;
 import com.googlecode.mp4parser.FileDataSourceImpl;
 import com.googlecode.mp4parser.authoring.Movie;
 import com.googlecode.mp4parser.authoring.Track;
 import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
 import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
+import com.googlecode.mp4parser.authoring.tracks.AppendTrack;
 import com.googlecode.mp4parser.authoring.tracks.CroppedTrack;
 
 import net.pocketmagic.android.openmxplayer.OpenMXPlayer;
@@ -45,6 +47,7 @@ import net.pocketmagic.android.openmxplayer.PlayerStates;
 import org.jcodec.api.android.SequenceEncoder;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
@@ -74,11 +77,6 @@ public class MainActivity extends ActionBarActivity {
     private static final String TAG = "MediaMuxerTest";
     private static final boolean VERBOSE = false;
     private static final int MAX_SAMPLE_SIZE = 256 * 1024;
-    private static final float LATITUDE = 0.0000f;
-    private static final float LONGITUDE = -180.0f;
-    private static final float BAD_LATITUDE = 91.0f;
-    private static final float BAD_LONGITUDE = -181.0f;
-    private static final float TOLERANCE = 0.0002f;
     private Resources mResources;
     private TextView interval ;
     private SeekBar timeinterval;
@@ -502,20 +500,15 @@ public class MainActivity extends ActionBarActivity {
     Button testmp3;
 
     public void onTestMp3Click(View v) {
-        if (musicPath != null) {
-            File mp3file = new File(musicPath);//"/storage/removable/sdcard1/Wyat.mp3");
-            try {
-                MPEGAudioFrameHeader mpaframe = new MPEGAudioFrameHeader(mp3file);
-                Log.d("MP3Info", mpaframe.toString());
 
+        try {
+            concatWithAudio(musicPath,videoPath);
 
-            } catch (NoMPEGFramesException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+
     }
 
 
@@ -524,38 +517,16 @@ public class MainActivity extends ActionBarActivity {
 
             if (musicPath != null) {
 
-                String video = videopath;//"/storage/removable/sdcard1/ggg.mp4";
-
+                String video =  videopath; //"/storage/removable/sdcard1/ggg.mp4";
 
                 MovieCreator mc = new MovieCreator();
-                // Movie videoin = MovieCreator.build("/storage/removable/sdcard1/outputaaac.mp4");
                 Movie countVideo = mc.build(video);
+
                 AACTrackImple aacTrack = new AACTrackImple(new FileDataSourceImpl(audiopath));//"/storage/removable/sdcard1/strangeclouds.aac"));
                 //MP3TrackImpl mp3 = new MP3TrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/Wyat.mp3"));
-                //  Log.d("mp3Info", mp3.toString());
-                Movie audiomovie = new Movie();
-                audiomovie.addTrack(aacTrack);
 
-
-                Movie[] clips = new Movie[2];
-                clips[0] = countVideo;
-                clips[1] = audiomovie;
-
-                List<Track> videoTracks = new LinkedList<Track>();
-                List<Track> audioTracks = new LinkedList<Track>();
-                long videotrackcount = 0;
-
-                for (Movie movie : clips) {
-                    for (Track track : movie.getTracks()) {
-                        if (track.getHandler().equals("soun"))
-                            audioTracks.add(track);
-
-                        if (track.getHandler().equals("vide"))
-                            videoTracks.add(track);
-                    }
-                }
-
-
+                int videotrackcount = 0;
+                videotrackcount = (int)(long)( (countVideo.getTracks().get(0).getSamples().size()*scale[0] *(1000 /23.2)) );
                 CroppedTrack ct = null;
                 long endmilis =0;
                 long startmilis =0;
@@ -569,34 +540,29 @@ public class MainActivity extends ActionBarActivity {
                     startmilis = 1;
                 }
                 else startmilis = startMiliSc;
-                    //TODO stuff
-                Log.d("value of sliders", "  Min "+startMiliSc + ", Max "+endmilis);
-                Log.d("value of audiotrack total sample size", "Value "+audioTracks.get(0).getSamples().size());
-                videotrackcount = (videoTracks.get(0).getSamples().size() -1 )*(scale[0]);
-                Log.d("scale[0]", "Value "+scale[0]);
-                CroppedTrack dd = new CroppedTrack(audioTracks.get(0), 1, (int)(videotrackcount*1000/23.3)-1);
-                Log.d("value of videotrack /88", "Value "+ videoTracks.get(0).getSamples().size());
-                Log.d("value of sample max to cut", "Value "+ ((int)(videotrackcount*1000/23.3)-1));
-                Log.d("value of sample*88", "Value "+ (videoTracks.get(0).getSamples().size() * 88));
-              /*  if((long)((float)endmilis/24) >=videotrackcount ) {
 
-                     ct = new CroppedTrack(audioTracks.get(0), (long)((float)startmilis/24), videotrackcount);
+                /////cutting
+                Log.d("value of videotrackcunt ", "Value " + videotrackcount + "ending time cont "+ ((int)((float)endmilis/23.2)) );
+                ct = new CroppedTrack(aacTrack, (long)((float)startmilis/23.2), (long)((float)endmilis/23.2));
+               /* if(  (long)((float)endmilis/23.2) - (long)((float)startmilis/23.2 ) >=videotrackcount ) {
+
+                    ct = new CroppedTrack(aacTrack, (long)((float)startmilis/23.2), ( (int)((float)startmilis/23.2) +videotrackcount));
                 }
+
                 else  {
-                   ct = new CroppedTrack(audioTracks.get(0), (long)((float)startmilis/24), (long)((float)endmilis/24));
+
+                    ct = new CroppedTrack(aacTrack, (long)((float)startmilis/23.2), (long)((float)endmilis/23.2));
                 }*/
-                Log.d("value of audiotrack total sample sizeafter crop", "Value "+audioTracks.get(0).getSamples().size());
-                if (videoTracks.size() > 0)
-                    // result.addTrack(new AppendTrack(videoTracks.toArray(new Track[videoTracks.size()])));
 
-                    if (audioTracks.size() > 0 && dd !=null)
-                        //  result.addTrack(new AppendTrack(audioTracks.toArray(new Track[audioTracks.size()])));
+                    Movie newmovie = new Movie();
+                        newmovie.addTrack(countVideo.getTracks().get(0));
+                        newmovie.addTrack(ct);
 
-                        countVideo.addTrack(dd);
+                //Log.d("result video size", "Size:  "+ result.getTracks().size() + " vid samples " + (result.getTracks().get(0).getSamples().size()*scale[0] *1000/23.2) +" vid samples " + (result.getTracks().get(1).getSamples().size() /23.2) );
 
                 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
                 String outputLocation = "/storage/removable/sdcard1/" + "VidGen_"+timeStamp + ".mp4";
-                Container out = new DefaultMp4Builder().build(countVideo);
+                Container out = new DefaultMp4Builder().build(newmovie);
                 FileChannel fc = new RandomAccessFile(String.format(outputLocation), "rw").getChannel();
                 out.writeContainer(fc);
                 fc.close();

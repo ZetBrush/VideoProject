@@ -13,6 +13,7 @@ import android.media.MediaMuxer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -502,6 +503,7 @@ public class MainActivity extends ActionBarActivity {
     public void onTestMp3Click(View v) {
 
         try {
+            videoPath = "/storage/removable/sdcard1/ggg.mp4";
             concatWithAudio(musicPath,videoPath);
 
         } catch (IOException e) {
@@ -514,7 +516,7 @@ public class MainActivity extends ActionBarActivity {
 
 
     private void concatWithAudio(String audiopath, String videopath) throws IOException{
-
+            float sampleindex = 1000*1024/44100;
             if (musicPath != null) {
 
                 String video =  videopath; //"/storage/removable/sdcard1/ggg.mp4";
@@ -526,7 +528,8 @@ public class MainActivity extends ActionBarActivity {
                 //MP3TrackImpl mp3 = new MP3TrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/Wyat.mp3"));
 
                 int videotrackcount = 0;
-                videotrackcount = (int)(long)( (countVideo.getTracks().get(0).getSamples().size()*scale[0] *(1000 /23.2)) );
+                videotrackcount = (int)(long)( (countVideo.getTracks().get(0).getSamples().size()*scale[0] *(43.066)));
+
                 CroppedTrack ct = null;
                 long endmilis =0;
                 long startmilis =0;
@@ -542,17 +545,17 @@ public class MainActivity extends ActionBarActivity {
                 else startmilis = startMiliSc;
 
                 /////cutting
-                Log.d("value of videotrackcunt ", "Value " + videotrackcount + "ending time cont "+ ((int)((float)endmilis/23.2)) );
-                ct = new CroppedTrack(aacTrack, (long)((float)startmilis/23.2), (long)((float)endmilis/23.2));
-               /* if(  (long)((float)endmilis/23.2) - (long)((float)startmilis/23.2 ) >=videotrackcount ) {
+                Log.d("value of videotrackcunt ", "Value " + videotrackcount + "ending time cont "+ ((long)(endmilis/sampleindex)) );
+                ct = new CroppedTrack(aacTrack, (long)(startmilis/sampleindex), (long)(endmilis/sampleindex));
+                if(  (long)(endmilis/sampleindex) - (long)(startmilis/sampleindex ) >=videotrackcount ) {
 
-                    ct = new CroppedTrack(aacTrack, (long)((float)startmilis/23.2), ( (int)((float)startmilis/23.2) +videotrackcount));
+                    ct = new CroppedTrack(aacTrack, (long)(startmilis/sampleindex), ( (long)(startmilis/sampleindex) +videotrackcount));
                 }
 
                 else  {
 
-                    ct = new CroppedTrack(aacTrack, (long)((float)startmilis/23.2), (long)((float)endmilis/23.2));
-                }*/
+                    ct = new CroppedTrack(aacTrack, (long)(startmilis/sampleindex), (long)(endmilis/sampleindex));
+                }
 
                     Movie newmovie = new Movie();
                         newmovie.addTrack(countVideo.getTracks().get(0));
@@ -799,5 +802,21 @@ public class MainActivity extends ActionBarActivity {
         return;
     }
 
+   /* @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try{
+        File dir = new File(Environment.getExternalStorageDirectory()+"/req_images");
+        if (dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                new File(dir, children[i]).delete();
+            }
+        }
 
+    }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }*/
 }

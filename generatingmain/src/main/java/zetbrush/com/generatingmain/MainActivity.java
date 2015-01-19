@@ -1,8 +1,10 @@
 package zetbrush.com.generatingmain;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
@@ -15,6 +17,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -137,9 +140,12 @@ public class MainActivity extends ActionBarActivity {
         if(requestCode==5 && data!=null)
         {
 
-            Uri message=data.getData();
+            musicPath  = AbsolutePathActivity.getPath(MainActivity.this,data.getData());
+
+            //musicPath = data.getData().getPath();
+
             newMusicPath=musicPath;
-            musicPath = message.getPath();
+            musicPath = data.getData().getPath();
             if(musicPath!=null)
             musicNameText.setText(musicPath);
             if(!musicPath.equals(newMusicPath)){
@@ -573,6 +579,7 @@ public class MainActivity extends ActionBarActivity {
     public void makevideoClick(View v) {
         if (name[0]!=null) {
 
+
             if(path!=null) {
                     path = Environment.getExternalStorageDirectory().getPath()+"/req_images";
                 File file = new File( path + "/image_000.png");
@@ -826,7 +833,17 @@ public class MainActivity extends ActionBarActivity {
                 }
 
             }
+
         } catch (Exception e){}
+        finish();
+    }
+
+    public static String getRealPathFromUri(Activity activity, Uri contentUri) {
+        String[] proj = { MediaStore.Images.Media.DATA };
+        Cursor cursor = activity.managedQuery(contentUri, proj, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
     }
 
 }

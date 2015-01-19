@@ -58,7 +58,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                     currentItem.setImageBitmap(arrayList.get(0));
                 }else {
 
-                    //but.setVisibility(View.VISIBLE);
+                    but.setVisibility(View.VISIBLE);
                     currentItem.setImageBitmap(null);
                 }
             }

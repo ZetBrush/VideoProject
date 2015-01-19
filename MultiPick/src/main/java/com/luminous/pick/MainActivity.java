@@ -95,7 +95,7 @@ public class MainActivity extends Activity {
 
         recyclerView = (RecyclerView) findViewById(R.id.rec_test);
         currentImage = (ImageView) findViewById(R.id.image_id);
-
+        btnGalleryPickMul = (Button) findViewById(R.id.btnGalleryPickMul);
         myRecyclerViewAdapter = new MyRecyclerViewAdapter(arrayList, currentImage,btnGalleryPickMul);
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);   // staggered grid
         itemAnimator = new DefaultItemAnimator();
@@ -104,7 +104,7 @@ public class MainActivity extends Activity {
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
         recyclerView.setItemAnimator(itemAnimator);
 
-        btnGalleryPickMul = (Button) findViewById(R.id.btnGalleryPickMul);
+
         btnGalleryPickMul.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -274,7 +274,7 @@ public class MainActivity extends Activity {
         protected void onProgressUpdate(Integer... progress) {
             if (progress[0] % 3 == 0) {
                 if(pd!=null)
-                pd.setMessage("Doing.. "+(((float) progress[0] / arrayList.size()) * 100) + "%");
+                pd.setMessage("Doing.. "+(  (int)(((float) progress[0] / arrayList.size()) * 100)) + "%");
                // Toast.makeText(getApplicationContext(), (((float) progress[0] / arrayList.size()) * 100) + "%", Toast.LENGTH_SHORT).show();
             }
             Log.d("importing images", "image" + progress[0]);

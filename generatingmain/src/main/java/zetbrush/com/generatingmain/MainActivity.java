@@ -815,4 +815,19 @@ public class MainActivity extends ActionBarActivity {
         } catch(Exception e){ }
     }
 
+    @Override
+    public void onBackPressed() {
+        try {
+
+            File dir = new File(Environment.getExternalStorageDirectory() + "/req_images");
+            if (dir.isDirectory()) {
+                String[] children = dir.list();
+                for (int i = 0; i < children.length; i++) {
+                    new File(dir, children[i]).delete();
+                }
+
+            }
+        } catch (Exception e){}
+    }
+
 }

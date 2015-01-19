@@ -53,7 +53,7 @@ public final class R {
         public static final int top_bar=0x7f02000f;
     }
     public static final class id {
-        public static final int action_settings=0x7f090011;
+        public static final int action_settings=0x7f090012;
         public static final int btnGalleryPickMul=0x7f09000c;
         public static final int crop_but=0x7f090002;
         public static final int delete_item=0x7f09000e;
@@ -70,6 +70,7 @@ public final class R {
         public static final int rotate_but=0x7f090001;
         public static final int save_but=0x7f090003;
         public static final int select_all_button=0x7f090006;
+        public static final int selected_count=0x7f090011;
         public static final int tvTitleText=0x7f090010;
     }
     public static final class layout {

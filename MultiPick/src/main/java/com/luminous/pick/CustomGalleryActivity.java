@@ -19,6 +19,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
@@ -85,11 +86,14 @@ public class CustomGalleryActivity extends Activity {
 
     private void init() {
 
+
+
+        TextView txt=(TextView)findViewById(R.id.selected_count);
         handler = new Handler();
 
         RecyclerView recyc = (RecyclerView) findViewById(R.id.gal_rec);
         recyc.setHasFixedSize(true);
-        myAdat = new GalAdapter(this, imageLoader, arr);
+        myAdat = new GalAdapter(this, imageLoader, arr,txt);
         StaggeredGridLayoutManager sglm = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         recyc.setClipToPadding(true);
         RecyclerView.ItemAnimator ra = new DefaultItemAnimator();

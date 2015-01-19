@@ -66,7 +66,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             }
         });
 
-        holder.rotate.setOnClickListener(new View.OnClickListener() {
+        /*holder.rotate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bitmap bitmap = ((BitmapDrawable) holder.icon.getDrawable()).getBitmap();
@@ -75,7 +75,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                 currentItem.setImageBitmap(rotate(bitmap));
                 notifyDataSetChanged();
             }
-        });
+        });*/
     }
 
 
@@ -98,7 +98,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             super(itemView);
             icon = (ImageView) itemView.findViewById(R.id.image_item);
             delete = (Button) itemView.findViewById(R.id.delete_item);
-            rotate=(Button)itemView.findViewById(R.id.rotate_but);
+            //rotate=(Button)itemView.findViewById(R.id.rotate_but);
         }
     }
 

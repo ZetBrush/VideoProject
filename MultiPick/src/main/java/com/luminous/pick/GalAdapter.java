@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
@@ -25,12 +26,16 @@ public class GalAdapter extends RecyclerView.Adapter<GalAdapter.ViewHolder> {
     String [] all_path=null;
     ImageLoader imageLoader;
 
+
+    TextView sel_count;
+
     private boolean isActionMultiplePick;
 
-    public GalAdapter(Context c,ImageLoader imageLoader, ArrayList<Bitmap> arr) {
+    public GalAdapter(Context c,ImageLoader imageLoader, ArrayList<Bitmap> arr,TextView text) {
         infalter = (LayoutInflater) c
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mContext = c;
+        sel_count=text;
         //this.arr=arr;
         this.imageLoader = imageLoader;
     }
@@ -49,8 +54,10 @@ public class GalAdapter extends RecyclerView.Adapter<GalAdapter.ViewHolder> {
             public void onClick(View v) {
                 if (data.get(position).isSeleted) {
                     data.get(position).isSeleted = false;
+                    sel_count.setText(String.valueOf(getSelectedCount()));
                 } else {
                     data.get(position).isSeleted = true;
+                    sel_count.setText(String.valueOf(getSelectedCount()));
                 }
 
                 holder.imgQueueMultiSelected.setSelected(data
@@ -69,10 +76,10 @@ public class GalAdapter extends RecyclerView.Adapter<GalAdapter.ViewHolder> {
                             super.onLoadingStarted(imageUri, view);
                         }
                     });
-           // holder.imgQueue.setImageBitmap(arr.get(position));
+            // holder.imgQueue.setImageBitmap(arr.get(position));
 
-                holder.imgQueueMultiSelected
-                        .setSelected(data.get(position).isSeleted);
+            holder.imgQueueMultiSelected
+                    .setSelected(data.get(position).isSeleted);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -168,5 +175,14 @@ public class GalAdapter extends RecyclerView.Adapter<GalAdapter.ViewHolder> {
         for(int i=0;i<data.size();i++){
             data.get(i).isSeleted=true;
         }
+    }
+    public int getSelectedCount(){
+        int cnt=0;
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).isSeleted) {
+                cnt++;
+            }
+        }
+        return cnt;
     }
 }

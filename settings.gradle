@@ -1,2 +1,2 @@
-include ':app', ':generatingmain', ':oMXPlayer',  ':MultiImPick'
+include ':app', ':generatingmain', ':oMXPlayer', ':MultiPick'
 

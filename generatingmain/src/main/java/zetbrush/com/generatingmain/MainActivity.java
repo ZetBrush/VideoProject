@@ -35,10 +35,8 @@ import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.Container;
 import com.googlecode.mp4parser.FileDataSourceImpl;
 import com.googlecode.mp4parser.authoring.Movie;
-import com.googlecode.mp4parser.authoring.Track;
 import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
 import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
-import com.googlecode.mp4parser.authoring.tracks.AppendTrack;
 import com.googlecode.mp4parser.authoring.tracks.CroppedTrack;
 
 import net.pocketmagic.android.openmxplayer.OpenMXPlayer;
@@ -48,7 +46,6 @@ import net.pocketmagic.android.openmxplayer.PlayerStates;
 import org.jcodec.api.android.SequenceEncoder;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
@@ -56,8 +53,6 @@ import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends ActionBarActivity {
@@ -104,7 +99,7 @@ public class MainActivity extends ActionBarActivity {
         progress = (TextView) findViewById(R.id.progress);
         playButton = (Button) findViewById(R.id.playButtn);
         seekbar = (SeekBar) findViewById(R.id.seekbar);
-        testmp3 = (Button)findViewById(R.id.TestMp3);
+        //testmp3 = (Button)findViewById(R.id.TestMp3);
         pickMusicbtn = (Button)findViewById(R.id.pickMusicbtn);
         musicNameText = (TextView)findViewById(R.id.musicNameText);
         musicTimeText = (TextView)findViewById(R.id.musicTimeText);
@@ -255,9 +250,9 @@ public class MainActivity extends ActionBarActivity {
         }
 
         protected void onPostExecute(Long result) {
-            progress.setText("Done!");
+           /* progress.setText("Done!");
             File fil = new File(videoPath);
-           boolean dele = fil.delete();
+            boolean dele = fil.delete();*/
             videoPath = null;
             outputName=null;
             name[0]=null;
@@ -498,12 +493,11 @@ public class MainActivity extends ActionBarActivity {
 
     ////////////////////////////TEST MP3 ///////////////////////////////
 
-    Button testmp3;
+   /* Button testmp3;
 
     public void onTestMp3Click(View v) {
 
         try {
-            videoPath = "/storage/removable/sdcard1/ggg.mp4";
             concatWithAudio(musicPath,videoPath);
 
         } catch (IOException e) {
@@ -511,67 +505,64 @@ public class MainActivity extends ActionBarActivity {
         }
 
 
-    }
+    }*/
 
 
 
     private void concatWithAudio(String audiopath, String videopath) throws IOException{
-            float sampleindex = 1000*1024/44100;
-            if (musicPath != null) {
 
-                String video =  videopath; //"/storage/removable/sdcard1/ggg.mp4";
 
-                MovieCreator mc = new MovieCreator();
-                Movie countVideo = mc.build(video);
+        if (musicPath != null) {
 
-                AACTrackImple aacTrack = new AACTrackImple(new FileDataSourceImpl(audiopath));//"/storage/removable/sdcard1/strangeclouds.aac"));
-                //MP3TrackImpl mp3 = new MP3TrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/Wyat.mp3"));
+            String video = videopath;// Environment.getExternalStorageDirectory().getPath()+"/req_images/xcgh.mp4";
 
-                int videotrackcount = 0;
-                videotrackcount = (int)(long)( (countVideo.getTracks().get(0).getSamples().size()*scale[0] *(43.066)));
+            MovieCreator mc = new MovieCreator();
+            Movie countVideo = mc.build(video);
 
-                CroppedTrack ct = null;
-                long endmilis =0;
-                long startmilis =0;
-                if(endMiliSc == null) {
-                   endmilis = videotrackcount;
-                }
-                else
-                    endmilis=endMiliSc;
+            AACTrackImple aacTrack = new AACTrackImple(new FileDataSourceImpl(audiopath));//"/storage/removable/sdcard1/strangeclouds.aac"));
+            //MP3TrackImpl mp3 = new MP3TrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/Wyat.mp3"));
+            IsoFile isoFile = new IsoFile(video);
+            double videoLengthInSeconds = (double)
+                    isoFile.getMovieBox().getMovieHeaderBox().getDuration() /
+                    isoFile.getMovieBox().getMovieHeaderBox().getTimescale();
 
-                if(startMiliSc == null) {
-                    startmilis = 1;
-                }
-                else startmilis = startMiliSc;
+            CroppedTrack ct = null;
+            double endmilis =0;
+            double startmilis =0;
 
-                /////cutting
-                Log.d("value of videotrackcunt ", "Value " + videotrackcount + "ending time cont "+ ((long)(endmilis/sampleindex)) );
-                ct = new CroppedTrack(aacTrack, (long)(startmilis/sampleindex), (long)(endmilis/sampleindex));
-                if(  (long)(endmilis/sampleindex) - (long)(startmilis/sampleindex ) >=videotrackcount ) {
+                endmilis=endMiliSc/1000;
 
-                    ct = new CroppedTrack(aacTrack, (long)(startmilis/sampleindex), ( (long)(startmilis/sampleindex) +videotrackcount));
-                }
-
-                else  {
-
-                    ct = new CroppedTrack(aacTrack, (long)(startmilis/sampleindex), (long)(endmilis/sampleindex));
-                }
-
-                    Movie newmovie = new Movie();
-                        newmovie.addTrack(countVideo.getTracks().get(0));
-                        newmovie.addTrack(ct);
-
-                //Log.d("result video size", "Size:  "+ result.getTracks().size() + " vid samples " + (result.getTracks().get(0).getSamples().size()*scale[0] *1000/23.2) +" vid samples " + (result.getTracks().get(1).getSamples().size() /23.2) );
-
-                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-                String outputLocation = "/storage/removable/sdcard1/" + "VidGen_"+timeStamp + ".mp4";
-                Container out = new DefaultMp4Builder().build(newmovie);
-                FileChannel fc = new RandomAccessFile(String.format(outputLocation), "rw").getChannel();
-                out.writeContainer(fc);
-                fc.close();
+            if(startMiliSc == null) {
+                startmilis = 1;
             }
-            else {Toast.makeText(this,"No music is selected",Toast.LENGTH_SHORT).show();}
+            else startmilis = startMiliSc/1000;
+
+            if(endmilis-startmilis>videoLengthInSeconds){
+                endmilis = startmilis+videoLengthInSeconds;
+            }
+
+            /////cutting
+           // Log.d("value of videotrackcunt ", "Value " + videotrackcount + "ending time cont "+ ((int)((float)endmilis/23.2)) );
+
+             ct = new CroppedTrack(aacTrack, (long)(startmilis*43.066), (long)(endmilis*43.066));
+
+
+
+            Movie newmovie = new Movie();
+            newmovie.addTrack(countVideo.getTracks().get(0));
+            newmovie.addTrack(ct);
+
+            //Log.d("result video size", "Size:  "+ result.getTracks().size() + " vid samples " + (result.getTracks().get(0).getSamples().size()*scale[0] *1000/23.2) +" vid samples " + (result.getTracks().get(1).getSamples().size() /23.2) );
+
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            String outputLocation = Environment.getExternalStorageDirectory().getPath()+ "/VidGen_"+timeStamp + ".mp4";
+            Container out = new DefaultMp4Builder().build(newmovie);
+            FileChannel fc = new RandomAccessFile(String.format(outputLocation), "rw").getChannel();
+            out.writeContainer(fc);
+            fc.close();
         }
+        else {Toast.makeText(this,"No music is selected",Toast.LENGTH_SHORT).show();}
+    }
 
 
         ////////////
@@ -580,7 +571,7 @@ public class MainActivity extends ActionBarActivity {
         if (name[0]!=null) {
 
             if(path!=null) {
-
+                    path = Environment.getExternalStorageDirectory().getPath()+"/req_images";
                 File file = new File( path + "/image_000.png");
 
                 String digits = file.getName().replaceAll("\\D+(\\d+)\\D+",
@@ -802,21 +793,5 @@ public class MainActivity extends ActionBarActivity {
         return;
     }
 
-   /* @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        try{
-        File dir = new File(Environment.getExternalStorageDirectory()+"/req_images");
-        if (dir.isDirectory()) {
-            String[] children = dir.list();
-            for (int i = 0; i < children.length; i++) {
-                new File(dir, children[i]).delete();
-            }
-        }
 
-    }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }*/
 }

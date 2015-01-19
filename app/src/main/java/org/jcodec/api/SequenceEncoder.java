@@ -1,23 +1,11 @@
 package org.jcodec.api;
 
-import com.coremedia.iso.boxes.Container;
-import com.coremedia.iso.boxes.sampleentry.SampleEntry;
-import com.googlecode.mp4parser.FileDataSourceImpl;
-import com.googlecode.mp4parser.authoring.Movie;
-import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
-import com.googlecode.mp4parser.authoring.tracks.AACTrackImpl;
-import com.googlecode.mp4parser.authoring.tracks.H264TrackImpl;
-
-
-
 import org.jcodec.codecs.h264.H264Encoder;
 import org.jcodec.codecs.h264.H264Utils;
 import org.jcodec.common.NIOUtils;
 import org.jcodec.common.SeekableByteChannel;
 import org.jcodec.common.model.ColorSpace;
 import org.jcodec.common.model.Picture;
-import org.jcodec.containers.mkv.MKVDemuxer;
-import org.jcodec.containers.mkv.MKVMuxer;
 import org.jcodec.containers.mp4.Brand;
 import org.jcodec.containers.mp4.MP4Packet;
 import org.jcodec.containers.mp4.TrackType;
@@ -27,11 +15,8 @@ import org.jcodec.scale.ColorUtil;
 import org.jcodec.scale.Transform;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 
 /**
@@ -109,20 +94,24 @@ public class SequenceEncoder {
 
 
         // Add packet to video track
-        outTrack.addFrame(new MP4Packet(
-                result,
-                frameNo*framesec,
-                1,
-                framesec,
-                frameNo,
-                true,
-                null,
-                frameNo*framesec,
-                0));
 
-        frameNo++;
+            if (framesec ==0)
+                framesec =1;
+
+            outTrack.addFrame(new MP4Packet(
+                    result,
+                    frameNo * framesec,
+                    1,
+                   framesec,
+                    frameNo,
+                    true,
+                    null,
+                  frameNo * framesec,
+                    0));
+
+            frameNo++;
+
     }
-
     public void finish() throws IOException {
         // Push saved SPS/PPS to a special storage in MP4
 

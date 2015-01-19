@@ -27,10 +27,12 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     private ArrayList<Bitmap> arrayList;
     private ImageView currentItem;
+    private Button but;
 
-    public MyRecyclerViewAdapter(ArrayList<Bitmap> arr,ImageView img) {
+    public MyRecyclerViewAdapter(ArrayList<Bitmap> arr,ImageView img,Button b) {
         arrayList = arr;
         currentItem=img;
+        but=b;
     }
 
     @Override
@@ -55,6 +57,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                 if(arrayList.size()>0) {
                     currentItem.setImageBitmap(arrayList.get(0));
                 }else {
+
+                    //but.setVisibility(View.VISIBLE);
                     currentItem.setImageBitmap(null);
                 }
             }

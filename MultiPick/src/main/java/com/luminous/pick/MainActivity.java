@@ -96,7 +96,7 @@ public class MainActivity extends Activity {
         recyclerView = (RecyclerView) findViewById(R.id.rec_test);
         currentImage = (ImageView) findViewById(R.id.image_id);
 
-        myRecyclerViewAdapter = new MyRecyclerViewAdapter(arrayList, currentImage);
+        myRecyclerViewAdapter = new MyRecyclerViewAdapter(arrayList, currentImage,btnGalleryPickMul);
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);   // staggered grid
         itemAnimator = new DefaultItemAnimator();
 
@@ -130,7 +130,6 @@ public class MainActivity extends Activity {
 
                     intent = new Intent("android.intent.action.videogen");
                     intent.putExtra("myimagespath", myDir.toString());
-
                     //startActivity(intent);
                     //finish();
                 } else {
@@ -189,7 +188,7 @@ public class MainActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "" + all_path.length, Toast.LENGTH_SHORT).show();
                 //myRecyclerViewAdapter.notifyDataSetChanged();
             }
-            //btnGalleryPickMul.setVisibility(View.GONE);
+            btnGalleryPickMul.setVisibility(View.GONE);
             next.setVisibility(View.VISIBLE);
         }
     }
@@ -285,6 +284,11 @@ public class MainActivity extends Activity {
             Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_SHORT).show();
             if (pd!=null) {
                 pd.dismiss();
+                arr1.removeAll(arr1);
+                arrayList.removeAll(arrayList);
+                myRecyclerViewAdapter.notifyDataSetChanged();
+                currentImage.setImageBitmap(null);
+                btnGalleryPickMul.setVisibility(View.VISIBLE);
                 startActivity(intent);
 
             }
@@ -308,37 +312,5 @@ public class MainActivity extends Activity {
             pd.show();
 
         }
-    }
-
-    public static Bitmap decodeSampledBitmapFromPath(String path, int reqWidth,
-                                                     int reqHeight) {
-
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(path, options);
-
-        options.inSampleSize = calculateInSampleSize(options, reqWidth,
-                reqHeight);
-        // Decode bitmap with inSampleSize set
-        options.inJustDecodeBounds = false;
-        Bitmap bmp = BitmapFactory.decodeFile(path, options);
-        bmp = Utils.scaleCenterCrop(bmp, 640, 640);
-        return bmp;
-    }
-
-    public static int calculateInSampleSize(BitmapFactory.Options options,
-                                            int reqWidth, int reqHeight) {
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        int inSampleSize = 1;
-
-        if (height > reqHeight || width > reqWidth) {
-            if (width > height) {
-                inSampleSize = Math.round((float) height / (float) reqHeight);
-            } else {
-                inSampleSize = Math.round((float) width / (float) reqWidth);
-            }
-        }
-        return inSampleSize;
     }
 }

@@ -1,0 +1,6 @@
+/Users/intern/Downloads/MultipleImagePick-master1/app/build/intermediates/classes/debug
+/Users/intern/Downloads/MultipleImagePick-master1/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.2-2bb0ea5d4f7b8521116516ede3ac116717cd3d28.jar
+/Users/intern/Downloads/MultipleImagePick-master1/app/build/intermediates/pre-dexed/debug/universal-image-loader-1.9.0-4cc69452782a344fd7c2e35bcbdc68708c7d0e7a.jar
+/Users/intern/Downloads/MultipleImagePick-master1/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.2-5436c05ae90f24fb603f6a8a61e18c05ebe32ad5.jar
+/Users/intern/Downloads/MultipleImagePick-master1/app/build/intermediates/pre-dexed/debug/classes-02730604984e851238d0aa845239f8f19b0b1e72.jar
+/Users/intern/Downloads/MultipleImagePick-master1/app/build/intermediates/pre-dexed/debug/classes-9cafb809a54fd802964a98f78137d053ef2b0c18.jar

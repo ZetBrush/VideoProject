@@ -1,6 +1,0 @@
-/Users/intern/Downloads/VideoGenerationJC/MultiImPick/build/intermediates/classes/debug
-/Users/intern/Downloads/VideoGenerationJC/MultiImPick/build/intermediates/pre-dexed/debug/support-annotations-21.0.2-2bb0ea5d4f7b8521116516ede3ac116717cd3d28.jar
-/Users/intern/Downloads/VideoGenerationJC/MultiImPick/build/intermediates/pre-dexed/debug/universal-image-loader-1.9.0-a595af6e30b4aa12728e1c375f4013e20e5a1079.jar
-/Users/intern/Downloads/VideoGenerationJC/MultiImPick/build/intermediates/pre-dexed/debug/internal_impl-21.0.2-eb0ce9ab0ccaa2fa8b2626fe4720f015ef61409a.jar
-/Users/intern/Downloads/VideoGenerationJC/MultiImPick/build/intermediates/pre-dexed/debug/classes-ac91384a2312791d642703ccfc4568482a63fc6e.jar
-/Users/intern/Downloads/VideoGenerationJC/MultiImPick/build/intermediates/pre-dexed/debug/classes-dbb7943f897a68aa6b1827c050515d5b58260576.jar

@@ -21,9 +21,9 @@ import java.io.IOException;
  */
 public class Utils {
 
-    public static Bitmap currectlyOrientation(String file) throws IOException {
+    public static Bitmap currectlyOrientation(String file,int x,int y) throws IOException {
 
-        Bitmap bm = decodeSampledBitmapFromResource(new File(file), 130, 130);
+        Bitmap bm = decodeSampledBitmapFromResource(new File(file), x, y);
         ExifInterface exif = null;
         try {
             exif = new ExifInterface(file);

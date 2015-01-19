@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/image_item"
@@ -15,12 +15,11 @@
         android:layout_gravity="left|top"
         android:background="@drawable/del"/>
 
-    <Button
+    <!--<Button
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:id="@+id/rotate_but"
         android:layout_gravity="right|top"
         android:layout_marginRight="2dp"
-        android:background="@drawable/rot"/>
-
+        android:background="@drawable/rot"/>-->
 </FrameLayout>

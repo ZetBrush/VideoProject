@@ -562,7 +562,6 @@ public class MainActivity extends ActionBarActivity {
             out.writeContainer(fc);
             fc.close();
 
-
             finish();
         }
         else {Toast.makeText(this,"No music is selected",Toast.LENGTH_SHORT).show();}

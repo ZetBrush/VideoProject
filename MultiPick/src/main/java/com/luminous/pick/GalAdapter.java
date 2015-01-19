@@ -54,10 +54,10 @@ public class GalAdapter extends RecyclerView.Adapter<GalAdapter.ViewHolder> {
             public void onClick(View v) {
                 if (data.get(position).isSeleted) {
                     data.get(position).isSeleted = false;
-                    sel_count.setText(String.valueOf(getSelectedCount()));
+                    sel_count.setText("Selected: "+String.valueOf(getSelectedCount()));
                 } else {
                     data.get(position).isSeleted = true;
-                    sel_count.setText(String.valueOf(getSelectedCount()));
+                    sel_count.setText("Selected: "+String.valueOf(getSelectedCount()));
                 }
 
                 holder.imgQueueMultiSelected.setSelected(data

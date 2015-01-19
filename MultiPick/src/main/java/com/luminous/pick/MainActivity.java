@@ -131,6 +131,8 @@ public class MainActivity extends Activity {
                     intent = new Intent("android.intent.action.videogen");
                     intent.putExtra("myimagespath", myDir.toString());
 
+
+
                     //startActivity(intent);
                     //finish();
                 } else {
@@ -285,6 +287,10 @@ public class MainActivity extends Activity {
             Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_SHORT).show();
             if (pd!=null) {
                 pd.dismiss();
+                arr1.removeAll(arr1);
+                arrayList.removeAll(arrayList);
+                myRecyclerViewAdapter.notifyDataSetChanged();
+                currentImage.setImageBitmap(null);
                 startActivity(intent);
 
             }

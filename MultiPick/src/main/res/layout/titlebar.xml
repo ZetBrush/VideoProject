@@ -26,10 +26,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/selected_count"
-        android:textSize="25dp"
-        android:layout_marginTop="6dp"
+        android:textSize="20dp"
+        android:layout_marginTop="8dp"
         android:layout_marginLeft="6dp"
-        android:text="0"
+        android:text="Selected: 0"
         android:visibility="visible"/>
 
 </FrameLayout>

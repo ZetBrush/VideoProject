@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -54,8 +55,9 @@ public class MainActivity extends Activity {
     private int[] firstItemPos;
     private int[] lastItemPos;
     private String[] all_path;
-
+    Intent intent=null;
     GalAdapter adat;
+     ProgressDialog pd;
 
     String root = Environment.getExternalStorageDirectory().toString();
     File myDir = new File(root + "/req_images");
@@ -126,10 +128,10 @@ public class MainActivity extends Activity {
                     SaveToMemary saveToMemary = new SaveToMemary();
                     saveToMemary.execute(all_path);
 
-                    Intent intent = new Intent("android.intent.action.videogen");
+                    intent = new Intent("android.intent.action.videogen");
                     intent.putExtra("myimagespath", myDir.toString());
 
-                    startActivity(intent);
+                    //startActivity(intent);
                     //finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "you have no image", Toast.LENGTH_SHORT).show();
@@ -234,6 +236,7 @@ public class MainActivity extends Activity {
     }
 
     private class SaveToMemary extends AsyncTask<String [], Integer, Void> {
+
         protected Void doInBackground(String [] ... path) {
 
             android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
@@ -271,13 +274,20 @@ public class MainActivity extends Activity {
 
         protected void onProgressUpdate(Integer... progress) {
             if (progress[0] % 3 == 0) {
-                Toast.makeText(getApplicationContext(), (((float) progress[0] / arrayList.size()) * 100) + "%", Toast.LENGTH_SHORT).show();
+                if(pd!=null)
+                pd.setMessage("Doing.. "+(((float) progress[0] / arrayList.size()) * 100) + "%");
+               // Toast.makeText(getApplicationContext(), (((float) progress[0] / arrayList.size()) * 100) + "%", Toast.LENGTH_SHORT).show();
             }
             Log.d("importing images", "image" + progress[0]);
         }
 
         protected void onPostExecute(Void result) {
             Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_SHORT).show();
+            if (pd!=null) {
+                pd.dismiss();
+                startActivity(intent);
+
+            }
         }
 
         @Override
@@ -290,6 +300,13 @@ public class MainActivity extends Activity {
                     new File(dir, children[i]).delete();
                 }
             }
+            pd= new ProgressDialog(MainActivity.this);
+            pd.setTitle("Processing...");
+            pd.setMessage("Please wait.");
+            pd.setCancelable(false);
+            pd.setIndeterminate(true);
+            pd.show();
+
         }
     }
 

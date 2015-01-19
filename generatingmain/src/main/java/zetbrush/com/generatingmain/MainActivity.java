@@ -312,6 +312,7 @@ public class MainActivity extends ActionBarActivity {
                 mux.execute(musicPath,videoPath,"muxing");
 
             }
+            else finish();
 
         }
 
@@ -555,11 +556,14 @@ public class MainActivity extends ActionBarActivity {
             //Log.d("result video size", "Size:  "+ result.getTracks().size() + " vid samples " + (result.getTracks().get(0).getSamples().size()*scale[0] *1000/23.2) +" vid samples " + (result.getTracks().get(1).getSamples().size() /23.2) );
 
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-            String outputLocation = Environment.getExternalStorageDirectory().getPath()+ "/VidGen_"+timeStamp + ".mp4";
+            String outputLocation = Environment.getExternalStorageDirectory().getPath()+ "/VidGen_"+name[0] + ".mp4";
             Container out = new DefaultMp4Builder().build(newmovie);
             FileChannel fc = new RandomAccessFile(String.format(outputLocation), "rw").getChannel();
             out.writeContainer(fc);
             fc.close();
+
+
+            finish();
         }
         else {Toast.makeText(this,"No music is selected",Toast.LENGTH_SHORT).show();}
     }
@@ -793,5 +797,22 @@ public class MainActivity extends ActionBarActivity {
         return;
     }
 
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        try{
+
+            File dir = new File(Environment.getExternalStorageDirectory()+"/req_images");
+            if (dir.isDirectory()) {
+                String[] children = dir.list();
+                for (int i = 0; i < children.length; i++) {
+                    new File(dir, children[i]).delete();
+                }
+
+            }
+
+
+        } catch(Exception e){ }
+    }
 
 }

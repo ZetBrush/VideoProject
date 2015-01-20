@@ -2,95 +2,11 @@
 <items version="2" >
 
     <item
-        jar="/Users/intern/Documents/adt-bundle-mac-x86_64-20140624/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.0/support-annotations-21.0.0.jar"
+        jar="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/exploded-aar/VideoGenerationJC/app/unspecified/classes.jar"
         jumboMode="false"
         revision="20.0.0"
-        sha1="1a578b9607b36266c63d43a4fa0ab5664dbe911e">
-        <dex dex="/Users/intern/Downloads/VidGen/VidGen/generatingmain/build/intermediates/pre-dexed/debug/support-annotations-21.0.0-2a968ebb3a4b4e979b81012b66bc444b77fb48ad.jar" />
-    </item>
-    <item
-        jar="/Users/intern/Downloads/VidGen/VidGen/generatingmain/build/intermediates/exploded-aar/VidGen/app/unspecified/libs/aspectjrt-1.8.4.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="d4f6592d1114c0cd0c82796c164df7203117e708">
-        <dex dex="/Users/intern/Downloads/VidGen/VidGen/generatingmain/build/intermediates/pre-dexed/debug/aspectjrt-1.8.4-526c6ae0b8ce07f8bc2d773cbb19a2e8e080dd32.jar" />
-    </item>
-    <item
-        jar="/Users/intern/Documents/adt-bundle-mac-x86_64-20140624/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.2/support-annotations-21.0.2.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="99373741f99a0556ee293c41e8faa1ca3ae8a4e6">
-        <dex dex="/Users/intern/Downloads/VidGen/VidGen/MultiPick/build/intermediates/pre-dexed/debug/support-annotations-21.0.2-2bb0ea5d4f7b8521116516ede3ac116717cd3d28.jar" />
-    </item>
-    <item
-        jar="/Users/intern/Downloads/VidGen/VidGen/generatingmain/build/intermediates/exploded-aar/VidGen/oMXPlayer/unspecified/classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="bc2da66ff12468b1834c7691422919c1a08333d1">
-        <dex dex="/Users/intern/Downloads/VidGen/VidGen/generatingmain/build/intermediates/pre-dexed/debug/classes-a3bdd912361c859fbd17bcf6b3916832b70043f9.jar" />
-    </item>
-    <item
-        jar="/Users/intern/Downloads/VidGen/VidGen/generatingmain/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/libs/internal_impl-21.0.0.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="1609e6d42d0480b0f4188e2c29f75388fa12a8f0">
-        <dex dex="/Users/intern/Downloads/VidGen/VidGen/generatingmain/build/intermediates/pre-dexed/debug/internal_impl-21.0.0-460c9fb67ca7bb52463d7f4ed7e368c79918e942.jar" />
-    </item>
-    <item
-        jar="/Users/intern/Downloads/VidGen/VidGen/MultiPick/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="d1bf02de1c56d942e7a9d093b8610ba1ef4128e3">
-        <dex dex="/Users/intern/Downloads/VidGen/VidGen/MultiPick/build/intermediates/pre-dexed/debug/classes-bc0eff953540a561569f2ef68526a8b6fc929811.jar" />
-    </item>
-    <item
-        jar="/Users/intern/Downloads/VidGen/VidGen/MultiPick/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.2/classes.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="4796f18d3750bf2bfa078407a94a7f9db35b440d">
-        <dex dex="/Users/intern/Downloads/VidGen/VidGen/MultiPick/build/intermediates/pre-dexed/debug/classes-36d89069e2cd0a77d528b711a09d2353217723de.jar" />
-    </item>
-    <item
-        jar="/Users/intern/Downloads/VidGen/VidGen/MultiPick/libs/universal-image-loader-1.9.0.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="f667a2f4f27542fe11a6781f5f7ac572d27afcec">
-        <dex dex="/Users/intern/Downloads/VidGen/VidGen/MultiPick/build/intermediates/pre-dexed/debug/universal-image-loader-1.9.0-a3b0c9c6a3f456e3177042aa7cea8302d4d15eb9.jar" />
-    </item>
-    <item
-        jar="/Users/intern/Downloads/VidGen/VidGen/generatingmain/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.0/classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="95fd37732ec852e99f07eeb516a3650172f1d136">
-        <dex dex="/Users/intern/Downloads/VidGen/VidGen/generatingmain/build/intermediates/pre-dexed/debug/classes-024f7753ab33d0c8f79140d21fa3a5610abff92c.jar" />
-    </item>
-    <item
-        jar="/Users/intern/Downloads/VidGen/VidGen/generatingmain/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.0/classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="686344a780033e4ba22b926cd225f8d4941247e6">
-        <dex dex="/Users/intern/Downloads/VidGen/VidGen/generatingmain/build/intermediates/pre-dexed/debug/classes-de1fc373f5623b62e074abf9c68b59b76e07f27e.jar" />
-    </item>
-    <item
-        jar="/Users/intern/Downloads/VidGen/VidGen/generatingmain/build/intermediates/exploded-aar/VidGen/app/unspecified/libs/isoparser-1.0.5.4.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="232e5130b709e6cc2ac4c4e5c5212a89929ab592">
-        <dex dex="/Users/intern/Downloads/VidGen/VidGen/generatingmain/build/intermediates/pre-dexed/debug/isoparser-1.0.5.4-e1d4f71b2492e4d3d7331f39d5af202e282a15d0.jar" />
-    </item>
-    <item
-        jar="/Users/intern/Downloads/VidGen/VidGen/MultiPick/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.2/libs/internal_impl-21.0.2.jar"
-        jumboMode="false"
-        revision="21.1.1"
-        sha1="962e8b12569c56dbdcf8367eb4eac8bb129cd18f">
-        <dex dex="/Users/intern/Downloads/VidGen/VidGen/MultiPick/build/intermediates/pre-dexed/debug/internal_impl-21.0.2-4dce71af24865ee7e346d310592fbd9bdecadc4f.jar" />
-    </item>
-    <item
-        jar="/Users/intern/Downloads/VidGen/VidGen/generatingmain/build/intermediates/exploded-aar/VidGen/app/unspecified/classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="910aac053e9257d29d32b9c446ca7ae7a4f56f92">
-        <dex dex="/Users/intern/Downloads/VidGen/VidGen/generatingmain/build/intermediates/pre-dexed/debug/classes-53aec093280782c0c936cd8e447c871752ecc37a.jar" />
+        sha1="ebdc53fdc3dba2630d8e8af8a7ba7fd68859f35f">
+        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/classes-962095e3cc7599f3065013909022a70ea9664cb1.jar" />
     </item>
 
 </items>

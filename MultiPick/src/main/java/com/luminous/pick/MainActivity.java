@@ -6,11 +6,13 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -18,6 +20,7 @@ import android.graphics.Color;
 import android.graphics.RectF;
 import android.os.*;
 import android.os.Process;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -52,12 +55,18 @@ public class MainActivity extends Activity {
     private ArrayList<Bitmap> arr1 = new ArrayList<Bitmap>();
     private ImageLoader imageLoader;
 
+    HashMap<String, String> hash = new HashMap<>();
+
     private int[] firstItemPos;
     private int[] lastItemPos;
     private String[] all_path;
-    Intent intent=null;
+    Intent intent = null;
     GalAdapter adat;
-     ProgressDialog pd;
+    ProgressDialog pd;
+
+    SharedPreferences sharedPreferences;
+
+    int arrayLength=0;
 
     String root = Environment.getExternalStorageDirectory().toString();
     File myDir = new File(root + "/req_images");
@@ -89,14 +98,17 @@ public class MainActivity extends Activity {
 
     private void init() {
 
-        TextView txt=(TextView)findViewById(R.id.selected_count);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        TextView txt = (TextView) findViewById(R.id.selected_count);
         txt.setVisibility(View.GONE);
-        adat = new GalAdapter(getApplicationContext(), imageLoader, arrayList,txt);
+        adat = new GalAdapter(getApplicationContext(), imageLoader, arrayList, txt);
 
         recyclerView = (RecyclerView) findViewById(R.id.rec_test);
         currentImage = (ImageView) findViewById(R.id.image_id);
 
-        myRecyclerViewAdapter = new MyRecyclerViewAdapter(arrayList, currentImage,btnGalleryPickMul);
+        btnGalleryPickMul = (Button) findViewById(R.id.btnGalleryPickMul);
+        myRecyclerViewAdapter = new MyRecyclerViewAdapter(arrayList, currentImage, btnGalleryPickMul);
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);   // staggered grid
         itemAnimator = new DefaultItemAnimator();
 
@@ -104,7 +116,7 @@ public class MainActivity extends Activity {
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
         recyclerView.setItemAnimator(itemAnimator);
 
-        btnGalleryPickMul = (Button) findViewById(R.id.btnGalleryPickMul);
+
         btnGalleryPickMul.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -123,11 +135,8 @@ public class MainActivity extends Activity {
                 if (arrayList.size() > 0) {
 
                     myDir.mkdirs();
-
-
                     SaveToMemary saveToMemary = new SaveToMemary();
                     saveToMemary.execute(all_path);
-
                     intent = new Intent("android.intent.action.videogen");
                     intent.putExtra("myimagespath", myDir.toString());
                     //startActivity(intent);
@@ -135,11 +144,11 @@ public class MainActivity extends Activity {
                 } else {
                     Toast.makeText(getApplicationContext(), "you have no image", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
 
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -168,10 +177,13 @@ public class MainActivity extends Activity {
         }*/
 
         if (requestCode == 200 && resultCode == Activity.RESULT_OK) {
+
+            arrayLength=sharedPreferences.getInt("length",0);
+
             all_path = data.getStringArrayExtra("all_path");
+            Toast.makeText(getApplicationContext(), "" + all_path.length, Toast.LENGTH_SHORT).show();
 
             if (all_path.length > 0) {
-
 
                 System.gc();
                 Bitmap bm = Bitmap.createBitmap(10, 10, Bitmap.Config.RGB_565);
@@ -188,7 +200,7 @@ public class MainActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "" + all_path.length, Toast.LENGTH_SHORT).show();
                 //myRecyclerViewAdapter.notifyDataSetChanged();
             }
-            btnGalleryPickMul.setVisibility(View.GONE);
+            //btnGalleryPickMul.setVisibility(View.GONE);
             next.setVisibility(View.VISIBLE);
         }
     }
@@ -199,11 +211,12 @@ public class MainActivity extends Activity {
             if (path[0].length > 0) {
                 for (int i = 0; i < path[0].length; i++) {
 
+                    //hash.put(String.valueOf(i), String.valueOf(path[0][i]));
                     //Bitmap bitmap = BitmapFactory.decodeFile(path[0][i]);
                     //Bitmap bitmap=decodeSampledBitmapFromPath(path[0][i],640,640);
                     Bitmap bitmap = null;
                     try {
-                        bitmap = Utils.currectlyOrientation(path[0][i],300,300);
+                        bitmap = Utils.currectlyOrientation(path[0][i], 300, 300);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -224,25 +237,30 @@ public class MainActivity extends Activity {
             if (progress[0] == 0) {
                 currentImage.setImageBitmap(arr1.get(0));
             }
-
-            arrayList.set(progress[0], arr1.get(progress[0]));
+            /*if (arrayList.size() > 0) {
+                arrayList.add(arr1.get(progress[0]));
+            } else {*/
+                arrayList.set(progress[0]+arrayLength, arr1.get(progress[0]));
+            //}
             myRecyclerViewAdapter.notifyDataSetChanged();
+
         }
 
         protected void onPostExecute(ArrayList<Bitmap> result) {
+            arr1.removeAll(arr1);
+
             Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private class SaveToMemary extends AsyncTask<String [], Integer, Void> {
+    private class SaveToMemary extends AsyncTask<String[], Integer, Void> {
 
-        protected Void doInBackground(String [] ... path) {
+        protected Void doInBackground(String[]... path) {
 
             android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
             Log.d("arralist 1 ", " " + arrayList.size());
 
-
-            for (int i = 0; i<path[0].length; i++) {
+            for (int i = 0; i < path[0].length; i++) {
 
                 String fname = "image_" + String.format("%03d", i) + ".png";
 
@@ -252,8 +270,8 @@ public class MainActivity extends Activity {
                     Bitmap bitmap = null;
                     if (file.exists())
                         file.delete();
-                    bitmap = Utils.currectlyOrientation(path[0][i],600,600);
-                    bitmap=Utils.scaleCenterCrop(bitmap,700,700);
+                    bitmap = Utils.currectlyOrientation(path[0][i], 600, 600);
+                    bitmap = Utils.scaleCenterCrop(bitmap, 700, 700);
                     FileOutputStream out = new FileOutputStream(file);
 
                     bitmap.compress(Bitmap.CompressFormat.PNG, 50, out);
@@ -273,16 +291,16 @@ public class MainActivity extends Activity {
 
         protected void onProgressUpdate(Integer... progress) {
             if (progress[0] % 3 == 0) {
-                if(pd!=null)
-                pd.setMessage("Doing.. "+(((float) progress[0] / arrayList.size()) * 100) + "%");
-               // Toast.makeText(getApplicationContext(), (((float) progress[0] / arrayList.size()) * 100) + "%", Toast.LENGTH_SHORT).show();
+                if (pd != null)
+                    pd.setMessage("Doing.. " + (((float) progress[0] / arrayList.size()) * 100) + "%");
+                // Toast.makeText(getApplicationContext(), (((float) progress[0] / arrayList.size()) * 100) + "%", Toast.LENGTH_SHORT).show();
             }
             Log.d("importing images", "image" + progress[0]);
         }
 
         protected void onPostExecute(Void result) {
             Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_SHORT).show();
-            if (pd!=null) {
+            if (pd != null) {
                 pd.dismiss();
                 arr1.removeAll(arr1);
                 arrayList.removeAll(arrayList);
@@ -290,7 +308,6 @@ public class MainActivity extends Activity {
                 currentImage.setImageBitmap(null);
                 btnGalleryPickMul.setVisibility(View.VISIBLE);
                 startActivity(intent);
-
             }
         }
 
@@ -304,7 +321,7 @@ public class MainActivity extends Activity {
                     new File(dir, children[i]).delete();
                 }
             }
-            pd= new ProgressDialog(MainActivity.this);
+            pd = new ProgressDialog(MainActivity.this);
             pd.setTitle("Processing...");
             pd.setMessage("Please wait.");
             pd.setCancelable(false);
@@ -312,5 +329,13 @@ public class MainActivity extends Activity {
             pd.show();
 
         }
+    }
+
+    @Override
+    protected void onPause() {
+        SharedPreferences.Editor editor= sharedPreferences.edit();
+        editor.putInt("length", arrayList.size());
+        editor.apply();
+        super.onPause();
     }
 }

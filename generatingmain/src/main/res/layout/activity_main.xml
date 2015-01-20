@@ -1,128 +1,136 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    tools:context=".MainActivity">
 
     <FrameLayout
+        android:id="@+id/imageframe"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:id = "@+id/imageframe">
+        android:layout_height="300dp">
+
         <ImageView
+            android:id="@+id/imagepreview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/imagepreview"
-            android:layout_gravity="center_horizontal|bottom"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_gravity="center_horizontal|bottom" />
 
     </FrameLayout>
 
     <LinearLayout
 
+        android:id="@+id/buttons"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:id="@+id/buttons"
         android:layout_below="@id/imageframe"
-        >
+        android:layout_marginTop="20dp">
 
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="play"
             android:id="@+id/playButtn"
-            android:layout_weight="1"
-            android:onClick="onPlayClick"/>
-
-        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="make video"
-            android:id = "@+id/makeVideoBut"
+            android:layout_weight="1"
+            android:onClick="onPlayClick"
+            android:text="play" />
+
+        <Button
+            android:id="@+id/makeVideoBut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:onClick="makevideoClick"
-            android:layout_weight="1"/>
+            android:text="make video" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/progress"
-            android:textSize="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="0dp"
             android:text="ready"
-            android:layout_marginRight="0dp"/>
-
-        </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/buttons">
-
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Settings"
-            android:id="@+id/settingsButton"
-            android:onClick="onSettingsButtonClick"/>
-       <!-- <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TestMp3"
-            android:id="@+id/TestMp3"
-            android:onClick="onTestMp3Click"/>-->
+            android:textSize="15sp" />
 
     </LinearLayout>
 
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true">
-    <TextView
-        android:layout_marginTop="45dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:id="@+id/musicNameText"
-        android:textSize="14sp"
-        android:text="No music selected"
-
-        />
-    <ImageView
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:background="@drawable/delete"
-        android:clickable="true"
-        android:id="@+id/deleteMusicImg"
-        android:onClick="onDeleteMusicPathClick"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="300dp" />
-    <Button
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pick Music"
-        android:onClick="onPickMusicClick"
-        android:id="@+id/pickMusicbtn"
+        android:layout_below="@+id/buttons"
+        android:orientation="horizontal">
 
-        />
-    <SeekBar
-        android:layout_width="210dp"
+
+        <Button
+            android:id="@+id/settingsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onSettingsButtonClick"
+            android:text="Settings" />
+        <!-- <Button
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="TestMp3"
+             android:id="@+id/TestMp3"
+             android:onClick="onTestMp3Click"/>-->
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/seekbar"
-        android:layout_marginLeft="100dp"
-        />
-    <TextView
-        android:layout_marginLeft="300dp"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/musicTimeText"
-        android:textSize="12sp"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/musicNameText"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_marginTop="45dp"
+            android:text="No music selected"
+            android:textSize="14sp"
+
+            />
+
+        <ImageView
+            android:id="@+id/deleteMusicImg"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="300dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/delete"
+            android:clickable="true"
+            android:onClick="onDeleteMusicPathClick" />
+
+        <Button
+            android:id="@+id/pickMusicbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onPickMusicClick"
+            android:text="Pick Music"
+
+            />
+
+        <SeekBar
+            android:id="@+id/seekbar"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp" />
+
+        <TextView
+            android:id="@+id/musicTimeText"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="300dp"
+            android:textSize="12sp"
 
 
-        />
+            />
 
-</FrameLayout>
+    </FrameLayout>
 
 </RelativeLayout>

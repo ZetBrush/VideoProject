@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
@@ -23,11 +24,10 @@ import java.util.LinkedList;
  */
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder>  {
 
-
-
     private ArrayList<Bitmap> arrayList;
     private ImageView currentItem;
     private Button but;
+    private ArrayList<String> arr;
 
     public MyRecyclerViewAdapter(ArrayList<Bitmap> arr,ImageView img,Button b) {
         arrayList = arr;
@@ -46,7 +46,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
         holder.icon.setImageBitmap(arrayList.get(position));
         //holder.icon.setImageBitmap(Example.getBitmap(String.valueOf(position)));
-
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +57,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                     currentItem.setImageBitmap(arrayList.get(0));
                 }else {
 
-                    //but.setVisibility(View.VISIBLE);
+                    but.setVisibility(View.VISIBLE);
                     currentItem.setImageBitmap(null);
                 }
             }
@@ -82,7 +81,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             }
         });*/
     }
-
 
     @Override
     public int getItemCount() {

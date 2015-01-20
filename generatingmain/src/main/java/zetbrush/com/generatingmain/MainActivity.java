@@ -3,6 +3,7 @@ package zetbrush.com.generatingmain;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
@@ -15,6 +16,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -74,7 +76,7 @@ public class MainActivity extends ActionBarActivity {
     private static final boolean VERBOSE = false;
     private static final int MAX_SAMPLE_SIZE = 256 * 1024;
     private Resources mResources;
-    private TextView interval ;
+    private TextView interval;
     private SeekBar timeinterval;
     private Handler handler = new Handler();
     private String outputName = null;
@@ -86,10 +88,13 @@ public class MainActivity extends ActionBarActivity {
     private TextView musicNameText;
     private String videoPath = null;
     private TextView musicTimeText;
-    private long musictotalTime =0;
+    private long musictotalTime = 0;
     private String newMusicPath = null;
     private Long startMiliSc = null;
     private Long endMiliSc = null;
+
+    private String[] STAR = {"*"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,9 +105,9 @@ public class MainActivity extends ActionBarActivity {
         playButton = (Button) findViewById(R.id.playButtn);
         seekbar = (SeekBar) findViewById(R.id.seekbar);
         //testmp3 = (Button)findViewById(R.id.TestMp3);
-        pickMusicbtn = (Button)findViewById(R.id.pickMusicbtn);
-        musicNameText = (TextView)findViewById(R.id.musicNameText);
-        musicTimeText = (TextView)findViewById(R.id.musicTimeText);
+        pickMusicbtn = (Button) findViewById(R.id.pickMusicbtn);
+        musicNameText = (TextView) findViewById(R.id.musicNameText);
+        musicTimeText = (TextView) findViewById(R.id.musicTimeText);
         try {
             Intent intent = getIntent();
             if (intent != null) {
@@ -110,50 +115,66 @@ public class MainActivity extends ActionBarActivity {
 
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             path = "/storage/removable/sdcard1/DCIM/100ANDRO/newfold";
         }
 
 
     }
 
-
     /////PickMusic///////
-    public void onPickMusicClick(View v){
+    public void onPickMusicClick(View v) {
+        //Intent intent = new Intent();
+        //intent.setType("*/*");
+        //intent.setAction(Intent.ACTION_GET_CONTENT);
+        //startActivityForResult(intent.createChooser(intent,"Complate action using"),5);
+
         Intent intent = new Intent();
-        intent.setType("*/*");
+        intent.setType("audio/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent.createChooser(intent,"Complate action using"),5);
-
-
+        startActivityForResult(Intent.createChooser(intent, "Select Audio "), 5);
 
     }
 
+    public String getRealPathFromURI(Context context, Uri contentUri) {
+        Cursor cursor = null;
+        try {
+            String[] proj = {MediaStore.Images.Media.DATA};
+            cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+    }
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode==5 && data!=null)
-        {
+        if (requestCode == 5 && data != null) {
 
-            Uri message=data.getData();
-            newMusicPath=musicPath;
-            musicPath = message.getPath();
-            if(musicPath!=null)
-            musicNameText.setText(musicPath);
-            if(!musicPath.equals(newMusicPath)){
+            Uri message = data.getData();
+
+            newMusicPath = musicPath;
+            musicPath = getRealPathFromURI(getApplicationContext(), message);
+            if (musicPath != null)
+                musicNameText.setText(musicPath);
+            if (!musicPath.equals(newMusicPath)) {
                 try {
                     player.stop();
                     player.setDataSource("");
+                } catch (NullPointerException e) {
                 }
-                catch(NullPointerException e){}
             }
 
             PlayerEvents events1 = new PlayerEvents() {
                 @Override
                 public void onStart(String mime, int sampleRate, int channels, long duration) {
-                    musictotalTime  = duration/1000;
+                    musictotalTime = duration / 1000;
                 }
 
                 @Override
@@ -178,7 +199,7 @@ public class MainActivity extends ActionBarActivity {
             };
             OpenMXPlayer mplyr = new OpenMXPlayer(events1);
             mplyr.setDataSource(musicPath);
-            try{
+            try {
                 mplyr.play();
                 mplyr.seek(2);
                 try {
@@ -188,8 +209,7 @@ public class MainActivity extends ActionBarActivity {
                 }
                 mplyr.stop();
 
-            }
-            catch (Exception e){
+            } catch (Exception e) {
 
             }
             mplyr.stop();
@@ -200,7 +220,7 @@ public class MainActivity extends ActionBarActivity {
 
     //////DeleteMusicPath////
 
-    public void onDeleteMusicPathClick(View v){
+    public void onDeleteMusicPathClick(View v) {
         musicPath = null;
         player.stop();
         musictotalTime = 0;
@@ -209,10 +229,9 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-      @Override
+    @Override
     protected void onResume() {
         super.onResume();
-
 
         seekbar = (SeekBar) findViewById(R.id.seekbar);
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -230,15 +249,13 @@ public class MainActivity extends ActionBarActivity {
                 if (fromUser) player.seek(progress);
             }
         });
-
-
     }
 
-    private class ConcateAudioVideo extends AsyncTask<String,String,String>{
+    private class ConcateAudioVideo extends AsyncTask<String, String, String> {
 
-        protected String doInBackground(String...paths){
+        protected String doInBackground(String... paths) {
             try {
-                concatWithAudio(paths[0],paths[1]);
+                concatWithAudio(paths[0], paths[1]);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -246,7 +263,7 @@ public class MainActivity extends ActionBarActivity {
         }
 
         protected void onProgressUpdate(String... progresss) {
-            progress.setText("processed " + String.valueOf(progresss[0])) ;
+            progress.setText("processed " + String.valueOf(progresss[0]));
         }
 
         protected void onPostExecute(Long result) {
@@ -254,15 +271,10 @@ public class MainActivity extends ActionBarActivity {
             File fil = new File(videoPath);
             boolean dele = fil.delete();*/
             videoPath = null;
-            outputName=null;
-            name[0]=null;
-
+            outputName = null;
+            name[0] = null;
         }
-
-
-
-}
-
+    }
 
     private static int count = 0;
 
@@ -273,9 +285,9 @@ public class MainActivity extends ActionBarActivity {
 
             SequenceEncoder se = null;
             try {
-                videoPath = params[0].getParentFile().getPath()+"/"+name[0]+".mp4";
+                videoPath = params[0].getParentFile().getPath() + "/" + name[0] + ".mp4";
                 se = new SequenceEncoder(new File(params[0].getParentFile(),
-                        name[0]+".mp4"));
+                        name[0] + ".mp4"));
 
                 for (int i = 0; !flag; i++) {
                     File img = new File(params[0].getParentFile(),
@@ -303,21 +315,19 @@ public class MainActivity extends ActionBarActivity {
             if (!values[0].equals(null))
                 progress.setText("processed " + String.valueOf(values[0]));
         }
-        @Override
-        protected void onPostExecute(Integer result){
-            progress.setText("Ready!");
-            if(musicPath!=null && videoPath!=null)
-            {
-                ConcateAudioVideo mux = new ConcateAudioVideo();
-                mux.execute(musicPath,videoPath,"muxing");
 
-            }
-            else finish();
+        @Override
+        protected void onPostExecute(Integer result) {
+            progress.setText("Ready!");
+            if (musicPath != null && videoPath != null) {
+                ConcateAudioVideo mux = new ConcateAudioVideo();
+                mux.execute(musicPath, videoPath, "muxing");
+
+            } else finish();
 
         }
 
     }
-
 
 
     PlayerEvents events = new PlayerEvents() {
@@ -329,10 +339,9 @@ public class MainActivity extends ActionBarActivity {
         }
 
 
-
         @Override
         public void onStart(String mime, int sampleRate, int channels, long duration) {
-            Log.d("on startplay", "onStart called: " + mime + " sampleRate:" + sampleRate + " channels:" + channels );
+            Log.d("on startplay", "onStart called: " + mime + " sampleRate:" + sampleRate + " channels:" + channels);
             if (duration == 0) {
 
             } else {
@@ -351,7 +360,7 @@ public class MainActivity extends ActionBarActivity {
                             TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(currentms))
             ));
             musictotalTime = totalms;
-            if(musicPath==null){
+            if (musicPath == null) {
                 player.stop();
                 player.setDataSource("");
 
@@ -386,14 +395,13 @@ public class MainActivity extends ActionBarActivity {
             playButton.setText("Play");
             isplaying = false;
         } else {
-            if(musicPath!=null) {
+            if (musicPath != null) {
                 player.setDataSource(musicPath);   //"/storage/removable/sdcard1/DCIM/100ANDRO/newfold/strangeclouds.aac");
                 player.play();
                 playButton.setText("Pause");
                 isplaying = true;
-            }
-            else{
-                Toast.makeText(this,"No music is selected",Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "No music is selected", Toast.LENGTH_SHORT).show();
 
             }
         }
@@ -401,25 +409,25 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    final int[] scale= new int [2];
+    final int[] scale = new int[2];
     final String[] name = new String[2];
 
-    public void onSettingsButtonClick(View v){
+    public void onSettingsButtonClick(View v) {
         View popupView = getLayoutInflater().inflate(R.layout.popup_settings, null);
 
         PopupWindow popupWindow = new PopupWindow(popupView,
                 RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
-          interval = (TextView) popupView.findViewById(R.id.textInterval);
-          timeinterval = (SeekBar)popupView.findViewById(R.id.tIntervalSeekBar);
-          outputEditText = (EditText)popupView.findViewById(R.id.videoName);
-          RangeSeekBar<Long> rengeSeekbar = (RangeSeekBar)popupView.findViewById(R.id.rangeSeekbar);
+        interval = (TextView) popupView.findViewById(R.id.textInterval);
+        timeinterval = (SeekBar) popupView.findViewById(R.id.tIntervalSeekBar);
+        outputEditText = (EditText) popupView.findViewById(R.id.videoName);
+        RangeSeekBar<Long> rengeSeekbar = (RangeSeekBar) popupView.findViewById(R.id.rangeSeekbar);
 
-          timeinterval.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        timeinterval.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if(progress==0)
-                    progress=1;
+                if (progress == 0)
+                    progress = 1;
                 scale[0] = progress;
                 interval.setText(String.valueOf(scale[0]));
 
@@ -432,7 +440,7 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                Log.d("value of frametime", "val "+ scale[0]);
+                Log.d("value of frametime", "val " + scale[0]);
                 org.jcodec.api.SequenceEncoder.setFrameDuration(scale[0]);
 
             }
@@ -451,7 +459,7 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                name[0]=s.toString();
+                name[0] = s.toString();
             }
         });
 
@@ -462,32 +470,28 @@ public class MainActivity extends ActionBarActivity {
         v.getLocationOnScreen(location);
 
         popupWindow.showAtLocation(v, Gravity.NO_GRAVITY,
-                location[0]-v.getHeight()*3,   location[1]-v.getWidth()*3);
+                location[0] - v.getHeight() * 3, location[1] - v.getWidth() * 3);
 
 
-
-        long start =0;
+        long start = 0;
         long minv = 20;
 
         rengeSeekbar.setRangeValues(start, musictotalTime);
         rengeSeekbar.setSelectedMinValue(minv);
         rengeSeekbar.setSelectedMaxValue(musictotalTime);
-      if(musicPath!=null) {
+        if (musicPath != null) {
 
-          rengeSeekbar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Long>() {
-              @Override
-              public void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar, Long minValue, Long maxValue) {
+            rengeSeekbar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Long>() {
+                @Override
+                public void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar, Long minValue, Long maxValue) {
                     startMiliSc = minValue;
                     endMiliSc = maxValue;
-                  //Log.i(TAG, "selected new range values: MIN=" + minValue + ", MAX=" + maxValue);
+                    //Log.i(TAG, "selected new range values: MIN=" + minValue + ", MAX=" + maxValue);
 
 
-              }
-          });
-      }
-
-
-
+                }
+            });
+        }
 
 
     }
@@ -509,8 +513,7 @@ public class MainActivity extends ActionBarActivity {
     }*/
 
 
-
-    private void concatWithAudio(String audiopath, String videopath) throws IOException{
+    private void concatWithAudio(String audiopath, String videopath) throws IOException {
 
 
         if (musicPath != null) {
@@ -528,26 +531,24 @@ public class MainActivity extends ActionBarActivity {
                     isoFile.getMovieBox().getMovieHeaderBox().getTimescale();
 
             CroppedTrack ct = null;
-            double endmilis =0;
-            double startmilis =0;
+            double endmilis = 0;
+            double startmilis = 0;
 
-                endmilis=endMiliSc/1000;
+            Log.d("gagagagagagagag", "" + endMiliSc);
+            endmilis = endMiliSc / 1000;
 
-            if(startMiliSc == null) {
+            if (startMiliSc == null) {
                 startmilis = 1;
-            }
-            else startmilis = startMiliSc/1000;
+            } else startmilis = startMiliSc / 1000;
 
-            if(endmilis-startmilis>videoLengthInSeconds){
-                endmilis = startmilis+videoLengthInSeconds;
+            if (endmilis - startmilis > videoLengthInSeconds) {
+                endmilis = startmilis + videoLengthInSeconds;
             }
 
             /////cutting
-           // Log.d("value of videotrackcunt ", "Value " + videotrackcount + "ending time cont "+ ((int)((float)endmilis/23.2)) );
+            // Log.d("value of videotrackcunt ", "Value " + videotrackcount + "ending time cont "+ ((int)((float)endmilis/23.2)) );
 
-             ct = new CroppedTrack(aacTrack, (long)(startmilis*43.066), (long)(endmilis*43.066));
-
-
+            ct = new CroppedTrack(aacTrack, (long) (startmilis * 43.066), (long) (endmilis * 43.066));
 
             Movie newmovie = new Movie();
             newmovie.addTrack(countVideo.getTracks().get(0));
@@ -556,44 +557,38 @@ public class MainActivity extends ActionBarActivity {
             //Log.d("result video size", "Size:  "+ result.getTracks().size() + " vid samples " + (result.getTracks().get(0).getSamples().size()*scale[0] *1000/23.2) +" vid samples " + (result.getTracks().get(1).getSamples().size() /23.2) );
 
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-            String outputLocation = Environment.getExternalStorageDirectory().getPath()+ "/VidGen_"+name[0] + ".mp4";
+            String outputLocation = Environment.getExternalStorageDirectory().getPath() + "/VidGen_" + name[0] + ".mp4";
             Container out = new DefaultMp4Builder().build(newmovie);
             FileChannel fc = new RandomAccessFile(String.format(outputLocation), "rw").getChannel();
             out.writeContainer(fc);
             fc.close();
 
             finish();
+        } else {
+            Toast.makeText(this, "No music is selected", Toast.LENGTH_SHORT).show();
         }
-        else {Toast.makeText(this,"No music is selected",Toast.LENGTH_SHORT).show();}
     }
 
-
-        ////////////
-
     public void makevideoClick(View v) {
-        if (name[0]!=null) {
+        if (name[0] != null) {
 
-            if(path!=null) {
-                    path = Environment.getExternalStorageDirectory().getPath()+"/req_images";
-                File file = new File( path + "/image_000.png");
+            if (path != null) {
+                path = Environment.getExternalStorageDirectory().getPath() + "/req_images";
+                File file = new File(path + "/image_000.png");
 
                 String digits = file.getName().replaceAll("\\D+(\\d+)\\D+",
                         "$1");
                 String mask = file.getName().replaceAll("(\\D+)\\d+(\\D+)",
                         "$1%0" + digits.length() + "d$2");
 
-                new Encoder().execute(new File( path + "/", mask));
-            }
-            else
-                Toast.makeText(getApplicationContext(),"path is null",Toast.LENGTH_SHORT).show();
+                new Encoder().execute(new File(path + "/", mask));
+            } else
+                Toast.makeText(getApplicationContext(), "path is null", Toast.LENGTH_SHORT).show();
 
-        }
-
-        else
-            Toast.makeText(getApplicationContext(),"Please configure output settings",Toast.LENGTH_SHORT).show();
+        } else
+            Toast.makeText(getApplicationContext(), "Please configure output settings", Toast.LENGTH_SHORT).show();
 
     }
-
 
 
     @Override
@@ -685,8 +680,8 @@ public class MainActivity extends ActionBarActivity {
         MediaMuxer muxer;
         muxer = new MediaMuxer(dstMediaPath, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
 
-      //  muxer.addTrack(MediaFormat.createVideoFormat("video/avc", 480, 320));
-      //  muxer.addTrack(MediaFormat.createAudioFormat("audio/mp4a-latm", 48000, 2));
+        //  muxer.addTrack(MediaFormat.createVideoFormat("video/avc", 480, 320));
+        //  muxer.addTrack(MediaFormat.createAudioFormat("audio/mp4a-latm", 48000, 2));
 
         // Set up the tracks.
         HashMap<Integer, Integer> indexMap = new HashMap<Integer, Integer>(trackCount);
@@ -705,47 +700,46 @@ public class MainActivity extends ActionBarActivity {
             indexMapAud.put(i, dstIndex);
 
         }
-        Log.d("IndexMaps", "sizes IndexMap "+ indexMap.size() + "IndexMapAud "+ indexMapAud.size(), null);
+        Log.d("IndexMaps", "sizes IndexMap " + indexMap.size() + "IndexMapAud " + indexMapAud.size(), null);
 
 
-    // Copy the samples from MediaExtractor to MediaMuxer.
-    boolean sawEOS = false;
-    int bufferSize = MAX_SAMPLE_SIZE;
-    int frameCount = 0;
-    int offset = 100;
+        // Copy the samples from MediaExtractor to MediaMuxer.
+        boolean sawEOS = false;
+        int bufferSize = MAX_SAMPLE_SIZE;
+        int frameCount = 0;
+        int offset = 100;
 
-    ByteBuffer dstBuf = ByteBuffer.allocate(bufferSize);
-    MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
+        ByteBuffer dstBuf = ByteBuffer.allocate(bufferSize);
+        MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
 
 
         muxer.start();
         boolean secondstage = false;
 
         while (!sawEOS) {
-            if(secondstage){
+            if (secondstage) {
                 break;
             }
             bufferInfo.offset = offset;
             bufferInfo.size = extractor.readSampleData(dstBuf, offset);
 
 
-            if (bufferInfo.size < 0 ) {
+            if (bufferInfo.size < 0) {
 
-               Log.d(TAG, "saw input EOS.");
+                Log.d(TAG, "saw input EOS.");
 
-               // sawEOS = true;
+                // sawEOS = true;
                 (bufferInfo.size) = 0;
                 frameCount = 0;
-                while(!sawEOS){
+                while (!sawEOS) {
 
                     if (bufferInfo.size < 0) {
                         sawEOS = true;
                         secondstage = true;
-                        bufferInfo.size =0;
+                        bufferInfo.size = 0;
                         muxer.stop();
                         break;
-                    }
-                   else{
+                    } else {
                         bufferInfo.presentationTimeUs = extractorAud.getSampleTime();
                         bufferInfo.flags = extractorAud.getSampleFlags();
                         int trackIndex = extractorAud.getSampleTrackIndex();
@@ -762,15 +756,12 @@ public class MainActivity extends ActionBarActivity {
                                 " TrackIndex:" + trackIndex +
                                 " Size(KB) " + bufferInfo.size / 1024);
 
-                        }
-
                     }
 
+                }
 
-                 }
 
-
-             else {
+            } else {
                 bufferInfo.presentationTimeUs = extractor.getSampleTime();
                 bufferInfo.flags = extractor.getSampleFlags();
                 int trackIndex = extractor.getSampleTrackIndex();
@@ -781,27 +772,27 @@ public class MainActivity extends ActionBarActivity {
 
                 frameCount++;
 
-                    Log.d(TAG, "Frame (" + frameCount + ") " +
-                            "PresentationTimeUs:" + bufferInfo.presentationTimeUs +
-                            " Flags:" + bufferInfo.flags +
-                            " TrackIndex:" + trackIndex +
-                            " Size(KB) " + bufferInfo.size / 1024);
+                Log.d(TAG, "Frame (" + frameCount + ") " +
+                        "PresentationTimeUs:" + bufferInfo.presentationTimeUs +
+                        " Flags:" + bufferInfo.flags +
+                        " TrackIndex:" + trackIndex +
+                        " Size(KB) " + bufferInfo.size / 1024);
 
             }
 
         }
 
-       // muxer.release();
+        // muxer.release();
 
         return;
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
-        try{
+        try {
 
-            File dir = new File(Environment.getExternalStorageDirectory()+"/req_images");
+            File dir = new File(Environment.getExternalStorageDirectory() + "/req_images");
             if (dir.isDirectory()) {
                 String[] children = dir.list();
                 for (int i = 0; i < children.length; i++) {
@@ -811,7 +802,8 @@ public class MainActivity extends ActionBarActivity {
             }
 
 
-        } catch(Exception e){ }
+        } catch (Exception e) {
+        }
     }
 
     @Override
@@ -826,7 +818,8 @@ public class MainActivity extends ActionBarActivity {
                 }
 
             }
-        } catch (Exception e){}
+        } catch (Exception e) {
+        }
     }
 
 }

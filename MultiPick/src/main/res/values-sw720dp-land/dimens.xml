@@ -6,4 +6,10 @@
     -->
     <dimen name="activity_horizontal_margin">128dp</dimen>
 
+    <dimen name="photo_width">400dp</dimen>
+    <dimen name="photo_height">400dp</dimen>
+
+    <dimen name="image_width">400dp</dimen>
+    <dimen name="image_height">400dp</dimen>
+
 </resources>

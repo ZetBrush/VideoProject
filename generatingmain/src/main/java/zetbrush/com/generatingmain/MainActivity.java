@@ -1,6 +1,7 @@
 package zetbrush.com.generatingmain;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -17,6 +18,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -29,6 +31,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -93,10 +96,17 @@ public class MainActivity extends ActionBarActivity {
     private String newMusicPath = null;
     private Long startMiliSc = null;
     private Long endMiliSc = null;
+    ProgressDialog progressDialog;
+    Handler h;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
+
 
         makeVideoButton = (Button) findViewById(R.id.makeVideoBut);
         progress = (TextView) findViewById(R.id.progress);
@@ -129,7 +139,6 @@ public class MainActivity extends ActionBarActivity {
         startActivityForResult(intent.createChooser(intent,"Complate action using"),5);
 
 
-
     }
 
     @Override
@@ -141,11 +150,7 @@ public class MainActivity extends ActionBarActivity {
         {
 
             musicPath  = AbsolutePathActivity.getPath(MainActivity.this,data.getData());
-
-            //musicPath = data.getData().getPath();
-
             newMusicPath=musicPath;
-            musicPath = data.getData().getPath();
             if(musicPath!=null)
             musicNameText.setText(musicPath);
             if(!musicPath.equals(newMusicPath)){
@@ -319,9 +324,7 @@ public class MainActivity extends ActionBarActivity {
 
             }
             else finish();
-
         }
-
     }
 
 
@@ -334,8 +337,6 @@ public class MainActivity extends ActionBarActivity {
             isplaying = false;
         }
 
-
-
         @Override
         public void onStart(String mime, int sampleRate, int channels, long duration) {
             Log.d("on startplay", "onStart called: " + mime + " sampleRate:" + sampleRate + " channels:" + channels );
@@ -344,7 +345,6 @@ public class MainActivity extends ActionBarActivity {
             } else {
 
             }
-
             // .setText("Playing content:" + mime + " " + sampleRate + "Hz " + (duration/1000000) + "sec");
         }
 
@@ -581,7 +581,37 @@ public class MainActivity extends ActionBarActivity {
 
 
             if(path!=null) {
-                    path = Environment.getExternalStorageDirectory().getPath()+"/req_images";
+
+
+                progressDialog = new ProgressDialog(this);
+                progressDialog.setTitle("Title");
+                progressDialog.setMessage("Message");
+
+                // меняем стиль на индикатор
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                // устанавливаем максимум
+                progressDialog.setMax(100);
+                // включаем анимацию ожидания
+                progressDialog.setIndeterminate(true);
+
+                progressDialog.show();
+                h = new Handler() {
+                    public void handleMessage(Message msg) {
+                        // выключаем анимацию ожидания
+                        progressDialog.setIndeterminate(false);
+                        if (progressDialog.getProgress() < progressDialog.getMax()) {
+                            // увеличиваем значения индикаторов
+                            progressDialog.incrementProgressBy(50);
+                            //progressDialog.incrementSecondaryProgressBy(75);
+                            h.sendEmptyMessageDelayed(0, 100);
+                        } else {
+                            progressDialog.dismiss();
+                        }
+                    }
+                };
+                h.sendEmptyMessageDelayed(0, 100);
+
+                   /* path = Environment.getExternalStorageDirectory().getPath()+"/req_images";
                 File file = new File( path + "/image_000.png");
 
                 String digits = file.getName().replaceAll("\\D+(\\d+)\\D+",
@@ -589,7 +619,7 @@ public class MainActivity extends ActionBarActivity {
                 String mask = file.getName().replaceAll("(\\D+)\\d+(\\D+)",
                         "$1%0" + digits.length() + "d$2");
 
-                new Encoder().execute(new File( path + "/", mask));
+                new Encoder().execute(new File( path + "/", mask));*/
             }
             else
                 Toast.makeText(getApplicationContext(),"path is null",Toast.LENGTH_SHORT).show();
@@ -846,4 +876,18 @@ public class MainActivity extends ActionBarActivity {
         return cursor.getString(column_index);
     }
 
+    public String getRealPathFromURI(Context context, Uri contentUri) {
+        Cursor cursor = null;
+        try {
+            String[] proj = { MediaStore.Images.Media.DATA };
+            cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+    }
 }

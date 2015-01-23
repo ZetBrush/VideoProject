@@ -30,8 +30,8 @@
         android:layout_marginTop="20dp"
         android:id="@+id/btnGalleryPickMul"
         style="@style/btn"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_width"
         android:background="@drawable/add" />
 
 </LinearLayout>

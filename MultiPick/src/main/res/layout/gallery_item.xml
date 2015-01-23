@@ -1,18 +1,20 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:padding="3dp" >
+    android:padding="3dp" >-->
 
-    <FrameLayout
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-
+        android:layout_height="wrap_content"
+        android:padding="1dp">
+<!--
         <FrameLayout
             android:id="@+id/frmQueue"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" >-->
 
             <ImageView
                 android:id="@+id/imgQueue"
@@ -22,7 +24,7 @@
                 android:contentDescription="@string/app_name"
                 android:scaleType="centerCrop"
                 android:src="@drawable/back" />
-        </FrameLayout>
+      <!--  </FrameLayout>-->
 
         <ImageView
             android:id="@+id/imgQueueMultiSelected"
@@ -38,4 +40,5 @@
             android:visibility="gone" />
     </FrameLayout>
 
-</LinearLayout>
+<!--
+</LinearLayout>-->

@@ -26,12 +26,12 @@ public final class R {
     public static final class dimen {
         public static final int activity_horizontal_margin=0x7f040000;
         public static final int activity_vertical_margin=0x7f040001;
-        public static final int button_height=0x7f040002;
-        public static final int button_width=0x7f040003;
-        public static final int image_height=0x7f040004;
-        public static final int image_width=0x7f040005;
-        public static final int photo_height=0x7f040006;
-        public static final int photo_width=0x7f040007;
+        public static final int button_height=0x7f040006;
+        public static final int button_width=0x7f040007;
+        public static final int image_height=0x7f040002;
+        public static final int image_width=0x7f040003;
+        public static final int photo_height=0x7f040004;
+        public static final int photo_width=0x7f040005;
     }
     public static final class drawable {
         public static final int add=0x7f020000;
@@ -53,25 +53,24 @@ public final class R {
         public static final int top_bar=0x7f02000f;
     }
     public static final class id {
-        public static final int action_settings=0x7f090012;
-        public static final int btnGalleryPickMul=0x7f09000c;
+        public static final int action_settings=0x7f090011;
+        public static final int btnGalleryPickMul=0x7f09000b;
         public static final int crop_but=0x7f090002;
-        public static final int delete_item=0x7f09000e;
-        public static final int frmQueue=0x7f090007;
+        public static final int delete_item=0x7f09000d;
         public static final int gal_rec=0x7f090004;
-        public static final int go_button=0x7f09000f;
+        public static final int go_button=0x7f09000e;
         public static final int image_edit=0x7f090000;
-        public static final int image_id=0x7f09000a;
-        public static final int image_item=0x7f09000d;
-        public static final int imgQueue=0x7f090008;
-        public static final int imgQueueMultiSelected=0x7f090009;
+        public static final int image_id=0x7f090009;
+        public static final int image_item=0x7f09000c;
+        public static final int imgQueue=0x7f090007;
+        public static final int imgQueueMultiSelected=0x7f090008;
         public static final int llBottomContainer=0x7f090005;
-        public static final int rec_test=0x7f09000b;
+        public static final int rec_test=0x7f09000a;
         public static final int rotate_but=0x7f090001;
         public static final int save_but=0x7f090003;
         public static final int select_all_button=0x7f090006;
-        public static final int selected_count=0x7f090011;
-        public static final int tvTitleText=0x7f090010;
+        public static final int selected_count=0x7f090010;
+        public static final int tvTitleText=0x7f09000f;
     }
     public static final class layout {
         public static final int activity_image_edit=0x7f030000;

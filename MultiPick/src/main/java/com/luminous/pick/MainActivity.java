@@ -1,22 +1,14 @@
 package com.luminous.pick;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -62,8 +54,9 @@ public class MainActivity extends Activity {
     private int[] lastItemPos;
     private String[] all_path;
     private Intent intent = null;
-    private GalAdapter adat;
     private ProgressDialog pd;
+
+    private LinkedList<String> pathlist;
 
     private int arrayLength = 0;
     private SharedPreferences sharedPreferences;
@@ -99,9 +92,9 @@ public class MainActivity extends Activity {
 
         sharedPreferences = getPreferences(MODE_PRIVATE);
 
+        pathlist=new LinkedList<>();
         TextView txt = (TextView) findViewById(R.id.selected_count);
         txt.setVisibility(View.GONE);
-        adat = new GalAdapter(getApplicationContext(), imageLoader, arrayList, txt);
 
         recyclerView = (RecyclerView) findViewById(R.id.rec_test);
         currentImage = (ImageView) findViewById(R.id.image_id);
@@ -135,7 +128,7 @@ public class MainActivity extends Activity {
 
 
                     SaveToMemary saveToMemary = new SaveToMemary();
-                    saveToMemary.execute(all_path);
+                    saveToMemary.execute(pathlist);
 
                     intent = new Intent("android.intent.action.videogen");
                     intent.putExtra("myimagespath", myDir.toString());
@@ -144,8 +137,7 @@ public class MainActivity extends Activity {
                 } else {
                     Toast.makeText(getApplicationContext(), "you have no image", Toast.LENGTH_SHORT).show();
                 }
-                    //foo(getApplicationContext());
-
+                //foo(getApplicationContext());
             }
         });
 
@@ -171,49 +163,49 @@ public class MainActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
 
 
-        arrayLength = sharedPreferences.getInt("length", 0);
+
         if (requestCode == 200 && resultCode == Activity.RESULT_OK) {
             all_path = data.getStringArrayExtra("all_path");
 
             if (all_path.length > 0) {
 
-                //setBadge(getApplicationContext(),all_path.length);
-
-                System.gc();
+                arrayLength = sharedPreferences.getInt("length", 0);
+                //System.gc();
                 Bitmap bm = Bitmap.createBitmap(10, 10, Bitmap.Config.RGB_565);
                 bm.eraseColor(Color.LTGRAY);
 
                 for (int i = 0; i < all_path.length; i++) {
 
+                    pathlist.add(all_path[i]);
                     arrayList.add(bm);
                 }
 
-                System.gc();
+                //System.gc();
                 DownloadFilesTask dtt = new DownloadFilesTask();
-                dtt.execute(all_path);
-                Toast.makeText(getApplicationContext(), "" + all_path.length, Toast.LENGTH_SHORT).show();
+                dtt.execute(pathlist);
+                //Toast.makeText(getApplicationContext(), "" + all_path.length, Toast.LENGTH_SHORT).show();
             }
             //btnGalleryPickMul.setVisibility(View.GONE);
             next.setVisibility(View.VISIBLE);
         }
     }
 
-    private class DownloadFilesTask extends AsyncTask<String[], Integer, ArrayList<Bitmap>> {
-        protected ArrayList<Bitmap> doInBackground(String[]... path) {
+    private class DownloadFilesTask extends AsyncTask<LinkedList<String>, Integer, ArrayList<Bitmap>> {
+        protected ArrayList<Bitmap> doInBackground(LinkedList<String>... path) {
 
-            if (path[0].length > 0) {
-                for (int i = 0; i < path[0].length; i++) {
+            if (path[0].size() > 0) {
+                for (int i = 0; i < path[0].size(); i++) {
 
                     Bitmap bitmap = null;
                     try {
-                        bitmap = Utils.currectlyOrientation(path[0][i], 300, 300);
+                        bitmap = Utils.currectlyOrientation(path[0].get(i), 300, 300);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                     bitmap = Utils.scaleCenterCrop(bitmap, 300, 300);
                     arr1.add(bitmap);
                     publishProgress(i);
-                    Log.d("path[0] length" + i, "" + path[0].length);
+                    Log.d("path[0] length" + i, "" + path[0].size());
                 }
             }
             return arr1;
@@ -235,13 +227,13 @@ public class MainActivity extends Activity {
         }
     }
 
-    private class SaveToMemary extends AsyncTask<String[], Integer, Void> {
+    private class SaveToMemary extends AsyncTask<LinkedList<String>, Integer, Void> {
 
-        protected Void doInBackground(String[]... path) {
+        protected Void doInBackground(LinkedList<String>... path) {
 
             android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
             Log.d("arralist 1 ", " " + arrayList.size());
-            for (int i = 0; i < path[0].length; i++) {
+            for (int i = 0; i < path[0].size(); i++) {
 
                 String fname = "image_" + String.format("%03d", i) + ".png";
 
@@ -250,12 +242,12 @@ public class MainActivity extends Activity {
                     Bitmap bitmap = null;
                     if (file.exists())
                         file.delete();
-                    bitmap = Utils.currectlyOrientation(path[0][i], 600, 600);
+                    bitmap = Utils.currectlyOrientation(path[0].get(i), 700, 700);
                     bitmap = Utils.scaleCenterCrop(bitmap, 700, 700);
                     FileOutputStream out = new FileOutputStream(file);
 
                     bitmap.compress(Bitmap.CompressFormat.PNG, 50, out);
-                    setBadge(getApplicationContext(),i);
+                    setBadge(getApplicationContext(), i);
                     out.flush();
                     out.close();
                     bitmap.recycle();
@@ -287,7 +279,7 @@ public class MainActivity extends Activity {
                 myRecyclerViewAdapter.notifyDataSetChanged();
                 currentImage.setImageBitmap(null);
                 btnGalleryPickMul.setVisibility(View.VISIBLE);
-                setBadge(getApplicationContext(),0);
+                setBadge(getApplicationContext(), 0);
                 startActivity(intent);
             }
         }
@@ -351,16 +343,16 @@ public class MainActivity extends Activity {
         return null;
     }
 
-    public  void foo(Context context){
-        try {
-            intent.setAction("com.sonyericsson.home.action.UPDATE_BADGE");
-            intent.putExtra("com.sonyericsson.home.intent.extra.badge.ACTIVITY_NAME", getLauncherClassName(context));
-            intent.putExtra("com.sonyericsson.home.intent.extra.badge.SHOW_MESSAGE", true);
-            intent.putExtra("com.sonyericsson.home.intent.extra.badge.MESSAGE", 10);
-            intent.putExtra("com.sonyericsson.home.intent.extra.badge.PACKAGE_NAME", context.getPackageName());
-            sendBroadcast(intent);
-        } catch (Exception localException) {
-            Log.e("CHECK", "Sony : " + localException.getLocalizedMessage());
-        }
+    public void foo(Context context) {
+        Intent intent = new Intent();
+
+        intent.setAction("com.sonyericsson.home.action.UPDATE_BADGE");
+        intent.putExtra("com.sonyericsson.home.intent.extra.badge.ACTIVITY_NAME", "com.luminous.pick.MainActivity");
+        intent.putExtra("com.sonyericsson.home.intent.extra.badge.SHOW_MESSAGE", true);
+        intent.putExtra("com.sonyericsson.home.intent.extra.badge.MESSAGE", "99");
+        intent.putExtra("com.sonyericsson.home.intent.extra.badge.PACKAGE_NAME", "com.luminous.pick");
+
+        sendBroadcast(intent);
+        Toast.makeText(getApplicationContext(),"badge",Toast.LENGTH_SHORT).show();
     }
 }

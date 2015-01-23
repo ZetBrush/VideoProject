@@ -1,5 +1,8 @@
 package org.jcodec.api;
 
+import android.animation.ObjectAnimator;
+import android.view.animation.AnimationUtils;
+
 import org.jcodec.codecs.h264.H264Encoder;
 import org.jcodec.codecs.h264.H264Utils;
 import org.jcodec.common.NIOUtils;
@@ -31,6 +34,7 @@ public class SequenceEncoder {
     private SeekableByteChannel chm;
     private Picture toEncode;
     private Transform transform;
+
     private H264Encoder encoder;
     private ArrayList<ByteBuffer> spsList;
     private ArrayList<ByteBuffer> ppsList;
@@ -74,7 +78,11 @@ public class SequenceEncoder {
 
     }
 
+
+
     public void encodeNativeFrame(Picture pic) throws IOException {
+
+
         if (toEncode == null) {
             toEncode = Picture.create(pic.getWidth(), pic.getHeight(), encoder.getSupportedColorSpaces()[0]);
         }
@@ -92,10 +100,9 @@ public class SequenceEncoder {
         H264Utils.wipePS(result, spsList, ppsList);
         H264Utils.encodeMOVPacket(result);
 
-
         // Add packet to video track
 
-            if (framesec ==0)
+           if (framesec ==0)
                 framesec =1;
             if(framesec>2)
             framesec=2;
@@ -119,38 +126,10 @@ public class SequenceEncoder {
       //  org.jcodec.containers.mp4.boxes.SampleEntry smpentry = H264Utils.createMOVSampleEntry(spsList, ppsList);
         outTrack.addSampleEntry(H264Utils.createMOVSampleEntry(spsList, ppsList));
 
-
-
         // Write MP4 header and finalize recording
 
         muxer.writeHeader();
 
         NIOUtils.closeQuietly(ch);
+     }
     }
-    }
-
-
-    //public void addAudioTrack(ByteBuffer result){
-
-
-
-
-        /*try {
-
-
-
-            AACTrackImpl aacTrack = new AACTrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/DCIM/100ANDRO/newfold/strangeclouds.aac"));
-            H264TrackImpl h264Track = new H264TrackImpl(new FileDataSourceImpl( new FileInputStream(result).getChannel()));
-            Movie movie = new Movie();
-            movie.addTrack(h264Track);
-            movie.addTrack(aacTrack);
-            Container mp4file = new DefaultMp4Builder().build(movie);
-            FileChannel fc = new FileOutputStream(new File("myoutput.mp4")).getChannel();
-            mp4file.writeContainer(fc);
-            fc.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
-

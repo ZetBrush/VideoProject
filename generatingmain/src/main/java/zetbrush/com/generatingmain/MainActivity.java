@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaCodec;
 import android.media.MediaExtractor;
 import android.media.MediaFormat;
@@ -28,8 +29,11 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -328,7 +332,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-
+    ImageView imagepreview;
     PlayerEvents events = new PlayerEvents() {
         @Override
         public void onStop() {
@@ -367,7 +371,10 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         public void onPlay() {
+           imagepreview = (ImageView)findViewById(R.id.imagepreview);
             playButton.setText("Pause");
+
+
         }
 
         @Override
@@ -382,6 +389,7 @@ public class MainActivity extends ActionBarActivity {
     OpenMXPlayer player = null;
 
     public void onPlayClick(View v) {
+
         if (player == null) {
             player = new OpenMXPlayer(events);
 

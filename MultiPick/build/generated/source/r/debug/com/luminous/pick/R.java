@@ -11,27 +11,27 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int bg_light_blue=0x7f070000;
-        public static final int dialog_bg=0x7f070001;
-        public static final int gray=0x7f070002;
-        public static final int holo_blue_bright=0x7f070003;
-        public static final int light_black=0x7f070004;
-        public static final int light_black_=0x7f070005;
-        public static final int light_black_AA=0x7f070006;
-        public static final int light_gray=0x7f070007;
-        public static final int light_white_=0x7f070008;
-        public static final int menu_bg=0x7f070009;
-        public static final int tab_bg=0x7f07000a;
+        public static final int bg_light_blue=0x7f080000;
+        public static final int dialog_bg=0x7f080001;
+        public static final int gray=0x7f080002;
+        public static final int holo_blue_bright=0x7f080003;
+        public static final int light_black=0x7f080004;
+        public static final int light_black_=0x7f080005;
+        public static final int light_black_AA=0x7f080006;
+        public static final int light_gray=0x7f080007;
+        public static final int light_white_=0x7f080008;
+        public static final int menu_bg=0x7f080009;
+        public static final int tab_bg=0x7f08000a;
     }
     public static final class dimen {
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_vertical_margin=0x7f040001;
-        public static final int button_height=0x7f040006;
-        public static final int button_width=0x7f040007;
-        public static final int image_height=0x7f040002;
-        public static final int image_width=0x7f040003;
-        public static final int photo_height=0x7f040004;
-        public static final int photo_width=0x7f040005;
+        public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_vertical_margin=0x7f050001;
+        public static final int button_height=0x7f050006;
+        public static final int button_width=0x7f050007;
+        public static final int image_height=0x7f050002;
+        public static final int image_width=0x7f050003;
+        public static final int photo_height=0x7f050004;
+        public static final int photo_width=0x7f050005;
     }
     public static final class drawable {
         public static final int add=0x7f020000;
@@ -53,24 +53,24 @@ public final class R {
         public static final int top_bar=0x7f02000f;
     }
     public static final class id {
-        public static final int action_settings=0x7f090011;
-        public static final int btnGalleryPickMul=0x7f09000b;
-        public static final int crop_but=0x7f090002;
-        public static final int delete_item=0x7f09000d;
-        public static final int gal_rec=0x7f090004;
-        public static final int go_button=0x7f09000e;
-        public static final int image_edit=0x7f090000;
-        public static final int image_id=0x7f090009;
-        public static final int image_item=0x7f09000c;
-        public static final int imgQueue=0x7f090007;
-        public static final int imgQueueMultiSelected=0x7f090008;
-        public static final int llBottomContainer=0x7f090005;
-        public static final int rec_test=0x7f09000a;
-        public static final int rotate_but=0x7f090001;
-        public static final int save_but=0x7f090003;
-        public static final int select_all_button=0x7f090006;
-        public static final int selected_count=0x7f090010;
-        public static final int tvTitleText=0x7f09000f;
+        public static final int action_settings=0x7f0a0011;
+        public static final int btnGalleryPickMul=0x7f0a000b;
+        public static final int crop_but=0x7f0a0002;
+        public static final int delete_item=0x7f0a000d;
+        public static final int gal_rec=0x7f0a0004;
+        public static final int go_button=0x7f0a000e;
+        public static final int image_edit=0x7f0a0000;
+        public static final int image_id=0x7f0a0009;
+        public static final int image_item=0x7f0a000c;
+        public static final int imgQueue=0x7f0a0007;
+        public static final int imgQueueMultiSelected=0x7f0a0008;
+        public static final int llBottomContainer=0x7f0a0005;
+        public static final int rec_test=0x7f0a000a;
+        public static final int rotate_but=0x7f0a0001;
+        public static final int save_but=0x7f0a0003;
+        public static final int select_all_button=0x7f0a0006;
+        public static final int selected_count=0x7f0a0010;
+        public static final int tvTitleText=0x7f0a000f;
     }
     public static final class layout {
         public static final int activity_image_edit=0x7f030000;
@@ -81,16 +81,16 @@ public final class R {
         public static final int titlebar=0x7f030005;
     }
     public static final class menu {
-        public static final int menu_image_edit=0x7f080000;
+        public static final int menu_image_edit=0x7f090000;
     }
     public static final class string {
-        public static final int action_settings=0x7f050000;
-        public static final int app_name=0x7f050001;
-        public static final int btn_ok=0x7f050004;
-        public static final int btn_pick=0x7f050005;
-        public static final int btn_pick_mul=0x7f050006;
-        public static final int hello_world=0x7f050002;
-        public static final int title_activity_image_edit=0x7f050003;
+        public static final int action_settings=0x7f060000;
+        public static final int app_name=0x7f060001;
+        public static final int btn_ok=0x7f060004;
+        public static final int btn_pick=0x7f060005;
+        public static final int btn_pick_mul=0x7f060006;
+        public static final int hello_world=0x7f060002;
+        public static final int title_activity_image_edit=0x7f060003;
     }
     public static final class style {
         /** 
@@ -101,11 +101,15 @@ public final class R {
  API 11 theme customizations can go here. 
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f070000;
         /**  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
-        public static final int btn=0x7f060002;
-        public static final int title_bar=0x7f060003;
+        public static final int AppTheme=0x7f070001;
+        public static final int btn=0x7f070002;
+        public static final int title_bar=0x7f070003;
+    }
+    public static final class transition {
+        public static final int fade_in=0x7f040000;
+        public static final int fade_out=0x7f040001;
     }
 }

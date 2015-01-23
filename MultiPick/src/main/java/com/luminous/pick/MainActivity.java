@@ -281,6 +281,7 @@ public class MainActivity extends Activity {
                 btnGalleryPickMul.setVisibility(View.VISIBLE);
                 setBadge(getApplicationContext(), 0);
                 startActivity(intent);
+                overridePendingTransition(R.transition.fade_in, R.transition.fade_out);
             }
         }
 

@@ -1,26 +1,32 @@
 package com.luminous.pick;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.RectF;
 import android.os.*;
 import android.os.Process;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -55,12 +61,15 @@ public class MainActivity extends Activity {
     private int[] firstItemPos;
     private int[] lastItemPos;
     private String[] all_path;
-    Intent intent=null;
-    GalAdapter adat;
-     ProgressDialog pd;
+    private Intent intent = null;
+    private GalAdapter adat;
+    private ProgressDialog pd;
 
-    String root = Environment.getExternalStorageDirectory().toString();
-    File myDir = new File(root + "/req_images");
+    private int arrayLength = 0;
+    private SharedPreferences sharedPreferences;
+
+    private static final String root = Environment.getExternalStorageDirectory().toString();
+    private File myDir = new File(root + "/req_images");
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,8 +79,6 @@ public class MainActivity extends Activity {
 
         initImageLoader();
         init();
-
-
     }
 
     private void initImageLoader() {
@@ -89,14 +96,17 @@ public class MainActivity extends Activity {
 
     private void init() {
 
-        TextView txt=(TextView)findViewById(R.id.selected_count);
+
+        sharedPreferences = getPreferences(MODE_PRIVATE);
+
+        TextView txt = (TextView) findViewById(R.id.selected_count);
         txt.setVisibility(View.GONE);
-        adat = new GalAdapter(getApplicationContext(), imageLoader, arrayList,txt);
+        adat = new GalAdapter(getApplicationContext(), imageLoader, arrayList, txt);
 
         recyclerView = (RecyclerView) findViewById(R.id.rec_test);
         currentImage = (ImageView) findViewById(R.id.image_id);
         btnGalleryPickMul = (Button) findViewById(R.id.btnGalleryPickMul);
-        myRecyclerViewAdapter = new MyRecyclerViewAdapter(arrayList, currentImage,btnGalleryPickMul);
+        myRecyclerViewAdapter = new MyRecyclerViewAdapter(arrayList, currentImage, btnGalleryPickMul);
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);   // staggered grid
         itemAnimator = new DefaultItemAnimator();
 
@@ -116,10 +126,9 @@ public class MainActivity extends Activity {
 
         next = (Button) findViewById(R.id.go_button);
         next.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-
-
                 if (arrayList.size() > 0) {
 
                     myDir.mkdirs();
@@ -135,6 +144,7 @@ public class MainActivity extends Activity {
                 } else {
                     Toast.makeText(getApplicationContext(), "you have no image", Toast.LENGTH_SHORT).show();
                 }
+                    //foo(getApplicationContext());
 
             }
         });
@@ -148,7 +158,6 @@ public class MainActivity extends Activity {
                     firstItemPos = staggeredGridLayoutManager.findFirstCompletelyVisibleItemPositions(firstItemPos);
                     lastItemPos = staggeredGridLayoutManager.findLastVisibleItemPositions(lastItemPos);
 
-                    //currentImage.setImageBitmap(myRecyclerViewAdapter.getCurrentItem());
                     if (arrayList.size() > 0) {
                         currentImage.setImageBitmap(arrayList.get(firstItemPos[0]));
                     }
@@ -161,17 +170,14 @@ public class MainActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        /*File file= new File(android.os.Environment.getExternalStorageDirectory()+ "/req_images");
-        if(file.isDirectory())
-        {
-            //file.listFiles().length
-        }*/
 
+        arrayLength = sharedPreferences.getInt("length", 0);
         if (requestCode == 200 && resultCode == Activity.RESULT_OK) {
             all_path = data.getStringArrayExtra("all_path");
 
             if (all_path.length > 0) {
 
+                //setBadge(getApplicationContext(),all_path.length);
 
                 System.gc();
                 Bitmap bm = Bitmap.createBitmap(10, 10, Bitmap.Config.RGB_565);
@@ -186,9 +192,8 @@ public class MainActivity extends Activity {
                 DownloadFilesTask dtt = new DownloadFilesTask();
                 dtt.execute(all_path);
                 Toast.makeText(getApplicationContext(), "" + all_path.length, Toast.LENGTH_SHORT).show();
-                //myRecyclerViewAdapter.notifyDataSetChanged();
             }
-            btnGalleryPickMul.setVisibility(View.GONE);
+            //btnGalleryPickMul.setVisibility(View.GONE);
             next.setVisibility(View.VISIBLE);
         }
     }
@@ -199,21 +204,16 @@ public class MainActivity extends Activity {
             if (path[0].length > 0) {
                 for (int i = 0; i < path[0].length; i++) {
 
-                    //Bitmap bitmap = BitmapFactory.decodeFile(path[0][i]);
-                    //Bitmap bitmap=decodeSampledBitmapFromPath(path[0][i],640,640);
                     Bitmap bitmap = null;
                     try {
-                        bitmap = Utils.currectlyOrientation(path[0][i],300,300);
+                        bitmap = Utils.currectlyOrientation(path[0][i], 300, 300);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                     bitmap = Utils.scaleCenterCrop(bitmap, 300, 300);
-                    //bitmap = Utils.scaleCenterCrop(bitmap, 640, 640);
-                    //Toast.makeText(getApplicationContext(),""+arr1.size(),Toast.LENGTH_SHORT).show();
                     arr1.add(bitmap);
                     publishProgress(i);
                     Log.d("path[0] length" + i, "" + path[0].length);
-
                 }
             }
             return arr1;
@@ -224,39 +224,38 @@ public class MainActivity extends Activity {
             if (progress[0] == 0) {
                 currentImage.setImageBitmap(arr1.get(0));
             }
-
-            arrayList.set(progress[0], arr1.get(progress[0]));
+            arrayList.set(arrayLength + progress[0], arr1.get(progress[0]));
             myRecyclerViewAdapter.notifyDataSetChanged();
         }
 
         protected void onPostExecute(ArrayList<Bitmap> result) {
+            arr1.removeAll(arr1);
+            //setBadge(getApplicationContext(),0);
             Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private class SaveToMemary extends AsyncTask<String [], Integer, Void> {
+    private class SaveToMemary extends AsyncTask<String[], Integer, Void> {
 
-        protected Void doInBackground(String [] ... path) {
+        protected Void doInBackground(String[]... path) {
 
             android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
             Log.d("arralist 1 ", " " + arrayList.size());
-
-
-            for (int i = 0; i<path[0].length; i++) {
+            for (int i = 0; i < path[0].length; i++) {
 
                 String fname = "image_" + String.format("%03d", i) + ".png";
 
                 try {
-
                     File file = new File(myDir, fname);
                     Bitmap bitmap = null;
                     if (file.exists())
                         file.delete();
-                    bitmap = Utils.currectlyOrientation(path[0][i],600,600);
-                    bitmap=Utils.scaleCenterCrop(bitmap,700,700);
+                    bitmap = Utils.currectlyOrientation(path[0][i], 600, 600);
+                    bitmap = Utils.scaleCenterCrop(bitmap, 700, 700);
                     FileOutputStream out = new FileOutputStream(file);
 
                     bitmap.compress(Bitmap.CompressFormat.PNG, 50, out);
+                    setBadge(getApplicationContext(),i);
                     out.flush();
                     out.close();
                     bitmap.recycle();
@@ -267,30 +266,29 @@ public class MainActivity extends Activity {
                 }
                 publishProgress(i);
             }
-
             return null;
         }
 
         protected void onProgressUpdate(Integer... progress) {
             if (progress[0] % 3 == 0) {
-                if(pd!=null)
-                pd.setMessage("Doing.. "+(  (int)(((float) progress[0] / arrayList.size()) * 100)) + "%");
-               // Toast.makeText(getApplicationContext(), (((float) progress[0] / arrayList.size()) * 100) + "%", Toast.LENGTH_SHORT).show();
+                if (pd != null)
+                    pd.setMessage("Doing.. " + ((int) (((float) progress[0] / arrayList.size()) * 100)) + "%");
+                // Toast.makeText(getApplicationContext(), (((float) progress[0] / arrayList.size()) * 100) + "%", Toast.LENGTH_SHORT).show();
             }
             Log.d("importing images", "image" + progress[0]);
         }
 
         protected void onPostExecute(Void result) {
             Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_SHORT).show();
-            if (pd!=null) {
+            if (pd != null) {
                 pd.dismiss();
                 arr1.removeAll(arr1);
                 arrayList.removeAll(arrayList);
                 myRecyclerViewAdapter.notifyDataSetChanged();
                 currentImage.setImageBitmap(null);
                 btnGalleryPickMul.setVisibility(View.VISIBLE);
+                setBadge(getApplicationContext(),0);
                 startActivity(intent);
-
             }
         }
 
@@ -304,13 +302,65 @@ public class MainActivity extends Activity {
                     new File(dir, children[i]).delete();
                 }
             }
-            pd= new ProgressDialog(MainActivity.this);
+
+            pd = new ProgressDialog(MainActivity.this);
             pd.setTitle("Processing...");
             pd.setMessage("Please wait.");
             pd.setCancelable(false);
             pd.setIndeterminate(true);
             pd.show();
+        }
+    }
 
+    @Override
+    protected void onPause() {
+        SharedPreferences.Editor ed = sharedPreferences.edit();
+        ed.putInt("length", arrayList.size());
+        ed.apply();
+        super.onPause();
+    }
+
+    public static void setBadge(Context context, int count) {
+
+        String launcherClassName = getLauncherClassName(context);
+        if (launcherClassName == null) {
+            return;
+        }
+
+        Intent intent = new Intent("android.intent.action.BADGE_COUNT_UPDATE");
+        intent.putExtra("badge_count", count);
+        intent.putExtra("badge_count_package_name", context.getPackageName());
+        intent.putExtra("badge_count_class_name", launcherClassName);
+        context.sendBroadcast(intent);
+    }
+
+    public static String getLauncherClassName(Context context) {
+
+        PackageManager pm = context.getPackageManager();
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+
+        List<ResolveInfo> resolveInfos = pm.queryIntentActivities(intent, 0);
+        for (ResolveInfo resolveInfo : resolveInfos) {
+            String pkgName = resolveInfo.activityInfo.applicationInfo.packageName;
+            if (pkgName.equalsIgnoreCase(context.getPackageName())) {
+                String className = resolveInfo.activityInfo.name;
+                return className;
+            }
+        }
+        return null;
+    }
+
+    public  void foo(Context context){
+        try {
+            intent.setAction("com.sonyericsson.home.action.UPDATE_BADGE");
+            intent.putExtra("com.sonyericsson.home.intent.extra.badge.ACTIVITY_NAME", getLauncherClassName(context));
+            intent.putExtra("com.sonyericsson.home.intent.extra.badge.SHOW_MESSAGE", true);
+            intent.putExtra("com.sonyericsson.home.intent.extra.badge.MESSAGE", 10);
+            intent.putExtra("com.sonyericsson.home.intent.extra.badge.PACKAGE_NAME", context.getPackageName());
+            sendBroadcast(intent);
+        } catch (Exception localException) {
+            Log.e("CHECK", "Sony : " + localException.getLocalizedMessage());
         }
     }
 }

@@ -2,11 +2,11 @@
 <items version="2" >
 
     <item
-        jar="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/exploded-aar/VideoGenerationJC/app/unspecified/classes.jar"
+        jar="/Users/intern/Downloads/VidGen/VidGen/generatingmain/build/intermediates/exploded-aar/VidGen/app/unspecified/classes.jar"
         jumboMode="false"
         revision="20.0.0"
-        sha1="ebdc53fdc3dba2630d8e8af8a7ba7fd68859f35f">
-        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/classes-962095e3cc7599f3065013909022a70ea9664cb1.jar" />
+        sha1="143d7ea2cf2fdcf4754c54475761a706ce976aae">
+        <dex dex="/Users/intern/Downloads/VidGen/VidGen/generatingmain/build/intermediates/pre-dexed/debug/classes-53aec093280782c0c936cd8e447c871752ecc37a.jar" />
     </item>
 
 </items>

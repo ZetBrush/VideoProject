@@ -120,6 +120,47 @@ public class SequenceEncoder {
             frameNo++;
 
     }
+    public void encodeNativeFrameForPartialEffect(Picture pic) throws IOException {
+
+
+        if (toEncode == null) {
+            toEncode = Picture.create(pic.getWidth(), pic.getHeight(), encoder.getSupportedColorSpaces()[0]);
+        }
+
+        // Perform conversion
+        transform.transform(pic, toEncode);
+
+        // Encode image into H.264 frame, the result is stored in '_out' buffer
+        _out.clear();
+        ByteBuffer result = encoder.encodeFrame(toEncode, _out);
+
+        // Based on the frame above form correct MP4 packet
+        spsList.clear();
+        ppsList.clear();
+        H264Utils.wipePS(result, spsList, ppsList);
+        H264Utils.encodeMOVPacket(result);
+
+        // Add packet to video track
+
+        if (framesec ==0)
+            framesec =1;
+        if(framesec>2)
+            framesec=2;
+        outTrack.addFrame(new MP4Packet(
+                result,
+                frameNo ,//* framesec,
+                25,
+                1,
+                frameNo,
+                true,
+                null,
+                frameNo,
+                0));
+
+        frameNo++;
+
+    }
+
     public void finish() throws IOException {
         // Push saved SPS/PPS to a special storage in MP4
 

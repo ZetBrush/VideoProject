@@ -8,6 +8,8 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaCodec;
@@ -53,9 +55,13 @@ import net.pocketmagic.android.openmxplayer.OpenMXPlayer;
 import net.pocketmagic.android.openmxplayer.PlayerEvents;
 import net.pocketmagic.android.openmxplayer.PlayerStates;
 
+import org.bytedeco.javacpp.opencv_core;
 import org.jcodec.api.android.SequenceEncoder;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
@@ -65,11 +71,16 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
+import static org.bytedeco.javacpp.opencv_core.cvReleaseImage;
+import static org.bytedeco.javacpp.opencv_highgui.cvLoadImage;
+import static org.bytedeco.javacpp.opencv_highgui.cvSaveImage;
+import static org.bytedeco.javacpp.opencv_imgproc.cvSmooth;
+
 public class MainActivity extends ActionBarActivity {
 
     private Button makeVideoButton;
     private Button playButton;
-    private TextView progress;
+    public TextView progress;
     private volatile boolean flag;
     private SeekBar seekbar;
     MediaExtractor extractor;
@@ -116,7 +127,7 @@ public class MainActivity extends ActionBarActivity {
         progress = (TextView) findViewById(R.id.progress);
         playButton = (Button) findViewById(R.id.playButtn);
         seekbar = (SeekBar) findViewById(R.id.seekbar);
-        //testmp3 = (Button)findViewById(R.id.TestMp3);
+        testmp3 = (Button)findViewById(R.id.TestMp3);
         pickMusicbtn = (Button)findViewById(R.id.pickMusicbtn);
         musicNameText = (TextView)findViewById(R.id.musicNameText);
         musicTimeText = (TextView)findViewById(R.id.musicTimeText);
@@ -142,7 +153,7 @@ public class MainActivity extends ActionBarActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent.createChooser(intent,"Complate action using"),5);
 
-
+        opencv_core.IplImage image;
     }
 
     @Override
@@ -330,7 +341,56 @@ public class MainActivity extends ActionBarActivity {
             else finish();
         }
     }
+    static int vidcount = 1;
 
+    private class PartialVidEncoder extends AsyncTask<File, Integer, Integer> {
+        private static final String TAG = "ENCODER";
+        protected Integer doInBackground(File... params) {
+
+            SequenceEncoder se = null;
+            try {
+                // videoPath = params[0].getParentFile().getPath()+"/part"+vidcount +".mp4";
+
+                se = new SequenceEncoder(new File(params[0].getParentFile(),
+                        "part"+vidcount +".mp4"));
+                vidcount++;
+                File img = new File(   "/storage/removable/sdcard1/image_000.png");//     Environment.getExternalStorageDirectory().getPath()+"/req_images/image_faded" + String.format("%03d",i)+".png");
+                for (int i = 1; i<=10; i++) {
+
+                    if (!img.exists())
+                        break;
+                    Bitmap frame = BitmapFactory.decodeFile(img
+                            .getAbsolutePath());
+                    Canvas canvas = new Canvas(frame);
+                    canvas.drawARGB(0, 0, 0, 0);
+                    final Paint paint = new Paint();
+                    paint.setAlpha(i * 10);
+                    canvas.drawBitmap(frame, 0, 0, paint);
+                    se.encodeImageForPartialEffect(frame);
+                    publishProgress(i);
+
+                }
+                se.finish();
+                // se.addAudioTrack();
+            } catch (IOException e) {
+                Log.e(TAG, "IO", e);
+            }
+
+            return 0;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            if (!values[0].equals(null))
+                progress.setText("processed " + String.valueOf(values[0]));
+        }
+        @Override
+        protected void onPostExecute(Integer result){
+            progress.setText("Ready!");
+
+
+        }
+    }
 
     ImageView imagepreview;
     PlayerEvents events = new PlayerEvents() {
@@ -508,19 +568,36 @@ public class MainActivity extends ActionBarActivity {
 
     ////////////////////////////TEST MP3 ///////////////////////////////
 
-   /* Button testmp3;
+    Button testmp3;
 
-    public void onTestMp3Click(View v) {
+    public void onTestMp3Click(View v)  {
 
-        try {
-            concatWithAudio(musicPath,videoPath);
+        String filename = "/storage/removable/sdcard1/image_000.png";
+        String filename2 = "/storage/removable/sdcard1/image_faded";
+        String filenm = Environment.getExternalStorageDirectory().getPath()+"/req_images/image_faded";
 
+      /*  try {
+            fadeInOut(filename);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
+
+        for(int i = 0; ;){
+           File fadfile = new File(filename);//+String.format("%03d",i+1)+".png");
+           if(fadfile.exists()){
+               new PartialVidEncoder().execute(fadfile);
+
+            i+=10;
+           }
+           else break;
+
+       }
 
 
-    }*/
+
+    }
+
+
 
 
 
@@ -590,36 +667,7 @@ public class MainActivity extends ActionBarActivity {
 
             if(path!=null) {
 
-
-                progressDialog = new ProgressDialog(this);
-                progressDialog.setTitle("Title");
-                progressDialog.setMessage("Message");
-
-                // меняем стиль на индикатор
-                progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                // устанавливаем максимум
-                progressDialog.setMax(100);
-                // включаем анимацию ожидания
-                progressDialog.setIndeterminate(true);
-
-                progressDialog.show();
-                h = new Handler() {
-                    public void handleMessage(Message msg) {
-                        // выключаем анимацию ожидания
-                        progressDialog.setIndeterminate(false);
-                        if (progressDialog.getProgress() < progressDialog.getMax()) {
-                            // увеличиваем значения индикаторов
-                            progressDialog.incrementProgressBy(50);
-                            //progressDialog.incrementSecondaryProgressBy(75);
-                            h.sendEmptyMessageDelayed(0, 100);
-                        } else {
-                            progressDialog.dismiss();
-                        }
-                    }
-                };
-                h.sendEmptyMessageDelayed(0, 100);
-
-                   /* path = Environment.getExternalStorageDirectory().getPath()+"/req_images";
+                path = Environment.getExternalStorageDirectory().getPath()+"/req_images";
                 File file = new File( path + "/image_000.png");
 
                 String digits = file.getName().replaceAll("\\D+(\\d+)\\D+",
@@ -627,7 +675,7 @@ public class MainActivity extends ActionBarActivity {
                 String mask = file.getName().replaceAll("(\\D+)\\d+(\\D+)",
                         "$1%0" + digits.length() + "d$2");
 
-                new Encoder().execute(new File( path + "/", mask));*/
+                new Encoder().execute(new File( path + "/", mask));
             }
             else
                 Toast.makeText(getApplicationContext(),"path is null",Toast.LENGTH_SHORT).show();
@@ -896,6 +944,37 @@ public class MainActivity extends ActionBarActivity {
             if (cursor != null) {
                 cursor.close();
             }
+        }
+    }
+    static int counter =1;
+    public void fadeInOut(String filename) throws IOException {
+        File imgFile = new File(filename);
+        if (imgFile.exists()) {
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            //Drawable d = new BitmapDrawable(getResources(), myBitmap);
+
+            int width = myBitmap.getWidth();
+            int height = myBitmap.getHeight();
+            Bitmap transBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+
+            for (int i = 1; i <= 10; i++) {
+                Canvas canvas = new Canvas(transBitmap);
+                canvas.drawARGB(0, 0, 0, 0);
+                final Paint paint = new Paint();
+                paint.setAlpha(i * 10);
+                canvas.drawBitmap(myBitmap, 0, 0, paint);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                transBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+                String newname = Environment.getExternalStorageDirectory().getPath()+"/req_images/image_faded" + String.format("%03d", counter) + ".png";
+                File file = new File(newname);
+                FileOutputStream fos = new FileOutputStream(file);
+                fos.write(byteArray);
+                fos.flush();
+                fos.close();
+                counter++;
+            }
+
         }
     }
 }

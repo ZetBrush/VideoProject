@@ -25,5 +25,5 @@ dependencies {
     // compile group: 'org.bytedeco', name: 'javacv', version: '0.9'
     compile project(':app')
     compile project(':oMXPlayer')
-    compile 'org.bytedeco:javacv:0.10'
+
 }

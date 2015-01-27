@@ -170,9 +170,9 @@ public class MainActivity extends Activity {
         playBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*for (int i = 0; i < arrayList.size(); i++) {
+                for (int i = 0; i < arrayList.size(); i++) {
                     currentImage.setImageBitmap(arrayList.get(i));
-                }*/
+                }
                 startService(new Intent(getApplicationContext(), MyService.class));
             }
         });

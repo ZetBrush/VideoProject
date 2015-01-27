@@ -27,10 +27,11 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private ArrayList<Bitmap> arrayList;
     private ImageView currentItem;
     private Button but;
-    private ArrayList<String> arr;
+    private LinkedList<String> pathlist;
 
-    public MyRecyclerViewAdapter(ArrayList<Bitmap> arr,ImageView img,Button b) {
+    public MyRecyclerViewAdapter(ArrayList<Bitmap> arr,LinkedList<String> list,ImageView img,Button b) {
         arrayList = arr;
+        pathlist=list;
         currentItem=img;
         but=b;
     }
@@ -51,7 +52,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             public void onClick(View v) {
 
                 arrayList.remove(position);
-                notifyItemRemoved(position);
+                pathlist.remove(position);
+                //notifyItemRemoved(position);
                 notifyDataSetChanged();
                 if(arrayList.size()>0) {
                     currentItem.setImageBitmap(arrayList.get(0));

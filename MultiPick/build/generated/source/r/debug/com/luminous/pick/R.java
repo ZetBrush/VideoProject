@@ -53,15 +53,16 @@ public final class R {
         public static final int top_bar=0x7f02000f;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0011;
+        public static final int action_settings=0x7f0a0012;
+        public static final int bt=0x7f0a000c;
         public static final int btnGalleryPickMul=0x7f0a000b;
         public static final int crop_but=0x7f0a0002;
-        public static final int delete_item=0x7f0a000d;
+        public static final int delete_item=0x7f0a000e;
         public static final int gal_rec=0x7f0a0004;
-        public static final int go_button=0x7f0a000e;
+        public static final int go_button=0x7f0a000f;
         public static final int image_edit=0x7f0a0000;
         public static final int image_id=0x7f0a0009;
-        public static final int image_item=0x7f0a000c;
+        public static final int image_item=0x7f0a000d;
         public static final int imgQueue=0x7f0a0007;
         public static final int imgQueueMultiSelected=0x7f0a0008;
         public static final int llBottomContainer=0x7f0a0005;
@@ -69,8 +70,8 @@ public final class R {
         public static final int rotate_but=0x7f0a0001;
         public static final int save_but=0x7f0a0003;
         public static final int select_all_button=0x7f0a0006;
-        public static final int selected_count=0x7f0a0010;
-        public static final int tvTitleText=0x7f0a000f;
+        public static final int selected_count=0x7f0a0011;
+        public static final int tvTitleText=0x7f0a0010;
     }
     public static final class layout {
         public static final int activity_image_edit=0x7f030000;

@@ -4,8 +4,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -37,6 +41,7 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 public class MainActivity extends Activity {
 
+
     private ImageView currentImage;
     private RecyclerView recyclerView;
     private Button btnGalleryPickMul;
@@ -64,6 +69,9 @@ public class MainActivity extends Activity {
     private static final String root = Environment.getExternalStorageDirectory().toString();
     private File myDir = new File(root + "/req_images");
 
+
+    Button playBut;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,16 +98,17 @@ public class MainActivity extends Activity {
     private void init() {
 
 
+        playBut = (Button) findViewById(R.id.bt);
         sharedPreferences = getPreferences(MODE_PRIVATE);
 
-        pathlist=new LinkedList<>();
+        pathlist = new LinkedList<>();
         TextView txt = (TextView) findViewById(R.id.selected_count);
         txt.setVisibility(View.GONE);
 
         recyclerView = (RecyclerView) findViewById(R.id.rec_test);
         currentImage = (ImageView) findViewById(R.id.image_id);
         btnGalleryPickMul = (Button) findViewById(R.id.btnGalleryPickMul);
-        myRecyclerViewAdapter = new MyRecyclerViewAdapter(arrayList, currentImage, btnGalleryPickMul);
+        myRecyclerViewAdapter = new MyRecyclerViewAdapter(arrayList, pathlist, currentImage, btnGalleryPickMul);
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);   // staggered grid
         itemAnimator = new DefaultItemAnimator();
 
@@ -127,6 +136,7 @@ public class MainActivity extends Activity {
                     myDir.mkdirs();
 
 
+                    //Toast.makeText(getApplicationContext(), pathlist.size()+"", Toast.LENGTH_SHORT).show();
                     SaveToMemary saveToMemary = new SaveToMemary();
                     saveToMemary.execute(pathlist);
 
@@ -156,12 +166,21 @@ public class MainActivity extends Activity {
                 }
             }
         });
+
+        playBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*for (int i = 0; i < arrayList.size(); i++) {
+                    currentImage.setImageBitmap(arrayList.get(i));
+                }*/
+                startService(new Intent(getApplicationContext(), MyService.class));
+            }
+        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
 
 
         if (requestCode == 200 && resultCode == Activity.RESULT_OK) {
@@ -183,9 +202,9 @@ public class MainActivity extends Activity {
                 //System.gc();
                 DownloadFilesTask dtt = new DownloadFilesTask();
                 dtt.execute(pathlist);
-                //Toast.makeText(getApplicationContext(), "" + all_path.length, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "" + pathlist.size(), Toast.LENGTH_SHORT).show();
             }
-            //btnGalleryPickMul.setVisibility(View.GONE);
+            //btnGalleryPickMul.setVisibility(View.VISIBLE);
             next.setVisibility(View.VISIBLE);
         }
     }
@@ -216,7 +235,7 @@ public class MainActivity extends Activity {
             if (progress[0] == 0) {
                 currentImage.setImageBitmap(arr1.get(0));
             }
-            arrayList.set(arrayLength + progress[0], arr1.get(progress[0]));
+            arrayList.set(progress[0], arr1.get(progress[0]));
             myRecyclerViewAdapter.notifyDataSetChanged();
         }
 
@@ -354,6 +373,21 @@ public class MainActivity extends Activity {
         intent.putExtra("com.sonyericsson.home.intent.extra.badge.PACKAGE_NAME", "com.luminous.pick");
 
         sendBroadcast(intent);
-        Toast.makeText(getApplicationContext(),"badge",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "badge", Toast.LENGTH_SHORT).show();
+    }
+
+    private class Down extends AsyncTask<Bitmap, Integer, Void> {
+        protected Void doInBackground(Bitmap... path) {
+            currentImage.setImageBitmap(path[0]);
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        protected void onProgressUpdate(Integer... progress) {
+        }
     }
 }

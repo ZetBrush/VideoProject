@@ -34,4 +34,12 @@
         android:layout_height="@dimen/button_width"
         android:background="@drawable/add" />
 
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/bt"
+        style="@style/btn"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_width"
+        android:background="@drawable/add" />
+
 </LinearLayout>

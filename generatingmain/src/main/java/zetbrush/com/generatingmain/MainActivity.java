@@ -526,14 +526,12 @@ public class MainActivity extends ActionBarActivity {
 
     private void concatWithAudio(String audiopath, String videopath) throws IOException{
 
-
         if (musicPath != null) {
 
             String video = videopath;// Environment.getExternalStorageDirectory().getPath()+"/req_images/xcgh.mp4";
 
             MovieCreator mc = new MovieCreator();
             Movie countVideo = mc.build(video);
-
             AACTrackImple aacTrack = new AACTrackImple(new FileDataSourceImpl(audiopath));//"/storage/removable/sdcard1/strangeclouds.aac"));
             //MP3TrackImpl mp3 = new MP3TrackImpl(new FileDataSourceImpl("/storage/removable/sdcard1/Wyat.mp3"));
             IsoFile isoFile = new IsoFile(video);
@@ -557,7 +555,7 @@ public class MainActivity extends ActionBarActivity {
             }
 
             /////cutting
-           // Log.d("value of videotrackcunt ", "Value " + videotrackcount + "ending time cont "+ ((int)((float)endmilis/23.2)) );
+            //Log.d("value of videotrackcunt ", "Value " + videotrackcount + "ending time cont "+ ((int)((float)endmilis/23.2)) );
 
              ct = new CroppedTrack(aacTrack, (long)(startmilis*43.066), (long)(endmilis*43.066));
 
@@ -591,7 +589,7 @@ public class MainActivity extends ActionBarActivity {
             if(path!=null) {
 
 
-                progressDialog = new ProgressDialog(this);
+                /*progressDialog = new ProgressDialog(this);
                 progressDialog.setTitle("Title");
                 progressDialog.setMessage("Message");
 
@@ -617,9 +615,9 @@ public class MainActivity extends ActionBarActivity {
                         }
                     }
                 };
-                h.sendEmptyMessageDelayed(0, 100);
+                h.sendEmptyMessageDelayed(0, 100);*/
 
-                   /* path = Environment.getExternalStorageDirectory().getPath()+"/req_images";
+                    path = Environment.getExternalStorageDirectory().getPath()+"/req_images";
                 File file = new File( path + "/image_000.png");
 
                 String digits = file.getName().replaceAll("\\D+(\\d+)\\D+",
@@ -627,7 +625,7 @@ public class MainActivity extends ActionBarActivity {
                 String mask = file.getName().replaceAll("(\\D+)\\d+(\\D+)",
                         "$1%0" + digits.length() + "d$2");
 
-                new Encoder().execute(new File( path + "/", mask));*/
+                new Encoder().execute(new File( path + "/", mask));
             }
             else
                 Toast.makeText(getApplicationContext(),"path is null",Toast.LENGTH_SHORT).show();

@@ -23,4 +23,7 @@ public class SequenceEncoder extends org.jcodec.api.SequenceEncoder {
 	public void encodeImage(Bitmap bi) throws IOException {
         encodeNativeFrame(BitmapUtil.fromBitmap(bi));
     }
+    public void encodeImageForPartialEffect(Bitmap bi) throws IOException {
+        encodeNativeFrameForPartialEffect(BitmapUtil.fromBitmap(bi));
+    }
 }

@@ -49,14 +49,16 @@ import com.googlecode.mp4parser.FileDataSourceImpl;
 import com.googlecode.mp4parser.authoring.Movie;
 import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
 import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
+import com.googlecode.mp4parser.authoring.tracks.AppendTrack;
 import com.googlecode.mp4parser.authoring.tracks.CroppedTrack;
 
 import net.pocketmagic.android.openmxplayer.OpenMXPlayer;
 import net.pocketmagic.android.openmxplayer.PlayerEvents;
 import net.pocketmagic.android.openmxplayer.PlayerStates;
 
-import org.bytedeco.javacpp.opencv_core;
+
 import org.jcodec.api.android.SequenceEncoder;
+import org.jcodec.scale.BitmapUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -71,10 +73,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
-import static org.bytedeco.javacpp.opencv_core.cvReleaseImage;
-import static org.bytedeco.javacpp.opencv_highgui.cvLoadImage;
-import static org.bytedeco.javacpp.opencv_highgui.cvSaveImage;
-import static org.bytedeco.javacpp.opencv_imgproc.cvSmooth;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -153,7 +151,7 @@ public class MainActivity extends ActionBarActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent.createChooser(intent,"Complate action using"),5);
 
-        opencv_core.IplImage image;
+
     }
 
     @Override
@@ -341,37 +339,51 @@ public class MainActivity extends ActionBarActivity {
             else finish();
         }
     }
-    static int vidcount = 1;
 
+
+    ////////////////////// FadeIn transaction Generator /////////////////////////
+
+    static int vidcount = 1;
     private class PartialVidEncoder extends AsyncTask<File, Integer, Integer> {
-        private static final String TAG = "ENCODER";
+        private static final String TAG = "PartialENCODER";
         protected Integer doInBackground(File... params) {
 
-            SequenceEncoder se = null;
+            SequenceEncoderPartial sep = null;
             try {
-                // videoPath = params[0].getParentFile().getPath()+"/part"+vidcount +".mp4";
-
-                se = new SequenceEncoder(new File(params[0].getParentFile(),
+                sep =  new SequenceEncoderPartial(new File(params[0].getParentFile(),
                         "part"+vidcount +".mp4"));
-                vidcount++;
-                File img = new File(   "/storage/removable/sdcard1/image_000.png");//     Environment.getExternalStorageDirectory().getPath()+"/req_images/image_faded" + String.format("%03d",i)+".png");
-                for (int i = 1; i<=10; i++) {
 
-                    if (!img.exists())
-                        break;
+                int transcounter =0;
+                int imagecounter = 0;
+                String dirNm = params[0].getParentFile().getPath();
+                while(true){
+                    transcounter++;
+                    imagecounter++;
+                    File img = new File(dirNm + "/image_faded"+String.format("%03d",imagecounter)+".png");
+                    if(transcounter==10){
+                        transcounter=0;
+                        vidcount++;
+                        sep.finish();
+                        File imgg = new File(dirNm + "/image_faded"+String.format("%03d",imagecounter+1)+".png");
+                        if (!imgg.exists()){
+                            vidcount=1;
+                            break;
+                        }
+                        sep =  new SequenceEncoderPartial(new File(params[0].getParentFile(),
+                                "part"+vidcount +".mp4"));
+                    }
+
                     Bitmap frame = BitmapFactory.decodeFile(img
-                            .getAbsolutePath());
-                    Canvas canvas = new Canvas(frame);
-                    canvas.drawARGB(0, 0, 0, 0);
-                    final Paint paint = new Paint();
-                    paint.setAlpha(i * 10);
-                    canvas.drawBitmap(frame, 0, 0, paint);
-                    se.encodeImageForPartialEffect(frame);
-                    publishProgress(i);
+                            .getAbsolutePath()).copy(Bitmap.Config.ARGB_8888, true);
+                    sep.encodeNativeFrameForPartialEffect(BitmapUtil.fromBitmap(frame));
+                    System.gc();
+                    publishProgress(imagecounter);
+
 
                 }
-                se.finish();
-                // se.addAudioTrack();
+
+
+
             } catch (IOException e) {
                 Log.e(TAG, "IO", e);
             }
@@ -391,6 +403,58 @@ public class MainActivity extends ActionBarActivity {
 
         }
     }
+
+                //////Still frame Encoder///////////
+
+    private class StillVidEncoder extends AsyncTask<File, Integer, Integer> {
+        private static final String TAG = "PartialENCODER";
+        protected Integer doInBackground(File... params) {
+            int imagecounter =0;
+            int vidcnt =1;
+
+            try {
+
+                while(true) {
+                    File img = new File(params[0].getParentFile().getPath() + "/image_" + String.format("%03d", imagecounter) + ".png");
+                    if(img.exists()) {
+                        Bitmap frame = BitmapFactory.decodeFile(img.getAbsolutePath());
+                        SequenceEncoder sep = new SequenceEncoder(new File(params[0].getParentFile().getParentFile(),
+                                "still"+vidcnt +".mp4"));
+                        sep.encodeImage(frame);
+                        vidcnt++;
+                        sep.finish();
+                    }
+                    else break;
+                    System.gc();
+                    publishProgress(imagecounter);
+                    imagecounter++;
+
+                }
+
+
+            } catch (IOException e) {
+                Log.e(TAG, "IO", e);
+            }
+
+            return 0;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            if (!values[0].equals(null))
+                progress.setText("processed " + String.valueOf(values[0]));
+        }
+        @Override
+        protected void onPostExecute(Integer result){
+            progress.setText("Ready!");
+
+
+        }
+    }
+
+
+
+
 
     ImageView imagepreview;
     PlayerEvents events = new PlayerEvents() {
@@ -570,28 +634,86 @@ public class MainActivity extends ActionBarActivity {
 
     Button testmp3;
 
-    public void onTestMp3Click(View v)  {
+    public void onTestMp3Click(View v) throws IOException {
 
-        String filename = "/storage/removable/sdcard1/image_000.png";
+        String filename = Environment.getExternalStorageDirectory().getPath() +"/req_images/image_";
         String filename2 = "/storage/removable/sdcard1/image_faded";
-        String filenm = Environment.getExternalStorageDirectory().getPath()+"/req_images/image_faded";
 
-      /*  try {
-            fadeInOut(filename);
+        String filenm = Environment.getExternalStorageDirectory().getPath()+"/vidgen_faded/image_faded";
+        File f = new File(Environment.getExternalStorageDirectory().getPath() + "/vidgen_faded");
+        if( !(f.exists() && f.isDirectory())) {
+            f.mkdir();
+        }
+        else{
+
+        }
+
+
+        try {
+            for(int i =0;;i++) {
+             File vv = new File(filename+String.format("%03d",i)+".png");
+                if(vv.exists()) {
+                    fadeInOut(vv.getPath());
+                }
+                else break;
+
+            }
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
 
-        for(int i = 0; ;){
-           File fadfile = new File(filename);//+String.format("%03d",i+1)+".png");
-           if(fadfile.exists()){
-               new PartialVidEncoder().execute(fadfile);
 
-            i+=10;
+
+         String flnm = filenm+String.format("%03d",1)+".png";
+            File ff = new File(flnm);
+           if(ff.exists()){
+               new PartialVidEncoder().execute(ff);
+
            }
-           else break;
+           else ;
 
-       }
+        File fadfile = new File(filename+"000.png");
+        if(fadfile.exists()){
+            new StillVidEncoder().execute(fadfile);
+
+        }
+        String vid1 = Environment.getExternalStorageDirectory().getPath() + "/vidgen_faded/part";
+        String vid2 = Environment.getExternalStorageDirectory().getPath()+ "/still";
+
+
+            MovieCreator mc = new MovieCreator();
+
+            Movie mt1 = mc.build(vid1+1+".mp4");
+            mc = new MovieCreator();
+
+            Movie mt2 = mc.build(vid1+2+".mp4");
+            mc = new MovieCreator();
+            Movie mt3 = mc.build(vid1+3+".mp4");
+            mc = new MovieCreator();
+
+
+            Movie ms1 = mc.build(vid2+1+".mp4");
+            mc = new MovieCreator();
+            Movie ms2 = mc.build(vid2+2+".mp4");
+            mc = new MovieCreator();
+            Movie ms3 = mc.build(vid2+3+".mp4");
+            AppendTrack apTrc = new AppendTrack(mt1.getTracks().get(0),ms1.getTracks().get(0),mt2.getTracks().get(0),ms2.getTracks().get(0),mt3.getTracks().get(0),ms3.getTracks().get(0));
+
+            Movie newmovie = new Movie();
+            newmovie.addTrack(apTrc);
+            //Log.d("result video size", "Size:  "+ result.getTracks().size() + " vid samples " + (result.getTracks().get(0).getSamples().size()*scale[0] *1000/23.2) +" vid samples " + (result.getTracks().get(1).getSamples().size() /23.2) );
+
+           // String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            String outputLocation = Environment.getExternalStorageDirectory().getPath()+ "/VidGen_fadeEffect.mp4";
+            Container out = new DefaultMp4Builder().build(newmovie);
+            FileChannel fc = new RandomAccessFile(String.format(outputLocation), "rw").getChannel();
+            out.writeContainer(fc);
+            fc.close();
+
+
+
+
+
 
 
 
@@ -964,9 +1086,9 @@ public class MainActivity extends ActionBarActivity {
                 paint.setAlpha(i * 10);
                 canvas.drawBitmap(myBitmap, 0, 0, paint);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                transBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                transBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
-                String newname = Environment.getExternalStorageDirectory().getPath()+"/req_images/image_faded" + String.format("%03d", counter) + ".png";
+                String newname = Environment.getExternalStorageDirectory().getPath()+"/vidgen_faded/image_faded" + String.format("%03d", counter) + ".png";
                 File file = new File(newname);
                 FileOutputStream fos = new FileOutputStream(file);
                 fos.write(byteArray);

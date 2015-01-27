@@ -1,7 +1,4 @@
-package org.jcodec.api;
-
-import android.animation.ObjectAnimator;
-import android.view.animation.AnimationUtils;
+package zetbrush.com.generatingmain;
 
 import org.jcodec.codecs.h264.H264Encoder;
 import org.jcodec.codecs.h264.H264Utils;
@@ -22,19 +19,12 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
-/**
- * This class is part of JCodec ( www.jcodec.org ) This software is distributed
- * under FreeBSD License
- * 
- * @author The JCodec project
- * 
- */
-public class SequenceEncoder {
+
+public class SequenceEncoderPartial {
     private SeekableByteChannel ch;
     private SeekableByteChannel chm;
     private Picture toEncode;
     private Transform transform;
-    int pts =0;
     private H264Encoder encoder;
     private ArrayList<ByteBuffer> spsList;
     private ArrayList<ByteBuffer> ppsList;
@@ -48,15 +38,12 @@ public class SequenceEncoder {
        framesec = sec;
     }
 
-    public SequenceEncoder(File out ) throws IOException {
+    public SequenceEncoderPartial(File out) throws IOException {
         this.ch = NIOUtils.writableFileChannel(out);
-
 
         muxer = new MP4Muxer(ch, Brand.MOV);
 
-        outTrack = muxer.addTrackForCompressed(TrackType.VIDEO, 1);
-
-
+        outTrack = muxer.addTrackForCompressed(TrackType.VIDEO, 10);
 
         // Allocate a buffer big enough to hold output frames
         _out = ByteBuffer.allocate(1920 * 1080 * 6);
@@ -75,47 +62,6 @@ public class SequenceEncoder {
     }
 
 
-
-    public void encodeNativeFrame(Picture pic) throws IOException {
-
-
-        if (toEncode == null) {
-            toEncode = Picture.create(pic.getWidth(), pic.getHeight(), encoder.getSupportedColorSpaces()[0]);
-        }
-
-        // Perform conversion
-        transform.transform(pic, toEncode);
-
-        // Encode image into H.264 frame, the result is stored in '_out' buffer
-        _out.clear();
-        ByteBuffer result = encoder.encodeFrame(toEncode, _out);
-
-        // Based on the frame above form correct MP4 packet
-        spsList.clear();
-        ppsList.clear();
-        H264Utils.wipePS(result, spsList, ppsList);
-        H264Utils.encodeMOVPacket(result);
-
-        // Add packet to video track
-
-           if (framesec ==0)
-                framesec =1;
-            if(framesec>2)
-             framesec=2;
-             outTrack.addFrame(new MP4Packet(
-                result,
-                frameNo * framesec,
-                1,
-                framesec,
-                frameNo,
-                true,
-                null,
-                frameNo * framesec,
-                0));
-
-        frameNo++;
-
-    }
     public void encodeNativeFrameForPartialEffect(Picture pic) throws IOException {
 
 

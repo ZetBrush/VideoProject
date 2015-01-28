@@ -55,7 +55,6 @@ import net.pocketmagic.android.openmxplayer.OpenMXPlayer;
 import net.pocketmagic.android.openmxplayer.PlayerEvents;
 import net.pocketmagic.android.openmxplayer.PlayerStates;
 
-import org.bytedeco.javacpp.opencv_core;
 import org.jcodec.api.android.SequenceEncoder;
 
 import java.io.ByteArrayOutputStream;
@@ -71,10 +70,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
-import static org.bytedeco.javacpp.opencv_core.cvReleaseImage;
-import static org.bytedeco.javacpp.opencv_highgui.cvLoadImage;
-import static org.bytedeco.javacpp.opencv_highgui.cvSaveImage;
-import static org.bytedeco.javacpp.opencv_imgproc.cvSmooth;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -153,7 +148,6 @@ public class MainActivity extends ActionBarActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent.createChooser(intent,"Complate action using"),5);
 
-        opencv_core.IplImage image;
     }
 
     @Override

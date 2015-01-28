@@ -35,13 +35,11 @@
         android:background="@drawable/add" />
 
     <Button
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:id="@+id/bt"
         style="@style/btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="play"
-        android:textStyle="bold"
-        android:textColor="@color/light_black"/>
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_width"
+        android:background="@drawable/add" />
 
 </LinearLayout>

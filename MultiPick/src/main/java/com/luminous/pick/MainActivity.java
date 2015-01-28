@@ -12,9 +12,6 @@ import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -25,7 +22,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.*;
 import android.os.Process;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -84,8 +80,6 @@ public class MainActivity extends Activity {
 
         initImageLoader();
         init();
-        setBadge(getApplicationContext(),0);
-
     }
 
     private void initImageLoader() {
@@ -137,35 +131,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-
-
-                Intent intent1=new Intent(getApplicationContext(),MyService.class);
-                String [] paths=new String[pathlist.size()];
-                for (int i=0;i<pathlist.size();i++){
-                    paths[i]=pathlist.get(i);
-
-                }
-                intent1.putExtra("paths",paths);
-                startService(intent1);
-
-                NotificationCompat.Builder mBuilder =   new NotificationCompat.Builder(getApplicationContext())
-                        .setSmallIcon(R.drawable.ic_launcher) // notification icon
-                        .setContentTitle("Picked Images") // title for notification
-                        .setContentText(""+pathlist.size()) // message for notification
-                        .setAutoCancel(true); // clear notification after click
-                Intent intent2 = new Intent(getApplicationContext(), MainActivity.class);
-                PendingIntent pi = PendingIntent.getActivity(getApplicationContext(),0,intent2,Intent.FLAG_ACTIVITY_NEW_TASK);
-                mBuilder.setContentIntent(pi);
-                NotificationManager mNotificationManager =
-                        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                mNotificationManager.notify(0, mBuilder.build());
-
-                intent = new Intent("android.intent.action.videogen");
-                intent.putExtra("myimagespath", myDir.toString());
-                startActivity(intent);
-
-
-                /*if (arrayList.size() > 0) {
+                if (arrayList.size() > 0) {
 
                     myDir.mkdirs();
 
@@ -174,29 +140,13 @@ public class MainActivity extends Activity {
                     SaveToMemary saveToMemary = new SaveToMemary();
                     saveToMemary.execute(pathlist);
 
-
-
-                    NotificationCompat.Builder mBuilder =   new NotificationCompat.Builder(getApplicationContext())
-                            .setSmallIcon(R.drawable.ic_launcher) // notification icon
-                            .setContentTitle("Notification!") // title for notification
-                            .setContentText(""+pathlist.size()) // message for notification
-                            .setAutoCancel(true); // clear notification after click
-                    Intent intent1 = new Intent(getApplicationContext(), MainActivity.class);
-                    PendingIntent pi = PendingIntent.getActivity(getApplicationContext(),0,intent1,Intent.FLAG_ACTIVITY_NEW_TASK);
-                    mBuilder.setContentIntent(pi);
-                    NotificationManager mNotificationManager =
-                            (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                    mNotificationManager.notify(0, mBuilder.build());
-
-
-
                     intent = new Intent("android.intent.action.videogen");
                     intent.putExtra("myimagespath", myDir.toString());
                     //startActivity(intent);
                     //finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "you have no image", Toast.LENGTH_SHORT).show();
-                }*/
+                }
                 //foo(getApplicationContext());
             }
         });
@@ -220,8 +170,10 @@ public class MainActivity extends Activity {
         playBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Down().execute();
-
+                for (int i = 0; i < arrayList.size(); i++) {
+                    currentImage.setImageBitmap(arrayList.get(i));
+                }
+                startService(new Intent(getApplicationContext(), MyService.class));
             }
         });
     }
@@ -314,7 +266,7 @@ public class MainActivity extends Activity {
                     FileOutputStream out = new FileOutputStream(file);
 
                     bitmap.compress(Bitmap.CompressFormat.PNG, 50, out);
-                    //setBadge(getApplicationContext(), i);
+                    setBadge(getApplicationContext(), i);
                     out.flush();
                     out.close();
                     bitmap.recycle();
@@ -424,23 +376,18 @@ public class MainActivity extends Activity {
         Toast.makeText(getApplicationContext(), "badge", Toast.LENGTH_SHORT).show();
     }
 
-    private class Down extends AsyncTask<Void, Integer, Void> {
-        protected Void doInBackground(Void... path) {
-            for (int i=0;i<pathlist.size();i++) {
-
-                try {
-                    TimeUnit.SECONDS.sleep(2);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                publishProgress(i);
+    private class Down extends AsyncTask<Bitmap, Integer, Void> {
+        protected Void doInBackground(Bitmap... path) {
+            currentImage.setImageBitmap(path[0]);
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
             return null;
         }
 
         protected void onProgressUpdate(Integer... progress) {
-
-            currentImage.setImageBitmap(arrayList.get(progress[0]));
         }
     }
 }

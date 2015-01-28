@@ -71,12 +71,12 @@
             android:layout_height="wrap_content"
             android:onClick="onSettingsButtonClick"
             android:text="Settings" />
-         <Button
+        <!-- <Button
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:text="ImageTest"
+             android:text="TestMp3"
              android:id="@+id/TestMp3"
-             android:onClick="onTestMp3Click"/>
+             android:onClick="onTestMp3Click"/>-->
 
     </LinearLayout>
 

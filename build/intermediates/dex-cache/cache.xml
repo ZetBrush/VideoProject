@@ -2,81 +2,11 @@
 <items version="2" >
 
     <item
-        jar="/Users/intern/.gradle/caches/modules-2/files-2.1/org.bytedeco.javacpp-presets/flandmark/1.07-0.10/2d934b4740c97e93f005bb7375c6f20259570e11/flandmark-1.07-0.10.jar"
+        jar="/Users/intern/Downloads/VidGen/VidGen/generatingmain/build/intermediates/exploded-aar/VidGen/app/unspecified/classes.jar"
         jumboMode="false"
         revision="20.0.0"
-        sha1="2d934b4740c97e93f005bb7375c6f20259570e11">
-        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/flandmark-1.07-0.10-eea4e345829df289328a440f38ad59e14da3c374.jar" />
-    </item>
-    <item
-        jar="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/exploded-aar/VideoGenerationJC/app/unspecified/classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="69550e124bef798eec4b404f6578c25fc2949d1a">
-        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/classes-962095e3cc7599f3065013909022a70ea9664cb1.jar" />
-    </item>
-    <item
-        jar="/Users/intern/.gradle/caches/modules-2/files-2.1/org.bytedeco.javacpp-presets/artoolkitplus/2.3.1-0.10/9983d8a78ce6ad56cbb5ef0f5081a7f3d79afacf/artoolkitplus-2.3.1-0.10.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="9983d8a78ce6ad56cbb5ef0f5081a7f3d79afacf">
-        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/artoolkitplus-2.3.1-0.10-fd49bdb2d7b6c69f9862240d0fa77d7a4b22b1a7.jar" />
-    </item>
-    <item
-        jar="/Users/intern/.gradle/caches/modules-2/files-2.1/org.bytedeco.javacpp-presets/opencv/2.4.10-0.10/a52a775a3d2d578823f86f1c9a347501bc39d9d2/opencv-2.4.10-0.10.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="a52a775a3d2d578823f86f1c9a347501bc39d9d2">
-        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/opencv-2.4.10-0.10-f70d9fdda75a65df223a9f49b049ee2e4774f4b7.jar" />
-    </item>
-    <item
-        jar="/Users/intern/.gradle/caches/modules-2/files-2.1/org.bytedeco.javacpp-presets/libdc1394/2.2.2-0.10/bbcf694f96f489c46ad35e667e98931ca8bb53a8/libdc1394-2.2.2-0.10.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="bbcf694f96f489c46ad35e667e98931ca8bb53a8">
-        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/libdc1394-2.2.2-0.10-a04471dd051730d8aac5ced757267c13bcd3d89a.jar" />
-    </item>
-    <item
-        jar="/Users/intern/.gradle/caches/modules-2/files-2.1/org.bytedeco.javacpp-presets/flycapture/2.7.3.13-0.10/968aad408c62cbb19591def672f4313f14b502a0/flycapture-2.7.3.13-0.10.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="968aad408c62cbb19591def672f4313f14b502a0">
-        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/flycapture-2.7.3.13-0.10-5fd7c15ea6bd067171141e1ab2c528159ed296f4.jar" />
-    </item>
-    <item
-        jar="/Users/intern/.gradle/caches/modules-2/files-2.1/org.bytedeco.javacpp-presets/libfreenect/0.5.1-0.10/991e54ab1edf05f08441fa4487bde1bc538deaf9/libfreenect-0.5.1-0.10.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="991e54ab1edf05f08441fa4487bde1bc538deaf9">
-        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/libfreenect-0.5.1-0.10-9a9007ed9efe4cb6911b473322af20012d4ac7fa.jar" />
-    </item>
-    <item
-        jar="/Users/intern/.gradle/caches/modules-2/files-2.1/org.bytedeco/javacpp/0.10/3346d5861a21ed4e230d56487694d9a1787dad62/javacpp-0.10.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="3346d5861a21ed4e230d56487694d9a1787dad62">
-        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/javacpp-0.10-ade8660d3c8cd48093e55fbc1c010e7c68e16611.jar" />
-    </item>
-    <item
-        jar="/Users/intern/.gradle/caches/modules-2/files-2.1/org.bytedeco/javacv/0.10/83cebbb74553be6c18868ac0edb37f5179bc8c29/javacv-0.10.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="83cebbb74553be6c18868ac0edb37f5179bc8c29">
-        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/javacv-0.10-60b74524922d8a670b817dad99bc8eec0998b7e4.jar" />
-    </item>
-    <item
-        jar="/Users/intern/.gradle/caches/modules-2/files-2.1/org.bytedeco.javacpp-presets/videoinput/0.200-0.10/6e0eaaf97d81eb995411b69e5deaa69dcd44e171/videoinput-0.200-0.10.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="6e0eaaf97d81eb995411b69e5deaa69dcd44e171">
-        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/videoinput-0.200-0.10-7b3cb075294720dbc5524eb42e867d29ecca3854.jar" />
-    </item>
-    <item
-        jar="/Users/intern/.gradle/caches/modules-2/files-2.1/org.bytedeco.javacpp-presets/ffmpeg/2.5.1-0.10/8eb44e2ede35feb581a3ad11621b4b0077042984/ffmpeg-2.5.1-0.10.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="8eb44e2ede35feb581a3ad11621b4b0077042984">
-        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/ffmpeg-2.5.1-0.10-9f6f6c3035feef397f61c7e5818844b8c1638870.jar" />
+        sha1="c6d1282c6012abd1dd849c73afb03503d05b4f83">
+        <dex dex="/Users/intern/Downloads/VidGen/VidGen/generatingmain/build/intermediates/pre-dexed/debug/classes-53aec093280782c0c936cd8e447c871752ecc37a.jar" />
     </item>
 
 </items>

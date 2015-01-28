@@ -169,12 +169,9 @@ public class MainActivity extends Activity {
 
                     myDir.mkdirs();
 
-
                     //Toast.makeText(getApplicationContext(), pathlist.size()+"", Toast.LENGTH_SHORT).show();
                     SaveToMemary saveToMemary = new SaveToMemary();
                     saveToMemary.execute(pathlist);
-
-
 
                     NotificationCompat.Builder mBuilder =   new NotificationCompat.Builder(getApplicationContext())
                             .setSmallIcon(R.drawable.ic_launcher) // notification icon

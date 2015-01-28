@@ -34,12 +34,14 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +49,7 @@ import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.Container;
 import com.googlecode.mp4parser.FileDataSourceImpl;
 import com.googlecode.mp4parser.authoring.Movie;
+import com.googlecode.mp4parser.authoring.Track;
 import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
 import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
 import com.googlecode.mp4parser.authoring.tracks.AppendTrack;
@@ -109,6 +112,8 @@ public class MainActivity extends ActionBarActivity {
     private String newMusicPath = null;
     private Long startMiliSc = null;
     private Long endMiliSc = null;
+    private int fadedCount = 0;
+    private boolean fadeEffect = false;
     ProgressDialog progressDialog;
     Handler h;
     @Override
@@ -309,7 +314,6 @@ public class MainActivity extends ActionBarActivity {
                     Bitmap frame = BitmapFactory.decodeFile(img
                             .getAbsolutePath());
                     se.encodeImage(frame);
-
                     publishProgress(i);
 
                 }
@@ -377,7 +381,8 @@ public class MainActivity extends ActionBarActivity {
                             .getAbsolutePath()).copy(Bitmap.Config.ARGB_8888, true);
                     sep.encodeNativeFrameForPartialEffect(BitmapUtil.fromBitmap(frame));
                     System.gc();
-                    publishProgress(imagecounter);
+
+                    publishProgress( imagecounter );
 
 
                 }
@@ -393,8 +398,10 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-            if (!values[0].equals(null))
-                progress.setText("processed " + String.valueOf(values[0]));
+            if (!values[0].equals(null)) {
+                String tmp = (int)( (float)values[0]/fadedCount *100) +"%";
+                progress.setText(tmp);
+            }
         }
         @Override
         protected void onPostExecute(Integer result){
@@ -405,26 +412,31 @@ public class MainActivity extends ActionBarActivity {
     }
 
                 //////Still frame Encoder///////////
-
+    int imagecounter =0;
     private class StillVidEncoder extends AsyncTask<File, Integer, Integer> {
         private static final String TAG = "PartialENCODER";
         protected Integer doInBackground(File... params) {
-            int imagecounter =0;
+
             int vidcnt =1;
 
             try {
 
-                while(true) {
-                    File img = new File(params[0].getParentFile().getPath() + "/image_" + String.format("%03d", imagecounter) + ".png");
-                    if(img.exists()) {
-                        Bitmap frame = BitmapFactory.decodeFile(img.getAbsolutePath());
-                        SequenceEncoder sep = new SequenceEncoder(new File(params[0].getParentFile().getParentFile(),
-                                "still"+vidcnt +".mp4"));
-                        sep.encodeImage(frame);
-                        vidcnt++;
-                        sep.finish();
-                    }
-                    else break;
+                    for (int i = 0; !flag; i++) {
+                        File img = new File(params[0].getParentFile().getPath() + "/image_" + String.format("%03d", imagecounter) + ".png");
+
+                        if (img.exists()) {
+                            Bitmap frame = BitmapFactory.decodeFile(img.getAbsolutePath());
+                            SequenceEncoder sep = new SequenceEncoder(new File(params[0].getParentFile(),
+                                    "still" + vidcnt + ".mp4"));
+                            sep.encodeImage(frame);
+                            sep.encodeImage(frame);
+
+                            vidcnt++;
+                            sep.finish();
+                        } else {
+                            break;
+                        }
+
                     System.gc();
                     publishProgress(imagecounter);
                     imagecounter++;
@@ -442,12 +454,48 @@ public class MainActivity extends ActionBarActivity {
         @Override
         protected void onProgressUpdate(Integer... values) {
             if (!values[0].equals(null))
-                progress.setText("processed " + String.valueOf(values[0]));
+                progress.setText("configuring..");
         }
         @Override
         protected void onPostExecute(Integer result){
-            progress.setText("Ready!");
+            progress.setText("wait..");
 
+            String vid1 = Environment.getExternalStorageDirectory().getPath() + "/vidgen_faded/part";
+            String vid2 = Environment.getExternalStorageDirectory().getPath()+ "/req_images/still";
+
+            AppendTrack apTrc = null;
+
+            try {
+                Track[] videoTracks = new Track[imagecounter*2];
+                    for(int i =1,j=0; i<=imagecounter;i++,j++){
+
+                        MovieCreator mc = new MovieCreator();
+                        Movie mt1 = mc.build(vid1 + i +".mp4");
+                        mc = new MovieCreator();
+                        videoTracks[j]=mt1.getTracks().get(0);
+                        Movie ms1 = mc.build(vid2 + i +".mp4");
+                        videoTracks[j+1]=ms1.getTracks().get(0);
+                        j++;
+
+                    }
+                apTrc = new AppendTrack(videoTracks);
+
+
+                Movie newmovie = new Movie();
+                newmovie.addTrack(apTrc);
+                //Log.d("result video size", "Size:  "+ result.getTracks().size() + " vid samples " + (result.getTracks().get(0).getSamples().size()*scale[0] *1000/23.2) +" vid samples " + (result.getTracks().get(1).getSamples().size() /23.2) );
+
+                // String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                String outputLocation = Environment.getExternalStorageDirectory().getPath() + "/vidgen_faded/fadedvid.mp4";
+                Container out = new DefaultMp4Builder().build(newmovie);
+                FileChannel fc = new RandomAccessFile(String.format(outputLocation), "rw").getChannel();
+                out.writeContainer(fc);
+                fc.close();
+                progress.setText("adding music");
+                ConcateAudioVideo mux = new ConcateAudioVideo();
+                mux.execute(musicPath,outputLocation,"muxing");
+            }
+            catch(Exception e){e.printStackTrace();}
 
         }
     }
@@ -541,7 +589,7 @@ public class MainActivity extends ActionBarActivity {
 
     final int[] scale= new int [2];
     final String[] name = new String[2];
-
+    Switch switchFade =null;
     public void onSettingsButtonClick(View v){
         View popupView = getLayoutInflater().inflate(R.layout.popup_settings, null);
 
@@ -551,6 +599,7 @@ public class MainActivity extends ActionBarActivity {
           interval = (TextView) popupView.findViewById(R.id.textInterval);
           timeinterval = (SeekBar)popupView.findViewById(R.id.tIntervalSeekBar);
           outputEditText = (EditText)popupView.findViewById(R.id.videoName);
+          switchFade = (Switch)popupView.findViewById(R.id.switchFade);
           RangeSeekBar<Long> rengeSeekbar = (RangeSeekBar)popupView.findViewById(R.id.rangeSeekbar);
 
           timeinterval.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -624,6 +673,14 @@ public class MainActivity extends ActionBarActivity {
           });
       }
 
+        switchFade.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    fadeEffect = true;
+                else fadeEffect = false;
+            }
+        });
 
 
 
@@ -636,81 +693,6 @@ public class MainActivity extends ActionBarActivity {
 
     public void onTestMp3Click(View v) throws IOException {
 
-        String filename = Environment.getExternalStorageDirectory().getPath() +"/req_images/image_";
-        String filename2 = "/storage/removable/sdcard1/image_faded";
-
-        String filenm = Environment.getExternalStorageDirectory().getPath()+"/vidgen_faded/image_faded";
-        File f = new File(Environment.getExternalStorageDirectory().getPath() + "/vidgen_faded");
-        if( !(f.exists() && f.isDirectory())) {
-            f.mkdir();
-        }
-        else{
-
-        }
-
-
-        try {
-            for(int i =0;;i++) {
-             File vv = new File(filename+String.format("%03d",i)+".png");
-                if(vv.exists()) {
-                    fadeInOut(vv.getPath());
-                }
-                else break;
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-
-         String flnm = filenm+String.format("%03d",1)+".png";
-            File ff = new File(flnm);
-           if(ff.exists()){
-               new PartialVidEncoder().execute(ff);
-
-           }
-           else ;
-
-        File fadfile = new File(filename+"000.png");
-        if(fadfile.exists()){
-            new StillVidEncoder().execute(fadfile);
-
-        }
-        String vid1 = Environment.getExternalStorageDirectory().getPath() + "/vidgen_faded/part";
-        String vid2 = Environment.getExternalStorageDirectory().getPath()+ "/still";
-
-
-            MovieCreator mc = new MovieCreator();
-
-            Movie mt1 = mc.build(vid1+1+".mp4");
-            mc = new MovieCreator();
-
-            Movie mt2 = mc.build(vid1+2+".mp4");
-            mc = new MovieCreator();
-            Movie mt3 = mc.build(vid1+3+".mp4");
-            mc = new MovieCreator();
-
-
-            Movie ms1 = mc.build(vid2+1+".mp4");
-            mc = new MovieCreator();
-            Movie ms2 = mc.build(vid2+2+".mp4");
-            mc = new MovieCreator();
-            Movie ms3 = mc.build(vid2+3+".mp4");
-            AppendTrack apTrc = new AppendTrack(mt1.getTracks().get(0),ms1.getTracks().get(0),mt2.getTracks().get(0),ms2.getTracks().get(0),mt3.getTracks().get(0),ms3.getTracks().get(0));
-
-            Movie newmovie = new Movie();
-            newmovie.addTrack(apTrc);
-            //Log.d("result video size", "Size:  "+ result.getTracks().size() + " vid samples " + (result.getTracks().get(0).getSamples().size()*scale[0] *1000/23.2) +" vid samples " + (result.getTracks().get(1).getSamples().size() /23.2) );
-
-           // String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-            String outputLocation = Environment.getExternalStorageDirectory().getPath()+ "/VidGen_fadeEffect.mp4";
-            Container out = new DefaultMp4Builder().build(newmovie);
-            FileChannel fc = new RandomAccessFile(String.format(outputLocation), "rw").getChannel();
-            out.writeContainer(fc);
-            fc.close();
-
-
 
 
 
@@ -718,9 +700,6 @@ public class MainActivity extends ActionBarActivity {
 
 
     }
-
-
-
 
 
     private void concatWithAudio(String audiopath, String videopath) throws IOException{
@@ -775,40 +754,97 @@ public class MainActivity extends ActionBarActivity {
             out.writeContainer(fc);
             fc.close();
 
-            finish();
+
         }
-        else {Toast.makeText(this,"No music is selected",Toast.LENGTH_SHORT).show();}
+        else {
+            String video = videopath;
+            Movie newmovie = new Movie();
+            MovieCreator mc = new MovieCreator();
+            Movie countVideo = mc.build(video);
+            newmovie.addTrack(countVideo.getTracks().get(0));
+            //Log.d("result video size", "Size:  "+ result.getTracks().size() + " vid samples " + (result.getTracks().get(0).getSamples().size()*scale[0] *1000/23.2) +" vid samples " + (result.getTracks().get(1).getSamples().size() /23.2) );
+            String outputLocation = Environment.getExternalStorageDirectory().getPath()+ "/VidGen_"+name[0] + ".mp4";
+            Container out = new DefaultMp4Builder().build(newmovie);
+            FileChannel fc = new RandomAccessFile(String.format(outputLocation), "rw").getChannel();
+            out.writeContainer(fc);
+            fc.close();
+            Toast.makeText(this,"No music is selected",Toast.LENGTH_SHORT).show();
+
+           }
+        finish();
     }
 
 
         ////////////
 
+
     public void makevideoClick(View v) {
-        if (name[0]!=null) {
+        if (name[0] != null) {
+
+            if (!fadeEffect) {
+
+                if (path != null) {
+
+                    path = Environment.getExternalStorageDirectory().getPath() + "/req_images";
+                    File file = new File(path + "/image_000.png");
+
+                    String digits = file.getName().replaceAll("\\D+(\\d+)\\D+",
+                            "$1");
+                    String mask = file.getName().replaceAll("(\\D+)\\d+(\\D+)",
+                            "$1%0" + digits.length() + "d$2");
+
+                    new Encoder().execute(new File(path + "/", mask));
+
+                } else
+                    Toast.makeText(getApplicationContext(), "path is null", Toast.LENGTH_SHORT).show();
+
+            } else {
+                String filename = Environment.getExternalStorageDirectory().getPath() + "/req_images/image_";
+                String filename2 = "/storage/removable/sdcard1/image_faded";
+
+                String filenm = Environment.getExternalStorageDirectory().getPath() + "/vidgen_faded/image_faded";
+                File f = new File(Environment.getExternalStorageDirectory().getPath() + "/vidgen_faded");
+                if (!(f.exists() && f.isDirectory())) {
+                    f.mkdir();
+                } else {
+
+                }
 
 
-            if(path!=null) {
+                try {
+                    for (int i = 0; ; i++) {
+                        fadedCount = (i + 1) * 10;
+                        File vv = new File(filename + String.format("%03d", i) + ".png");
+                        if (vv.exists()) {
+                            fadeInOut(vv.getPath());
+                        } else break;
 
-                path = Environment.getExternalStorageDirectory().getPath()+"/req_images";
-                File file = new File( path + "/image_000.png");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
-                String digits = file.getName().replaceAll("\\D+(\\d+)\\D+",
-                        "$1");
-                String mask = file.getName().replaceAll("(\\D+)\\d+(\\D+)",
-                        "$1%0" + digits.length() + "d$2");
 
-                new Encoder().execute(new File( path + "/", mask));
+                String flnm = filenm + String.format("%03d", 1) + ".png";
+                File ff = new File(flnm);
+                if (ff.exists()) {
+                    new PartialVidEncoder().execute(ff);
+
+                }
+
+
+                File fadfile = new File(filename + "000.png");
+                if (fadfile.exists()) {
+                    new StillVidEncoder().execute(fadfile);
+
+                }
+
             }
-            else
-                Toast.makeText(getApplicationContext(),"path is null",Toast.LENGTH_SHORT).show();
 
         }
-
         else
-            Toast.makeText(getApplicationContext(),"Please configure output settings",Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(getApplicationContext(), "Please configure output settings", Toast.LENGTH_SHORT).show();
     }
-
 
 
     @Override
@@ -1024,6 +1060,13 @@ public class MainActivity extends ActionBarActivity {
                 }
 
             }
+            dir = new File(Environment.getExternalStorageDirectory() + "/vidgen_faded");
+            if (dir.isDirectory()) {
+                String[] children = dir.list();
+                for (int i = 0; i < children.length; i++) {
+                    new File(dir, children[i]).delete();
+                }
+            }
 
 
         } catch(Exception e){ }
@@ -1039,8 +1082,15 @@ public class MainActivity extends ActionBarActivity {
                 for (int i = 0; i < children.length; i++) {
                     new File(dir, children[i]).delete();
                 }
-
             }
+                dir = new File(Environment.getExternalStorageDirectory() + "/vidgen_faded");
+                if (dir.isDirectory()) {
+                    String[] children = dir.list();
+                    for (int i = 0; i < children.length; i++) {
+                        new File(dir, children[i]).delete();
+                    }
+                }
+
 
         } catch (Exception e){}
         finish();

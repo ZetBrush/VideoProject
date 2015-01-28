@@ -1,6 +1,6 @@
-/Users/intern/Downloads/VidGen/VidGen/MultiPick/build/intermediates/classes/debug
-/Users/intern/Downloads/VidGen/VidGen/MultiPick/build/intermediates/pre-dexed/debug/support-annotations-21.0.2-2bb0ea5d4f7b8521116516ede3ac116717cd3d28.jar
-/Users/intern/Downloads/VidGen/VidGen/MultiPick/build/intermediates/pre-dexed/debug/universal-image-loader-1.9.0-a3b0c9c6a3f456e3177042aa7cea8302d4d15eb9.jar
-/Users/intern/Downloads/VidGen/VidGen/MultiPick/build/intermediates/pre-dexed/debug/internal_impl-21.0.2-4dce71af24865ee7e346d310592fbd9bdecadc4f.jar
-/Users/intern/Downloads/VidGen/VidGen/MultiPick/build/intermediates/pre-dexed/debug/classes-36d89069e2cd0a77d528b711a09d2353217723de.jar
-/Users/intern/Downloads/VidGen/VidGen/MultiPick/build/intermediates/pre-dexed/debug/classes-bc0eff953540a561569f2ef68526a8b6fc929811.jar
+/Users/intern/Downloads/VideoGenerationJC/MultiPick/build/intermediates/classes/debug
+/Users/intern/Downloads/VideoGenerationJC/MultiPick/build/intermediates/pre-dexed/debug/support-annotations-21.0.2-2bb0ea5d4f7b8521116516ede3ac116717cd3d28.jar
+/Users/intern/Downloads/VideoGenerationJC/MultiPick/build/intermediates/pre-dexed/debug/universal-image-loader-1.9.0-f27877ba48e02fd24ddce93b718867ba6524eb07.jar
+/Users/intern/Downloads/VideoGenerationJC/MultiPick/build/intermediates/pre-dexed/debug/internal_impl-21.0.2-2dd86f4a0daca67fcf0389a3912217552a2793b7.jar
+/Users/intern/Downloads/VideoGenerationJC/MultiPick/build/intermediates/pre-dexed/debug/classes-8e65d4506880c4483db48ca628539834c3a4c486.jar
+/Users/intern/Downloads/VideoGenerationJC/MultiPick/build/intermediates/pre-dexed/debug/classes-c8f6f8139bb21b3c2f2fb69c93eaa39488ed7feb.jar

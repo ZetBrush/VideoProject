@@ -100,20 +100,19 @@ public class SequenceEncoder {
 
            if (framesec ==0)
                 framesec =1;
-            if(framesec>2)
-             framesec=2;
-             outTrack.addFrame(new MP4Packet(
-                result,
-                frameNo * framesec,
-                1,
-                framesec,
-                frameNo,
-                true,
-                null,
-                frameNo * framesec,
-                0));
 
-        frameNo++;
+            outTrack.addFrame(new MP4Packet(
+                    result,
+                    frameNo * framesec,
+                    1,
+                    framesec,
+                    frameNo,
+                    true,
+                    null,
+                    frameNo * framesec,
+                    0));
+
+            frameNo++;
 
     }
     public void encodeNativeFrameForPartialEffect(Picture pic) throws IOException {

@@ -25,7 +25,9 @@
             </intent-filter>
 
         </activity>
-
+        <service
+            android:name=".VideoRenderService"
+            android:exported="false"/>
 
     </application>
 

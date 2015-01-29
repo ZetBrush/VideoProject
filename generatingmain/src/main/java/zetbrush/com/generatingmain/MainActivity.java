@@ -1,7 +1,9 @@
 package zetbrush.com.generatingmain;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -17,16 +19,14 @@ import android.media.MediaExtractor;
 import android.media.MediaFormat;
 import android.media.MediaMuxer;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
+import android.os.*;
+import android.os.Process;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -68,6 +68,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
@@ -112,7 +113,7 @@ public class MainActivity extends ActionBarActivity {
     private String newMusicPath = null;
     private Long startMiliSc = null;
     private Long endMiliSc = null;
-    private int fadedCount = 0;
+    private int imageCount = 0;
     private boolean fadeEffect = false;
     ProgressDialog progressDialog;
     Handler h;
@@ -120,10 +121,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
-
 
 
         makeVideoButton = (Button) findViewById(R.id.makeVideoBut);
@@ -144,7 +141,7 @@ public class MainActivity extends ActionBarActivity {
         }catch (Exception e){
             path = "/storage/removable/sdcard1/DCIM/100ANDRO/newfold";
         }
-
+        setImageCount();
 
     }
 
@@ -155,7 +152,6 @@ public class MainActivity extends ActionBarActivity {
         intent.setType("*/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent.createChooser(intent,"Complate action using"),5);
-
 
     }
 
@@ -229,6 +225,26 @@ public class MainActivity extends ActionBarActivity {
 
     //////DeleteMusicPath////
 
+
+    public void setImageCount(){
+
+        this.imageCount =getCount(Environment.getExternalStorageDirectory().getPath()+"/req_images");
+    }
+    private int getCount(String dirPath)
+    {
+        int fls = 0;
+        File f = new File(dirPath);
+        File[] files  = f.listFiles();
+
+        if(files != null)
+            for(int i=0; i < files.length; i++)
+            {
+                fls ++;
+                File file = files[i];
+            }
+        return fls;
+    }
+
     public void onDeleteMusicPathClick(View v){
         musicPath = null;
         player.stop();
@@ -266,6 +282,7 @@ public class MainActivity extends ActionBarActivity {
     private class ConcateAudioVideo extends AsyncTask<String,String,String>{
 
         protected String doInBackground(String...paths){
+            android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
             try {
                 concatWithAudio(paths[0],paths[1]);
             } catch (IOException e) {
@@ -329,7 +346,7 @@ public class MainActivity extends ActionBarActivity {
         @Override
         protected void onProgressUpdate(Integer... values) {
             if (!values[0].equals(null))
-                progress.setText("processed " + String.valueOf(values[0]));
+                progress.setText("processed " +  (int)( ((float)values[0])/imageCount*100) +"%" );
         }
         @Override
         protected void onPostExecute(Integer result){
@@ -351,42 +368,49 @@ public class MainActivity extends ActionBarActivity {
     private class PartialVidEncoder extends AsyncTask<File, Integer, Integer> {
         private static final String TAG = "PartialENCODER";
         protected Integer doInBackground(File... params) {
-
-            SequenceEncoderPartial sep = null;
+            android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
+            SequenceEncoderPartial se = null;
             try {
-                sep =  new SequenceEncoderPartial(new File(params[0].getParentFile(),
+                se =  new SequenceEncoderPartial(new File(params[0].getParentFile(),
                         "part"+vidcount +".mp4"));
 
                 int transcounter =0;
                 int imagecounter = 0;
                 String dirNm = params[0].getParentFile().getPath();
+
+
                 while(true){
-                    transcounter++;
-                    imagecounter++;
-                    File img = new File(dirNm + "/image_faded"+String.format("%03d",imagecounter)+".png");
-                    if(transcounter==10){
-                        transcounter=0;
-                        vidcount++;
-                        sep.finish();
-                        File imgg = new File(dirNm + "/image_faded"+String.format("%03d",imagecounter+1)+".png");
+
+                    File img = new File(dirNm + "/image_"+String.format("%03d",imagecounter)+".png");
+                    Bitmap btm = BitmapFactory.decodeFile(img.getAbsolutePath());
+                    int width = btm.getWidth();
+                    int height = btm.getHeight();
+                    Bitmap transBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+                    Canvas canvas = new Canvas(transBitmap);
+                    canvas.drawRGB( 0, 0, 0);
+                    for(int i =0; i<=9;i++){
+
+                        final Paint paint = new Paint();
+                        paint.setAlpha(i * 10);
+                        canvas.drawBitmap(btm, 0, 0, paint);
+                        se.encodeNativeFrameForPartialEffect(BitmapUtil.fromBitmap(transBitmap));
+                        publishProgress( transcounter );
+                        transcounter++;
+                    }
+                    vidcount++;
+                    se.finish();
+                    System.gc();
+                        File imgg = new File(dirNm + "/image_"+String.format("%03d",imagecounter+1)+".png");
                         if (!imgg.exists()){
                             vidcount=1;
                             break;
                         }
-                        sep =  new SequenceEncoderPartial(new File(params[0].getParentFile(),
+                        imagecounter++;
+                        se=  new SequenceEncoderPartial(new File(params[0].getParentFile(),
                                 "part"+vidcount +".mp4"));
+
+
                     }
-
-                    Bitmap frame = BitmapFactory.decodeFile(img
-                            .getAbsolutePath()).copy(Bitmap.Config.ARGB_8888, true);
-                    sep.encodeNativeFrameForPartialEffect(BitmapUtil.fromBitmap(frame));
-                    System.gc();
-
-                    publishProgress( imagecounter );
-
-
-                }
-
 
 
             } catch (IOException e) {
@@ -399,7 +423,7 @@ public class MainActivity extends ActionBarActivity {
         @Override
         protected void onProgressUpdate(Integer... values) {
             if (!values[0].equals(null)) {
-                String tmp = (int)( (float)values[0]/fadedCount *100) +"%";
+                String tmp = (int)( ((float)values[0]/(imageCount *10)) *100) +"%";
                 progress.setText(tmp);
             }
         }
@@ -414,13 +438,12 @@ public class MainActivity extends ActionBarActivity {
                 //////Still frame Encoder///////////
     int imagecounter =0;
     private class StillVidEncoder extends AsyncTask<File, Integer, Integer> {
+
         private static final String TAG = "PartialENCODER";
         protected Integer doInBackground(File... params) {
-
+            android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
             int vidcnt =1;
-
             try {
-
                     for (int i = 0; !flag; i++) {
                         File img = new File(params[0].getParentFile().getPath() + "/image_" + String.format("%03d", imagecounter) + ".png");
 
@@ -429,8 +452,6 @@ public class MainActivity extends ActionBarActivity {
                             SequenceEncoder sep = new SequenceEncoder(new File(params[0].getParentFile(),
                                     "still" + vidcnt + ".mp4"));
                             sep.encodeImage(frame);
-                            sep.encodeImage(frame);
-
                             vidcnt++;
                             sep.finish();
                         } else {
@@ -460,7 +481,7 @@ public class MainActivity extends ActionBarActivity {
         protected void onPostExecute(Integer result){
             progress.setText("wait..");
 
-            String vid1 = Environment.getExternalStorageDirectory().getPath() + "/vidgen_faded/part";
+            String vid1 = Environment.getExternalStorageDirectory().getPath() + "/req_images/part";
             String vid2 = Environment.getExternalStorageDirectory().getPath()+ "/req_images/still";
 
             AppendTrack apTrc = null;
@@ -480,7 +501,6 @@ public class MainActivity extends ActionBarActivity {
                     }
                 apTrc = new AppendTrack(videoTracks);
 
-
                 Movie newmovie = new Movie();
                 newmovie.addTrack(apTrc);
                 //Log.d("result video size", "Size:  "+ result.getTracks().size() + " vid samples " + (result.getTracks().get(0).getSamples().size()*scale[0] *1000/23.2) +" vid samples " + (result.getTracks().get(1).getSamples().size() /23.2) );
@@ -499,10 +519,6 @@ public class MainActivity extends ActionBarActivity {
 
         }
     }
-
-
-
-
 
     ImageView imagepreview;
     PlayerEvents events = new PlayerEvents() {
@@ -546,7 +562,6 @@ public class MainActivity extends ActionBarActivity {
            imagepreview = (ImageView)findViewById(R.id.imagepreview);
             playButton.setText("Pause");
 
-
         }
 
         @Override
@@ -587,14 +602,23 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+
     final int[] scale= new int [2];
     final String[] name = new String[2];
     Switch switchFade =null;
     public void onSettingsButtonClick(View v){
-        View popupView = getLayoutInflater().inflate(R.layout.popup_settings, null);
+
+        Animation bottomUp = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.top_up);
+
+         final View popupView = getLayoutInflater().inflate(R.layout.popup_settings, null);
+                popupView.startAnimation(bottomUp);
+                popupView.setVisibility(View.VISIBLE);
 
         PopupWindow popupWindow = new PopupWindow(popupView,
                 RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+
 
           interval = (TextView) popupView.findViewById(R.id.textInterval);
           timeinterval = (SeekBar)popupView.findViewById(R.id.tIntervalSeekBar);
@@ -648,8 +672,18 @@ public class MainActivity extends ActionBarActivity {
 
         v.getLocationOnScreen(location);
 
-        popupWindow.showAtLocation(v, Gravity.NO_GRAVITY,
-                location[0]-v.getHeight()*3,   location[1]-v.getWidth()*3);
+        popupWindow.showAtLocation(v, Gravity.TOP,  0, 165 );
+               // location[0]-v.getHeight()*3,   location[1]-v.getWidth()*3);
+
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                Animation bottomDn = AnimationUtils.loadAnimation(getApplicationContext(),
+                        R.anim.top_down);
+                popupView.startAnimation(bottomDn);
+
+            }
+        });
 
 
 
@@ -693,6 +727,7 @@ public class MainActivity extends ActionBarActivity {
 
     public void onTestMp3Click(View v) throws IOException {
 
+        String filename = Environment.getExternalStorageDirectory().getPath() + "/req_images/image_000.png";
 
 
 
@@ -811,21 +846,7 @@ public class MainActivity extends ActionBarActivity {
                 }
 
 
-                try {
-                    for (int i = 0; ; i++) {
-                        fadedCount = (i + 1) * 10;
-                        File vv = new File(filename + String.format("%03d", i) + ".png");
-                        if (vv.exists()) {
-                            fadeInOut(vv.getPath());
-                        } else break;
-
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-
-                String flnm = filenm + String.format("%03d", 1) + ".png";
+                String flnm = filename + "000.png";
                 File ff = new File(flnm);
                 if (ff.exists()) {
                     new PartialVidEncoder().execute(ff);
@@ -1060,14 +1081,6 @@ public class MainActivity extends ActionBarActivity {
                 }
 
             }
-            dir = new File(Environment.getExternalStorageDirectory() + "/vidgen_faded");
-            if (dir.isDirectory()) {
-                String[] children = dir.list();
-                for (int i = 0; i < children.length; i++) {
-                    new File(dir, children[i]).delete();
-                }
-            }
-
 
         } catch(Exception e){ }
     }
@@ -1083,14 +1096,6 @@ public class MainActivity extends ActionBarActivity {
                     new File(dir, children[i]).delete();
                 }
             }
-                dir = new File(Environment.getExternalStorageDirectory() + "/vidgen_faded");
-                if (dir.isDirectory()) {
-                    String[] children = dir.list();
-                    for (int i = 0; i < children.length; i++) {
-                        new File(dir, children[i]).delete();
-                    }
-                }
-
 
         } catch (Exception e){}
         finish();

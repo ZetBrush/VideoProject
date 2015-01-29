@@ -20,9 +20,7 @@ android {
 }
 
 dependencies {
-    //compile files('aacdecoder-android-0.8.jar')
     compile 'com.android.support:appcompat-v7:21.0.0'
-    // compile group: 'org.bytedeco', name: 'javacv', version: '0.9'
     compile project(':app')
     compile project(':oMXPlayer')
 

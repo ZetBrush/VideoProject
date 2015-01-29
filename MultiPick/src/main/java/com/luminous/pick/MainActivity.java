@@ -129,7 +129,6 @@ public class MainActivity extends Activity {
 
                     SaveToMemary saveToMemary = new SaveToMemary();
                     saveToMemary.execute(pathlist);
-
                     intent = new Intent("android.intent.action.videogen");
                     intent.putExtra("myimagespath", myDir.toString());
                     //startActivity(intent);

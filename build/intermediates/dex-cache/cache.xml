@@ -8,5 +8,12 @@
         sha1="c6d1282c6012abd1dd849c73afb03503d05b4f83">
         <dex dex="/Users/intern/Downloads/VidGen/VidGen/generatingmain/build/intermediates/pre-dexed/debug/classes-53aec093280782c0c936cd8e447c871752ecc37a.jar" />
     </item>
+    <item
+        jar="/Users/intern/Downloads/VidGen/VidGen/MultiPick/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.2/classes.jar"
+        jumboMode="false"
+        revision="21.1.1"
+        sha1="7ae2d38807a43b2f2185ff4089a92c790b579e54">
+        <dex dex="/Users/intern/Downloads/VidGen/VidGen/MultiPick/build/intermediates/pre-dexed/debug/classes-d78f041bf144c0f1430856f01b77b575407743c7.jar" />
+    </item>
 
 </items>

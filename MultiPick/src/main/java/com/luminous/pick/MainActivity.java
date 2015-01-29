@@ -11,6 +11,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -26,6 +27,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -78,6 +81,7 @@ public class MainActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.main);
 
+
         initImageLoader();
         init();
     }
@@ -102,8 +106,8 @@ public class MainActivity extends Activity {
         sharedPreferences = getPreferences(MODE_PRIVATE);
 
         pathlist = new LinkedList<>();
-        TextView txt = (TextView) findViewById(R.id.selected_count);
-        txt.setVisibility(View.GONE);
+        /*TextView txt = (TextView) findViewById(R.id.selected_count);
+        txt.setVisibility(View.GONE);*/
 
         recyclerView = (RecyclerView) findViewById(R.id.rec_test);
         currentImage = (ImageView) findViewById(R.id.image_id);
@@ -126,7 +130,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        next = (Button) findViewById(R.id.go_button);
+        /*next = (Button) findViewById(R.id.go_button);
         next.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -149,7 +153,7 @@ public class MainActivity extends Activity {
                 }
                 //foo(getApplicationContext());
             }
-        });
+        });*/
 
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -170,9 +174,9 @@ public class MainActivity extends Activity {
         playBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i = 0; i < arrayList.size(); i++) {
+                /*for (int i = 0; i < arrayList.size(); i++) {
                     currentImage.setImageBitmap(arrayList.get(i));
-                }
+                }*/
                 startService(new Intent(getApplicationContext(), MyService.class));
             }
         });
@@ -205,7 +209,7 @@ public class MainActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "" + pathlist.size(), Toast.LENGTH_SHORT).show();
             }
             //btnGalleryPickMul.setVisibility(View.VISIBLE);
-            next.setVisibility(View.VISIBLE);
+            //next.setVisibility(View.VISIBLE);
         }
     }
 
@@ -389,5 +393,13 @@ public class MainActivity extends Activity {
 
         protected void onProgressUpdate(Integer... progress) {
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }

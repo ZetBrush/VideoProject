@@ -371,7 +371,8 @@ public class MainActivity extends ActionBarActivity {
             android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
             SequenceEncoderPartial se = null;
             try {
-                se =  new SequenceEncoderPartial(new File(params[0].getParentFile(),
+
+                    se =  new SequenceEncoderPartial(new File(params[0].getParentFile(),
                         "part"+vidcount +".mp4"));
 
                 int transcounter =0;
@@ -386,14 +387,17 @@ public class MainActivity extends ActionBarActivity {
                     int width = btm.getWidth();
                     int height = btm.getHeight();
                     Bitmap transBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-                    Canvas canvas = new Canvas(transBitmap);
-                    canvas.drawRGB( 0, 0, 0);
-                    for(int i =0; i<=9;i++){
 
+                    for(int i =0; i<9;i++){
+                        Canvas canvas = new Canvas(transBitmap);
+                        canvas.drawRGB( 0, 0, 0);
                         final Paint paint = new Paint();
                         paint.setAlpha(i * 10);
+
                         canvas.drawBitmap(btm, 0, 0, paint);
+
                         se.encodeNativeFrameForPartialEffect(BitmapUtil.fromBitmap(transBitmap));
+
                         publishProgress( transcounter );
                         transcounter++;
                     }
@@ -442,25 +446,52 @@ public class MainActivity extends ActionBarActivity {
         private static final String TAG = "PartialENCODER";
         protected Integer doInBackground(File... params) {
             android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
-            int vidcnt =1;
+            int vidcnt = 1;
+            if(scale[0]<1){ scale[0]=1;}
+
             try {
-                    for (int i = 0; !flag; i++) {
-                        File img = new File(params[0].getParentFile().getPath() + "/image_" + String.format("%03d", imagecounter) + ".png");
 
-                        if (img.exists()) {
-                            Bitmap frame = BitmapFactory.decodeFile(img.getAbsolutePath());
-                            SequenceEncoder sep = new SequenceEncoder(new File(params[0].getParentFile(),
-                                    "still" + vidcnt + ".mp4"));
-                            sep.encodeImage(frame);
-                            vidcnt++;
-                            sep.finish();
-                        } else {
-                            break;
-                        }
+              for (int i = 0; !flag; i++) {
+                 File img = new File(params[0].getParentFile().getPath() + "/image_" + String.format("%03d", imagecounter) + ".png");
 
-                    System.gc();
-                    publishProgress(imagecounter);
+                if (img.exists()) {
+
+                    Bitmap frame = BitmapFactory.decodeFile(img.getAbsolutePath());
+                    SequenceEncoderPartial sep = new SequenceEncoderPartial(new File(params[0].getParentFile(),
+                            "still" + vidcnt + ".mp4"));
+                    sep.encodeNativeFrameForPartialEffect(BitmapUtil.fromBitmap(frame));
+                    sep.finish();
                     imagecounter++;
+                    frame.recycle();
+
+                    MovieCreator mc = new MovieCreator();
+
+                    Movie mm = mc.build(params[0].getParentFile().getPath() + "/still" + vidcnt + ".mp4");
+                    Track vidTr = mm.getTracks().get(0);
+                    AppendTrack stillApTr;
+                    Track[] vidTracks = new Track[scale[0] * 10];
+
+                    for (int j = 0; j < scale[0] * 10; j++) {
+                        vidTracks[j] = vidTr;
+                    }
+
+                    stillApTr = new AppendTrack(vidTracks);
+                    Movie newmovie = new Movie();
+                    newmovie.addTrack(stillApTr);
+                    String outputLocation = Environment.getExternalStorageDirectory().getPath() + "/req_images/stilll"+vidcnt+ ".mp4";
+                    Container out = new DefaultMp4Builder().build(newmovie);
+                    FileChannel fc = new RandomAccessFile(String.format(outputLocation), "rw").getChannel();
+                    out.writeContainer(fc);
+                    fc.close();
+                    vidcnt++;
+
+                } else {
+                    break;
+                }
+
+                System.gc();
+                publishProgress(imagecounter);
+
 
                 }
 
@@ -475,14 +506,14 @@ public class MainActivity extends ActionBarActivity {
         @Override
         protected void onProgressUpdate(Integer... values) {
             if (!values[0].equals(null))
-                progress.setText("configuring..");
+                progress.setText("conf " + values[0]);
         }
         @Override
         protected void onPostExecute(Integer result){
             progress.setText("wait..");
 
             String vid1 = Environment.getExternalStorageDirectory().getPath() + "/req_images/part";
-            String vid2 = Environment.getExternalStorageDirectory().getPath()+ "/req_images/still";
+            String vid2 = Environment.getExternalStorageDirectory().getPath()+ "/req_images/stilll";
 
             AppendTrack apTrc = null;
 
@@ -504,9 +535,8 @@ public class MainActivity extends ActionBarActivity {
                 Movie newmovie = new Movie();
                 newmovie.addTrack(apTrc);
                 //Log.d("result video size", "Size:  "+ result.getTracks().size() + " vid samples " + (result.getTracks().get(0).getSamples().size()*scale[0] *1000/23.2) +" vid samples " + (result.getTracks().get(1).getSamples().size() /23.2) );
-
                 // String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-                String outputLocation = Environment.getExternalStorageDirectory().getPath() + "/vidgen_faded/fadedvid.mp4";
+                String outputLocation = Environment.getExternalStorageDirectory().getPath() + "/req_images/fadedvid.mp4";
                 Container out = new DefaultMp4Builder().build(newmovie);
                 FileChannel fc = new RandomAccessFile(String.format(outputLocation), "rw").getChannel();
                 out.writeContainer(fc);
@@ -716,9 +746,6 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-
-
-
     }
 
     ////////////////////////////TEST MP3 ///////////////////////////////
@@ -727,10 +754,41 @@ public class MainActivity extends ActionBarActivity {
 
     public void onTestMp3Click(View v) throws IOException {
 
-        String filename = Environment.getExternalStorageDirectory().getPath() + "/req_images/image_000.png";
+        String filename = "/storage/removable/sdcard1/image_000.png";
+        File img = new File(filename);
+        Bitmap frame = BitmapFactory.decodeFile(img.getAbsolutePath());
+        SequenceEncoderPartial sep = new SequenceEncoderPartial(new File("/storage/removable/sdcard1",
+                "still_count.mp4"));
+
+        sep.encodeNativeFrameForPartialEffect(BitmapUtil.fromBitmap(frame));
+
+        sep.finish();
+        frame.recycle();
+        MovieCreator mc = new MovieCreator();
+        Movie mm = mc.build("/storage/removable/sdcard1/still_count.mp4");
+
+        Track vidTr = mm.getTracks().get(0);
+        AppendTrack stillApTr = null;
+
+        Track[] vidTracks = new Track[scale[0]*10];
 
 
-
+        try {
+            for (int i = 0; i<scale[0]*10; i++) {
+                vidTracks[i]=vidTr;
+                }
+            stillApTr  = new AppendTrack(vidTracks);
+            Movie newmovie = new Movie();
+            newmovie.addTrack(stillApTr);
+            //Log.d("result video size", "Size:  "+ result.getTracks().size() + " vid samples " + (result.getTracks().get(0).getSamples().size()*scale[0] *1000/23.2) +" vid samples " + (result.getTracks().get(1).getSamples().size() /23.2) );
+            // String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            String outputLocation = Environment.getExternalStorageDirectory().getPath() + "/stilledNew.mp4";
+            Container out = new DefaultMp4Builder().build(newmovie);
+            FileChannel fc = new RandomAccessFile(String.format(outputLocation), "rw").getChannel();
+            out.writeContainer(fc);
+            fc.close();
+            }
+        catch (Exception e){e.printStackTrace();}
 
 
 
@@ -757,7 +815,6 @@ public class MainActivity extends ActionBarActivity {
             CroppedTrack ct = null;
             double endmilis =0;
             double startmilis =0;
-
                 endmilis=endMiliSc/1000;
 
             if(startMiliSc == null) {
@@ -788,7 +845,6 @@ public class MainActivity extends ActionBarActivity {
             FileChannel fc = new RandomAccessFile(String.format(outputLocation), "rw").getChannel();
             out.writeContainer(fc);
             fc.close();
-
 
         }
         else {

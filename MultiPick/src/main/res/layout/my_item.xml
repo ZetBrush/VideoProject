@@ -5,8 +5,8 @@
 
     <ImageView
         android:id="@+id/image_item"
-        android:layout_width="110dp"
-        android:layout_height="110dp"/>
+        android:layout_width="@dimen/rec_height"
+        android:layout_height="@dimen/rec_height"/>
 
     <Button
         android:id="@+id/delete_item"
@@ -22,4 +22,5 @@
         android:layout_gravity="right|top"
         android:layout_marginRight="2dp"
         android:background="@drawable/rot"/>-->
+
 </FrameLayout>

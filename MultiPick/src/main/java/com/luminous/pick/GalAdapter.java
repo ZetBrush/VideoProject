@@ -1,5 +1,6 @@
 package com.luminous.pick;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
@@ -26,18 +27,18 @@ public class GalAdapter extends RecyclerView.Adapter<GalAdapter.ViewHolder> {
     String [] all_path=null;
     ImageLoader imageLoader;
 
+    ActionBar actionBar;
 
-    TextView sel_count;
 
     private boolean isActionMultiplePick;
 
-    public GalAdapter(Context c,ImageLoader imageLoader, ArrayList<Bitmap> arr,TextView text) {
+    public GalAdapter(Context c,ImageLoader imageLoader, ArrayList<Bitmap> arr,ActionBar act) {
         infalter = (LayoutInflater) c
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mContext = c;
-        sel_count=text;
         //this.arr=arr;
         this.imageLoader = imageLoader;
+        actionBar=act;
     }
 
     @Override
@@ -54,10 +55,10 @@ public class GalAdapter extends RecyclerView.Adapter<GalAdapter.ViewHolder> {
             public void onClick(View v) {
                 if (data.get(position).isSeleted) {
                     data.get(position).isSeleted = false;
-                    sel_count.setText("Selected: "+String.valueOf(getSelectedCount()));
+                    actionBar.setTitle("Selected: "+String.valueOf(getSelectedCount()));
                 } else {
                     data.get(position).isSeleted = true;
-                    sel_count.setText("Selected: "+String.valueOf(getSelectedCount()));
+                    actionBar.setTitle("Selected: "+String.valueOf(getSelectedCount()));
                 }
 
                 holder.imgQueueMultiSelected.setSelected(data

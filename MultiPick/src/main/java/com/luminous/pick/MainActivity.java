@@ -26,13 +26,16 @@ import android.os.Process;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,15 +76,20 @@ public class MainActivity extends Activity {
     private File myDir = new File(root + "/req_images");
 
 
+    Down down;
+    private Boolean playButtonIsSelected=false;
     Button playBut;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.main);
 
-        //testing github on windows
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.show();
 
         initImageLoader();
         init();
@@ -102,16 +110,22 @@ public class MainActivity extends Activity {
 
     private void init() {
 
-
+        down=new Down();
         playBut = (Button) findViewById(R.id.bt);
         sharedPreferences = getPreferences(MODE_PRIVATE);
-
         pathlist = new LinkedList<>();
-        /*TextView txt = (TextView) findViewById(R.id.selected_count);
-        txt.setVisibility(View.GONE);*/
 
         recyclerView = (RecyclerView) findViewById(R.id.rec_test);
         currentImage = (ImageView) findViewById(R.id.image_id);
+
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        int height = displaymetrics.heightPixels;
+        int width = displaymetrics.widthPixels;
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width,width);
+        currentImage.setLayoutParams(layoutParams);
+        //currentImage.setMaxHeight(20);
+
         btnGalleryPickMul = (Button) findViewById(R.id.btnGalleryPickMul);
         myRecyclerViewAdapter = new MyRecyclerViewAdapter(arrayList, pathlist, currentImage, btnGalleryPickMul);
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);   // staggered grid
@@ -121,7 +135,6 @@ public class MainActivity extends Activity {
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
         recyclerView.setItemAnimator(itemAnimator);
 
-
         btnGalleryPickMul.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -130,31 +143,6 @@ public class MainActivity extends Activity {
                 startActivityForResult(i, 200);
             }
         });
-
-        /*next = (Button) findViewById(R.id.go_button);
-        next.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (arrayList.size() > 0) {
-
-                    myDir.mkdirs();
-
-
-                    //Toast.makeText(getApplicationContext(), pathlist.size()+"", Toast.LENGTH_SHORT).show();
-                    SaveToMemary saveToMemary = new SaveToMemary();
-                    saveToMemary.execute(pathlist);
-
-                    intent = new Intent("android.intent.action.videogen");
-                    intent.putExtra("myimagespath", myDir.toString());
-                    //startActivity(intent);
-                    //finish();
-                } else {
-                    Toast.makeText(getApplicationContext(), "you have no image", Toast.LENGTH_SHORT).show();
-                }
-                //foo(getApplicationContext());
-            }
-        });*/
 
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -172,13 +160,25 @@ public class MainActivity extends Activity {
             }
         });
 
+        recyclerView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+
+            }
+        });
+
         playBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*for (int i = 0; i < arrayList.size(); i++) {
-                    currentImage.setImageBitmap(arrayList.get(i));
-                }*/
-                startService(new Intent(getApplicationContext(), MyService.class));
+
+                if(playButtonIsSelected==false) {
+                    playButtonIsSelected=true;
+
+                }else {
+                    playButtonIsSelected=false;
+                    down.cancel(true);
+                    Toast.makeText(getApplicationContext(),"stoped",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -187,14 +187,12 @@ public class MainActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-
         if (requestCode == 200 && resultCode == Activity.RESULT_OK) {
             all_path = data.getStringArrayExtra("all_path");
 
             if (all_path.length > 0) {
 
                 arrayLength = sharedPreferences.getInt("length", 0);
-                //System.gc();
                 Bitmap bm = Bitmap.createBitmap(10, 10, Bitmap.Config.RGB_565);
                 bm.eraseColor(Color.LTGRAY);
 
@@ -204,13 +202,10 @@ public class MainActivity extends Activity {
                     arrayList.add(bm);
                 }
 
-                //System.gc();
                 DownloadFilesTask dtt = new DownloadFilesTask();
                 dtt.execute(pathlist);
-                Toast.makeText(getApplicationContext(), "" + pathlist.size(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "" + pathlist.size(), Toast.LENGTH_SHORT).show();
             }
-            //btnGalleryPickMul.setVisibility(View.VISIBLE);
-            //next.setVisibility(View.VISIBLE);
         }
     }
 
@@ -222,11 +217,11 @@ public class MainActivity extends Activity {
 
                     Bitmap bitmap = null;
                     try {
-                        bitmap = Utils.currectlyOrientation(path[0].get(i), 300, 300);
+                        bitmap = Utils.currectlyOrientation(path[0].get(i), 400, 400);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    bitmap = Utils.scaleCenterCrop(bitmap, 300, 300);
+                    bitmap = Utils.scaleCenterCrop(bitmap, 400, 400);
                     arr1.add(bitmap);
                     publishProgress(i);
                     Log.d("path[0] length" + i, "" + path[0].size());
@@ -381,18 +376,31 @@ public class MainActivity extends Activity {
         Toast.makeText(getApplicationContext(), "badge", Toast.LENGTH_SHORT).show();
     }
 
-    private class Down extends AsyncTask<Bitmap, Integer, Void> {
-        protected Void doInBackground(Bitmap... path) {
-            currentImage.setImageBitmap(path[0]);
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    private class Down extends AsyncTask<Void, Integer, Void> {
+        protected Void doInBackground(Void... path) {
+            for (int i=0;i<arrayList.size();i++) {
+
+                if (isCancelled()) return null;
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                final int finalI = i;
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        currentImage.setImageBitmap(arrayList.get(finalI));
+                    }
+                });
             }
             return null;
         }
 
         protected void onProgressUpdate(Integer... progress) {
+
         }
     }
 
@@ -402,5 +410,26 @@ public class MainActivity extends Activity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_next:
+
+                if (arrayList.size() > 0) {
+                    myDir.mkdirs();
+                    SaveToMemary saveToMemary = new SaveToMemary();
+                    saveToMemary.execute(pathlist);
+                    intent = new Intent("android.intent.action.videogen");
+                    intent.putExtra("myimagespath", myDir.toString());
+                } else {
+                    Toast.makeText(getApplicationContext(), "you have no image", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

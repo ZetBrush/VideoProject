@@ -1251,8 +1251,8 @@ containing a value of this type.
         public static final int abc_text_size_title_material_toolbar=0x7f080024;
         public static final int activity_horizontal_margin=0x7f080025;
         public static final int activity_vertical_margin=0x7f080026;
-        public static final int button_height=0x7f080031;
-        public static final int button_width=0x7f080032;
+        public static final int button_height=0x7f080032;
+        public static final int button_width=0x7f080033;
         public static final int dialog_fixed_height_major=0x7f080027;
         public static final int dialog_fixed_height_minor=0x7f080028;
         public static final int dialog_fixed_width_major=0x7f080029;
@@ -1263,6 +1263,7 @@ containing a value of this type.
         public static final int image_width=0x7f08002e;
         public static final int photo_height=0x7f08002f;
         public static final int photo_width=0x7f080030;
+        public static final int rec_height=0x7f080031;
     }
     public static final class drawable {
         public static final int abc_ab_share_pack_holo_dark=0x7f020000;
@@ -1348,7 +1349,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f09002e;
         public static final int action_mode_bar_stub=0x7f09002d;
         public static final int action_mode_close_button=0x7f090020;
-        public static final int action_settings=0x7f09004d;
+        public static final int action_next=0x7f09004e;
         public static final int activity_chooser_view_content=0x7f090021;
         public static final int always=0x7f090016;
         public static final int beginning=0x7f090013;
@@ -1405,6 +1406,7 @@ containing a value of this type.
         public static final int showHome=0x7f090010;
         public static final int showTitle=0x7f090011;
         public static final int split_action_bar=0x7f090007;
+        public static final int statusTextview=0x7f09004d;
         public static final int submit_area=0x7f09003c;
         public static final int tabMode=0x7f09000b;
         public static final int title=0x7f090027;
@@ -1449,7 +1451,8 @@ containing a value of this type.
         public static final int titlebar=0x7f03001c;
     }
     public static final class menu {
-        public static final int menu=0x7f0d0000;
+        public static final int gallery_menu=0x7f0d0000;
+        public static final int menu=0x7f0d0001;
     }
     public static final class string {
         public static final int abc_action_bar_home_description=0x7f0b0000;

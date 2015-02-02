@@ -8,4 +8,6 @@
 
     <dimen name="image_width">400dp</dimen>
     <dimen name="image_height">400dp</dimen>
+
+    <dimen name="rec_height">110dp</dimen>
 </resources>

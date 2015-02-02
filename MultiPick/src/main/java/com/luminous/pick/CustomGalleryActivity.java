@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -17,10 +18,14 @@ import android.provider.MediaStore;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
@@ -39,6 +44,7 @@ public class CustomGalleryActivity extends Activity {
     private ImageLoader imageLoader;
 
     GalAdapter myAdat;
+    ActionBar actionBar;
 
     private ArrayList<Bitmap> arr = new ArrayList<>();
 
@@ -46,10 +52,19 @@ public class CustomGalleryActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.gallery);
 
+        actionBar=getActionBar();
+        actionBar.setDisplayShowHomeEnabled(false);
+        //actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.show();
+        actionBar.setTitle("Selected: 0");
+
+
+
         action = getIntent().getAction();
+
         if (action == null) {
             finish();
         }
@@ -94,7 +109,7 @@ public class CustomGalleryActivity extends Activity {
 
         RecyclerView recyc = (RecyclerView) findViewById(R.id.gal_rec);
         recyc.setHasFixedSize(true);
-        myAdat = new GalAdapter(this, imageLoader, arr,txt);
+        myAdat = new GalAdapter(this, imageLoader, arr,actionBar);
         StaggeredGridLayoutManager sglm = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         recyc.setClipToPadding(true);
         RecyclerView.ItemAnimator ra = new DefaultItemAnimator();
@@ -103,12 +118,12 @@ public class CustomGalleryActivity extends Activity {
         recyc.setItemAnimator(ra);
 
 
-        Button go = (Button) findViewById(R.id.go_button);
+        /*Button go = (Button) findViewById(R.id.go_button);
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             }
-        });
+        });*/
 
         btnGalleryOk = (Button) findViewById(R.id.select_all_button);
         btnGalleryOk.setOnClickListener(mOkClickListener);
@@ -182,5 +197,25 @@ public class CustomGalleryActivity extends Activity {
         // show newest photo at beginning of the list
         Collections.reverse(galleryList);
         return galleryList;
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.gallery_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_next:
+
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

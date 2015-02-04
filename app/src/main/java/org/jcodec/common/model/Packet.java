@@ -4,14 +4,9 @@ import java.nio.ByteBuffer;
 import java.util.Comparator;
 
 /**
- * This class is part of JCodec ( www.jcodec.org ) This software is distributed
- * under FreeBSD License
- * 
- * Encoded stream packet
- * 
- * @author The JCodec project
- * 
- */
+ *
+ *
+ **/
 public class Packet {
     private ByteBuffer data;
     private long pts;

@@ -1,27 +1,34 @@
-package com.luminous.pick;
+package com.luminous.pick.Utils;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.media.ExifInterface;
 import android.media.ThumbnailUtils;
+import android.support.v7.widget.RecyclerView;
 import android.view.Display;
+import android.view.View;
 import android.view.WindowManager;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by User on 14.01.2015.
  */
 public class Utils {
 
-    public static Bitmap currectlyOrientation(String file,int x,int y) throws IOException {
+    public static Bitmap currectlyOrientation(String file, int x, int y) throws IOException {
 
         Bitmap bm = decodeSampledBitmapFromResource(new File(file), x, y);
         ExifInterface exif = null;
@@ -135,4 +142,56 @@ public class Utils {
 
         return dest;
     }
+
+    public class SpacesItemDecoration extends RecyclerView.ItemDecoration {   //////////   recyclerview item  spaces    ///////
+        private int space;
+
+        public SpacesItemDecoration(int space) {
+            this.space = space;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            outRect.left = space;
+            outRect.right = space;
+            outRect.bottom = space;
+
+            // Add top margin only for the first item to avoid double space between items
+            if (parent.getChildPosition(view) == 0)
+                outRect.top = space;
+        }
+    }
+
+
+    public static void setBadge(Context context, int count) {
+
+        String launcherClassName = getLauncherClassName(context);
+        if (launcherClassName == null) {
+            return;
+        }
+
+        Intent intent = new Intent("android.intent.action.BADGE_COUNT_UPDATE");
+        intent.putExtra("badge_count", count);
+        intent.putExtra("badge_count_package_name", context.getPackageName());
+        intent.putExtra("badge_count_class_name", launcherClassName);
+        context.sendBroadcast(intent);
+    }
+
+    public static String getLauncherClassName(Context context) {
+
+        PackageManager pm = context.getPackageManager();
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+
+        List<ResolveInfo> resolveInfos = pm.queryIntentActivities(intent, 0);
+        for (ResolveInfo resolveInfo : resolveInfos) {
+            String pkgName = resolveInfo.activityInfo.applicationInfo.packageName;
+            if (pkgName.equalsIgnoreCase(context.getPackageName())) {
+                String className = resolveInfo.activityInfo.name;
+                return className;
+            }
+        }
+        return null;
+    }
+
 }

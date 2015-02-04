@@ -1,4 +1,4 @@
-package com.luminous.pick;
+package com.luminous.pick.Adapter;
 
 import android.app.ActionBar;
 import android.content.Context;
@@ -8,8 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
+import com.luminous.pick.Utils.CustomGallery;
+import com.luminous.pick.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 
@@ -23,8 +24,8 @@ public class GalAdapter extends RecyclerView.Adapter<GalAdapter.ViewHolder> {
     private Context mContext;
     private LayoutInflater infalter;
     private ArrayList<CustomGallery> data = new ArrayList<CustomGallery>();
-    ArrayList<Bitmap> arr=new ArrayList<Bitmap>();
-    String [] all_path=null;
+    ArrayList<Bitmap> arr = new ArrayList<Bitmap>();
+    String[] all_path = null;
     ImageLoader imageLoader;
 
     ActionBar actionBar;
@@ -32,13 +33,13 @@ public class GalAdapter extends RecyclerView.Adapter<GalAdapter.ViewHolder> {
 
     private boolean isActionMultiplePick;
 
-    public GalAdapter(Context c,ImageLoader imageLoader, ArrayList<Bitmap> arr,ActionBar act) {
+    public GalAdapter(Context c, ImageLoader imageLoader, ArrayList<Bitmap> arr, ActionBar act) {
         infalter = (LayoutInflater) c
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mContext = c;
         //this.arr=arr;
         this.imageLoader = imageLoader;
-        actionBar=act;
+        actionBar = act;
     }
 
     @Override
@@ -55,10 +56,10 @@ public class GalAdapter extends RecyclerView.Adapter<GalAdapter.ViewHolder> {
             public void onClick(View v) {
                 if (data.get(position).isSeleted) {
                     data.get(position).isSeleted = false;
-                    actionBar.setTitle("Selected: "+String.valueOf(getSelectedCount()));
+                    actionBar.setTitle("Selected: " + String.valueOf(getSelectedCount()));
                 } else {
                     data.get(position).isSeleted = true;
-                    actionBar.setTitle("Selected: "+String.valueOf(getSelectedCount()));
+                    actionBar.setTitle("Selected: " + String.valueOf(getSelectedCount()));
                 }
 
                 holder.imgQueueMultiSelected.setSelected(data
@@ -172,13 +173,14 @@ public class GalAdapter extends RecyclerView.Adapter<GalAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void selectAll(){
-        for(int i=0;i<data.size();i++){
-            data.get(i).isSeleted=true;
+    public void selectAll() {
+        for (int i = 0; i < data.size(); i++) {
+            data.get(i).isSeleted = true;
         }
     }
-    public int getSelectedCount(){
-        int cnt=0;
+
+    public int getSelectedCount() {
+        int cnt = 0;
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).isSeleted) {
                 cnt++;

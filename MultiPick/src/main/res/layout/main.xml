@@ -15,12 +15,29 @@
         android:layout_marginTop="3dp"
         android:adjustViewBounds="true" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rec_test"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/rec_height"
-        android:layout_marginTop="3dp"
-        android:scrollbars="vertical" />
+        android:layout_height="@dimen/rec_height">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rec_test"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/rec_height"
+            android:layout_marginTop="3dp"
+            android:scrollbars="vertical" />
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="@dimen/rec_height"
+            android:id="@+id/gic"
+            android:layout_marginLeft="250dp"/>
+       <!-- <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:id="@+id/seek_bar"
+            android:progressDrawable="@android:color/transparent"/>-->
+
+    </FrameLayout>
+
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -42,7 +59,7 @@
             android:layout_height="@dimen/button_width"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
-            android:text="btn"/>
+            android:text="btn" />
     </LinearLayout>
 
 </LinearLayout>

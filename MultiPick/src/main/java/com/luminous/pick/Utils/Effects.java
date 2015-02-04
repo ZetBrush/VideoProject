@@ -1,4 +1,4 @@
-package com.luminous.pick;
+package com.luminous.pick.Utils;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

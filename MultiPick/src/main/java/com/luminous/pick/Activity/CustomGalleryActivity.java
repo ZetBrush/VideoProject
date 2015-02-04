@@ -1,9 +1,8 @@
-package com.luminous.pick;
+package com.luminous.pick.Activity;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -22,11 +21,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.luminous.pick.Adapter.GalleryAdapter;
+import com.luminous.pick.Utils.CustomGallery;
+import com.luminous.pick.Adapter.GalAdapter;
+import com.luminous.pick.R;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -43,11 +44,10 @@ public class CustomGalleryActivity extends Activity {
     private String action;
     private ImageLoader imageLoader;
 
-    GalAdapter myAdat;
-    ActionBar actionBar;
+    private GalAdapter myAdat;
+    private ActionBar actionBar;
 
     private ArrayList<Bitmap> arr = new ArrayList<>();
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,20 +55,16 @@ public class CustomGalleryActivity extends Activity {
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.gallery);
 
-        actionBar=getActionBar();
+        actionBar = getActionBar();
         actionBar.setDisplayShowHomeEnabled(false);
         //actionBar.setDisplayShowTitleEnabled(false);
         actionBar.show();
         actionBar.setTitle("Selected: 0");
-
-
-
         action = getIntent().getAction();
 
         if (action == null) {
             finish();
         }
-
         initImageLoader();
         init();
     }
@@ -102,14 +98,12 @@ public class CustomGalleryActivity extends Activity {
 
     private void init() {
 
-
-
-        TextView txt=(TextView)findViewById(R.id.selected_count);
+        TextView txt = (TextView) findViewById(R.id.selected_count);
         handler = new Handler();
 
         RecyclerView recyc = (RecyclerView) findViewById(R.id.gal_rec);
         recyc.setHasFixedSize(true);
-        myAdat = new GalAdapter(this, imageLoader, arr,actionBar);
+        myAdat = new GalAdapter(this, imageLoader, arr, actionBar);
         StaggeredGridLayoutManager sglm = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         recyc.setClipToPadding(true);
         RecyclerView.ItemAnimator ra = new DefaultItemAnimator();
@@ -117,19 +111,10 @@ public class CustomGalleryActivity extends Activity {
         recyc.setAdapter(myAdat);
         recyc.setItemAnimator(ra);
 
-
-        /*Button go = (Button) findViewById(R.id.go_button);
-        go.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });*/
-
         btnGalleryOk = (Button) findViewById(R.id.select_all_button);
         btnGalleryOk.setOnClickListener(mOkClickListener);
 
         new Thread() {
-
             @Override
             public void run() {
                 Looper.prepare();
@@ -143,9 +128,7 @@ public class CustomGalleryActivity extends Activity {
                 Looper.loop();
             }
         }.start();
-
     }
-
 
     View.OnClickListener mOkClickListener = new View.OnClickListener() {
 
@@ -198,6 +181,7 @@ public class CustomGalleryActivity extends Activity {
         Collections.reverse(galleryList);
         return galleryList;
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar

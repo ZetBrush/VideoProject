@@ -1,14 +1,11 @@
-package com.luminous.pick;
+package com.luminous.pick.Activity;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import android.app.ActionBar;
@@ -21,9 +18,12 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.*;
 import android.os.Process;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.DisplayMetrics;
@@ -32,13 +32,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.luminous.pick.Utils.Action;
+import com.luminous.pick.Adapter.MyRecyclerViewAdapter;
+import com.luminous.pick.R;
+import com.luminous.pick.Utils.Utils;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -51,39 +54,37 @@ public class MainActivity extends Activity {
     private ImageView currentImage;
     private RecyclerView recyclerView;
     private Button btnGalleryPickMul;
-    private Button next;
+    private Button playBut;
+    private ProgressDialog pd;
+    private SeekBar seekBar;
+    ImageView gic;
 
     private MyRecyclerViewAdapter myRecyclerViewAdapter;
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
     private RecyclerView.ItemAnimator itemAnimator;
+    private LinearLayoutManager linearLayoutManager;
 
     private ArrayList<Bitmap> arrayList = new ArrayList<>();
-    private ArrayList<Bitmap> arr1 = new ArrayList<Bitmap>();
-    private ImageLoader imageLoader;
+    private ArrayList<Bitmap> arr1 = new ArrayList<>();
+    private LinkedList<String> pathlist = new LinkedList<>();
 
     private int[] firstItemPos;
     private int[] lastItemPos;
     private String[] all_path;
+
+    private ImageLoader imageLoader;
     private Intent intent = null;
-    private ProgressDialog pd;
-
-    private LinkedList<String> pathlist;
-
     private int arrayLength = 0;
     private SharedPreferences sharedPreferences;
+    private SlideShow slideShow;
+    private Boolean playButtonIsSelected = false;
 
     private static final String root = Environment.getExternalStorageDirectory().toString();
     private File myDir = new File(root + "/req_images");
 
-
-    Down down;
-    private Boolean playButtonIsSelected=false;
-    Button playBut;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.main);
 
         ActionBar actionBar = getActionBar();
@@ -110,29 +111,38 @@ public class MainActivity extends Activity {
 
     private void init() {
 
-        down=new Down();
-        playBut = (Button) findViewById(R.id.bt);
         sharedPreferences = getPreferences(MODE_PRIVATE);
-        pathlist = new LinkedList<>();
 
         recyclerView = (RecyclerView) findViewById(R.id.rec_test);
         currentImage = (ImageView) findViewById(R.id.image_id);
+        btnGalleryPickMul = (Button) findViewById(R.id.btnGalleryPickMul);
+        playBut = (Button) findViewById(R.id.bt);
+        //seekBar = (SeekBar) findViewById(R.id.seek_bar);
+
+
+        Bitmap bm = Bitmap.createBitmap(10, 200, Bitmap.Config.RGB_565);
+        bm.eraseColor(Color.RED);
+        //seekBar.setThumb(new BitmapDrawable(bm));
+        gic = (ImageView) findViewById(R.id.gic);
+        gic.setImageBitmap(bm);
+        gic.setVisibility(View.GONE);
 
         DisplayMetrics displaymetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        int height = displaymetrics.heightPixels;
         int width = displaymetrics.widthPixels;
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width,width);
-        currentImage.setLayoutParams(layoutParams);
-        //currentImage.setMaxHeight(20);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(width, width);
 
-        btnGalleryPickMul = (Button) findViewById(R.id.btnGalleryPickMul);
+        currentImage.setLayoutParams(layoutParams);
+
         myRecyclerViewAdapter = new MyRecyclerViewAdapter(arrayList, pathlist, currentImage, btnGalleryPickMul);
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);   // staggered grid
+        linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         itemAnimator = new DefaultItemAnimator();
 
+        //recyclerView.addItemDecoration(new SpacesItemDecoration(5));
         recyclerView.setAdapter(myRecyclerViewAdapter);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
+        recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setItemAnimator(itemAnimator);
 
         btnGalleryPickMul.setOnClickListener(new View.OnClickListener() {
@@ -149,14 +159,16 @@ public class MainActivity extends Activity {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
 
-                if (myRecyclerViewAdapter.getItemCount() > 0) {
+
+                /*if (myRecyclerViewAdapter.getItemCount() > 0) {
                     firstItemPos = staggeredGridLayoutManager.findFirstCompletelyVisibleItemPositions(firstItemPos);
                     lastItemPos = staggeredGridLayoutManager.findLastVisibleItemPositions(lastItemPos);
+
 
                     if (arrayList.size() > 0) {
                         currentImage.setImageBitmap(arrayList.get(firstItemPos[0]));
                     }
-                }
+                }*/
             }
         });
 
@@ -170,14 +182,16 @@ public class MainActivity extends Activity {
         playBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Toast.makeText(getApplicationContext(),linearLayoutManager.getFocusedChild().getWidth() +"",Toast.LENGTH_SHORT).show();
+                if (playButtonIsSelected == false) {
+                    playButtonIsSelected = true;
+                    slideShow = new SlideShow();
+                    slideShow.execute();
 
-                if(playButtonIsSelected==false) {
-                    playButtonIsSelected=true;
-
-                }else {
-                    playButtonIsSelected=false;
-                    down.cancel(true);
-                    Toast.makeText(getApplicationContext(),"stoped",Toast.LENGTH_SHORT).show();
+                } else {
+                    playButtonIsSelected = false;
+                    slideShow.cancel(true);
+                    Toast.makeText(getApplicationContext(), "stoped", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -192,6 +206,7 @@ public class MainActivity extends Activity {
 
             if (all_path.length > 0) {
 
+                gic.setVisibility(View.VISIBLE);
                 arrayLength = sharedPreferences.getInt("length", 0);
                 Bitmap bm = Bitmap.createBitmap(10, 10, Bitmap.Config.RGB_565);
                 bm.eraseColor(Color.LTGRAY);
@@ -203,28 +218,28 @@ public class MainActivity extends Activity {
                 }
 
                 DownloadFilesTask dtt = new DownloadFilesTask();
-                dtt.execute(pathlist);
+                dtt.execute(all_path);
                 //Toast.makeText(getApplicationContext(), "" + pathlist.size(), Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private class DownloadFilesTask extends AsyncTask<LinkedList<String>, Integer, ArrayList<Bitmap>> {
-        protected ArrayList<Bitmap> doInBackground(LinkedList<String>... path) {
+    private class DownloadFilesTask extends AsyncTask<String[], Integer, ArrayList<Bitmap>> {
+        protected ArrayList<Bitmap> doInBackground(String[]... path) {
 
-            if (path[0].size() > 0) {
-                for (int i = 0; i < path[0].size(); i++) {
+            if (path[0].length > 0) {
+                for (int i = 0; i < path[0].length; i++) {
 
                     Bitmap bitmap = null;
                     try {
-                        bitmap = Utils.currectlyOrientation(path[0].get(i), 400, 400);
+                        bitmap = Utils.currectlyOrientation(path[0][i], 400, 400);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                     bitmap = Utils.scaleCenterCrop(bitmap, 400, 400);
                     arr1.add(bitmap);
                     publishProgress(i);
-                    Log.d("path[0] length" + i, "" + path[0].size());
+                    Log.d("path[0] length" + i, "" + path[0].length);
                 }
             }
             return arr1;
@@ -235,7 +250,7 @@ public class MainActivity extends Activity {
             if (progress[0] == 0) {
                 currentImage.setImageBitmap(arr1.get(0));
             }
-            arrayList.set(progress[0], arr1.get(progress[0]));
+            arrayList.set(arrayLength + progress[0], arr1.get(progress[0]));
             myRecyclerViewAdapter.notifyDataSetChanged();
         }
 
@@ -249,13 +264,11 @@ public class MainActivity extends Activity {
     private class SaveToMemary extends AsyncTask<LinkedList<String>, Integer, Void> {
 
         protected Void doInBackground(LinkedList<String>... path) {
-
             android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
             Log.d("arralist 1 ", " " + arrayList.size());
             for (int i = 0; i < path[0].size(); i++) {
 
                 String fname = "image_" + String.format("%03d", i) + ".png";
-
                 try {
                     File file = new File(myDir, fname);
                     Bitmap bitmap = null;
@@ -266,7 +279,6 @@ public class MainActivity extends Activity {
                     FileOutputStream out = new FileOutputStream(file);
 
                     bitmap.compress(Bitmap.CompressFormat.PNG, 50, out);
-                    setBadge(getApplicationContext(), i);
                     out.flush();
                     out.close();
                     bitmap.recycle();
@@ -298,7 +310,6 @@ public class MainActivity extends Activity {
                 myRecyclerViewAdapter.notifyDataSetChanged();
                 currentImage.setImageBitmap(null);
                 btnGalleryPickMul.setVisibility(View.VISIBLE);
-                setBadge(getApplicationContext(), 0);
                 startActivity(intent);
                 overridePendingTransition(R.transition.fade_in, R.transition.fade_out);
             }
@@ -332,75 +343,41 @@ public class MainActivity extends Activity {
         super.onPause();
     }
 
-    public static void setBadge(Context context, int count) {
-
-        String launcherClassName = getLauncherClassName(context);
-        if (launcherClassName == null) {
-            return;
-        }
-
-        Intent intent = new Intent("android.intent.action.BADGE_COUNT_UPDATE");
-        intent.putExtra("badge_count", count);
-        intent.putExtra("badge_count_package_name", context.getPackageName());
-        intent.putExtra("badge_count_class_name", launcherClassName);
-        context.sendBroadcast(intent);
-    }
-
-    public static String getLauncherClassName(Context context) {
-
-        PackageManager pm = context.getPackageManager();
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_LAUNCHER);
-
-        List<ResolveInfo> resolveInfos = pm.queryIntentActivities(intent, 0);
-        for (ResolveInfo resolveInfo : resolveInfos) {
-            String pkgName = resolveInfo.activityInfo.applicationInfo.packageName;
-            if (pkgName.equalsIgnoreCase(context.getPackageName())) {
-                String className = resolveInfo.activityInfo.name;
-                return className;
-            }
-        }
-        return null;
-    }
-
-    public void foo(Context context) {
-        Intent intent = new Intent();
-
-        intent.setAction("com.sonyericsson.home.action.UPDATE_BADGE");
-        intent.putExtra("com.sonyericsson.home.intent.extra.badge.ACTIVITY_NAME", "com.luminous.pick.MainActivity");
-        intent.putExtra("com.sonyericsson.home.intent.extra.badge.SHOW_MESSAGE", true);
-        intent.putExtra("com.sonyericsson.home.intent.extra.badge.MESSAGE", "99");
-        intent.putExtra("com.sonyericsson.home.intent.extra.badge.PACKAGE_NAME", "com.luminous.pick");
-
-        sendBroadcast(intent);
-        Toast.makeText(getApplicationContext(), "badge", Toast.LENGTH_SHORT).show();
-    }
-
-    private class Down extends AsyncTask<Void, Integer, Void> {
+    private class SlideShow extends AsyncTask<Void, Integer, Void> {
         protected Void doInBackground(Void... path) {
-            for (int i=0;i<arrayList.size();i++) {
 
-                if (isCancelled()) return null;
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                final int finalI = i;
-                runOnUiThread(new Runnable() {
+            for (int i = 0; i < arrayList.size(); i++) {
+                for (int j = 110; j > 0; j--) {
+                    if (isCancelled()) return null;
 
-                    @Override
-                    public void run() {
+                    final int finalI = i;
+                    final int finalJ = j;
+                    runOnUiThread(new Runnable() {
 
-                        currentImage.setImageBitmap(arrayList.get(finalI));
+                        @Override
+                        public void run() {
+                            linearLayoutManager.scrollToPositionWithOffset(finalI + 1, finalJ * 2);
+                            //recyclerView.smoothScrollToPosition(finalI);
+                            currentImage.setImageBitmap(arrayList.get(finalI));
+                        }
+                    });
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(8);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                });
+                }
             }
             return null;
         }
 
         protected void onProgressUpdate(Integer... progress) {
+        }
 
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            playButtonIsSelected = false;
+            super.onPostExecute(aVoid);
         }
     }
 
@@ -431,5 +408,12 @@ public class MainActivity extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        arrayList.removeAll(arrayList);
+        pathlist.removeAll(pathlist);
+        super.onDestroy();
     }
 }

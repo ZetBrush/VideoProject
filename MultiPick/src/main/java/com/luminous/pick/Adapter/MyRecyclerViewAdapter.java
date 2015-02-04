@@ -1,39 +1,34 @@
-package com.luminous.pick;
+package com.luminous.pick.Adapter;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
-import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import java.io.File;
+import com.luminous.pick.R;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
  * Created by User on 14.12.2014.
  */
-public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder>  {
+public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
     private ArrayList<Bitmap> arrayList;
     private ImageView currentItem;
     private Button but;
     private LinkedList<String> pathlist;
 
-    public MyRecyclerViewAdapter(ArrayList<Bitmap> arr,LinkedList<String> list,ImageView img,Button b) {
+    public MyRecyclerViewAdapter(ArrayList<Bitmap> arr, LinkedList<String> list, ImageView img, Button b) {
         arrayList = arr;
-        pathlist=list;
-        currentItem=img;
-        but=b;
+        pathlist = list;
+        currentItem = img;
+        but = b;
     }
 
     @Override
@@ -53,11 +48,11 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
                 arrayList.remove(position);
                 pathlist.remove(position);
-                //notifyItemRemoved(position);
+                notifyItemRemoved(position);
                 notifyDataSetChanged();
-                if(arrayList.size()>0) {
+                if (arrayList.size() > 0) {
                     currentItem.setImageBitmap(arrayList.get(0));
-                }else {
+                } else {
 
                     but.setVisibility(View.VISIBLE);
                     currentItem.setImageBitmap(null);
@@ -93,7 +88,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         return arrayList.get(i);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView icon;
         private Button delete;
@@ -120,11 +115,11 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         notifyItemRemoved(position);
     }
 
-    private Bitmap rotate(Bitmap bm){
+    private Bitmap rotate(Bitmap bm) {
 
         Matrix matrix = new Matrix();
         matrix.postRotate(90);
-        Bitmap bg = Bitmap.createBitmap(bm , 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
+        Bitmap bg = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
         return bg;
     }
 }

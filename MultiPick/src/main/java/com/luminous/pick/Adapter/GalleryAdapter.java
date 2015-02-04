@@ -1,4 +1,4 @@
-package com.luminous.pick;
+package com.luminous.pick.Adapter;
 
 import java.util.ArrayList;
 
@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.luminous.pick.Utils.CustomGallery;
+import com.luminous.pick.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 

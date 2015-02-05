@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +23,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.*;
 import android.os.Process;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -38,6 +40,7 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.luminous.pick.Sevice.MyService;
 import com.luminous.pick.Utils.Action;
 import com.luminous.pick.Adapter.MyRecyclerViewAdapter;
 import com.luminous.pick.R;
@@ -48,6 +51,10 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat.Builder;
+
+
 public class MainActivity extends Activity {
 
 
@@ -57,7 +64,6 @@ public class MainActivity extends Activity {
     private Button playBut;
     private ProgressDialog pd;
     private SeekBar seekBar;
-    ImageView gic;
 
     private MyRecyclerViewAdapter myRecyclerViewAdapter;
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
@@ -82,6 +88,10 @@ public class MainActivity extends Activity {
     private static final String root = Environment.getExternalStorageDirectory().toString();
     private File myDir = new File(root + "/req_images");
 
+    private NotificationManager mNotifyManager;
+    private Builder mBuilder;
+    int id = 1;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +101,7 @@ public class MainActivity extends Activity {
         actionBar.setDisplayShowHomeEnabled(false);
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.show();
+
 
         initImageLoader();
         init();
@@ -117,15 +128,29 @@ public class MainActivity extends Activity {
         currentImage = (ImageView) findViewById(R.id.image_id);
         btnGalleryPickMul = (Button) findViewById(R.id.btnGalleryPickMul);
         playBut = (Button) findViewById(R.id.bt);
-        //seekBar = (SeekBar) findViewById(R.id.seek_bar);
+        seekBar = (SeekBar) findViewById(R.id.seek_bar);
 
 
         Bitmap bm = Bitmap.createBitmap(10, 200, Bitmap.Config.RGB_565);
         bm.eraseColor(Color.RED);
-        //seekBar.setThumb(new BitmapDrawable(bm));
-        gic = (ImageView) findViewById(R.id.gic);
-        gic.setImageBitmap(bm);
-        gic.setVisibility(View.GONE);
+        seekBar.setThumb(new BitmapDrawable(bm));
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
         DisplayMetrics displaymetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
@@ -206,7 +231,6 @@ public class MainActivity extends Activity {
 
             if (all_path.length > 0) {
 
-                gic.setVisibility(View.VISIBLE);
                 arrayLength = sharedPreferences.getInt("length", 0);
                 Bitmap bm = Bitmap.createBitmap(10, 10, Bitmap.Config.RGB_565);
                 bm.eraseColor(Color.LTGRAY);
@@ -274,6 +298,7 @@ public class MainActivity extends Activity {
                     Bitmap bitmap = null;
                     if (file.exists())
                         file.delete();
+                    publishProgress(i);
                     bitmap = Utils.currectlyOrientation(path[0].get(i), 700, 700);
                     bitmap = Utils.scaleCenterCrop(bitmap, 700, 700);
                     FileOutputStream out = new FileOutputStream(file);
@@ -283,22 +308,27 @@ public class MainActivity extends Activity {
                     out.close();
                     bitmap.recycle();
 
+
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "Error while SaveToMemory", Toast.LENGTH_SHORT).show();
                 }
-                publishProgress(i);
             }
             return null;
         }
 
         protected void onProgressUpdate(Integer... progress) {
-            if (progress[0] % 3 == 0) {
-                if (pd != null)
-                    pd.setMessage("Doing.. " + ((int) (((float) progress[0] / arrayList.size()) * 100)) + "%");
-                // Toast.makeText(getApplicationContext(), (((float) progress[0] / arrayList.size()) * 100) + "%", Toast.LENGTH_SHORT).show();
-            }
+            //if (progress[0] % 3 == 0) {
+            //if (pd != null)
+
+            mBuilder.setProgress(100, progress[0] * (100 / pathlist.size()), false);
+            mNotifyManager.notify(id, mBuilder.build());
+
+            //pd.setMessage("Doing.. " + ((int) (((float) progress[0] / arrayList.size()) * 100)) + "%");
+            // Toast.makeText(getApplicationContext(), (((float) progress[0] / arrayList.size()) * 100) + "%", Toast.LENGTH_SHORT).show();
+            //}
             Log.d("importing images", "image" + progress[0]);
+            super.onProgressUpdate(progress);
         }
 
         protected void onPostExecute(Void result) {
@@ -312,12 +342,22 @@ public class MainActivity extends Activity {
                 btnGalleryPickMul.setVisibility(View.VISIBLE);
                 startActivity(intent);
                 overridePendingTransition(R.transition.fade_in, R.transition.fade_out);
+
+                mBuilder.setContentText("Download complete");
+                // Removes the progress bar
+                mBuilder.setProgress(0, 0, false);
+                mNotifyManager.notify(id, mBuilder.build());
             }
         }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
+            // Displays the progress bar for the first time.
+            mBuilder.setProgress(100, 0, false);
+            mNotifyManager.notify(id, mBuilder.build());
+
             File dir = new File(Environment.getExternalStorageDirectory() + "/req_images");
             if (dir.isDirectory()) {
                 String[] children = dir.list();
@@ -397,10 +437,24 @@ public class MainActivity extends Activity {
 
                 if (arrayList.size() > 0) {
                     myDir.mkdirs();
+
+                    /*mNotifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                    mBuilder = new NotificationCompat.Builder(MainActivity.this);
+                    mBuilder.setContentTitle("Download")
+                            .setContentText("Download in progress")
+                            .setSmallIcon(R.drawable.ic_action_download);
                     SaveToMemary saveToMemary = new SaveToMemary();
-                    saveToMemary.execute(pathlist);
+                    saveToMemary.execute(pathlist);*/
+
+                    String[] paths = new String[pathlist.size()];
+                    for (int i = 0; i < paths.length; i++) {
+                        paths[i] = pathlist.get(i);
+                    }
+                    startService(new Intent(this, MyService.class).putExtra("paths", paths));
                     intent = new Intent("android.intent.action.videogen");
                     intent.putExtra("myimagespath", myDir.toString());
+                    startActivity(intent);
+
                 } else {
                     Toast.makeText(getApplicationContext(), "you have no image", Toast.LENGTH_SHORT).show();
                 }

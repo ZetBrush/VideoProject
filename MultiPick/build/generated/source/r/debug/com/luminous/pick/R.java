@@ -1328,12 +1328,13 @@ containing a value of this type.
         public static final int checkbox_up=0x7f02003b;
         public static final int del=0x7f02003c;
         public static final int emp=0x7f02003d;
-        public static final int ic_launcher=0x7f02003e;
-        public static final int icon=0x7f02003f;
-        public static final int light_black_=0x7f020043;
-        public static final int on_focus_checkbox=0x7f020040;
-        public static final int rot=0x7f020041;
-        public static final int top_bar=0x7f020042;
+        public static final int ic_action_download=0x7f02003e;
+        public static final int ic_launcher=0x7f02003f;
+        public static final int icon=0x7f020040;
+        public static final int light_black_=0x7f020044;
+        public static final int on_focus_checkbox=0x7f020041;
+        public static final int rot=0x7f020042;
+        public static final int top_bar=0x7f020043;
     }
     public static final class id {
         public static final int action_bar=0x7f090031;
@@ -1368,7 +1369,6 @@ containing a value of this type.
         public static final int expand_activities_button=0x7f090022;
         public static final int expanded_menu=0x7f090028;
         public static final int gal_rec=0x7f09003f;
-        public static final int gic=0x7f090047;
         public static final int go_button=0x7f09004c;
         public static final int home=0x7f090004;
         public static final int homeAsUp=0x7f09000d;
@@ -1401,6 +1401,7 @@ containing a value of this type.
         public static final int search_plate=0x7f090039;
         public static final int search_src_text=0x7f09003a;
         public static final int search_voice_btn=0x7f09003e;
+        public static final int seek_bar=0x7f090047;
         public static final int select_all_button=0x7f090041;
         public static final int selected_count=0x7f09004e;
         public static final int shortcut=0x7f09002a;

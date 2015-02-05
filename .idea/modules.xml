@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MultiPick/MultiPick.iml" filepath="$PROJECT_DIR$/MultiPick/MultiPick.iml" />
-      <module fileurl="file://$PROJECT_DIR$/VidGen.iml" filepath="$PROJECT_DIR$/VidGen.iml" />
       <module fileurl="file://$PROJECT_DIR$/VideoGenerationJC.iml" filepath="$PROJECT_DIR$/VideoGenerationJC.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/generatingmain/generatingmain.iml" filepath="$PROJECT_DIR$/generatingmain/generatingmain.iml" />

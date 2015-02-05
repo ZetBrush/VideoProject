@@ -1,6 +1,5 @@
 package zetbrush.com.generatingmain;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
@@ -11,6 +10,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -93,8 +93,7 @@ public class MainActivity extends ActionBarActivity {
     MediaExtractor extractor;
     private PlayerStates state = new PlayerStates();
     private String sourcePath = null;
-    private int sourceRawResId = -1;
-    private Context mContext;
+
     private boolean stop = false;
     private MediaCodec codec;
     private static int filecount = 0;
@@ -124,6 +123,7 @@ public class MainActivity extends ActionBarActivity {
     Handler h;
     DisplayMetrics dm = null;
     public static int currentEffect =0;
+    public static int intervalSec =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,14 +154,12 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-
     /////PickMusic///////
     public void onPickMusicClick(View v) {
         Intent intent = new Intent();
         intent.setType("*/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent.createChooser(intent, "Complate action using"), 5);
-
     }
 
     @Override
@@ -231,7 +229,6 @@ public class MainActivity extends ActionBarActivity {
 
     //////DeleteMusicPath////
 
-
     public void setImageCount() {
 
         this.imageCount = getCount(Environment.getExternalStorageDirectory().getPath() + "/req_images");
@@ -258,7 +255,6 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -277,10 +273,9 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (fromUser) player.seek(progress);
+                if (fromUser && player!=null) try{ player.seek(progress);} catch (NullPointerException e){};
             }
         });
-
 
     }
 
@@ -310,11 +305,8 @@ public class MainActivity extends ActionBarActivity {
 
         }
 
-
     }
 
-
-    private static int count = 0;
 
     private class Encoder extends AsyncTask<File, Integer, Integer> {
         private static final String TAG = "ENCODER";
@@ -323,8 +315,8 @@ public class MainActivity extends ActionBarActivity {
 
             SequenceEncoder se = null;
             try {
-                videoPath = params[0].getParentFile().getPath() + "/" + name[0] + ".mp4";
-                se = new SequenceEncoder(new File(params[0].getParentFile(),
+                videoPath = Environment.getExternalStorageDirectory().getPath() + "/" + name[0] + ".mp4";
+                se = new SequenceEncoder(new File(Environment.getExternalStorageDirectory(),
                         name[0] + ".mp4"));
 
                 for (int i = 0; !flag; i++) {
@@ -393,15 +385,28 @@ public class MainActivity extends ActionBarActivity {
                     int height = btm.getHeight();
                     Bitmap transBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
-                    for (int i = 0; i < 9; i++) {
+                    for (int i = 0; i < 10; i++) {
                         Canvas canvas = new Canvas(transBitmap);
                         canvas.drawRGB(0, 0, 0);
                         final Paint paint = new Paint();
+                        Matrix mx = new Matrix();
                         ///choosing effect
-                        if(currentEffect==1)
-                        paint.setAlpha(i * 10);
-                        else
-                        canvas.drawBitmap(btm, dm.widthPixels - i * (dm.widthPixels / 9), 0, paint);
+                        if(currentEffect==1){
+                            paint.setAlpha(i * 10);
+                            canvas.drawBitmap(btm,0,0,paint);
+                        }
+
+                        else if (currentEffect==2) {
+                            canvas.drawBitmap(btm, dm.widthPixels - i * (dm.widthPixels / 9), 0, paint);
+                        }
+
+                        else if(currentEffect>= 3){
+                            mx.postRotate(90 - i*10);
+                            mx.postTranslate(150+ dm.widthPixels - i * (dm.widthPixels / 10 + 50),0);
+                            canvas.concat(mx);
+                            canvas.drawBitmap(btm,0,0,paint);
+
+                        }
                         /// starting encode frame
                         se.encodeNativeFrameForPartialEffect(BitmapUtil.fromBitmap(transBitmap));
 
@@ -457,8 +462,8 @@ public class MainActivity extends ActionBarActivity {
         protected Integer doInBackground(File... params) {
             android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
             int vidcnt = 1;
-            if (scale[0] < 1) {
-                scale[0] = 1;
+            if (intervalSec < 1) {
+                intervalSec = 1;
             }
 
             try {
@@ -481,9 +486,9 @@ public class MainActivity extends ActionBarActivity {
                         Movie mm = mc.build(params[0].getParentFile().getPath() + "/still" + vidcnt + ".mp4");
                         Track vidTr = mm.getTracks().get(0);
                         AppendTrack stillApTr;
-                        Track[] vidTracks = new Track[scale[0] * 10];
+                        Track[] vidTracks = new Track[intervalSec * 10];
 
-                        for (int j = 0; j < scale[0] * 10; j++) {
+                        for (int j = 0; j < intervalSec * 10; j++) {
                             vidTracks[j] = vidTr;
                         }
 
@@ -564,6 +569,7 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+                                                /////   Player  //////
     ImageView imagepreview;
     PlayerEvents events = new PlayerEvents() {
         @Override
@@ -646,16 +652,16 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    final int[] scale = new int[2];
+
     final String[] name = new String[2];
 
     ScrollPickerView effectPicker;
 
 
-
+        ///////  Settings
 
     public void onSettingsButtonClick(View v) {
-
+        TouchScroll.idgen =0;
         Animation bottomUp = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.top_up);
 
@@ -667,8 +673,8 @@ public class MainActivity extends ActionBarActivity {
                 RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
 
-        interval = (TextView) popupView.findViewById(R.id.textInterval);
-        timeinterval = (SeekBar) popupView.findViewById(R.id.tIntervalSeekBar);
+
+
         outputEditText = (EditText) popupView.findViewById(R.id.videoName);
 
         effectPicker = (ScrollPickerView)popupView.findViewById(R.id.scrollpicker);
@@ -676,38 +682,13 @@ public class MainActivity extends ActionBarActivity {
         Resources res = getResources();
 
         final String[] labels = res.getStringArray(R.array.effects_list);
+        final String[] secs = res.getStringArray(R.array.seconds_list);
+        effectPicker.addSlot(secs,2, ScrollPickerView.ScrollType.Loop);
+        effectPicker.addSlot(labels,3, ScrollPickerView.ScrollType.Loop);
+               effectPicker.setSlotIndex(1,currentEffect);
+            effectPicker.setSlotIndex(0,intervalSec);
+           //  effectPicker.setSlotIndex(1,intervalSec);
 
-            effectPicker.addSlot(labels,2, ScrollPickerView.ScrollType.Loop);
-               effectPicker.setSlotIndex(0,currentEffect);
-
-
-
-
-
-
-               timeinterval.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-                   @Override
-                   public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                       if (progress == 0)
-                           progress = 1;
-                       scale[0] = progress;
-                       interval.setText(String.valueOf(scale[0]));
-
-                   }
-
-                   @Override
-                   public void onStartTrackingTouch(SeekBar seekBar) {
-
-                   }
-
-                   @Override
-                   public void onStopTrackingTouch(SeekBar seekBar) {
-                       Log.d("value of frametime", "val " + scale[0]);
-                       org.jcodec.api.SequenceEncoder.setFrameDuration(scale[0]);
-
-                   }
-
-               });
 
         outputEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -792,11 +773,11 @@ public class MainActivity extends ActionBarActivity {
         Track vidTr = mm.getTracks().get(0);
         AppendTrack stillApTr = null;
 
-        Track[] vidTracks = new Track[scale[0]*10];
+        Track[] vidTracks = new Track[intervalSec*10];
 
 
         try {
-            for (int i = 0; i<scale[0]*10; i++) {
+            for (int i = 0; i<intervalSec*10; i++) {
                 vidTracks[i]=vidTr;
                 }
             stillApTr  = new AppendTrack(vidTracks);
@@ -881,14 +862,15 @@ public class MainActivity extends ActionBarActivity {
             FileChannel fc = new RandomAccessFile(String.format(outputLocation), "rw").getChannel();
             out.writeContainer(fc);
             fc.close();
-            Toast.makeText(this,"No music is selected",Toast.LENGTH_SHORT).show();
+            Looper.prepare();
+            Toast.makeText(getApplicationContext(),"No music is selected",Toast.LENGTH_SHORT).show();
 
            }
         finish();
     }
 
 
-        ////////////
+                                        ////////////  Making Video /////////
 
 
     public void makevideoClick(View v) {
@@ -945,6 +927,8 @@ public class MainActivity extends ActionBarActivity {
             Toast.makeText(getApplicationContext(), "Please configure output settings", Toast.LENGTH_SHORT).show();
     }
 
+
+    ////End of Making Video ///////
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -1202,34 +1186,7 @@ public class MainActivity extends ActionBarActivity {
         }
     }
     static int counter =1;
-    public void fadeInOut(String filename) throws IOException {
-        File imgFile = new File(filename);
-        if (imgFile.exists()) {
-            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-            //Drawable d = new BitmapDrawable(getResources(), myBitmap);
 
-            int width = myBitmap.getWidth();
-            int height = myBitmap.getHeight();
-            Bitmap transBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
-            for (int i = 1; i <= 10; i++) {
-                Canvas canvas = new Canvas(transBitmap);
-                canvas.drawARGB(0, 0, 0, 0);
-                final Paint paint = new Paint();
-                paint.setAlpha(i * 10);
-                canvas.drawBitmap(myBitmap, 0, 0, paint);
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                transBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                byte[] byteArray = stream.toByteArray();
-                String newname = Environment.getExternalStorageDirectory().getPath()+"/vidgen_faded/image_faded" + String.format("%03d", counter) + ".png";
-                File file = new File(newname);
-                FileOutputStream fos = new FileOutputStream(file);
-                fos.write(byteArray);
-                fos.flush();
-                fos.close();
-                counter++;
-            }
 
-        }
-    }
 }

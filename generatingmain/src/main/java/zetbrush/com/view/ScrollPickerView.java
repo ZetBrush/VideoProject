@@ -85,7 +85,7 @@ public class ScrollPickerView extends LinearLayout {
 	public void addSlot(String[] labels, float weight, ScrollType scrollType) {
 		AbstractSlotView tv = SlotViewFactory.create(getContext(), scrollType);
 		// tv.setBackgroundColor(Color.BLUE);
-		LayoutParams lp = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+		LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 		lp.weight = weight;
 		tv.setLabels(labels);
 		this.addView(tv, lp);

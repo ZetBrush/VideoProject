@@ -8,12 +8,7 @@
     <style name="FloatingLabelWidget" parent="@android:style/Widget.Holo">
     </style>
 
-    <style name="FloatingLabelWidget.DropDownItem" parent="@android:style/Widget.Holo.TextView">
-        <item name="android:textSize">@dimen/flw_defaultDropDownItemTextSize</item>
-        <item name="android:padding">@dimen/flw_defaultDropDownItemPadding</item>
-        <item name="android:lines">1</item>
-        <item name="android:maxLines">1</item>
-    </style>
+
 
     <style name="FloatingLabelWidget.ItemPicker">
     </style>

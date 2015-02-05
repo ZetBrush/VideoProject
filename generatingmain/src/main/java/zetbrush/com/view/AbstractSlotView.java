@@ -35,8 +35,19 @@ abstract class AbstractSlotView extends View implements GestureDetector.OnGestur
 	protected Runnable scrollHandler = new Runnable(){
 		@Override
 		public void run() {
+
+
 			boolean ret = scroller.update();
-            MainActivity.currentEffect= scroller.getCurrentIndex();
+            Log.d("Scroller id: ","....." + scroller.id);
+          if(scroller.id ==2) {
+              MainActivity.currentEffect = scroller.getCurrentIndex();
+          }
+            if(scroller.id ==1) {
+                int timing = scroller.getCurrentIndex();
+                MainActivity.intervalSec = scroller.getCurrentIndex();
+                if(timing==0) timing =1;
+                org.jcodec.api.SequenceEncoder.setFrameDuration(timing);
+            }
 			AbstractSlotView.this.invalidate();
 			
 			if(ret) {
@@ -47,7 +58,7 @@ abstract class AbstractSlotView extends View implements GestureDetector.OnGestur
 	
 	public AbstractSlotView(Context context) {
 		super(context);
-    	setClickable(true);	// ACTION_DOWN以外のイベントも取得
+    	setClickable(true);	// ACTION_DOWN
     	setFocusable(true);
     	gestureDetector = new GestureDetector(context, this);
 		initializeIndexType = INIT_INDEX_TYPE_NONE;
@@ -169,8 +180,8 @@ abstract class AbstractSlotView extends View implements GestureDetector.OnGestur
     			maxTextLength = count;
     		}
     	}
-    	maxTextLength *= 0.5f;
-    	return (int)Math.min(labelHeight * 0.8f, width * 0.8f / maxTextLength);
+    	maxTextLength *= 0.6f;
+    	return (int)Math.min(labelHeight * 1.0f, width * 1.2f / maxTextLength);
     }
     
 

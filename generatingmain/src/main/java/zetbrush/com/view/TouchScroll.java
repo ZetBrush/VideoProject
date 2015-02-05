@@ -21,11 +21,15 @@ public class TouchScroll {
 	private float adjustSize;
 	private float currentPoint;
 	private float targetPoint;
+    public int id ;
+    public static int idgen;
 
 	/**
 	 * 
 	 */
 	public TouchScroll() {
+       idgen++;
+      id=idgen;
 	}
 
 	/**

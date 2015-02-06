@@ -133,8 +133,10 @@ public class MainActivity extends ActionBarActivity {
         dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         makeVideoButton = (Button) findViewById(R.id.makeVideoBut);
+        makeVideoButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_render_button));
         progress = (TextView) findViewById(R.id.progress);
         playButton = (Button) findViewById(R.id.playButtn);
+        playButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.selectorplaybutton));
         seekbar = (SeekBar) findViewById(R.id.seekbar);
         testmp3 = (Button) findViewById(R.id.TestMp3);
         pickMusicbtn = (Button) findViewById(R.id.pickMusicbtn);
@@ -610,7 +612,7 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public void onPlay() {
             imagepreview = (ImageView) findViewById(R.id.imagepreview);
-            playButton.setText("Pause");
+            playButton.setText("||");
 
         }
 
@@ -634,13 +636,13 @@ public class MainActivity extends ActionBarActivity {
 
         if (isplaying) {
             player.pause();
-            playButton.setText("Play");
+            playButton.setText("|>");
             isplaying = false;
         } else {
             if (musicPath != null) {
                 player.setDataSource(musicPath);   //"/storage/removable/sdcard1/DCIM/100ANDRO/newfold/strangeclouds.aac");
                 player.play();
-                playButton.setText("Pause");
+                playButton.setText("||");
                 isplaying = true;
             } else {
                 Toast.makeText(this, "No music is selected", Toast.LENGTH_SHORT).show();

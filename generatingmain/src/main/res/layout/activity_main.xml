@@ -29,24 +29,27 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_below="@id/imageframe"
-        android:layout_marginTop="20dp">
-
-
-        <Button
-            android:id="@+id/playButtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="onPlayClick"
-            android:text="play" />
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/playButtn"
+        android:layout_toEndOf="@+id/playButtn">
 
         <Button
             android:id="@+id/makeVideoBut"
+            android:text="Render"
+            android:textColor="#3D3923"
+            android:textSize="21sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:background="@drawable/render_button"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="6"
             android:onClick="makevideoClick"
-            android:text="make video" />
+            android:layout_below="@+id/imageframe"
+            android:layout_toRightOf="@+id/playButtn"
+            android:layout_toEndOf="@+id/playButtn"
+            android:layout_marginLeft="20dp"/>
 
         <TextView
             android:id="@+id/progress"
@@ -54,7 +57,8 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="0dp"
             android:text="ready"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:layout_marginLeft="30dp"/>
 
     </LinearLayout>
 
@@ -62,7 +66,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttons"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout">
 
 
         <Button
@@ -128,9 +133,26 @@
             android:layout_marginLeft="300dp"
             android:textSize="12sp"
 
-
             />
 
     </FrameLayout>
+
+    <Button
+        android:id="@+id/playButtn"
+        android:text="|>"
+        android:textColor="#FFF2F2"
+        android:textSize="30sp"
+        android:background="@drawable/playbuttonshape"
+        android:shadowColor="#A843A5"
+        android:shadowDx="1"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:onClick="onPlayClick"
+        android:layout_above="@+id/linearLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="60dp"/>
 
 </RelativeLayout>

@@ -19,6 +19,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Outline;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.*;
@@ -33,7 +34,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewOutlineProvider;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -135,22 +138,26 @@ public class MainActivity extends Activity {
         bm.eraseColor(Color.RED);
         seekBar.setThumb(new BitmapDrawable(bm));
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            int originalProgress;
 
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
-
+                originalProgress = seekBar.getProgress();
             }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
+            public void onProgressChanged(SeekBar seekBar, int arg1, boolean fromUser) {
+                if (fromUser == true) {
+                    seekBar.setProgress(originalProgress);
+                }
             }
         });
+
+
 
         DisplayMetrics displaymetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
@@ -184,11 +191,9 @@ public class MainActivity extends Activity {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
 
-
                 /*if (myRecyclerViewAdapter.getItemCount() > 0) {
                     firstItemPos = staggeredGridLayoutManager.findFirstCompletelyVisibleItemPositions(firstItemPos);
                     lastItemPos = staggeredGridLayoutManager.findLastVisibleItemPositions(lastItemPos);
-
 
                     if (arrayList.size() > 0) {
                         currentImage.setImageBitmap(arrayList.get(firstItemPos[0]));
@@ -372,6 +377,7 @@ public class MainActivity extends Activity {
             pd.setCancelable(false);
             pd.setIndeterminate(true);
             pd.show();
+
         }
     }
 

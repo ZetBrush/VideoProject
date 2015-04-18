@@ -2,6 +2,13 @@
 <items version="2" >
 
     <item
+        jar="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/exploded-aar/VideoGenerationJC/FFmpeg/unspecified/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="987a66edd75e176b84f425e2110d87de76c4e415">
+        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/classes-0eb0c9b9abdee12c5d37f68d96d976816833f302.jar" />
+    </item>
+    <item
         jar="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/exploded-aar/VideoGenerationJC/app/unspecified/libs/aspectjrt-1.8.4.jar"
         jumboMode="false"
         revision="20.0.0"

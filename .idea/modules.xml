@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/FFmpeg/FFmpeg.iml" filepath="$PROJECT_DIR$/FFmpeg/FFmpeg.iml" />
       <module fileurl="file://$PROJECT_DIR$/MultiPick/MultiPick.iml" filepath="$PROJECT_DIR$/MultiPick/MultiPick.iml" />
       <module fileurl="file://$PROJECT_DIR$/VideoGenerationJC.iml" filepath="$PROJECT_DIR$/VideoGenerationJC.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
@@ -10,4 +11,3 @@
     </modules>
   </component>
 </project>
-

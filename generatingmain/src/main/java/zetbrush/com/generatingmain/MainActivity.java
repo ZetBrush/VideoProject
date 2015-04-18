@@ -1,9 +1,10 @@
 package zetbrush.com.generatingmain;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -13,43 +14,44 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.media.MediaCodec;
 import android.media.MediaExtractor;
-import android.media.MediaFormat;
-import android.media.MediaMuxer;
 import android.net.Uri;
-import android.os.*;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.Process;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.text.method.Touch;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.Container;
+import com.github.hiteshsondhi88.libffmpeg.ExecuteBinaryResponseHandler;
+import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
+import com.github.hiteshsondhi88.libffmpeg.LoadBinaryResponseHandler;
+import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
+import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException;
 import com.googlecode.mp4parser.FileDataSourceImpl;
 import com.googlecode.mp4parser.authoring.Movie;
 import com.googlecode.mp4parser.authoring.Track;
@@ -65,21 +67,16 @@ import net.pocketmagic.android.openmxplayer.PlayerStates;
 import org.jcodec.api.android.SequenceEncoder;
 import org.jcodec.scale.BitmapUtil;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.RandomAccessFile;
-import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
+
 import zetbrush.com.view.ScrollPickerView;
-import zetbrush.com.view.ScrollPickerViewListener;
 import zetbrush.com.view.TouchScroll;
 
 
@@ -125,6 +122,8 @@ public class MainActivity extends ActionBarActivity {
     public static int currentEffect =0;
     public static int intervalSec =0;
 
+    FFmpeg ffmpeg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -153,6 +152,83 @@ public class MainActivity extends ActionBarActivity {
             path = "/storage/removable/sdcard1/DCIM/100ANDRO/newfold";
         }
         setImageCount();
+
+       loadFFMpegBinary();
+    }
+
+
+
+    private void loadFFMpegBinary() {
+        try {
+            ffmpeg= FFmpeg.getInstance(MainActivity.this);
+            ffmpeg.loadBinary(new LoadBinaryResponseHandler() {
+                @Override
+                public void onFailure() {
+                    showUnsupportedExceptionDialog();
+                }
+            });
+        } catch (FFmpegNotSupportedException e) {
+            showUnsupportedExceptionDialog();
+        }
+    }
+
+    private void execFFmpegBinary(final String command) {
+        try {
+            ffmpeg.execute(command, new ExecuteBinaryResponseHandler() {
+                @Override
+                public void onFailure(String s) {
+
+                    Log.i("FFMPEGG","FAILED with output : "+s);
+                }
+
+                @Override
+                public void onSuccess(String s) {
+
+                    Log.i("FFMPEGG", "SUCCESS with output : " + s);
+                }
+
+                @Override
+                public void onProgress(String s) {
+                    Log.d(TAG, "Started command : ffmpeg " + command);
+                    progressDialog.setMessage("Processing\n"+s);
+                }
+
+                @Override
+                public void onStart() {
+
+
+                    Log.d(TAG, "Started command : ffmpeg " + command);
+                    progressDialog.setMessage("Processing...");
+                    progressDialog.show();
+                }
+
+                @Override
+                public void onFinish() {
+                    Log.d(TAG, "Finished command : ffmpeg "+command);
+                    progressDialog.dismiss();
+                }
+            });
+        } catch (FFmpegCommandAlreadyRunningException e) {
+            // do nothing for now
+        }
+    }
+
+
+
+    private void showUnsupportedExceptionDialog() {
+        new AlertDialog.Builder(MainActivity.this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("dev not supported")
+                .setMessage("dev not supported")
+                .setCancelable(false)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MainActivity.this.finish();
+                    }
+                })
+                .create()
+                .show();
 
     }
 
@@ -387,24 +463,24 @@ public class MainActivity extends ActionBarActivity {
                     int height = btm.getHeight();
                     Bitmap transBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
-                    for (int i = 0; i < 10; i++) {
+                    for (int i = 0; i < 25; i++) {
                         Canvas canvas = new Canvas(transBitmap);
                         canvas.drawRGB(0, 0, 0);
                         final Paint paint = new Paint();
                         Matrix mx = new Matrix();
                         ///choosing effect
                         if(currentEffect==1){
-                            paint.setAlpha(i * 10);
+                            paint.setAlpha((i+1) * 4);
                             canvas.drawBitmap(btm,0,0,paint);
                         }
 
                         else if (currentEffect==2) {
-                            canvas.drawBitmap(btm, dm.widthPixels - i * (dm.widthPixels / 9), 0, paint);
+                            canvas.drawBitmap(btm, dm.widthPixels - i * (dm.widthPixels / 24), 0, paint);
                         }
 
                         else if(currentEffect>= 3){
                             mx.postRotate(90 - i*10);
-                            mx.postTranslate(150+ dm.widthPixels - i * (dm.widthPixels / 10 + 50),0);
+                            mx.postTranslate(150+ dm.widthPixels - i * (dm.widthPixels / 24 + 50),0);
                             canvas.concat(mx);
                             canvas.drawBitmap(btm,0,0,paint);
 
@@ -454,6 +530,127 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    private class FfmEncoder extends AsyncTask<File, Integer, Integer> {
+        private static final String TAG = "ffencoder";
+
+        protected Integer doInBackground(File... params) {
+            android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
+
+            try {
+
+
+                int imgallcounter =0;
+                int transcounter = 0;
+                int imagecounter = 0;
+                String dirNm = params[0].getParentFile().getPath();
+
+
+
+                while (true) {
+
+                    File img = new File(dirNm + "/" + "image_"+ String.format("%03d", imagecounter) + ".png");
+                    String inptFile = "image_"+ String.format("%03d", imagecounter) + ".png";
+
+                    Bitmap btm = BitmapFactory.decodeFile(img.getAbsolutePath());
+                    int width = btm.getWidth();
+                    int height = btm.getHeight();
+                    Bitmap transBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+                    FileOutputStream out = null;
+
+
+
+                    for(int i=0; i<25; i++){
+
+                        String imgoutputName = "image_"+ String.format("%03d", imgallcounter++) + ".jpg";
+                        Util.copyFile(img.getParentFile().getPath(),inptFile,imgoutputName,Environment.getExternalStorageDirectory().getPath()+"/tempimgs");
+                    }
+
+                    for (int i = 0; i < 25; i++) {
+                        Canvas canvas = new Canvas(transBitmap);
+                        canvas.drawRGB(0, 0, 0);
+                        final Paint paint = new Paint();
+                        Matrix mx = new Matrix();
+                        ///choosing effect
+                        if(currentEffect==1){
+                            paint.setAlpha((i+1) * 4);
+                            canvas.drawBitmap(btm,0,0,paint);
+                        }
+
+                        else if (currentEffect==2) {
+                            canvas.drawBitmap(btm, dm.widthPixels - i * (dm.widthPixels / 24), 0, paint);
+                        }
+
+                        else if(currentEffect>= 3){
+                            mx.postRotate(90 - i*10);
+                            mx.postTranslate(150+ dm.widthPixels - i * (dm.widthPixels / 24 + 50),0);
+                            canvas.concat(mx);
+                            canvas.drawBitmap(btm,0,0,paint);
+
+                        }
+                        /// starting encode frame
+                       // se.encodeNativeFrameForPartialEffect(BitmapUtil.fromBitmap(transBitmap));
+                         out = null;
+                        try {
+                            File filename = new File(Environment.getExternalStorageDirectory().getPath()+"/tempimgs" + "/image_" + String.format("%03d", imgallcounter++) + ".jpg");
+                            out = new FileOutputStream(filename);
+                            transBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out); // bmp is your Bitmap instance
+                            // PNG is a lossless format, the compression factor (100) is ignored
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        } finally {
+                            try {
+                                if (out != null) {
+                                    out.close();
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        publishProgress(transcounter);
+                        transcounter++;
+                    }
+                    vidcount++;
+                    //se.finish();
+                    System.gc();
+                    File imgg = new File(dirNm + "/image_" + String.format("%03d", imagecounter + 1) + ".png");
+                    if (!imgg.exists()) {
+                        vidcount = 1;
+                        break;
+                    }
+                    imagecounter++;
+
+
+                }
+
+
+            } catch (Exception e) {
+                Log.e(TAG, "IO", e);
+            }
+
+            return 0;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            if (!values[0].equals(null)) {
+                String tmp = (int) (((float) values[0] / (imageCount * 24)) * 100) + "%";
+                progress.setText(tmp);
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Integer result) {
+            progress.setText("Ready!");
+            String command="-f image2 -i "+" " +Environment.getExternalStorageDirectory().getPath()+"/tempimgs"+ "/image_%03d.png -c:v libx264 -t 24 -pix_fmt yuv420p /storage/emulated/0/video.mp4";
+            if (!TextUtils.isEmpty(command)) {
+                execFFmpegBinary(command);
+            }
+
+        }
+    }
+
+
+
     //////Still frame Encoder///////////
     int imagecounter = 0;
 
@@ -488,6 +685,7 @@ public class MainActivity extends ActionBarActivity {
                         Movie mm = mc.build(params[0].getParentFile().getPath() + "/still" + vidcnt + ".mp4");
                         Track vidTr = mm.getTracks().get(0);
                         AppendTrack stillApTr;
+
                         Track[] vidTracks = new Track[intervalSec * 10];
 
                         for (int j = 0; j < intervalSec * 10; j++) {
@@ -877,6 +1075,8 @@ public class MainActivity extends ActionBarActivity {
 
     public void makevideoClick(View v) {
         if (name[0] != null) {
+            progressDialog = new ProgressDialog(MainActivity.this);
+            progressDialog.setTitle(null);
 
             if (currentEffect==0) {
 
@@ -890,7 +1090,8 @@ public class MainActivity extends ActionBarActivity {
                     String mask = file.getName().replaceAll("(\\D+)\\d+(\\D+)",
                             "$1%0" + digits.length() + "d$2");
 
-                    new Encoder().execute(new File(path + "/", mask));
+                    //new Encoder().execute(new File(path + "/", mask));
+                    new FfmEncoder().execute(new File(path + "/", mask));
 
                 } else
                     Toast.makeText(getApplicationContext(), "path is null", Toast.LENGTH_SHORT).show();
@@ -911,16 +1112,17 @@ public class MainActivity extends ActionBarActivity {
                 String flnm = filename + "000.png";
                 File ff = new File(flnm);
                 if (ff.exists()) {
-                    new PartialVidEncoder().execute(ff);
+                  //  new PartialVidEncoder().execute(ff);
+                    new FfmEncoder().execute(ff);
 
                 }
 
 
-                File fadfile = new File(filename + "000.png");
+               /* File fadfile = new File(filename + "000.png");
                 if (fadfile.exists()) {
                     new StillVidEncoder().execute(fadfile);
 
-                }
+                }*/
 
             }
 
@@ -931,6 +1133,8 @@ public class MainActivity extends ActionBarActivity {
 
 
     ////End of Making Video ///////
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -952,185 +1156,7 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /*private class Decoder extends AsyncTask<File, Integer, Integer> {
-        private static final String TAG = "DECODER";
 
-        protected Integer doInBackground(File... params) {
-            FileChannelWrapper ch = null;
-            try {
-                ch = NIOUtils.readableFileChannel(params[0]);
-                FrameGrab frameGrab = new FrameGrab(ch);
-                FrameGrab.MediaInfo mi = frameGrab.getMediaInfo();
-                Bitmap frame = Bitmap.createBitmap(mi.getDim().getWidth(), mi
-                        .getDim().getHeight(), Bitmap.Config.ARGB_8888);
-
-                for (int i = 0; !flag; i++) {
-                    frameGrab.getFrame(frame);
-                    if (frame == null)
-                        break;
-                    OutputStream os = null;
-                    try {
-                        os = new BufferedOutputStream(new FileOutputStream(
-                                new File(params[0].getParentFile(),
-                                        String.format("img%08d.jpg", i))));
-                        frame.compress(Bitmap.CompressFormat.JPEG, 90, os);
-                    } finally {
-                        if (os != null)
-                            os.close();
-                    }
-                    publishProgress(i);
-
-                }
-            } catch (IOException e) {
-                Log.e(TAG, "IO", e);
-            } catch (JCodecException e) {
-                Log.e(TAG, "JCodec", e);
-
-            } finally {
-                NIOUtils.closeQuietly(ch);
-            }
-            return 0;
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            //progress.setText(String.valueOf(values[0]));
-        }
-    }
-*/
-
-    private void cloneMediaUsingMuxer(String srcvid, String srcAud, String dstMediaPath,
-                                      int expectedTrackCount, int degrees) throws IOException {
-
-        // Set up MediaExtractor to read from the source.
-
-        MediaExtractor extractor = new MediaExtractor();
-        extractor.setDataSource(srcvid);
-
-
-        MediaExtractor extractorAud = new MediaExtractor();
-        extractorAud.setDataSource(srcAud);
-
-        int trackCount = extractor.getTrackCount();
-        int trackCountAud = extractorAud.getTrackCount();
-
-
-        //assertEquals("wrong number of tracks", expectedTrackCount, trackCount);
-
-        // Set up MediaMuxer for the destination.
-        MediaMuxer muxer;
-        muxer = new MediaMuxer(dstMediaPath, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
-
-      //  muxer.addTrack(MediaFormat.createVideoFormat("video/avc", 480, 320));
-      //  muxer.addTrack(MediaFormat.createAudioFormat("audio/mp4a-latm", 48000, 2));
-
-        // Set up the tracks.
-        HashMap<Integer, Integer> indexMap = new HashMap<Integer, Integer>(trackCount);
-        HashMap<Integer, Integer> indexMapAud = new HashMap<Integer, Integer>(trackCountAud);
-        for (int i = 0; i < trackCount; i++) {
-            extractor.selectTrack(i);
-            MediaFormat format = extractor.getTrackFormat(i);
-            int dstIndex = muxer.addTrack(format);
-            indexMap.put(i, dstIndex);
-        }
-
-        for (int i = 0; i < trackCount; i++) {
-            extractorAud.selectTrack(i);
-            MediaFormat format = extractorAud.getTrackFormat(i);
-            int dstIndex = muxer.addTrack(format);
-            indexMapAud.put(i, dstIndex);
-
-        }
-        Log.d("IndexMaps", "sizes IndexMap "+ indexMap.size() + "IndexMapAud "+ indexMapAud.size(), null);
-
-
-    // Copy the samples from MediaExtractor to MediaMuxer.
-    boolean sawEOS = false;
-    int bufferSize = MAX_SAMPLE_SIZE;
-    int frameCount = 0;
-    int offset = 100;
-
-    ByteBuffer dstBuf = ByteBuffer.allocate(bufferSize);
-    MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
-
-
-        muxer.start();
-        boolean secondstage = false;
-
-        while (!sawEOS) {
-            if(secondstage){
-                break;
-            }
-            bufferInfo.offset = offset;
-            bufferInfo.size = extractor.readSampleData(dstBuf, offset);
-
-
-            if (bufferInfo.size < 0 ) {
-
-               Log.d(TAG, "saw input EOS.");
-
-               // sawEOS = true;
-                (bufferInfo.size) = 0;
-                frameCount = 0;
-                while(!sawEOS){
-
-                    if (bufferInfo.size < 0) {
-                        sawEOS = true;
-                        secondstage = true;
-                        bufferInfo.size =0;
-                        muxer.stop();
-                        break;
-                    }
-                   else{
-                        bufferInfo.presentationTimeUs = extractorAud.getSampleTime();
-                        bufferInfo.flags = extractorAud.getSampleFlags();
-                        int trackIndex = extractorAud.getSampleTrackIndex();
-
-                        muxer.writeSampleData(indexMapAud.get(trackIndex), dstBuf,
-                                bufferInfo);
-                        extractorAud.advance();
-
-                        frameCount++;
-
-                        Log.d(TAG, "Frame (" + frameCount + ") " +
-                                "PresentationTimeUs:" + bufferInfo.presentationTimeUs +
-                                " Flags:" + bufferInfo.flags +
-                                " TrackIndex:" + trackIndex +
-                                " Size(KB) " + bufferInfo.size / 1024);
-
-                        }
-
-                    }
-
-
-                 }
-
-
-             else {
-                bufferInfo.presentationTimeUs = extractor.getSampleTime();
-                bufferInfo.flags = extractor.getSampleFlags();
-                int trackIndex = extractor.getSampleTrackIndex();
-
-                muxer.writeSampleData(indexMap.get(trackIndex), dstBuf,
-                        bufferInfo);
-                extractor.advance();
-
-                frameCount++;
-
-                    Log.d(TAG, "Frame (" + frameCount + ") " +
-                            "PresentationTimeUs:" + bufferInfo.presentationTimeUs +
-                            " Flags:" + bufferInfo.flags +
-                            " TrackIndex:" + trackIndex +
-                            " Size(KB) " + bufferInfo.size / 1024);
-
-            }
-
-        }
-
-       // muxer.release();
-
-        return;
-    }
 
     @Override
     protected void onDestroy(){

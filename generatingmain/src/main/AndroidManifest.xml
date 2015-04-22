@@ -35,8 +35,7 @@
 
         </activity>
         <service
-            android:name=".VideoRenderService"
-            android:exported="false"/>
+            android:name=".FfmpegService" />
 
     </application>
 

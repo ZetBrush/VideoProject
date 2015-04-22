@@ -234,7 +234,7 @@ public class MainActivity extends Activity {
             Log.d("arralist 1 ", " " + arrayList.size());
             for (int i = 0; i < path[0].size(); i++) {
 
-                String fname = "image_" + String.format("%03d", i) + ".png";
+                String fname = "image_" + String.format("%03d", i) + ".jpg";
 
                 try {
                     File file = new File(myDir, fname);
@@ -245,7 +245,7 @@ public class MainActivity extends Activity {
                     bitmap = Utils.scaleCenterCrop(bitmap, 700, 700);
                     FileOutputStream out = new FileOutputStream(file);
 
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 50, out);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
                     setBadge(getApplicationContext(), i);
                     out.flush();
                     out.close();

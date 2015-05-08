@@ -16,14 +16,14 @@ public class ItemChooserActivity extends ListActivity {
 
     public static final String RES_SELECTED_PRODUCT = "SelectedProduct";
 
-    public static final Effects[] AVAILABLE_PRODUCTS = new Effects[]{
-            new Effects("FadeIn"),
-            new Effects("Slide from Right"),
-            new Effects("None"),
+    public static final EffectChoser[] AVAILABLE_PRODUCTS = new EffectChoser[]{
+            new EffectChoser("FadeIn"),
+            new EffectChoser("Slide from Right"),
+            new EffectChoser("None"),
 
     };
 
-    protected ArrayAdapter<Effects> adapter;
+    protected ArrayAdapter<EffectChoser> adapter;
 
 
 
@@ -41,7 +41,7 @@ public class ItemChooserActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chooser);
 
-        adapter = new ArrayAdapter<Effects>(this, android.R.layout.simple_list_item_1, AVAILABLE_PRODUCTS);
+        adapter = new ArrayAdapter<EffectChoser>(this, android.R.layout.simple_list_item_1, AVAILABLE_PRODUCTS);
         setListAdapter(adapter);
     }
 
@@ -51,7 +51,7 @@ public class ItemChooserActivity extends ListActivity {
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        Effects selectedItem = adapter.getItem(position);
+        EffectChoser selectedItem = adapter.getItem(position);
 
         Intent res = new Intent();
         res.putExtra(RES_SELECTED_PRODUCT, selectedItem);

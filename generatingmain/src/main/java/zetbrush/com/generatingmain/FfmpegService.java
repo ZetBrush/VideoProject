@@ -1,26 +1,25 @@
 package zetbrush.com.generatingmain;
 
-import android.app.Service;
+import android.app.IntentService;
 import android.content.Intent;
 import android.os.IBinder;
 
 /**
  * Created by Arman on 4/22/15.
  */
-public class FfmpegService extends Service {
+public class FfmpegService extends IntentService {
 
-    private FfmpegService ffmpeg;
 
-    public FfmpegService(){}
-
-    public FfmpegService getInstance(){
-        synchronized (FfmpegService.class){
-            if(ffmpeg==null){
-                ffmpeg = new FfmpegService();
-            }
-        }
-        return ffmpeg;
+    /**
+     * Creates an IntentService.  Invoked by your subclass's constructor.
+     *
+     * @param name Used to name the worker thread, important only for debugging.
+     */
+    public FfmpegService(String name) {
+        super(name);
     }
+
+
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -38,6 +37,12 @@ public class FfmpegService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
+
         return null;
+    }
+
+    @Override
+    protected void onHandleIntent(Intent intent) {
+
     }
 }

@@ -3,10 +3,10 @@ package com.github.hiteshsondhi88.libffmpeg;
 import android.content.Context;
 import android.text.TextUtils;
 
-import java.util.Map;
-
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException;
+
+import java.util.Map;
 
 @SuppressWarnings("unused")
 public class FFmpeg implements FFmpegInterface {
@@ -20,7 +20,7 @@ public class FFmpeg implements FFmpegInterface {
 
     private static FFmpeg instance = null;
 
-    private FFmpeg(Context context) {
+    public FFmpeg(Context context) {
         this.context = context.getApplicationContext();
         Log.setDEBUG(Util.isDebug(this.context));
     }

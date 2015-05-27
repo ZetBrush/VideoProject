@@ -45,6 +45,7 @@ import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.Container;
 import com.github.hiteshsondhi88.libffmpeg.ExecuteBinaryResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
+import com.github.hiteshsondhi88.libffmpeg.FFmpegExecuteResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.LoadBinaryResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException;
@@ -172,7 +173,7 @@ public class MainActivity extends ActionBarActivity implements IThreadCompleteLi
     //////DeleteMusicPath////
     private Long startMiliSc = null;
     private Long endMiliSc = null;
-    private int imageCount = 0;
+    public static int imageCount = 0;
 
 
 
@@ -397,10 +398,11 @@ public class MainActivity extends ActionBarActivity implements IThreadCompleteLi
                 Toast.makeText(this, "No music is selected", Toast.LENGTH_SHORT).show();
 
             }
+            }
         }
 
 
-    }
+
 
     public void onSettingsButtonClick(View v) {
         TouchScroll.idgen = 0;
@@ -488,10 +490,92 @@ public class MainActivity extends ActionBarActivity implements IThreadCompleteLi
 
 
     }
+    int videoDuration() {
+        int dur = (imageCount*intervalSec + intervalSec);
+
+        return dur;
+    }
+
 
     public void onTestMp3Click(View v) throws IOException {
 
+        FFmpeg ffmpg = new FFmpeg(MainActivity.this);
 
+        String cmd = "-y -i video.mp4 -i inputfile.mp3 -ss 30 -t 70 -acodec copy -vcodec copy outputfile.mp4";
+        int endmilis = 0;
+        int startmilis = 0;
+        int videodur=0;
+        int musicdur=0;
+
+
+        endmilis = (int) (endMiliSc / 1000);
+
+        if (startMiliSc == null) {
+            startmilis = 0;
+        } else startmilis = (int) (startMiliSc / 1000);
+
+        musicdur=endmilis-startmilis;
+
+        videodur=videoDuration();
+
+        musicdur= musicdur>videodur? videodur: musicdur;
+
+
+        if (musicPath != null || musicPath != "") {
+            //cmd="-af afade=enable='between(t,0,3)':t=in:ss=0:d=3";
+
+            cmd = " -ss "+startmilis+" -t "+(endmilis-startmilis)+" -i " + musicPath + " -af afade=t=out:st=" +
+            (musicdur-2) +":d=2 -strict -2 "+  Environment.getExternalStorageDirectory().getPath() + "/req_images/musictoadd.aac";
+
+            try {
+                final FFmpeg mmpg = new FFmpeg(MainActivity.this);
+                final boolean fade[] = new boolean[1];
+                fade[0]=true;
+                final int finalStartmilis = startmilis;
+                final int finalMusicdur = musicdur;
+                mmpg.execute(cmd, new FFmpegExecuteResponseHandler() {
+                    @Override
+                    public void onSuccess(String message) {
+                        Log.d("FFMusic Success", message);
+                      /*  if(fade[0]){
+                            fade[0]=false;
+                            String fadecmd ="-i " + Environment.getExternalStorageDirectory().getPath() + "/req_images/musictoadd.aac" + " -af afade=t=out:st=" +
+                                    (finalMusicdur-2) +":d=2 -strict -2 "+
+                                    Environment.getExternalStorageDirectory().getPath() + "/req_images/musictoaddd.aac";
+                            try {
+                                mmpg.execute(fadecmd,this);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }*/
+                    }
+
+                    @Override
+                    public void onProgress(String message) {
+                        Log.d("FFMusic Progress", message);
+                    }
+
+                    @Override
+                    public void onFailure(String message) {
+                        Log.d("FFMusic Failure", message);
+                    }
+
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        Log.d("FFMusic", "music cut finished");
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+        }
     }
 
 
@@ -565,10 +649,12 @@ public class MainActivity extends ActionBarActivity implements IThreadCompleteLi
         }
         finish();
     }
-                ///////////////////VideoClick///////////////
-    ////////////////////////////TEST MP3 ///////////////////////////////
+                ///////////////////VideoClick////////////
+     ///////////////////TEST MP3 ///////////////////////////////
 
     public void makevideoClick(View v) {
+
+
         if (name[0] != null) {
             progressDialog = new ProgressDialog(MainActivity.this);
             progressDialog.setTitle(null);
@@ -614,6 +700,46 @@ public class MainActivity extends ActionBarActivity implements IThreadCompleteLi
 
                     new TransitionFrameGenerator().execute(ff);
 
+                }
+
+                if(musicPath!=null || musicPath!=""){
+
+                    String cmd =
+                            "-i "+musicPath+" -ss "+((int)(startMiliSc/1000))+" -af afade=t=out:st="+((int)((endMiliSc/1000)
+                            - (startMiliSc/1000))-2)+ ":d=2 " + Environment.getExternalStorageDirectory().getPath() + "/req_images/musictoadd.mp3";
+
+                    try {
+                        FFmpeg mmpg = new FFmpeg(MainActivity.this);
+
+                        mmpg.execute(cmd, new FFmpegExecuteResponseHandler() {
+                            @Override
+                            public void onSuccess(String message) {
+                                Log.d("FFMusic Success", message);
+                            }
+
+                            @Override
+                            public void onProgress(String message) {
+                                Log.d("FFMusic Progress", message);
+                            }
+
+                            @Override
+                            public void onFailure(String message) {
+                                Log.d("FFMusic Failure", message);
+                            }
+
+                            @Override
+                            public void onStart() {
+
+                            }
+
+                            @Override
+                            public void onFinish() {
+                            Log.d("FFMusic", "music cut finished");
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
 
 
@@ -1090,7 +1216,10 @@ public class MainActivity extends ActionBarActivity implements IThreadCompleteLi
             Log.d("ImageCount_Listen",String.valueOf(imageCount));
             setImageCount();
             Log.d("ImageCount_Listen", String.valueOf(imageCount));
-            new MergeVidsWorker(MainActivity.this, Environment.getExternalStorageDirectory().getAbsoluteFile() + "/Vid_" + name[0]).execute(imageCount);
+
+            new MergeVidsWorker(MainActivity.this,
+                    Environment.getExternalStorageDirectory().getAbsoluteFile() + "/Vid_" + name[0],
+                    Environment.getExternalStorageDirectory().getAbsoluteFile()+"/req_images/musictoadd.mp3").execute(imageCount, (int) (startMiliSc / 1000), (int) (endMiliSc / 1000));
         }
     }
 

@@ -18,31 +18,37 @@ public class MergeVidsWorker extends AsyncTask<Integer, Integer, Integer> implem
     String stillPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/req_images/transitions/still_";
     String transVidpath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/req_images/transitions/trans";
     String outputVidName="";
+    String audioPath="";
 
-    public MergeVidsWorker(Context ctx,String outputnm){
+    public MergeVidsWorker(Context ctx,String outputnm,String audiopath){
         this.ctx = ctx;
         this.outputVidName=outputnm;
+        this.audioPath=audiopath;
     }
 
 
     @Override
-    protected Integer doInBackground(Integer... params) {
+    protected Integer doInBackground(final Integer... params) {
 
-        FFmpeg mmpg = new FFmpeg(ctx);
+        final FFmpeg mmpg = new FFmpeg(ctx);
         try {
+            final boolean[] check = {true};
             mmpg.execute(getCommand(params[0].toString(), outputVidName), new FFmpegExecuteResponseHandler() {
                 @Override
                 public void onSuccess(String message) {
+
                     Log.d("Merging.....",message);
                 }
 
                 @Override
                 public void onProgress(String message) {
-                Log.d("Merging.....",message);
+
+                    Log.d("Merging.....",message);
                 }
 
                 @Override
-                public void onFailure(String message) {
+                public void onFailure(String message)
+                {
                     Log.d("Merging....Failure",message);
                 }
 
@@ -54,6 +60,18 @@ public class MergeVidsWorker extends AsyncTask<Integer, Integer, Integer> implem
                 @Override
                 public void onFinish() {
                     Log.d("Merging.....","Finished!");
+                   if(check[0] && (audioPath!=null || audioPath!="")) {
+                        check[0] =false;
+                       //String cmd = "-y -i video.mp4 -i inputfile.mp3 -ss 30 -t 70 -acodec copy -vcodec copy outputfile.mp4"     -ss "+params[1]+" -t "+params[2] +";
+                        String cmd = "-i " + outputVidName + ".mp4 -i "+audioPath+" -map 0:0 -af afade=t=out:st="+(params[2]-params[1]-2)+ ":d=2 -map 1:0 -shortest " + outputVidName + "_m.mp4";
+                        try {
+
+                            mmpg.execute(cmd, this);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    }
 
                     Toast.makeText(ctx,"Video is ready!",Toast.LENGTH_SHORT).show();
                 }

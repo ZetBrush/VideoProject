@@ -4,7 +4,7 @@
     package="zetbrush.com.generatingmain">
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <!--<uses-permission android:name="android.permission.Access_" />-->
     <application
         tools:replace="label,icon, theme"
@@ -35,7 +35,8 @@
 
         </activity>
         <service
-            android:name=".FfmpegService" />
+            android:name=".ServiceFloating"
+            android:exported="true" />
 
     </application>
 

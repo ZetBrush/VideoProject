@@ -85,7 +85,7 @@ public class MainActivity extends ActionBarActivity implements IThreadCompleteLi
     static int vidcount = 1;
     static int counter = 1;
     private static int filecount = 0;
-    final String[] name = new String[2];
+    public static final String[] name = new String[2];
     public TextView progress;
     MediaExtractor extractor;
     ProgressDialog progressDialog;
@@ -171,8 +171,8 @@ public class MainActivity extends ActionBarActivity implements IThreadCompleteLi
     private String newMusicPath = null;
 
     //////DeleteMusicPath////
-    private Long startMiliSc = null;
-    private Long endMiliSc = null;
+    public static Long startMiliSc = null;
+    public static Long endMiliSc = null;
     public static int imageCount = 0;
 
 
@@ -693,16 +693,26 @@ public class MainActivity extends ActionBarActivity implements IThreadCompleteLi
                 String flnm = filename + "000.jpg";
                 File ff = new File(flnm);
                 if (ff.exists()) {
-                    //  new PartialVidEncoder().execute(ff);
+
+                    Intent intnt = new Intent(MainActivity.this,ServiceFloating.class);
+                    intnt.putExtra("interval",intervalSec);
+                    intnt.putExtra("startms",startMiliSc);
+                    intnt.putExtra("endms",endMiliSc);
+                    intnt.putExtra("effect",currentEffect);
+                    intnt.putExtra("name",name[0]);
+                    intnt.putExtra("musicpath",musicPath);
+                    startService(intnt);
+                    finish();
+                   /* //  new PartialVidEncoder().execute(ff);
                     StillFFEncoder thrd = new StillFFEncoder(ff);
                     thrd.addListener(MainActivity.this);
                     thrd.execute();
 
-                    new TransitionFrameGenerator().execute(ff);
+                    new TransitionFrameGenerator().execute(ff);*/
 
                 }
 
-                if(musicPath!=null || musicPath!=""){
+                /*if(musicPath!=null || musicPath!=""){
 
                     String cmd =
                             "-i "+musicPath+" -ss "+((int)(startMiliSc/1000))+" -af afade=t=out:st="+((int)((endMiliSc/1000)
@@ -740,7 +750,7 @@ public class MainActivity extends ActionBarActivity implements IThreadCompleteLi
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }
+                }*/
 
 
                /* File fadfile = new File(filename + "000.png");
@@ -781,7 +791,7 @@ public class MainActivity extends ActionBarActivity implements IThreadCompleteLi
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        try {
+       /* try {
 
             File dir = new File(Environment.getExternalStorageDirectory() + "/req_images");
             if (dir.isDirectory()) {
@@ -793,7 +803,7 @@ public class MainActivity extends ActionBarActivity implements IThreadCompleteLi
             }
 
         } catch (Exception e) {
-        }
+        }*/
     }
 
 

@@ -22,11 +22,13 @@ public class TransitionFrameGen extends AsyncTask<File, Integer, Integer> {
     int vidcount = 1;
     private final Set<IThreadCompleteListener> listeners = new CopyOnWriteArraySet<IThreadCompleteListener>();
     IThreadCompleteListener listener;
+    int imageCount;
 
- public TransitionFrameGen(Context ctx, IThreadCompleteListener lis, int currEffect){
+ public TransitionFrameGen(Context ctx, IThreadCompleteListener lis, int currEffect, int imageCount){
     this._ctx=ctx;
     this.currentEffect=currEffect;
     this.listener=lis;
+     this.imageCount=imageCount;
 
  }
     public final void addListener(final IThreadCompleteListener listener) {
@@ -109,7 +111,7 @@ public class TransitionFrameGen extends AsyncTask<File, Integer, Integer> {
     @Override
     protected void onProgressUpdate(Integer... values) {
         if (!values[0].equals(null)) {
-            String tmp = (int) (((float) values[0] / (MainActivity.imageCount * 24)) * 100) + "%";
+            String tmp = (int) (((float) values[0] / (imageCount * 24)) * 100) + "%";
            Log.d("TransitionFrame",tmp);
 
         }
@@ -119,7 +121,7 @@ public class TransitionFrameGen extends AsyncTask<File, Integer, Integer> {
 
         FFmpegTransitionEncoder ffmpegins = new FFmpegTransitionEncoder(this._ctx);
         ffmpegins.addListener(listener);
-        ffmpegins.execute(MainActivity.imageCount);
+        ffmpegins.execute(imageCount);
 
     }
 }

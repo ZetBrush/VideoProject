@@ -13,7 +13,7 @@ import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunnin
 /**
  * Created by Arman on 5/6/15.
  */
-public class MergeVidsWorker extends AsyncTask<Integer, Integer, Integer> implements ICommandProvider {
+public  class MergeVidsWorker extends AsyncTask<Integer, Integer, Integer> implements ICommandProvider,IThreadCompleteListener {
     Context ctx;
     String stillPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/req_images/transitions/still_";
     String transVidpath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/req_images/transitions/trans";
@@ -36,7 +36,12 @@ public class MergeVidsWorker extends AsyncTask<Integer, Integer, Integer> implem
             mmpg.execute(getCommand(params[0].toString(), outputVidName), new FFmpegExecuteResponseHandler() {
                 @Override
                 public void onSuccess(String message) {
-
+                    if((audioPath==null || audioPath=="")){
+                        notifyOfThreadComplete(666); //exitcode
+                    }
+                    else if(check[0]==false){
+                        notifyOfThreadComplete(666);
+                    }
                     Log.d("Merging.....",message);
                 }
 
@@ -125,5 +130,10 @@ public class MergeVidsWorker extends AsyncTask<Integer, Integer, Integer> implem
         }
     Log.d("MERGE_INFO COMMAND", sb.toString());
         return sb.toString();
+    }
+
+    @Override
+    public void notifyOfThreadComplete(int id) {
+
     }
 }

@@ -11,27 +11,31 @@ import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 
 import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
 import com.github.hiteshsondhi88.libffmpeg.FFmpegExecuteResponseHandler;
+import com.github.lzyzsd.circleprogress.CircleProgress;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ServiceFloating extends Service implements IThreadCompleteListener {
 
 	public static  int ID_NOTIFICATION = 6778;
-
+	private RelativeLayout parentlayout;
 	private WindowManager windowManager;
 	private ImageView chatHead;
+	CircleProgress arcpr;
 	private PopupWindow pwindo;
 	boolean checker=false;
 	boolean mHasDoubleClicked = false;
@@ -39,11 +43,14 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 	private Boolean _enable = true;
 	String outputFold = Environment.getExternalStorageDirectory().getAbsolutePath()+"/req_images/transitions";
 	ArrayList<String> myArray;
-
+	View v;
+	CircleProgress progressView;
 	int contract=0,imageCount,interval,effect;
-
 	Long startMiliSc,endMiliSc;
 	String vidName,musicPath;
+
+	CopyOnWriteArrayList<Integer> progressOverall = new CopyOnWriteArrayList();
+
 
 
 	void writeState(int state,Bundle extra) {
@@ -71,6 +78,7 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 
 	@Override
 	public int onStartCommand (Intent intent, int flags, int startId) {
+		progressOverall.add(0);
 		if(intent!=null && intent.getExtras()!=null) {
 			Bundle extra = intent.getExtras();
 
@@ -84,6 +92,9 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 				writeState(2,extra);
 
 			}
+
+			 progressView = (CircleProgress)v.findViewById(R.id.circle_progress);
+
 
 			if (musicPath != null || musicPath != "") {
 
@@ -131,13 +142,47 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 			String filename = Environment.getExternalStorageDirectory().getPath() + "/req_images/image_";
 			String flnm = filename + "000.jpg";
 			File ff = new File(flnm);
+			ProgressHandler stillHandl = new ProgressHandler(20);
 			if (ff.exists()) {
 
-				StillFFEncoder2 thrd = new StillFFEncoder2(ff, this);
-				thrd.addListener(ServiceFloating.this);
-				thrd.execute(interval);
+				StillFFEncoder2 thrd = new StillFFEncoder2(ff, this,stillHandl,imageCount);
+				thrd.addThreadComplListener(ServiceFloating.this);
+				thrd.setProgressListener(new IProgress() {
+					@Override
+					public void progress(int prg) {
+						int prev= progressOverall.get(0);
+						progressOverall.remove(0);
+						progressOverall.add(prg+prev);
+						final int pr = prg;
+						v.post(new Runnable() {
+							@Override
+							public void run() {
 
-				new TransitionFrameGen(this, this, effect,imageCount).execute(ff);
+								((CircleProgress)v.findViewById(R.id.circle_progress)).setProgress(pr);
+							}
+						});
+					}
+				});
+				thrd.execute(interval);
+				ProgressHandler transHandl = new ProgressHandler(30);
+				TransitionFrameGen trgen = new TransitionFrameGen(this, this, effect,transHandl,imageCount);
+				trgen.setProgressListener(new IProgress() {
+					@Override
+					public void progress(int prg) {
+						int prev = progressOverall.get(0);
+						progressOverall.remove(0);
+						progressOverall.add(prg + prev);
+						final int pr = prg;
+						v.post(new Runnable() {
+							@Override
+							public void run() {
+
+								((CircleProgress) v.findViewById(R.id.circle_progress)).setProgress(pr);
+							}
+						});
+					}});
+
+				trgen.execute(ff);
 
 			}
 
@@ -173,13 +218,18 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 
 	 }
 		setImageCount();
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
 
 		windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
 
-		chatHead = new ImageView(this);
-		chatHead.setImageResource(R.drawable.floating2);
+		LayoutInflater inflater = LayoutInflater.from(this);
+		 v =inflater.inflate(R.layout.circleprogressplace,null,true);
+  			arcpr = (CircleProgress)v.findViewById(R.id.circle_progress);
+		arcpr.setMax(100);
+
+		//chatHead = new ImageView(this);
+
+		//chatHead.setImageResource(R.drawable.floating2);
+
 
 
 		final WindowManager.LayoutParams params = new WindowManager.LayoutParams(
@@ -193,10 +243,10 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 		params.x = 0;
 		params.y = 100;
 
-		windowManager.addView(chatHead, params);
+		windowManager.addView(v,params);
 
 		try {
-			chatHead.setOnTouchListener(new View.OnTouchListener() {
+			v.setOnTouchListener(new View.OnTouchListener() {
 				private WindowManager.LayoutParams paramsF = params;
 				private int initialX;
 				private int initialY;
@@ -231,8 +281,9 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 						case MotionEvent.ACTION_MOVE:
 							paramsF.x = initialX + (int) (event.getRawX() - initialTouchX);
 							paramsF.y = initialY + (int) (event.getRawY() - initialTouchY);
-							windowManager.updateViewLayout(chatHead, paramsF);
+							windowManager.updateViewLayout(v, paramsF);
 							break;
+
 					}
 					return false;
 				}
@@ -241,7 +292,7 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 			// TODO: handle exception
 		}
 
-		chatHead.setOnClickListener(new View.OnClickListener() {
+		v.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
@@ -254,9 +305,6 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 
 
 		}
-
-
-
 
 
 	public void createNotification(){
@@ -275,24 +323,33 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		if (chatHead != null) windowManager.removeView(chatHead);
+		if (arcpr != null) windowManager.removeView(v);
 	}
 
 	@Override
 	public void notifyOfThreadComplete(int code) {
 		contract+=code;
+		CircleProgress cp = (CircleProgress)v.findViewById(R.id.circle_progress);
+		cp.setProgress(contract*20);
 		if(contract ==3) {
 			contract=0;
 			Log.d("ImageCount_Listen", String.valueOf(imageCount));
 			setImageCount();
 			Log.d("ImageCount_Listen", String.valueOf(imageCount));
 
-			new MergeVidsWorker(ServiceFloating.this,
+			MergeVidsWorker merger = new MergeVidsWorker(ServiceFloating.this,
 					Environment.getExternalStorageDirectory().getAbsoluteFile() + "/Vid_" + vidName,
 					Environment.getExternalStorageDirectory().getAbsoluteFile()+"/req_images/musictoadd.mp3"){
 
 
-			}.execute(imageCount, (int) (startMiliSc / 1000), (int) (endMiliSc / 1000));
+			};
+
+			merger.setListener(ServiceFloating.this,cp);
+			merger.execute(imageCount, (int) (startMiliSc / 1000), (int) (endMiliSc / 1000));
+		}
+
+		if(code==666){
+			ServiceFloating.this.stopSelf();
 		}
 
 	}
@@ -321,4 +378,6 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 				" -t " + param[1] + " "+" -preset ultrafast -bsf:v h264_mp4toannexb " +
 				outputFold + "/still_" + param[2] + ".ts";
 	}
+
+
 }

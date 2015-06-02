@@ -16,6 +16,13 @@
         <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/aspectjrt-1.8.4-414fed123c683655bb582bb052c56fe681ca442f.jar" />
     </item>
     <item
+        jar="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/exploded-aar/VideoGenerationJC/library/1.2.0/classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="4d7e4bf0f3b507db6a29e5995a80804dbdcfdc41">
+        <dex dex="/Users/intern/Downloads/VideoGenerationJC/generatingmain/build/intermediates/pre-dexed/debug/classes-7d0fef85dfda3aa6af54c80e828f50daaf09afce.jar" />
+    </item>
+    <item
         jar="/Users/intern/Documents/adt-bundle-mac-x86_64-20140624/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.2/support-annotations-21.0.2.jar"
         jumboMode="false"
         revision="21.1.1"

@@ -3,7 +3,6 @@ package zetbrush.com.generatingmain;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
 
@@ -14,7 +13,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 /**
  * Created by Arman on 5/26/15.
  */
-public class TransitionFrameGen extends AsyncTask<File, Integer, Integer> {
+public class TransitionFrameGen extends ModernAsyncTask<File, Integer, Integer> {
 
     private static final String TAG = "ffencoder";
     private Context _ctx;
@@ -23,13 +22,15 @@ public class TransitionFrameGen extends AsyncTask<File, Integer, Integer> {
     private final Set<IThreadCompleteListener> listeners = new CopyOnWriteArraySet<IThreadCompleteListener>();
     IThreadCompleteListener listener;
     int imageCount;
+    ProgressHandler prhandler;
+    IProgress prgr;
 
- public TransitionFrameGen(Context ctx, IThreadCompleteListener lis, int currEffect, int imageCount){
+ public TransitionFrameGen(Context ctx, IThreadCompleteListener lis, int currEffect,ProgressHandler prhand, int imageCount){
     this._ctx=ctx;
     this.currentEffect=currEffect;
     this.listener=lis;
      this.imageCount=imageCount;
-
+     this.prhandler= prhand;
  }
     public final void addListener(final IThreadCompleteListener listener) {
         listeners.add(listener);
@@ -41,6 +42,9 @@ public class TransitionFrameGen extends AsyncTask<File, Integer, Integer> {
         for (IThreadCompleteListener listener : listeners) {
             listener.notifyOfThreadComplete(code);
         }
+    }
+    public void setProgressListener( IProgress prg){
+        this.prgr = prg;
     }
 
     protected Integer doInBackground(File... params) {
@@ -85,11 +89,11 @@ public class TransitionFrameGen extends AsyncTask<File, Integer, Integer> {
 
 
                 Effects.builder(ef)
-
                         .generateFrames(btm, vidcount);
 
                 publishProgress(transcounter);
                 transcounter++;
+
                 vidcount++;
                 System.gc();
                 File imgg = new File(dirNm + "/image_" + String.format("%03d", imagecounter + 1) + ".jpg");
@@ -112,8 +116,8 @@ public class TransitionFrameGen extends AsyncTask<File, Integer, Integer> {
     protected void onProgressUpdate(Integer... values) {
         if (!values[0].equals(null)) {
             String tmp = (int) (((float) values[0] / (imageCount * 24)) * 100) + "%";
-           Log.d("TransitionFrame",tmp);
-
+            Log.d("TransitionFrame"," "+values[0]);
+            prgr.progress(prhandler.updateProgress((int) (((values[0]+1) / (imageCount * 1.0)) * 100)));
         }
     }
     @Override

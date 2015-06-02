@@ -1,2 +1,2 @@
-include ':app', ':generatingmain', ':oMXPlayer', ':MultiPick', ':FFmpeg'
+include ':app', ':generatingmain', ':oMXPlayer', ':MultiPick', ':FFmpeg', ':library'
 

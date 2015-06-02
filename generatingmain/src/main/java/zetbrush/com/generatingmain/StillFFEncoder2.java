@@ -1,7 +1,6 @@
 package zetbrush.com.generatingmain;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
 
@@ -16,7 +15,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 /**
  * Created by Arman on 5/26/15.
  */
-public class StillFFEncoder2 extends AsyncTask<Integer,Integer,Integer> implements ICommandProvider {
+public class StillFFEncoder2 extends ModernAsyncTask<Integer,Integer,Integer> implements ICommandProvider {
 
     private static final String TAG = "StillFFENCODER";
     boolean checker = false;
@@ -25,20 +24,29 @@ public class StillFFEncoder2 extends AsyncTask<Integer,Integer,Integer> implemen
     String outputFold="";
     Context _ctx;
     private final Set<IThreadCompleteListener> listeners = new CopyOnWriteArraySet<IThreadCompleteListener>();
+    ProgressHandler prgs;
+    int imgCount;
+    IProgress progress;
 
 
-
-    public StillFFEncoder2(Context ctx){
-        this._ctx = ctx;
+    public void setProgressListener(IProgress progress) {
+        this.progress = progress;
     }
 
-    public StillFFEncoder2(File file, Context ctx){
+    public StillFFEncoder2(Context ctx, ProgressHandler pgh){
+        this._ctx = ctx;
+        this.prgs=pgh;
+    }
+
+    public StillFFEncoder2(File file, Context ctx,ProgressHandler pgh,int imgCount){
         workingforpath=file;
         this._ctx=ctx;
+        this.prgs=pgh;
+        this.imgCount=imgCount;
     }
 
 
-    public final void addListener(final IThreadCompleteListener listener) {
+    public final void addThreadComplListener(final IThreadCompleteListener listener) {
         listeners.add(listener);
     }
     public final void removeListener(final IThreadCompleteListener listener) {
@@ -82,7 +90,7 @@ public class StillFFEncoder2 extends AsyncTask<Integer,Integer,Integer> implemen
 
                     @Override
                     public void onSuccess(String s) {
-
+                        publishProgress(i[0]);
                         Log.i("FFMPEGG", "SUCCESS with output : " + s);
 
 
@@ -93,7 +101,7 @@ public class StillFFEncoder2 extends AsyncTask<Integer,Integer,Integer> implemen
                         Log.d(TAG, "onProgress : ffmpeg " + s);
 
 
-                        publishProgress(i[0]);
+
                         // progressDialog.setMessage("Processing\n" + s);
                     }
 
@@ -167,13 +175,13 @@ public class StillFFEncoder2 extends AsyncTask<Integer,Integer,Integer> implemen
     protected void onProgressUpdate(Integer... values) {
         if (!values[0].equals(null))
             Log.d("conf. ", "" + values[0]);
+            progress.progress(prgs.updateProgress((int) (((values[0]+1) / (imgCount * 1.0)) * 100)));
+
     }
 
     @Override
     protected void onPostExecute(Integer result) {
         Log.d("stillFFencoder"," is ready");
-
-
 
     }
 

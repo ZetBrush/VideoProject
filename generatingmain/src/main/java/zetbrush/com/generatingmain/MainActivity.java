@@ -705,7 +705,7 @@ public class MainActivity extends ActionBarActivity implements IThreadCompleteLi
                     finish();
                    /* //  new PartialVidEncoder().execute(ff);
                     StillFFEncoder thrd = new StillFFEncoder(ff);
-                    thrd.addListener(MainActivity.this);
+                    thrd.addThreadComplListener(MainActivity.this);
                     thrd.execute();
 
                     new TransitionFrameGenerator().execute(ff);*/

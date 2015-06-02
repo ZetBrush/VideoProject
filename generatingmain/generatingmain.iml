@@ -92,5 +92,6 @@
     <orderEntry type="module" module-name="oMXPlayer" exported="" />
     <orderEntry type="module" module-name="FFmpeg" exported="" />
     <orderEntry type="module" module-name="app" exported="" />
+    <orderEntry type="module" module-name="library" exported="" />
   </component>
 </module>

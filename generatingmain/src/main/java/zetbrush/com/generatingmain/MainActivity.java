@@ -672,7 +672,7 @@ public class MainActivity extends ActionBarActivity implements IThreadCompleteLi
                             "$1%0" + digits.length() + "d$2");
 
                     //new Encoder().execute(new File(path + "/", mask));
-                    new TransitionFrameGenerator().execute(new File(path + "/", mask));
+                   // new TransitionFrameGenerator().execute(new File(path + "/", mask));
 
                 } else
                     Toast.makeText(getApplicationContext(), "path is null", Toast.LENGTH_SHORT).show();
@@ -1092,9 +1092,9 @@ public class MainActivity extends ActionBarActivity implements IThreadCompleteLi
         protected void onPostExecute(Integer result) {
             progress.setText("wait..");
 
-            FFmpegTransitionEncoder ffmpegins = new FFmpegTransitionEncoder(MainActivity.this);
-            ffmpegins.addListener(MainActivity.this);
-            ffmpegins.execute(imageCount);
+            //FFmpegTransitionEncoder ffmpegins = new FFmpegTransitionEncoder(MainActivity.this,);
+            //ffmpegins.addListener(MainActivity.this);
+           // ffmpegins.execute(imageCount);
 
         }
 

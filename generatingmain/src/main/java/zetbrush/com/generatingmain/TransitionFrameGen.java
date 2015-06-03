@@ -3,7 +3,7 @@ package zetbrush.com.generatingmain;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Environment;
+import android.os.*;
 import android.util.Log;
 
 import java.io.File;
@@ -82,11 +82,6 @@ public class TransitionFrameGen extends ModernAsyncTask<File, Integer, Integer> 
 
                 Bitmap btm = BitmapFactory.decodeFile(img.getAbsolutePath());
 
-                   /* int width = btm.getWidth();
-                    int height = btm.getHeight();
-                    Bitmap transBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-                    FileOutputStream out = null;*/
-
 
                 Effects.builder(ef)
                         .generateFrames(btm, vidcount);
@@ -95,11 +90,13 @@ public class TransitionFrameGen extends ModernAsyncTask<File, Integer, Integer> 
                 transcounter++;
 
                 vidcount++;
-                System.gc();
+
                 File imgg = new File(dirNm + "/image_" + String.format("%03d", imagecounter + 1) + ".jpg");
                 if (!imgg.exists()) {
                     vidcount = 1;
+                    notifyListeners(1); /// service thread complate key1
                     break;
+
                 }
                 imagecounter++;
 
@@ -122,10 +119,7 @@ public class TransitionFrameGen extends ModernAsyncTask<File, Integer, Integer> 
     }
     @Override
     protected void onPostExecute(Integer result) {
-
-        FFmpegTransitionEncoder ffmpegins = new FFmpegTransitionEncoder(this._ctx);
-        ffmpegins.addListener(listener);
-        ffmpegins.execute(imageCount);
-
+        notifyListeners(1);
     }
+
 }

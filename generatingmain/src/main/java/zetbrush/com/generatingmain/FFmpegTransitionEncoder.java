@@ -1,6 +1,5 @@
 package zetbrush.com.generatingmain;
 
-import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
 
@@ -15,16 +14,19 @@ import java.util.concurrent.CopyOnWriteArraySet;
 /**
  * Created by Arman on 4/22/15.
  */
-public class FFmpegTransitionEncoder extends AsyncTask<Integer, Integer, Integer> implements ICommandProvider {
+public class FFmpegTransitionEncoder extends ModernAsyncTask<Integer, Integer, Integer> implements ICommandProvider {
     static int vidcount;
     static int imageCount;
     private final android.content.Context ctx;
+    ProgressHandler progressHandler;
+    IProgress prg;
 
     private static final String TAG = "ffencoder";
 
 
-    public FFmpegTransitionEncoder(android.content.Context ctx) {
+    public FFmpegTransitionEncoder(android.content.Context ctx, ProgressHandler prhandler) {
         this.ctx = ctx;
+        this.progressHandler = prhandler;
     }
 
 
@@ -33,6 +35,11 @@ public class FFmpegTransitionEncoder extends AsyncTask<Integer, Integer, Integer
     public final void addListener(final IThreadCompleteListener listener) {
         listeners.add(listener);
     }
+    public void setProgressListener( IProgress prg){
+        this.prg = prg;
+    }
+
+
     public final void removeListener(final IThreadCompleteListener listener) {
         listeners.remove(listener);
     }
@@ -61,13 +68,14 @@ public class FFmpegTransitionEncoder extends AsyncTask<Integer, Integer, Integer
             }
             String vidNm = outputName+counter[0];
             final FFmpeg encoder= new FFmpeg(ctx);
-
+            publishProgress(counter[0]);
             try {
                 encoder.execute(getCommand(dir.getAbsolutePath(),vidNm ), new FFmpegExecuteResponseHandler() {
                     @Override
                     public void onSuccess(String message) {
                         File dir = new File(dirNm + ++counter[0]);
                         String vidNm = outputName+counter[0];
+                        publishProgress(counter[0]);
                         if (dir.exists()) {
                             try {
                                 encoder.execute(getCommand(dir.getAbsolutePath(),vidNm),this);
@@ -76,7 +84,7 @@ public class FFmpegTransitionEncoder extends AsyncTask<Integer, Integer, Integer
                             }
 
                         }else {
-                             notifyListeners(1); /// notyfing when all chain of enoding transactions are finished
+                             notifyListeners(3); /// notyfing when all chain of enoding transactions are finished
                             Log.d(TAG, message);
                         };
                     }
@@ -117,6 +125,7 @@ public class FFmpegTransitionEncoder extends AsyncTask<Integer, Integer, Integer
     protected void onProgressUpdate(Integer... values) {
         if (!values[0].equals(null)) {
             String tmp = (int) (((float) values[0] / (imageCount * 24)) * 100) + "%";
+            prg.progress(progressHandler.updateProgress((int) (((values[0]+1) / (imageCount * 1.0)) * 100)));
             //progress.setText(tmp);
         }
     }

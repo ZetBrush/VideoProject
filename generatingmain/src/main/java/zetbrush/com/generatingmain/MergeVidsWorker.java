@@ -10,6 +10,8 @@ import com.github.hiteshsondhi88.libffmpeg.FFmpegExecuteResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
 import com.github.lzyzsd.circleprogress.CircleProgress;
 
+import java.io.File;
+
 /**
  * Created by Arman on 5/6/15.
  */
@@ -21,6 +23,8 @@ public  class MergeVidsWorker extends ModernAsyncTask<Integer, Integer, Integer>
     String audioPath="";
     IThreadCompleteListener listener;
     CircleProgress cp;
+    ProgressHandler prgs;
+    IProgress progress;
 
     public MergeVidsWorker(Context ctx,String outputnm,String audiopath){
         this.ctx = ctx;
@@ -28,9 +32,11 @@ public  class MergeVidsWorker extends ModernAsyncTask<Integer, Integer, Integer>
         this.audioPath=audiopath;
     }
 
-    public void setListener(IThreadCompleteListener listener,CircleProgress cp) {
+    public void setListener(IThreadCompleteListener listener,CircleProgress cp, ProgressHandler prgs, IProgress prgress) {
         this.listener = listener;
         this.cp = cp;
+        this.progress=prgress;
+        this.prgs = prgs;
     }
 
     @Override
@@ -42,12 +48,12 @@ public  class MergeVidsWorker extends ModernAsyncTask<Integer, Integer, Integer>
             mmpg.execute(getCommand(params[0].toString(), outputVidName), new FFmpegExecuteResponseHandler() {
                 @Override
                 public void onSuccess(String message) {
-                    if((audioPath==null || audioPath=="")){
+                  /*  if((audioPath==null || audioPath=="")){
                         listener.notifyOfThreadComplete(666); //exitcode
                     }
                     else if(check[0]==false){
                         listener.notifyOfThreadComplete(666);
-                    }
+                    }*/
                     Log.d("Merging.....",message);
                 }
 
@@ -70,20 +76,21 @@ public  class MergeVidsWorker extends ModernAsyncTask<Integer, Integer, Integer>
 
                 @Override
                 public void onFinish() {
-                    if(check[0]==false){
-                        cp.setProgress(100);
-                        listener.notifyOfThreadComplete(666);
-                    }
                     if(audioPath==null || audioPath==""){
-                        cp.setProgress(100);
                         listener.notifyOfThreadComplete(666);
                     }
+
+                    else if(check[0]==false){
+                        new File(outputVidName).delete();
+                        listener.notifyOfThreadComplete(666);
+                    }
+
                     Log.d("Merging.....","Finished!");
                    if(check[0] && (audioPath!=null || audioPath!="")) {
-                       cp.setProgress(80);
+                       progress.progress(prgs.updateProgress(90));
                         check[0] =false;
                        //String cmd = "-y -i video.mp4 -i inputfile.mp3 -ss 30 -t 70 -acodec copy -vcodec copy outputfile.mp4"     -ss "+params[1]+" -t "+params[2] +";
-                        String cmd = "-i " + outputVidName + ".mp4 -i "+audioPath+" -map 0:0 -af afade=t=out:st="+(params[2]-params[1]-2)+ ":d=2 -map 1:0 -shortest " + outputVidName + "_m.mp4";
+                        String cmd = "-i " + outputVidName + ".mp4 -i "+audioPath+" -map 0:0 -map 1:0 -acodec copy -shortest " + outputVidName + "_.mp4";
                         try {
 
                             mmpg.execute(cmd, this);

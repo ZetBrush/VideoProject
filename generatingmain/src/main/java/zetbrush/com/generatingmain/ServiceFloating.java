@@ -1,10 +1,12 @@
 package zetbrush.com.generatingmain;
 
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
@@ -23,6 +25,8 @@ import android.widget.RelativeLayout;
 
 import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
 import com.github.hiteshsondhi88.libffmpeg.FFmpegExecuteResponseHandler;
+import com.github.hiteshsondhi88.libffmpeg.LoadBinaryResponseHandler;
+import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException;
 import com.github.lzyzsd.circleprogress.CircleProgress;
 
 import java.io.File;
@@ -48,8 +52,13 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 	int contract=0,imageCount,interval,effect;
 	Long startMiliSc,endMiliSc;
 	String vidName,musicPath;
-
+	IProgress prgrUpdater;
+	FFmpeg ffmpeg;
 	CopyOnWriteArrayList<Integer> progressOverall = new CopyOnWriteArrayList();
+	boolean key1 =false;
+	boolean key2 =false;
+	boolean key3 =false;
+	boolean key4 =false;
 
 
 
@@ -79,7 +88,7 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 	@Override
 	public int onStartCommand (Intent intent, int flags, int startId) {
 		progressOverall.add(0);
-		if(intent!=null && intent.getExtras()!=null) {
+		if (intent != null && intent.getExtras() != null) {
 			Bundle extra = intent.getExtras();
 
 			if (extra != null) {
@@ -89,90 +98,67 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 				effect = extra.getInt("effect");
 				vidName = extra.getString("name");
 				musicPath = extra.getString("musicpath");
-				writeState(2,extra);
+				writeState(2, extra);
 
 			}
-
-			 progressView = (CircleProgress)v.findViewById(R.id.circle_progress);
+			loadFFMpegBinary();
+			progressView = (CircleProgress) v.findViewById(R.id.circle_progress);
 
 
 			if (musicPath != null || musicPath != "") {
 
-				String cmd =
+				final String cmd =
 						" -ss " + ((int) (startMiliSc / 1000)) + " -i " + musicPath + " -acodec copy " + Environment.getExternalStorageDirectory().getPath() + "/req_images/musictoadd.mp3";
 
-				try {
-					FFmpeg mmpg = new FFmpeg(ServiceFloating.this);
 
-					mmpg.execute(cmd, new FFmpegExecuteResponseHandler() {
-						@Override
-						public void onSuccess(String message) {
-							Log.d("FFMusic Success", message);
-						}
+				final FFmpeg mmpg = new FFmpeg(ServiceFloating.this);
 
-						@Override
-						public void onProgress(String message) {
-							Log.d("FFMusic Progress", message);
-						}
-
-						@Override
-						public void onFailure(String message) {
-							Log.d("FFMusic Failure", message);
-						}
-
-						@Override
-						public void onStart() {
-
-						}
-
-						@Override
-						public void onFinish() {
-							Log.d("FFMusic", "music cut finished");
-						}
-					});
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-
-
-
-
-
-			String filename = Environment.getExternalStorageDirectory().getPath() + "/req_images/image_";
-			String flnm = filename + "000.jpg";
-			File ff = new File(flnm);
-			ProgressHandler stillHandl = new ProgressHandler(20);
-			if (ff.exists()) {
-
-				StillFFEncoder2 thrd = new StillFFEncoder2(ff, this,stillHandl,imageCount);
-				thrd.addThreadComplListener(ServiceFloating.this);
-				thrd.setProgressListener(new IProgress() {
+				new Runnable() {
 					@Override
-					public void progress(int prg) {
-						int prev= progressOverall.get(0);
-						progressOverall.remove(0);
-						progressOverall.add(prg+prev);
-						final int pr = prg;
-						v.post(new Runnable() {
-							@Override
-							public void run() {
+					public void run() {
+						try {
+							mmpg.execute(cmd, new FFmpegExecuteResponseHandler() {
+								@Override
+								public void onSuccess(String message) {
+									Log.d("FFMusic Success", message);
+									musicPath = Environment.getExternalStorageDirectory().getPath() + "/req_images/musictoadd.mp3";
+								}
 
-								((CircleProgress)v.findViewById(R.id.circle_progress)).setProgress(pr);
-							}
-						});
+								@Override
+								public void onProgress(String message) {
+									Log.d("FFMusic Progress", message);
+								}
+
+								@Override
+								public void onFailure(String message) {
+									Log.d("FFMusic Failure", message);
+								}
+
+								@Override
+								public void onStart() {
+
+								}
+
+								@Override
+								public void onFinish() {
+									Log.d("FFMusic", "music cut finished");
+								}
+							});
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
 					}
-				});
-				thrd.execute(interval);
-				ProgressHandler transHandl = new ProgressHandler(30);
-				TransitionFrameGen trgen = new TransitionFrameGen(this, this, effect,transHandl,imageCount);
-				trgen.setProgressListener(new IProgress() {
+				};
+
+
+				prgrUpdater = new IProgress() {
 					@Override
 					public void progress(int prg) {
-						int prev = progressOverall.get(0);
+						CircleProgress cr = ((CircleProgress) v.findViewById(R.id.circle_progress));
+						int prev = cr.getProgress();
 						progressOverall.remove(0);
 						progressOverall.add(prg + prev);
-						final int pr = prg;
+						final int pr = progressOverall.get(0);
 						v.post(new Runnable() {
 							@Override
 							public void run() {
@@ -180,12 +166,32 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 								((CircleProgress) v.findViewById(R.id.circle_progress)).setProgress(pr);
 							}
 						});
-					}});
 
-				trgen.execute(ff);
+					}
+				};
+
+				String filename = Environment.getExternalStorageDirectory().getPath() + "/req_images/image_";
+				String flnm = filename + "000.jpg";
+				File ff = new File(flnm);
+
+				if (ff.exists()) {
+					ProgressHandler stillHandl = new ProgressHandler(20);
+					StillFFEncoder2 thrd = new StillFFEncoder2(ff, this, stillHandl, imageCount);
+					thrd.addThreadComplListener(ServiceFloating.this);
+					thrd.setProgressListener(prgrUpdater);
+					thrd.execute(interval);
+
+
+					ProgressHandler transHandl = new ProgressHandler(30);
+					TransitionFrameGen trgen = new TransitionFrameGen(this, this, effect, transHandl, imageCount);
+					trgen.addListener(this);
+					trgen.setProgressListener(prgrUpdater);
+					trgen.execute(ff);
+
+				}
+
 
 			}
-
 
 		}
 		return START_NOT_STICKY;
@@ -206,7 +212,7 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 		super.onCreate();
      if(1!=getState()){
 		SharedPreferences pref = getApplicationContext().getSharedPreferences("serviceStart",
-				 MODE_MULTI_PROCESS);
+				MODE_MULTI_PROCESS);
 
 		 interval = pref.getInt("interval",1);
 		 startMiliSc = pref.getLong("startms",1);
@@ -328,27 +334,63 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 
 	@Override
 	public void notifyOfThreadComplete(int code) {
-		contract+=code;
+
 		CircleProgress cp = (CircleProgress)v.findViewById(R.id.circle_progress);
-		cp.setProgress(contract*20);
-		if(contract ==3) {
-			contract=0;
+		if(code==1){
+			key1=true;
+			ProgressHandler prHandl = new ProgressHandler(30);
+			FFmpegTransitionEncoder ffmpegins = new FFmpegTransitionEncoder(this,prHandl);
+			ffmpegins.addListener(this);
+			ffmpegins.setProgressListener(prgrUpdater);
+			ffmpegins.execute(imageCount);
+
+		}
+		if(code ==2){
+			key2=true;
+
+		}
+
+		if(code==3){
+			key3 =true;
+		}
+
+		if(key3){
+
+		}
+
+		if(key1 && key2 && key3) {
+
 			Log.d("ImageCount_Listen", String.valueOf(imageCount));
 			setImageCount();
 			Log.d("ImageCount_Listen", String.valueOf(imageCount));
-
+			if(!new File(Environment.getExternalStorageDirectory().getAbsoluteFile()+"/req_images/musictoadd.mp3").exists()){
+				musicPath = null;
+			}
+			else musicPath= Environment.getExternalStorageDirectory().getAbsoluteFile()+"/req_images/musictoadd.mp3";
 			MergeVidsWorker merger = new MergeVidsWorker(ServiceFloating.this,
 					Environment.getExternalStorageDirectory().getAbsoluteFile() + "/Vid_" + vidName,
-					Environment.getExternalStorageDirectory().getAbsoluteFile()+"/req_images/musictoadd.mp3"){
+					musicPath);
 
-
-			};
-
-			merger.setListener(ServiceFloating.this,cp);
+			merger.setListener(ServiceFloating.this,cp,new ProgressHandler(20),prgrUpdater);
 			merger.execute(imageCount, (int) (startMiliSc / 1000), (int) (endMiliSc / 1000));
 		}
 
 		if(code==666){
+			prgrUpdater.progress(8);
+			try {
+
+            File dir = new File(Environment.getExternalStorageDirectory() + "/req_images");
+            if (dir.isDirectory()) {
+                String[] children = dir.list();
+                for (int i = 0; i < children.length; i++) {
+                    new File(dir, children[i]).delete();
+                }
+            }
+
+          } catch (Exception e) {
+        }
+
+
 			ServiceFloating.this.stopSelf();
 		}
 
@@ -379,5 +421,34 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 				outputFold + "/still_" + param[2] + ".ts";
 	}
 
+	private void loadFFMpegBinary() {
+		try {
+			 ffmpeg = FFmpeg.getInstance(this);
+			ffmpeg.loadBinary(new LoadBinaryResponseHandler() {
+				@Override
+				public void onFailure() {
+					showUnsupportedExceptionDialog();
+				}
+			});
+		} catch (FFmpegNotSupportedException e) {
+			showUnsupportedExceptionDialog();
+		}
+	}
+	private void showUnsupportedExceptionDialog() {
+		new AlertDialog.Builder(this)
+				.setIcon(android.R.drawable.ic_dialog_alert)
+				.setTitle("dev not supported")
+				.setMessage("dev not supported")
+				.setCancelable(false)
+				.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						stopSelf();
+					}
+				})
+				.create()
+				.show();
+
+	}
 
 }

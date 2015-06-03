@@ -66,11 +66,11 @@ public class Effects {
                paint.setAlpha((i + 1) * 4);
                canvas.drawBitmap(source, 0, 0, paint);
            } else if (efectInstance.effect == EFFECT.SlIDE) {
-               canvas.drawBitmap(source, width - i * (height / 12), 0, paint);
+               canvas.drawBitmap(source, (24-i) * (height / 24) - width , 0, paint);
 
            } else if (efectInstance.effect == EFFECT.ROTATE) {
-               mx.postRotate(90 - i * 4);
-               mx.postTranslate(150 + width - i * (width / 12 + 50), 0);
+               mx.postRotate(90 - i * 3.75f);
+               mx.postTranslate((24-i) * (width / 24 + 50) - (150 + width), 0);
                canvas.concat(mx);
                canvas.drawBitmap(source, 0, 0, paint);
 

@@ -22,6 +22,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
 import com.github.hiteshsondhi88.libffmpeg.FFmpegExecuteResponseHandler;
@@ -112,12 +113,9 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 						" -ss " + ((int) (startMiliSc / 1000)) + " -i " + musicPath + " -acodec copy " + Environment.getExternalStorageDirectory().getPath() + "/req_images/musictoadd.mp3";
 
 
-				final FFmpeg mmpg = new FFmpeg(ServiceFloating.this);
 
-				new Thread(new Runnable() {
-					@Override
-					public void run() {
 						try {
+							 FFmpeg mmpg = new FFmpeg(ServiceFloating.this);
 							mmpg.execute(cmd, new FFmpegExecuteResponseHandler() {
 								@Override
 								public void onSuccess(String message) {
@@ -148,8 +146,8 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
-					}
-				});
+
+
 
 
 				prgrUpdater = new IProgress() {
@@ -331,10 +329,14 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 	public void onDestroy() {
 		super.onDestroy();
 		if (arcpr != null) windowManager.removeView(v);
+		File dir = new File(Environment.getExternalStorageDirectory().getPath()+"/req_images");
+		if(dir.exists())
+		deleteRecursive(dir);
 	}
 
 	@Override
 	public void notifyOfThreadComplete(int code) {
+		Log.d("Codeon Noty", "service " + code);
 
 		CircleProgress cp = (CircleProgress)v.findViewById(R.id.circle_progress);
 		if(code==1){
@@ -360,7 +362,8 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 		}
 
 		if(key1 && key2 && key3) {
-
+			key2=false;
+			key3=false;
 			Log.d("ImageCount_Listen", String.valueOf(imageCount));
 			setImageCount();
 			Log.d("ImageCount_Listen", String.valueOf(imageCount));
@@ -380,19 +383,61 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 			prgrUpdater.progress(8);
 			try {
 
-            File dir = new File(Environment.getExternalStorageDirectory() + "/req_images");
-            if (dir.isDirectory()) {
-                String[] children = dir.list();
-                for (int i = 0; i < children.length; i++) {
-                    new File(dir, children[i]).delete();
-                }
-            }
-
+              File dir = new File(Environment.getExternalStorageDirectory() + "/req_images");
+				deleteRecursive(dir);
+				if(musicPath!=null || musicPath!="")
+				Toast.makeText(this,"Saved at "+ Environment.getExternalStorageDirectory()+"/"+vidName+"_.mp4",Toast.LENGTH_LONG).show();
+				else Toast.makeText(this,"Saved at "+ Environment.getExternalStorageDirectory()+"/"+vidName+".mp4",Toast.LENGTH_LONG).show();
           } catch (Exception e) {
         }
 
 
 			ServiceFloating.this.stopSelf();
+		}
+
+		if(code==555){
+			String cmd = "-i " + Environment.getExternalStorageDirectory().getAbsoluteFile() + "/Vid_" + vidName + ".mp4 -i "+musicPath+" -c:v copy -c:a aac -strict experimental -shortest " + Environment.getExternalStorageDirectory().getAbsoluteFile() + "/Vid_" + vidName +"_.mp4";
+			try {
+				FFmpeg mmpgg = new FFmpeg(this);
+				try{
+					Thread.currentThread().wait(100);
+				}catch (Exception e){
+
+				}
+				mmpgg.execute(cmd, new FFmpegExecuteResponseHandler() {
+					@Override
+					public void onSuccess(String message) {
+						Log.d("MusMerger Success", message);
+					}
+
+					@Override
+					public void onProgress(String message) {
+						Log.d("MusMerger Prog", message);
+					}
+
+					@Override
+					public void onFailure(String message) {
+						Log.d("MusMerger Fail", message);
+					}
+
+					@Override
+					public void onStart() {
+
+					}
+					@Override
+					public void onFinish() {
+						Log.d("MusMerger Finish", "fin");
+								File ff = new File(Environment.getExternalStorageDirectory().getAbsoluteFile() + "/Vid_" + vidName + ".mp4");
+						        if(ff.exists())
+								ff.delete();
+
+							ServiceFloating.this.notifyOfThreadComplete(666);
+						}
+				});
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		}
 
 	}
@@ -450,6 +495,13 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 				.create()
 				.show();
 
+	}
+	void deleteRecursive(File fileOrDirectory) {
+		if (fileOrDirectory.isDirectory())
+			for (File child : fileOrDirectory.listFiles())
+				deleteRecursive(child);
+
+		fileOrDirectory.delete();
 	}
 
 }

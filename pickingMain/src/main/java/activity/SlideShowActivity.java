@@ -197,13 +197,8 @@ public class SlideShowActivity extends ActionBarActivity {
                 }
 
 
-               MainGenFragment newFragment = new MainGenFragment();
-                Bundle b = new Bundle();
-                b.putString("myimagespath", myDir.toString());
-
-                newFragment.show(getSupportFragmentManager(), "gendialog");
-
-
+                MainGenFragment newFragment = new MainGenFragment();
+                newFragment.show(getSupportFragmentManager(), "Configure.");
                 Intent intentService = new Intent(this, MyService.class);
                 intentService.putExtra("paths", pathsForDecoding);
                 startService(intentService);

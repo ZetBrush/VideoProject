@@ -1,39 +1,45 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity">
+    android:background="@color/background_floating_material_dark"
+    >
 
-    <FrameLayout
-        android:id="@+id/imageframe"
-        android:layout_width="match_parent"
-        android:layout_height="300dp">
-
-        <ImageView
-            android:id="@+id/imagepreview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_horizontal|bottom" />
-
-    </FrameLayout>
 
     <LinearLayout
 
         android:id="@+id/buttons"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@id/imageframe"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_toRightOf="@+id/playButtn"
-        android:layout_toEndOf="@+id/playButtn">
+        android:weightSum="3"
+        >
 
         <Button
+            android:layout_weight="1"
+            android:id="@+id/playButtn"
+            android:text="|>"
+            android:textColor="#FFF2F2"
+            android:textSize="30sp"
+            android:background="@drawable/playbuttonshape"
+            android:shadowColor="#A843A5"
+            android:shadowDx="1"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:layout_width="67dp"
+            android:layout_height="64dp"
+            android:onClick="onPlayClick"
+            android:layout_above="@+id/linearLayout"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="20dp"/>
+
+        <Button
+            android:layout_weight="1"
             android:id="@+id/makeVideoBut"
             android:text="Render"
             android:textColor="#3D3923"
@@ -45,50 +51,35 @@
             android:shadowDx="0"
             android:shadowDy="0"
             android:shadowRadius="6"
-
-            android:layout_below="@+id/imageframe"
-            android:layout_toRightOf="@+id/playButtn"
-            android:layout_toEndOf="@+id/playButtn"
-            android:layout_marginLeft="20dp"/>
-
-        <TextView
-            android:id="@+id/progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="0dp"
-            android:text="ready"
-            android:textSize="15sp"
-            android:layout_marginLeft="30dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/buttons"
-        android:orientation="horizontal"
-        android:id="@+id/linearLayout">
-
+            android:layout_marginLeft="8dp"
+            android:layout_alignTop="@+id/buttons"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <Button
+            android:layout_weight="1"
             android:id="@+id/settingsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
             android:onClick="onSettingsButtonClick"
             android:text="Settings" />
-         <Button
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="ImageTest"
-             android:id="@+id/TestMp3"
-             android:onClick="onTestMp3Click"/>
-
     </LinearLayout>
+
+
+
+
+
+
+
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_marginTop="38dp"
+        android:layout_below="@+id/buttons"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <TextView
             android:id="@+id/musicNameText"
@@ -136,23 +127,5 @@
             />
 
     </FrameLayout>
-
-    <Button
-        android:id="@+id/playButtn"
-        android:text="|>"
-        android:textColor="#FFF2F2"
-        android:textSize="30sp"
-        android:background="@drawable/playbuttonshape"
-        android:shadowColor="#A843A5"
-        android:shadowDx="1"
-        android:shadowDy="0"
-        android:shadowRadius="5"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:onClick="onPlayClick"
-        android:layout_above="@+id/linearLayout"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="60dp"/>
 
 </RelativeLayout>

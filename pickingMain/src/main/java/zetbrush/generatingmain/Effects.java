@@ -63,7 +63,7 @@ public class Effects {
            Matrix mx = new Matrix();
            ///choosing effect
            if (efectInstance.effect == EFFECT.FADE) {
-               paint.setAlpha((i + 1) * 4);
+               paint.setAlpha((24-i ) * 4);
                canvas.drawBitmap(source, 0, 0, paint);
            } else if (efectInstance.effect == EFFECT.SlIDE) {
                canvas.drawBitmap(source, (24-i) * (height / 24) - width , 0, paint);

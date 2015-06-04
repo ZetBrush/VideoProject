@@ -137,7 +137,7 @@ public class MainGenFragment extends DialogFragment {
 
         @Override
         public void onPlay() {
-            imagepreview = (ImageView) rlLayout.findViewById(R.id.imagepreview);
+
             playButton.setText("||");
 
         }
@@ -169,11 +169,11 @@ public class MainGenFragment extends DialogFragment {
         super.getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
         makeVideoButton = (Button) rlLayout.findViewById(R.id.makeVideoBut);
         makeVideoButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_render_button));
-        progress = (TextView)  rlLayout.findViewById(R.id.progress);
+
         playButton = (Button) rlLayout.findViewById(R.id.playButtn);
         playButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.selectorplaybutton));
         seekbar = (SeekBar) rlLayout.findViewById(R.id.seekbar);
-        testmp3 = (Button) rlLayout.findViewById(R.id.TestMp3);
+
         pickMusicbtn = (Button) rlLayout.findViewById(R.id.pickMusicbtn);
         musicNameText = (TextView) rlLayout.findViewById(R.id.musicNameText);
         musicTimeText = (TextView) rlLayout.findViewById(R.id.musicTimeText);
@@ -266,8 +266,9 @@ public class MainGenFragment extends DialogFragment {
             musicPath = AbsolutePathActivity.getPath(super.getActivity(), data.getData());
             newMusicPath = musicPath;
             if (musicPath != null)
-                musicNameText.setText("");
+                musicNameText.setText(musicPath);
             if (!musicPath.equals(newMusicPath)) {
+                newMusicPath = musicPath;
                 try {
                     player.stop();
                     player.setDataSource("");

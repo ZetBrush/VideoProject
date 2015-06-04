@@ -42,24 +42,22 @@ public  class MergeVidsWorker extends ModernAsyncTask<Integer, Integer, Integer>
     @Override
     protected Integer doInBackground(final Integer... params) {
 
-        final FFmpeg mmpg = new FFmpeg(ctx);
+         FFmpeg mmpg = new FFmpeg(ctx);
         try {
-            final boolean[] check = {true};
+            final boolean[] check =new boolean[1];
+            check[0]=true;
             mmpg.execute(getCommand(params[0].toString(), outputVidName), new FFmpegExecuteResponseHandler() {
                 @Override
                 public void onSuccess(String message) {
-                  /*  if((audioPath==null || audioPath=="")){
-                        listener.notifyOfThreadComplete(666); //exitcode
-                    }
-                    else if(check[0]==false){
-                        listener.notifyOfThreadComplete(666);
-                    }*/
+
                     Log.d("Merging.....",message);
                 }
 
                 @Override
                 public void onProgress(String message) {
-
+                    if(check[0]==false){
+                        Log.d("AudioMerging..Progress",message);
+                    }else
                     Log.d("Merging.....",message);
                 }
 
@@ -67,6 +65,9 @@ public  class MergeVidsWorker extends ModernAsyncTask<Integer, Integer, Integer>
                 public void onFailure(String message)
                 {
                     Log.d("Merging....Failure",message);
+                    if(check[0]==false){
+                        Log.d("AudioMerging....Failure",message);
+                    }
                 }
 
                 @Override
@@ -77,30 +78,16 @@ public  class MergeVidsWorker extends ModernAsyncTask<Integer, Integer, Integer>
                 @Override
                 public void onFinish() {
                     if(audioPath==null || audioPath==""){
+                        onPostExecute(666);
                         listener.notifyOfThreadComplete(666);
+                        Toast.makeText(ctx,"Video is ready!",Toast.LENGTH_SHORT).show();
+                    }
+                        else {
+                        onPostExecute(555);
+                        listener.notifyOfThreadComplete(555);
                     }
 
-                    else if(check[0]==false){
-                        new File(outputVidName).delete();
-                        listener.notifyOfThreadComplete(666);
-                    }
-
-                    Log.d("Merging.....","Finished!");
-                   if(check[0] && (audioPath!=null || audioPath!="")) {
-                       progress.progress(prgs.updateProgress(90));
-                        check[0] =false;
-                       //String cmd = "-y -i video.mp4 -i inputfile.mp3 -ss 30 -t 70 -acodec copy -vcodec copy outputfile.mp4"     -ss "+params[1]+" -t "+params[2] +";
-                        String cmd = "-i " + outputVidName + ".mp4 -i "+audioPath+" -map 0:0 -map 1:0 -acodec copy -shortest " + outputVidName + "_.mp4";
-                        try {
-
-                            mmpg.execute(cmd, this);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-
-                    Toast.makeText(ctx,"Video is ready!",Toast.LENGTH_SHORT).show();
+                    Log.d("Merging.....", "Finished!");
 
                 }
             });
@@ -121,7 +108,10 @@ public  class MergeVidsWorker extends ModernAsyncTask<Integer, Integer, Integer>
     @Override
     protected void onPostExecute(Integer integer) {
         super.onPostExecute(integer);
-
+        if(integer!=null)
+        listener.notifyOfThreadComplete(integer);
+        if(listener==null)
+            Log.d("Null", "listener" );
     }
 
     @Override
@@ -132,8 +122,8 @@ public  class MergeVidsWorker extends ModernAsyncTask<Integer, Integer, Integer>
 
     @Override
     public String getCommand(String... param) {
-        Log.d("Merge Command","-i " + "concat:" +videosPathBuilder(Integer.valueOf(param[0])) + " -preset ultrafast "+ "-c copy "+param[1]+".mp4");
-        return "-i " + "concat:" +videosPathBuilder(Integer.valueOf(param[0])) + " -preset ultrafast "+ "-c copy "+param[1]+".mp4";
+        Log.d("Merge Command","-i " + "concat:" +videosPathBuilder(Integer.valueOf(param[0])) + " -preset ultrafast "+ "-c:v copy "+param[1]+".mp4");
+        return "-i " + "concat:" +videosPathBuilder(Integer.valueOf(param[0])) + " -preset ultrafast "+ "-c:v copy "+param[1]+".mp4";
     }
 
 

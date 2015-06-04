@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.intern.picsartvideo.R;
+import com.picsartvideo.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.File;

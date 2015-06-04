@@ -1,12 +1,10 @@
 package activity;
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.net.Uri;
-import android.os.Bundle;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -14,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
-import com.example.intern.picsartvideo.R;
+import com.picsartvideo.R;
 
 import java.util.ArrayList;
 

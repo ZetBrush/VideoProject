@@ -1,7 +1,5 @@
 package zetbrush.com.view;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -14,7 +12,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import zetbrush.com.generatingmain.R;
+import java.util.ArrayList;
+
+import zetbrush.generatingmain.R;
+
 
 public class ScrollPickerView extends LinearLayout {
 	private static final int lineWidth = 4;
@@ -166,7 +167,7 @@ public class ScrollPickerView extends LinearLayout {
 	@Override
 	public void onSizeChanged(int w, int h, int oldw, int oldh) {
 		super.onSizeChanged(w, h, oldw, oldh);
-		Log.d("Datetimepicker#onSizeChanged", "w:" + w + ", h:" + h);
+		Log.d("Datetimepic#", "w:" + w + ", h:" + h);
 		int destWidth = (int)((float)w / srcRect.width() * barSrcRect.width());
 		int destHeight = (int)((float)h / srcRect.height() * barSrcRect.height());
 		this.barDstRect.set(- destWidth / 2, -destHeight / 2, destWidth / 2, destHeight / 2);

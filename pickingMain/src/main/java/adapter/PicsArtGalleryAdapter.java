@@ -12,15 +12,11 @@ import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+import com.picsartvideo.R;
 
 import java.util.ArrayList;
 
 import item.PicsArtGalleryItem;
-
-import com.example.intern.picsartvideo.R;
-import com.squareup.picasso.MemoryPolicy;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 
 /**
  * Created by Tigran Isajanyan on 4/28/15.

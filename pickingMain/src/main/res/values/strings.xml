@@ -10,4 +10,33 @@
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="min_label">Min</string>
+    <string name="max_label">Max</string>
+
+    <string-array name="view_scroll_picker_ymd_separater">
+        <item>/</item>
+        <item>/</item>
+    </string-array>
+
+    <string-array name="seconds_list">
+        <item>0.5 sec</item>
+        <item>1 sec</item>
+        <item>2 sec</item>
+        <item>3 sec</item>
+        <item>4 sec</item>
+        <item>5 sec</item>
+        <item>6 sec</item>
+        <item>7 sec</item>
+        <item>8 sec</item>
+
+    </string-array>
+    <string-array name="effects_list">
+        <item>None</item>
+        <item>Fade In</item>
+        <item>Slide Left</item>
+        <item>Rotate</item>
+
+    </string-array>
 </resources>

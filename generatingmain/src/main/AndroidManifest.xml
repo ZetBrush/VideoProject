@@ -1,44 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="zetbrush.com.generatingmain">
+   package="zetbrush.generatingmain">
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <!--<uses-permission android:name="android.permission.Access_" />-->
-    <application
-        tools:replace="label,icon, theme"
-        android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:largeHeap="true">
 
-        <activity
-            android:name=".MainGenFragment"
-
-            android:label="@string/app_name"
-            android:screenOrientation="portrait">
-            <intent-filter>
+<!--
+           <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.videogen"/>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+    -->
 
-        </activity>
 
-        <activity
-            android:name=".ItemChooserActivity"
+       <!-- <activity
+            android:name="zetbrush.generatingmain.ItemChooserActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             >
-
         </activity>
         <service
-            android:name=".ServiceFloating"
+            android:name="zetbrush.generatingmain.ServiceFloating"
             android:exported="true"
-            android:largeHeap="true"/>
+            android:largeHeap="true"/>-->
 
-    </application>
 
 </manifest>

@@ -1,31 +1,25 @@
 package activity;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.intern.picsartvideo.R;
+import com.picsartvideo.R;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -35,7 +29,7 @@ import adapter.ImagePagerAdapter;
 import adapter.SlideShowAdapter;
 import item.SlideShowItem;
 import service.MyService;
-
+import zetbrush.generatingmain.MainGenFragment;
 
 
 public class SlideShowActivity extends ActionBarActivity {
@@ -201,21 +195,23 @@ public class SlideShowActivity extends ActionBarActivity {
                 for (int i = 0; i < selectedImagesPathList.size(); i++) {
                     pathsForDecoding[i] = selectedImagesPathList.get(i).getPath();
                 }
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
 
 
-                ft.addToBackStack(null);
+               MainGenFragment newFragment = new MainGenFragment();
+                Bundle b = new Bundle();
+                b.putString("myimagespath", myDir.toString());
 
-               // DialogFragment newFragment = new MainGenFragment();
-               // newFragment.show(ft, "dialog");
+                newFragment.show(getSupportFragmentManager(), "gendialog");
+
 
                 Intent intentService = new Intent(this, MyService.class);
                 intentService.putExtra("paths", pathsForDecoding);
                 startService(intentService);
-                Intent intent = new Intent("android.intent.action.videogen");
-                intent.putExtra("myimagespath", myDir.toString());
-                startActivity(intent);
-                finish();
+
+               // Intent intent = new Intent("android.intent.action.videogen");
+               // intent.putExtra("myimagespath", myDir.toString());
+               // startActivity(intent);
+                // finish();
 
             } else {
                 Toast.makeText(getApplicationContext(), "you have no image", Toast.LENGTH_SHORT).show();

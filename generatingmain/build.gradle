@@ -1,28 +1,26 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 21
     buildToolsVersion '20.0.0'
 
     defaultConfig {
-        applicationId "zetbrush.com.generatingmain"
-        minSdkVersion 16
+        //applicationId "com.zetbrush.vidsart"
+        minSdkVersion 15
         targetSdkVersion 21
-        versionCode 1
-        versionName "1.0"
+
     }
     buildTypes {
         release {
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'),
-                    'proguard-rules.pro', 'proguard-rules-new.pro'
+
         }
     }
 
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:21.0.0'
+    provided 'com.android.support:appcompat-v7:21.0.0'
     compile project(':oMXPlayer')
     compile project(':FFmpeg')
     compile project(':library')

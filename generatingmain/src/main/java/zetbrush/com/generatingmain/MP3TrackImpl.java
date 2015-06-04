@@ -1,3 +1,4 @@
+/*
 package zetbrush.com.generatingmain;
 
 import android.util.Log;
@@ -22,13 +23,15 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+*/
 /**
  * MPEG V1 Layer 3 Audio. Does not support IDv3 or any other tags. Only raw stream of MP3 frames.
  * See <a href="http://mpgedit.org/mpgedit/mpeg_format/mpeghdr.htm">http://mpgedit.org/mpgedit/mpeg_format/mpeghdr.htm</a>
  * for stream format description.
  *
  * @author Roman Elizarov
- */
+ *//*
+
 public class MP3TrackImpl extends AbstractTrack {
     private static final int MPEG_V1 = 3; // only support V1
     private static final int MPEG_L3 = 3; // only support L3
@@ -247,3 +250,4 @@ public class MP3TrackImpl extends AbstractTrack {
         return "MP3TrackImpl";
     }
 }
+*/

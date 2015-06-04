@@ -9,7 +9,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-import zetbrush.com.generatingmain.MainActivity;
+import zetbrush.com.generatingmain.MainGenFragment;
 
 abstract class AbstractSlotView extends View implements GestureDetector.OnGestureListener/*, GestureDetector.OnDoubleTapListener*/ {
 	protected static final int SHOW_LABEL_COUNT = 5;
@@ -40,13 +40,13 @@ abstract class AbstractSlotView extends View implements GestureDetector.OnGestur
 			boolean ret = scroller.update();
             Log.d("Scroller id: ","....." + scroller.id);
           if(scroller.id ==2) {
-              MainActivity.currentEffect = scroller.getCurrentIndex();
+              MainGenFragment.currentEffect = scroller.getCurrentIndex();
           }
             if(scroller.id ==1) {
                 int timing = scroller.getCurrentIndex();
-                MainActivity.intervalSec = scroller.getCurrentIndex();
+                MainGenFragment.intervalSec = scroller.getCurrentIndex();
                 if(timing==0) timing =1;
-                org.jcodec.api.SequenceEncoder.setFrameDuration(timing);
+                //org.jcodec.api.SequenceEncoder.setFrameDuration(timing);
             }
 			AbstractSlotView.this.invalidate();
 			

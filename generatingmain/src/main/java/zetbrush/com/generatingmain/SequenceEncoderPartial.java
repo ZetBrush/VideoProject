@@ -1,3 +1,4 @@
+/*
 package zetbrush.com.generatingmain;
 
 import org.jcodec.codecs.h264.H264Encoder;
@@ -87,7 +88,8 @@ public class SequenceEncoderPartial {
 
         outTrack.addFrame(new MP4Packet(
                 result,
-                frameNo, //* framesec,
+                frameNo, /
+ framesec,
                 25,
                 1,
                 frameNo,
@@ -114,3 +116,4 @@ public class SequenceEncoderPartial {
         NIOUtils.closeQuietly(ch);
      }
     }
+*/

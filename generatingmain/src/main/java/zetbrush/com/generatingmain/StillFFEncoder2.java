@@ -68,7 +68,7 @@ public class StillFFEncoder2 extends ModernAsyncTask<Integer,Integer,Integer> im
 
 
         try {
-            //  execFFmpegBinary(new FFmpeg(MainActivity.this),commandStill);
+            //  execFFmpegBinary(new FFmpeg(MainGenFragment.this),commandStill);
             final int[]i = new int[1];
             img = new File(workingforpath.getParentFile().getPath() + "/image_" + String.format("%03d", i[0]) + ".jpg");
 

@@ -1,3 +1,4 @@
+/*
 package zetbrush.com.generatingmain;
 
 import android.util.Log;
@@ -25,13 +26,15 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+*/
 /**
  * MPEG V1 Layer 3 Audio. Does not support IDv3 or any other tags. Only raw stream of MP3 frames.
  * See <a href="http://mpgedit.org/mpgedit/mpeg_format/mpeghdr.htm">http://mpgedit.org/mpgedit/mpeg_format/mpeghdr.htm</a>
  * for stream format description.
  *
  * @author Roman Elizarov
- */
+ *//*
+
 public class MP3TrackImplNew extends AbstractTrack {
     private static final int MPEG_V1 = 0x3; // only support V1
     private static final int MPEG_L3 = 1; // only support L3
@@ -216,7 +219,8 @@ public class MP3TrackImplNew extends AbstractTrack {
          int padding;
          int channelMode;
          int channelCount;
-        /**
+        */
+/**
          * Create an MPEGAudioFrameHeader from the file specified.  Upon creation
          * information will be read in from the first frame header the object
          * encounters in the file.
@@ -225,14 +229,16 @@ public class MP3TrackImplNew extends AbstractTrack {
          * @exception NoMPEGFramesException if the file is not a valid mpeg
          * @exception java.io.FileNotFoundException if an error occurs
          * @exception IOException if an error occurs
-         */
+         *//*
+
         public MP3Header( File mp3 )
                 throws NoMPEGFramesException, FileNotFoundException, IOException {
 
             this( mp3, 0 );
         }
 
-        /**
+        */
+/**
          * Create an MPEGAudioFrameHeader from the file specified.  Upon creation
          * information will be read in from the first frame header the object
          * encounters in the file.  The offset tells the object where to start
@@ -245,7 +251,8 @@ public class MP3TrackImplNew extends AbstractTrack {
          * @exception NoMPEGFramesException if the file is not a valid mpeg
          * @exception FileNotFoundException if an error occurs
          * @exception IOException if an error occurs
-         */
+         *//*
+
         public MP3Header( File mp3, int offset )
                 throws NoMPEGFramesException, FileNotFoundException, IOException {
 
@@ -271,7 +278,8 @@ public class MP3TrackImplNew extends AbstractTrack {
             }
         }
 
-        /**
+        */
+/**
          * Searches through the file and finds the first occurrence of an mpeg
          * frame.  Returns the location of the header of the frame.
          *
@@ -279,7 +287,8 @@ public class MP3TrackImplNew extends AbstractTrack {
          * @return the location of the header of the frame
          * @exception FileNotFoundException if an error occurs
          * @exception IOException if an error occurs
-         */
+         *//*
+
         private long findFrame( int offset )
                 throws FileNotFoundException, IOException {
 
@@ -305,13 +314,15 @@ public class MP3TrackImplNew extends AbstractTrack {
             return loc;
         }
 
-        /**
+        */
+/**
          * Read in all the information found in the mpeg header.
          *
          * @param location the location of the header (found by findFrame)
          * @exception FileNotFoundException if an error occurs
          * @exception IOException if an error occurs
-         */
+         *//*
+
         private void readHeader( long location )
                 throws FileNotFoundException, IOException {
 
@@ -334,12 +345,14 @@ public class MP3TrackImplNew extends AbstractTrack {
             emphasis = BinaryParser.convertToDecimal( head[3], 0, 1 );
         }
 
-        /**
+        */
+/**
          * Based on the bitrate index found in the header, try to find and set the
          * bitrate from the table.
          *
          * @param bitrateIndex the bitrate index read from the header
-         */
+         *//*
+
         private void findBitRate( int bitrateIndex ) {
             int ind = -1;
 
@@ -368,12 +381,14 @@ public class MP3TrackImplNew extends AbstractTrack {
             }
         }
 
-        /**
+        */
+/**
          * Based on the sample rate index found in the header, attempt to lookup
          * and set the sample rate from the table.
          *
          * @param sampleIndex the sample rate index read from the header
-         */
+         *//*
+
         private void findSampleRate( int sampleIndex ) {
             int ind = -1;
 
@@ -393,12 +408,14 @@ public class MP3TrackImplNew extends AbstractTrack {
             }
         }
 
-        /**
+        */
+/**
          * Return a string representation of this object.  Includes all information
          * read in.
          *
          * @return a string representation of this object
-         */
+         *//*
+
         public String toString() {
             return getVersion() + " " + getLayer() + "\nBitRate:\t\t\t" +
                     getBitRate() + "kbps\nSampleRate:\t\t\t" + getSampleRate() +
@@ -408,11 +425,13 @@ public class MP3TrackImplNew extends AbstractTrack {
                     "\nEmphasis:\t\t\t" + getEmphasis();
         }
 
-        /**
+        */
+/**
          * Return the version of the mpeg in string form.  Ex: MPEG Version 1.0
          *
          * @return the version of the mpeg
-         */
+         *//*
+
         public String getVersion() {
             String str = null;
 
@@ -423,12 +442,14 @@ public class MP3TrackImplNew extends AbstractTrack {
             return str;
         }
 
-        /**
+        */
+/**
          * Return the layer description of the mpeg in string form.
          * Ex: Layer III
          *
          * @return the layer description of the mpeg
-         */
+         *//*
+
         public String getLayer() {
             String str = null;
 
@@ -439,12 +460,14 @@ public class MP3TrackImplNew extends AbstractTrack {
             return str;
         }
 
-        /**
+        */
+/**
          * Return the channel mode of the mpeg in string form.
          * Ex: Joint Stereo (STEREO)
          *
          * @return the channel mode of the mpeg
-         */
+         *//*
+
         public String getChannelMode() {
             String str = null;
 
@@ -455,56 +478,68 @@ public class MP3TrackImplNew extends AbstractTrack {
             return str;
         }
 
-        /**
+        */
+/**
          * Returns the bitrate of the mpeg in kbps
          *
          * @return the bitrate of the mpeg in kbps
-         */
+         *//*
+
         public int getBitRate() {
             return bitRate;
         }
 
-        /**
+        */
+/**
          * Returns the sample rate of the mpeg in Hz
          *
          * @return the sample rate of the mpeg in Hz
-         */
+         *//*
+
         public int getSampleRate() {
             return sampleRate;
         }
 
-        /**
+        */
+/**
          * Returns true if the audio is copyrighted
          *
          * @return true if the audio is copyrighted
-         */
+         *//*
+
         public boolean isCopyrighted() {
             return copyrighted;
         }
 
-        /**
+        */
+/**
          * Returns true if this mpeg is protected by CRC
          *
          * @return true if this mpeg is protected by CRC
-         */
+         *//*
+
         public boolean isProtected() {
             return crced;
         }
 
-        /**
+        */
+/**
          * Returns true if this is the original media
          *
          * @return true if this is the original media
-         */
+         *//*
+
         public boolean isOriginal() {
             return original;
         }
 
-        /**
+        */
+/**
          * Returns the emphasis.  I don't know what this means, it just does it...
          *
          * @return the emphasis
-         */
+         *//*
+
         public String getEmphasis() {
             String str = null;
 
@@ -515,12 +550,14 @@ public class MP3TrackImplNew extends AbstractTrack {
             return str;
         }
 
-        /**
+        */
+/**
          * Returns true if the file passed to the constructor is an mp3 (MPEG
          * layer III).
          *
          * @return true if the file is an mp3
-         */
+         *//*
+
         public boolean isMP3() {
             return (layer == MPEG_L_3);
         }
@@ -595,3 +632,4 @@ public class MP3TrackImplNew extends AbstractTrack {
         return "MP3TrackImpl";
     }
 }
+*/

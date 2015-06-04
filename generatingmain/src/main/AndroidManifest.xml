@@ -15,7 +15,7 @@
         android:largeHeap="true">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".MainGenFragment"
 
             android:label="@string/app_name"
             android:screenOrientation="portrait">

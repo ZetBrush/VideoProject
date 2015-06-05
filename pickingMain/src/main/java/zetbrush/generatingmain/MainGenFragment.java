@@ -11,7 +11,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
-import android.media.MediaExtractor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -34,7 +33,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
@@ -55,6 +53,9 @@ import java.util.concurrent.TimeUnit;
 import zetbrush.com.view.ScrollPickerView;
 import zetbrush.com.view.TouchScroll;
 
+/**
+ * Created by Arman
+ */
 
 public class MainGenFragment extends DialogFragment {
 
@@ -62,39 +63,35 @@ public class MainGenFragment extends DialogFragment {
     public static int currentEffect = 0;
     public static int intervalSec = 0;
     static int vidcount = 1;
-    static int counter = 1;
-    private static int filecount = 0;
+
     public static final String[] name = new String[2];
     public TextView progress;
-    MediaExtractor extractor;
+
     ProgressDialog progressDialog;
     DisplayMetrics dm = null;
     FFmpeg ffmpeg;
-    //////Still frame Encoder///////////
-    int imagecounter = 0;
-    /////   Player  //////
-    ImageView imagepreview;
+
+
     boolean isplaying = false;
     OpenMXPlayer player = null;
     ScrollPickerView effectPicker;
-    Button testmp3;
+
     private Button makeVideoButton;
     private Button playButton;
-    private volatile boolean flag;
+
     private SeekBar seekbar;
-    private String outputName = null;
+
     private EditText outputEditText;
-    private String mime = null;
+
     private String path = null;
     private String musicPath = null;
     private Button pickMusicbtn;
     private TextView musicNameText;
-    private String videoPath = null;
+
     private TextView musicTimeText;
     private long musictotalTime = 0;
-    private static boolean stillflag = false;
-    private static boolean transitflag = false;
-    int contract =0; // validator for merging process
+
+
     RelativeLayout rlLayout;
     private Button settingsButton;
 
@@ -267,7 +264,7 @@ public class MainGenFragment extends DialogFragment {
             newMusicPath = musicPath;
             if (musicPath != null)
                 musicNameText.setText(musicPath);
-            if (!musicPath.equals(newMusicPath)) {
+             if (!musicPath.equals(newMusicPath)) {
                 newMusicPath = musicPath;
                 try {
                     player.stop();

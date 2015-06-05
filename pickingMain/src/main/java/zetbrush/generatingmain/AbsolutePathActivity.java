@@ -11,7 +11,7 @@ import android.provider.MediaStore;
 
 
 /**
- * Created by intern on 1/19/15.
+ * Created by Arman on 1/19/15.
  */
 public class AbsolutePathActivity {
     private static final int GALLERY_INTENT_CALLED=302;

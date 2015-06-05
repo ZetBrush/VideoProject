@@ -8,9 +8,6 @@ import android.widget.Toast;
 import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
 import com.github.hiteshsondhi88.libffmpeg.FFmpegExecuteResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
-import com.github.lzyzsd.circleprogress.CircleProgress;
-
-import java.io.File;
 
 /**
  * Created by Arman on 5/6/15.
@@ -22,9 +19,9 @@ public  class MergeVidsWorker extends ModernAsyncTask<Integer, Integer, Integer>
     String outputVidName="";
     String audioPath="";
     IThreadCompleteListener listener;
-    CircleProgress cp;
     ProgressHandler prgs;
     IProgress progress;
+    int imageCount;
 
     public MergeVidsWorker(Context ctx,String outputnm,String audiopath){
         this.ctx = ctx;
@@ -32,9 +29,9 @@ public  class MergeVidsWorker extends ModernAsyncTask<Integer, Integer, Integer>
         this.audioPath=audiopath;
     }
 
-    public void setListener(IThreadCompleteListener listener,CircleProgress cp, ProgressHandler prgs, IProgress prgress) {
+    public void setListener(IThreadCompleteListener listener, ProgressHandler prgs, IProgress prgress) {
         this.listener = listener;
-        this.cp = cp;
+
         this.progress=prgress;
         this.prgs = prgs;
     }
@@ -43,9 +40,9 @@ public  class MergeVidsWorker extends ModernAsyncTask<Integer, Integer, Integer>
     protected Integer doInBackground(final Integer... params) {
 
          FFmpeg mmpg = new FFmpeg(ctx);
+        imageCount=params[0];
         try {
-            final boolean[] check =new boolean[1];
-            check[0]=true;
+            final int[] imgc = {imageCount};
             mmpg.execute(getCommand(params[0].toString(), outputVidName), new FFmpegExecuteResponseHandler() {
                 @Override
                 public void onSuccess(String message) {
@@ -55,19 +52,15 @@ public  class MergeVidsWorker extends ModernAsyncTask<Integer, Integer, Integer>
 
                 @Override
                 public void onProgress(String message) {
-                    if(check[0]==false){
-                        Log.d("AudioMerging..Progress",message);
-                    }else
-                    Log.d("Merging.....",message);
+                    publishProgress(--imgc[0]);
+                    Log.d("Merging.....", message);
                 }
 
                 @Override
                 public void onFailure(String message)
                 {
                     Log.d("Merging....Failure",message);
-                    if(check[0]==false){
-                        Log.d("AudioMerging....Failure",message);
-                    }
+
                 }
 
                 @Override
@@ -117,6 +110,7 @@ public  class MergeVidsWorker extends ModernAsyncTask<Integer, Integer, Integer>
     @Override
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
+        progress.progress(prgs.updateProgress(imageCount),"Creating Transitions");
 
     }
 

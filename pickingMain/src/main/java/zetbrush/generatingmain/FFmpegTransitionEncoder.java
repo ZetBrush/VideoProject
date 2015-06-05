@@ -68,7 +68,7 @@ public class FFmpegTransitionEncoder extends ModernAsyncTask<Integer, Integer, I
             }
             String vidNm = outputName+counter[0];
             final FFmpeg encoder= new FFmpeg(ctx);
-            publishProgress(counter[0]);
+
             try {
                 encoder.execute(getCommand(dir.getAbsolutePath(),vidNm ), new FFmpegExecuteResponseHandler() {
                     @Override
@@ -125,7 +125,7 @@ public class FFmpegTransitionEncoder extends ModernAsyncTask<Integer, Integer, I
     protected void onProgressUpdate(Integer... values) {
         if (!values[0].equals(null)) {
             String tmp = (int) (((float) values[0] / (imageCount * 24)) * 100) + "%";
-            prg.progress(progressHandler.updateProgress((int) (((values[0]+1) / (imageCount * 1.0)) * 100)));
+            prg.progress(progressHandler.updateProgress(imageCount),"Adding Transitions");
             //progress.setText(tmp);
         }
     }

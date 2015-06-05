@@ -19,9 +19,9 @@ public class ProgressHandler implements IProgressCustom{
 
     @Override
     public int updateProgress(int x) {
-        int a = (int)((x/100.0)*this.maxinLocal);
-        if(a>maxinLocal)return  maxinLocal;
-        else
+        if(x<1) x=1;
+        int a = (int)((this.maxinLocal*1.0)/(x));
+
         return a;
     }
 }

@@ -28,7 +28,7 @@ import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
 import com.github.hiteshsondhi88.libffmpeg.FFmpegExecuteResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.LoadBinaryResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException;
-import com.github.lzyzsd.circleprogress.CircleProgress;
+import com.github.lzyzsd.circleprogress.ArcProgress;
 import com.picsartvideo.R;
 
 import java.io.File;
@@ -41,7 +41,7 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 	private RelativeLayout parentlayout;
 	private WindowManager windowManager;
 	private ImageView chatHead;
-	CircleProgress arcpr;
+	ArcProgress arcpr;
 	private PopupWindow pwindo;
 	boolean checker=false;
 	boolean mHasDoubleClicked = false;
@@ -50,7 +50,7 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 	String outputFold = Environment.getExternalStorageDirectory().getAbsolutePath()+"/req_images/transitions";
 	ArrayList<String> myArray;
 	View v;
-	CircleProgress progressView;
+	ArcProgress progressView;
 	int contract=0,imageCount,interval,effect;
 	Long startMiliSc,endMiliSc;
 	String vidName,musicPath;
@@ -104,7 +104,7 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 
 			}
 			loadFFMpegBinary();
-			progressView = (CircleProgress) v.findViewById(R.id.circle_progress);
+			progressView = (ArcProgress) v.findViewById(R.id.circle_progress);
 
 
 			if (musicPath != null || musicPath != "") {
@@ -152,8 +152,8 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 
 				prgrUpdater = new IProgress() {
 					@Override
-					public void progress(int prg) {
-						CircleProgress cr = ((CircleProgress) v.findViewById(R.id.circle_progress));
+					synchronized public void progress(int prg , final String fromtask) {
+						ArcProgress cr = ((ArcProgress) v.findViewById(R.id.circle_progress));
 						int prev = cr.getProgress();
 						progressOverall.remove(0);
 						progressOverall.add(prg + prev);
@@ -162,7 +162,9 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 							@Override
 							public void run() {
 
-								((CircleProgress) v.findViewById(R.id.circle_progress)).setProgress(pr);
+								ArcProgress pg = ((ArcProgress) v.findViewById(R.id.circle_progress));
+								pg.setProgress(pr);
+								pg.setBottomText(fromtask);
 							}
 						});
 
@@ -181,7 +183,7 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 					thrd.execute(interval);
 
 
-					ProgressHandler transHandl = new ProgressHandler(30);
+					ProgressHandler transHandl = new ProgressHandler(20);
 					TransitionFrameGen trgen = new TransitionFrameGen(this, this, effect, transHandl, imageCount);
 					trgen.addListener(this);
 					trgen.setProgressListener(prgrUpdater);
@@ -228,7 +230,7 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 
 		LayoutInflater inflater = LayoutInflater.from(this);
 		 v =inflater.inflate(R.layout.circleprogressplace,null,true);
-  			arcpr = (CircleProgress)v.findViewById(R.id.circle_progress);
+  			arcpr = (ArcProgress)v.findViewById(R.id.circle_progress);
 		arcpr.setMax(100);
 
 		//chatHead = new ImageView(this);
@@ -338,11 +340,11 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 	public void notifyOfThreadComplete(int code) {
 		Log.d("Codeon Noty", "service " + code);
 
-		CircleProgress cp = (CircleProgress)v.findViewById(R.id.circle_progress);
+		ArcProgress cp = (ArcProgress)v.findViewById(R.id.circle_progress);
 		if(code==1){
 			key1=true;
-			ProgressHandler prHandl = new ProgressHandler(30);
-			FFmpegTransitionEncoder ffmpegins = new FFmpegTransitionEncoder(this,prHandl);
+			ProgressHandler prHanndl = new ProgressHandler(30);
+			FFmpegTransitionEncoder ffmpegins = new FFmpegTransitionEncoder(this,prHanndl);
 			ffmpegins.addListener(this);
 			ffmpegins.setProgressListener(prgrUpdater);
 			ffmpegins.execute(imageCount);
@@ -375,12 +377,12 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 					Environment.getExternalStorageDirectory().getAbsoluteFile() + "/Vid_" + vidName,
 					musicPath);
 
-			merger.setListener(ServiceFloating.this,cp,new ProgressHandler(20),prgrUpdater);
+			merger.setListener(ServiceFloating.this,new ProgressHandler(20),prgrUpdater);
 			merger.execute(imageCount, (int) (startMiliSc / 1000), (int) (endMiliSc / 1000));
 		}
 
 		if(code==666){
-			prgrUpdater.progress(8);
+			prgrUpdater.progress(3,"Saving");
 			try {
 
               File dir = new File(Environment.getExternalStorageDirectory() + "/req_images");
@@ -422,7 +424,8 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 
 					@Override
 					public void onStart() {
-
+						ProgressHandler hnd = new ProgressHandler(7);
+						prgrUpdater.progress(hnd.updateProgress(1),"Adding music");
 					}
 					@Override
 					public void onFinish() {
@@ -496,7 +499,7 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 				.show();
 
 	}
-	void deleteRecursive(File fileOrDirectory) {
+	private void deleteRecursive(File fileOrDirectory) {
 		if (fileOrDirectory.isDirectory())
 			for (File child : fileOrDirectory.listFiles())
 				deleteRecursive(child);

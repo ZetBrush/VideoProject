@@ -2,137 +2,137 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\libs\universal-image-loader-1.9.3.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a85588bec3e2c4584d593d3f15df1677321bca72">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\pre-dexed\debug\universal-image-loader-1.9.3-b8ce2c2c1111d66a09a23ac0f00fd1ac708f0d0b.jar" />
-    </item>
-    <item
-        jar="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\libs\json-simple-1.1.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="5d6f9b6a9ddca2a28c0216cc44efb2e20d9c23b5">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\pre-dexed\debug\json-simple-1.1.1-74d94be7a12c88e933d824f7acaabcd0874d148d.jar" />
-    </item>
-    <item
-        jar="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\exploded-aar\VideoProject\fab_library\unspecified\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="2f8d0e70d7d75e455252964624ada4105945f80d">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\pre-dexed\debug\classes-844aed0c67887a85b7649f9f5f44f987136924c8.jar" />
-    </item>
-    <item
-        jar="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\exploded-aar\VideoProject\FFmpeg\unspecified\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="03cf1b1322a1d15116780887c7ad0193ff3bfccf">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\pre-dexed\debug\classes-b3615348566f24e319618d466cde05c1069cd2d0.jar" />
-    </item>
-    <item
-        jar="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\exploded-aar\VideoProject\oMXPlayer\unspecified\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="b986414a483a54138caa76bc1532e5daed6eb0c1">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\pre-dexed\debug\classes-a32127abb19434f2ad7ea0e6135cf8648e359f32.jar" />
-    </item>
-    <item
-        jar="C:\Users\Arman\.gradle\caches\modules-2\files-2.1\com.nineoldandroids\library\2.4.0\e9b63380f3a242dbdbf103a2355ad7e43bad17cb\library-2.4.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\pre-dexed\debug\library-2.4.0-5b7815cd37c1e0081a2fa287d2b04afe67d946ed.jar" />
-    </item>
-    <item
-        jar="F:\adt-bundle-windows-x86_64-20140702\sdk\extras\android\m2repository\com\android\support\support-annotations\22.1.1\support-annotations-22.1.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\pre-dexed\debug\support-annotations-22.1.1-63ab1390a3e59d4a8afe9d7874b7611f2659d9cc.jar" />
-    </item>
-    <item
-        jar="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\exploded-aar\VideoProject\libraryphoto\unspecified\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="e422da229d1b4faf04e408b8ca3f3b48b1865305">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\pre-dexed\debug\classes-ce4caf292d314574d9423b66ea255bd157fea42f.jar" />
-    </item>
-    <item
-        jar="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\libs\picsartSDK.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="0316ca4cb38b51caad5895e30488d64cf6030817">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\pre-dexed\debug\picsartSDK-e1bdfd60e82ffaa0ca0adfa2d28abcaa6f33fbcb.jar" />
-    </item>
-    <item
-        jar="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\libs\junit-4.2.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="9934c403eb780ca94f34f929f1d86ec0f13711a7">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\pre-dexed\debug\junit-4.2-ffb20db32c27fd4a63a594798da68b049970ce63.jar" />
-    </item>
-    <item
-        jar="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\22.1.0\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="80434c45861675a57d690fba5ca31c3d55c89489">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\pre-dexed\debug\classes-4a0d30e607de55a8d50c2af7b992bf4e5fd3ee40.jar" />
-    </item>
-    <item
-        jar="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\libs\library-1.0.11.jar"
+        jar="/Users/intern/Documents/VidProj/VideoProject/pickingMain/libs/library-1.0.11.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="cc0e75df30613111ea9b6bfdb4d81527527f2611">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\pre-dexed\debug\library-1.0.11-a08deec5cf7830f885cd4e803b013462aded192d.jar" />
+        <dex dex="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/pre-dexed/debug/library-1.0.11-239281448f1d8128a126f08b1a6ca04044293afa.jar" />
     </item>
     <item
-        jar="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\libs\gson-2.3.1.jar"
+        jar="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/exploded-aar/VideoProject/libraryphoto/unspecified/classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\pre-dexed\debug\gson-2.3.1-b789fab0ffa3588e6d83b6517ecf9e3beee8bb0b.jar" />
+        sha1="a911b6c1fc71886dbdedf719bd479544202bd243">
+        <dex dex="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/pre-dexed/debug/classes-2c75616c69d5a540f16cd489822874745c230453.jar" />
     </item>
     <item
-        jar="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\libs\internal_impl-22.1.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\pre-dexed\debug\internal_impl-22.1.1-1ef598f5b070ce99f77a58bb693e2212db230834.jar" />
-    </item>
-    <item
-        jar="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\libs\httpmime-4.3.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="5b0002c5fb66867ca919be0fbd86de1cfaf76da7">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\pre-dexed\debug\httpmime-4.3-a204a6109995201d67027709b59384dd58f8f514.jar" />
-    </item>
-    <item
-        jar="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.1.1\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\pre-dexed\debug\classes-1b658ebd9e1477f4ff9bd56e4020972d5692cd54.jar" />
-    </item>
-    <item
-        jar="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\classes.jar"
+        jar="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\pre-dexed\debug\classes-b429f261ac155295943421b1c67857869932028f.jar" />
+        <dex dex="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/pre-dexed/debug/classes-cc77c920e43bc15a273cef49bed9a564ee0a026e.jar" />
     </item>
     <item
-        jar="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\exploded-aar\VideoProject\library\1.2.0\classes.jar"
+        jar="/Users/intern/Documents/VidProj/VideoProject/pickingMain/libs/gson-2.3.1.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="26a1a75431f4b50e3ffbbea7b1c09aeb882a5588">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\pre-dexed\debug\classes-510cb0f79bb398b5ce122a48afeb9b6efcca1549.jar" />
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/pre-dexed/debug/gson-2.3.1-da522092ad13d426f4a7f02bc92139e682444181.jar" />
     </item>
     <item
-        jar="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\libs\picasso-2.5.2.jar"
+        jar="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/exploded-aar/VideoProject/oMXPlayer/unspecified/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="27f122de6cae6448e747d47ab35309d68304cb7e">
+        <dex dex="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/pre-dexed/debug/classes-0b04a99cb70a491d687c6d86bebf44709b2cf031.jar" />
+    </item>
+    <item
+        jar="/Users/intern/Documents/VidProj/VideoProject/pickingMain/libs/picasso-2.5.2.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
-        <dex dex="C:\Users\Arman\Documents\GitHub\VideoProject\pickingMain\build\intermediates\pre-dexed\debug\picasso-2.5.2-7078b842ef999a20c0c955b8ea170f90194a2aa4.jar" />
+        <dex dex="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/pre-dexed/debug/picasso-2.5.2-5cdc356459f0e3b4795d30190eb9146bd3287842.jar" />
+    </item>
+    <item
+        jar="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
+        <dex dex="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/pre-dexed/debug/classes-127a22c56f22fde86c67a09bb34b523f6bec4493.jar" />
+    </item>
+    <item
+        jar="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/exploded-aar/VideoProject/fab_library/unspecified/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="34059c9dc6a4789b455fddf308475422c222dd3b">
+        <dex dex="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/pre-dexed/debug/classes-b492c9d494c81c71d12b8496f1a52b5611d8aaaf.jar" />
+    </item>
+    <item
+        jar="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/exploded-aar/VideoProject/FFmpeg/unspecified/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="950b590c197d34595f3196c58cd9247576679ede">
+        <dex dex="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/pre-dexed/debug/classes-bc7f461433848e955d2cfde7a1e401bf24c6d61b.jar" />
+    </item>
+    <item
+        jar="/Users/intern/Documents/adt-bundle-mac-x86_64-20140624/sdk/extras/android/m2repository/com/android/support/support-annotations/22.1.1/support-annotations-22.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
+        <dex dex="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/pre-dexed/debug/support-annotations-22.1.1-47b570c29cfc546d29843f8a7a9bea440932166c.jar" />
+    </item>
+    <item
+        jar="/Users/intern/Documents/VidProj/VideoProject/pickingMain/libs/picsartSDK.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0316ca4cb38b51caad5895e30488d64cf6030817">
+        <dex dex="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/pre-dexed/debug/picsartSDK-dea62f4fedd2d1231f4bf80fa081e994243182e0.jar" />
+    </item>
+    <item
+        jar="/Users/intern/Documents/VidProj/VideoProject/pickingMain/libs/universal-image-loader-1.9.3.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a85588bec3e2c4584d593d3f15df1677321bca72">
+        <dex dex="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/pre-dexed/debug/universal-image-loader-1.9.3-5c959ae1e3f0d2ffea99d5756cccbc8388df648b.jar" />
+    </item>
+    <item
+        jar="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/exploded-aar/VideoProject/library/1.2.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b453e1c720dc7b97b8a7ccaeaa19cec8c7806f90">
+        <dex dex="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/pre-dexed/debug/classes-11a5fd5e9599c8a5c900035577845bee41101815.jar" />
+    </item>
+    <item
+        jar="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.1.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="80434c45861675a57d690fba5ca31c3d55c89489">
+        <dex dex="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/pre-dexed/debug/classes-15526860d0558bf8755865bf588d02f9046e2678.jar" />
+    </item>
+    <item
+        jar="/Users/intern/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/pre-dexed/debug/library-2.4.0-277d3a05e1655136336e932d28329a00a025254e.jar" />
+    </item>
+    <item
+        jar="/Users/intern/Documents/VidProj/VideoProject/pickingMain/libs/json-simple-1.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5d6f9b6a9ddca2a28c0216cc44efb2e20d9c23b5">
+        <dex dex="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/pre-dexed/debug/json-simple-1.1.1-0b72687bb3bc65b21be2cad9750f724911d54565.jar" />
+    </item>
+    <item
+        jar="/Users/intern/Documents/VidProj/VideoProject/pickingMain/libs/httpmime-4.3.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5b0002c5fb66867ca919be0fbd86de1cfaf76da7">
+        <dex dex="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/pre-dexed/debug/httpmime-4.3-8019d0419f9f5cd1f4785c8272265ca3a80fcee0.jar" />
+    </item>
+    <item
+        jar="/Users/intern/Documents/VidProj/VideoProject/pickingMain/libs/junit-4.2.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9934c403eb780ca94f34f929f1d86ec0f13711a7">
+        <dex dex="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/pre-dexed/debug/junit-4.2-7a11523123cf11ea85184176beb7927d938fe531.jar" />
+    </item>
+    <item
+        jar="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/libs/internal_impl-22.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
+        <dex dex="/Users/intern/Documents/VidProj/VideoProject/pickingMain/build/intermediates/pre-dexed/debug/internal_impl-22.1.1-c31e6c055d840f5f3628bf99b9dac67cce1241ad.jar" />
     </item>
 
 </items>

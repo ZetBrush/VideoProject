@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="C:\Users\Arman\Documents\GitHub\VideoProject\libraryphoto\src\main\assets"/></dataSet><dataSet config="release"><source path="C:\Users\Arman\Documents\GitHub\VideoProject\libraryphoto\src\release\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/intern/Documents/VidProj/VideoProject/libraryphoto/src/main/assets"/></dataSet><dataSet config="release"><source path="/Users/intern/Documents/VidProj/VideoProject/libraryphoto/src/release/assets"/></dataSet></merger>

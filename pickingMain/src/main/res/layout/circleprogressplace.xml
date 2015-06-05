@@ -5,11 +5,14 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-        <com.github.lzyzsd.circleprogress.CircleProgress
+        <com.github.lzyzsd.circleprogress.ArcProgress
             android:id="@+id/circle_progress"
             android:layout_marginLeft="50dp"
+            custom:arc_text_color="@android:color/holo_red_dark"
+            custom:arc_bottom_text_size="12dp"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            custom:arc_stroke_width="7dp"
             custom:circle_max="100"
             custom:circle_progress="0"/>
 

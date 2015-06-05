@@ -114,7 +114,7 @@ public class TransitionFrameGen extends ModernAsyncTask<File, Integer, Integer> 
         if (!values[0].equals(null)) {
             String tmp = (int) (((float) values[0] / (imageCount * 24)) * 100) + "%";
             Log.d("TransitionFrame"," "+values[0]);
-            prgr.progress(prhandler.updateProgress((int) (((values[0]+1) / (imageCount * 1.0)) * 100)));
+            prgr.progress(prhandler.updateProgress(imageCount),"Creating Transitions");
         }
     }
     @Override

@@ -33,7 +33,8 @@ import com.picsartvideo.R;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 public class ServiceFloating extends Service implements IThreadCompleteListener {
 
@@ -56,7 +57,7 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 	String vidName,musicPath;
 	IProgress prgrUpdater;
 	FFmpeg ffmpeg;
-	CopyOnWriteArrayList<Integer> progressOverall = new CopyOnWriteArrayList();
+	static BlockingQueue<Integer> progressOverall = new ArrayBlockingQueue<Integer>(1,true);
 	boolean key1 =false;
 	boolean key2 =false;
 	boolean key3 =false;
@@ -89,7 +90,11 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 
 	@Override
 	public int onStartCommand (Intent intent, int flags, int startId) {
-		progressOverall.add(0);
+		try {
+			progressOverall.put(0);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		if (intent != null && intent.getExtras() != null) {
 			Bundle extra = intent.getExtras();
 
@@ -153,17 +158,23 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 				prgrUpdater = new IProgress() {
 					@Override
 					synchronized public void progress(int prg , final String fromtask) {
-						ArcProgress cr = ((ArcProgress) v.findViewById(R.id.circle_progress));
-						int prev = cr.getProgress();
-						progressOverall.remove(0);
-						progressOverall.add(prg + prev);
-						final int pr = progressOverall.get(0);
+						//ArcProgress cr = ((ArcProgress) v.findViewById(R.id.circle_progress));
+						int prev = progressOverall.peek();
+						int pr=0;
+						try {
+							progressOverall.take();
+							progressOverall.put(pr=(prg + prev));
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+
+						final int finalPr = pr;
 						v.post(new Runnable() {
 							@Override
 							public void run() {
 
 								ArcProgress pg = ((ArcProgress) v.findViewById(R.id.circle_progress));
-								pg.setProgress(pr);
+								pg.setProgress(finalPr);
 								pg.setBottomText(fromtask);
 							}
 						});
@@ -272,7 +283,7 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 							// If double click...
 							if (pressTime - lastPressTime <= 300) {
 								createNotification();
-								ServiceFloating.this.stopSelf();
+
 								mHasDoubleClicked = true;
 							} else { // If not double click....
 								mHasDoubleClicked = false;
@@ -318,13 +329,14 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 		Intent notificationIntent = new Intent(getApplicationContext(), ServiceFloating.class);
 		PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), 0, notificationIntent, 0);
 
-		Notification notification = new Notification(R.drawable.floating2, "Click to start launcher", System.currentTimeMillis());
+		Notification notification = new Notification(R.drawable.icon, "Click to show Progress head", System.currentTimeMillis());
 		notification.setLatestEventInfo(getApplicationContext(), "Start launcher" ,  "Click to start launcher", pendingIntent);
 		notification.flags = Notification.FLAG_AUTO_CANCEL | Notification.FLAG_ONGOING_EVENT;
 
 		NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
 
 		notificationManager.notify(ID_NOTIFICATION, notification);
+
 	}
 
 	@Override
@@ -343,9 +355,10 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 		ArcProgress cp = (ArcProgress)v.findViewById(R.id.circle_progress);
 		if(code==1){
 			key1=true;
-			ProgressHandler prHanndl = new ProgressHandler(30);
-			FFmpegTransitionEncoder ffmpegins = new FFmpegTransitionEncoder(this,prHanndl);
-			ffmpegins.addListener(this);
+			ProgressHandler prHanndl = new ProgressHandler(20);
+
+			FFmpegTransitionEncoder ffmpegins = new FFmpegTransitionEncoder(this,prHanndl,this);
+
 			ffmpegins.setProgressListener(prgrUpdater);
 			ffmpegins.execute(imageCount);
 
@@ -424,8 +437,7 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 
 					@Override
 					public void onStart() {
-						ProgressHandler hnd = new ProgressHandler(7);
-						prgrUpdater.progress(hnd.updateProgress(1),"Adding music");
+
 					}
 					@Override
 					public void onFinish() {
@@ -434,6 +446,7 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 						        if(ff.exists())
 								ff.delete();
 
+								prgrUpdater.progress(5,"Adding music");
 							ServiceFloating.this.notifyOfThreadComplete(666);
 						}
 				});

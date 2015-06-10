@@ -33,6 +33,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
@@ -70,8 +71,6 @@ public class MainGenFragment extends DialogFragment {
     ProgressDialog progressDialog;
     DisplayMetrics dm = null;
     FFmpeg ffmpeg;
-
-
     boolean isplaying = false;
     OpenMXPlayer player = null;
     ScrollPickerView effectPicker;
@@ -94,6 +93,7 @@ public class MainGenFragment extends DialogFragment {
 
     RelativeLayout rlLayout;
     private Button settingsButton;
+    private ImageView deleteMusic;
 
 
     PlayerEvents events = new PlayerEvents() {
@@ -175,14 +175,14 @@ public class MainGenFragment extends DialogFragment {
         musicNameText = (TextView) rlLayout.findViewById(R.id.musicNameText);
         musicTimeText = (TextView) rlLayout.findViewById(R.id.musicTimeText);
         settingsButton = (Button)rlLayout.findViewById(R.id.settingsButton);
-
+        deleteMusic = (ImageView)rlLayout.findViewById(R.id.deleteMusicImg);
 
 
         pickMusicbtn.setOnClickListener(onPickMusicClick);
         makeVideoButton.setOnClickListener(makevideoClick);
         settingsButton.setOnClickListener(onSettingsButtonClick);
         playButton.setOnClickListener(onPlayClick);
-
+        deleteMusic.setOnClickListener(onDeleteMusicPathClick);
         return rlLayout; // We must return the loaded Layout
     }
 
@@ -340,13 +340,15 @@ public class MainGenFragment extends DialogFragment {
         return fls;
     }
 
-    public void onDeleteMusicPathClick(View v) {
-        musicPath = null;
-        player.stop();
-        musictotalTime = 0;
-        musicNameText.setText("No music Selected");
-
-    }
+    View.OnClickListener onDeleteMusicPathClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            musicPath = null;
+            player.stop();
+            musictotalTime = 0;
+            musicNameText.setText("No music Selected");
+        }
+    };
 
 
 

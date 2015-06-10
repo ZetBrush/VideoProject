@@ -71,12 +71,12 @@ public  class MergeVidsWorker extends ModernAsyncTask<Integer, Integer, Integer>
                 @Override
                 public void onFinish() {
                     if(audioPath==null || audioPath==""){
-                        onPostExecute(666);
+
                         listener.notifyOfThreadComplete(666);
                         Toast.makeText(ctx,"Video is ready!",Toast.LENGTH_SHORT).show();
                     }
                         else {
-                        onPostExecute(555);
+
                         listener.notifyOfThreadComplete(555);
                     }
 
@@ -101,16 +101,14 @@ public  class MergeVidsWorker extends ModernAsyncTask<Integer, Integer, Integer>
     @Override
     protected void onPostExecute(Integer integer) {
         super.onPostExecute(integer);
-        if(integer!=null)
-        listener.notifyOfThreadComplete(integer);
-        if(listener==null)
-            Log.d("Null", "listener" );
+
     }
 
     @Override
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
-        progress.progress(prgs.updateProgress(imageCount),"Creating Transitions");
+        Log.d("Merging||CreatingTrans", "progress.progress( " + prgs.updateProgress((int)(imageCount/2.0)) + "  imageCount " + imageCount);
+        progress.progress(prgs.updateProgress((int)(imageCount/2.0)),"Creating Transitions");
 
     }
 

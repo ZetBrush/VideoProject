@@ -50,7 +50,7 @@ public class CustomGalleryActivity extends ActionBarActivity {
 
     private void init() {
 
-        getSupportActionBar().setTitle("PicsArtVideo");
+        getSupportActionBar().setTitle("PicsArt Videos");
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         customGalleryAdapter = new CustomGalleryAdapter(customGalleryArrayList, this, getSupportActionBar());
 

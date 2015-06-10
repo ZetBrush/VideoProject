@@ -2,33 +2,26 @@ package activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.picsart.api.LoginManager;
 import com.picsart.api.Photo;
 import com.picsart.api.PicsArtConst;
 import com.picsart.api.RequestListener;
+import com.picsart.api.UserController;
 import com.picsartvideo.R;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -48,6 +41,9 @@ public class PicsArtGalleryActvity extends ActionBarActivity {
 
     private ArrayList<Photo> photos = new ArrayList<>();
     private ArrayList<PicsArtGalleryItem> picsArtGalleryItems = new ArrayList<>();
+    SharedPreferences sharedPreferences;
+    UserController userController;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,217 +51,104 @@ public class PicsArtGalleryActvity extends ActionBarActivity {
         setContentView(R.layout.activity_pics_art_gallery_actvity);
 
         init();
+        Log.d("onCreat thread", Thread.currentThread().getName() + " " + Thread.currentThread().getId());
 
-        SharedPreferences sharedPreferences = this.getSharedPreferences("pics_art_video", MODE_PRIVATE);
-        if (!LoginManager.getInstance().hasValidSession(this)) {
-            LoginManager.getInstance().openSession(PicsArtGalleryActvity.this, new RequestListener(0) {
-                @Override
-                public void onRequestReady(int reqnumber, String message) {
-                    if (reqnumber == 7777) {
-                        Toast.makeText(PicsArtGalleryActvity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                        RequestQueue queue = Volley.newRequestQueue(PicsArtGalleryActvity.this);
-                        String url = "https://api.picsart.com/users/me/photos?token=" + LoginManager.getAccessToken();
-
-                        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                                new Response.Listener<String>() {
-                                    @Override
-                                    public void onResponse(String response) {
-                                        JSONArray jsonArray = null;
-                                        try {
-                                            jsonArray = new JSONArray(response);
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                        for (int i = 0; i < jsonArray.length(); i++) {
-                                            JSONObject jsonObject = null;
-                                            try {
-                                                jsonObject = jsonArray.getJSONObject(i);
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-                                            try {
-                                                //Log.d("gaga", jsonObject.getString("url") + "");
-                                                PicsArtGalleryItem picsArtGalleryItem = new PicsArtGalleryItem(jsonObject.getString("url"),
-                                                        jsonObject.getInt("width"), jsonObject.getInt("height"), false, false);
-                                                picsArtGalleryItems.add(picsArtGalleryItem);
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
-                                        FileUtils.writeListToJson(PicsArtGalleryActvity.this, picsArtGalleryItems, "myfile.json");
-                                        picsArtGalleryAdapter.notifyDataSetChanged();
-                                        progressBar.setVisibility(View.GONE);
-
-                                    }
-                                }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                //perform operation here after getting error
-                            }
-                        });
-                        queue.add(stringRequest);
-                        /*final UserController userController = new UserController(LoginManager.getAccessToken(), PicsArtGalleryActvity.this);
-                        userController.requestUserPhotos("me", 0, UserController.MAX_LIMIT);
-                        userController.setListener(new RequestListener(0) {
-                            @Override
-                            public void onRequestReady(int i, String s) {
-                                photos = userController.getPhotos();
-                                for (int j = 0; j < photos.size(); j++) {
-                                    PicsArtGalleryItem picsArtGalleryItem = new PicsArtGalleryItem(photos.get(j).getUrl(),
-                                            photos.get(j).getWidth(), photos.get(j).getHeight(), false, false);
-                                    picsArtGalleryItems.add(picsArtGalleryItem);
-
-                                }
-                                FileUtils.writeListToJson(PicsArtGalleryActvity.this, picsArtGalleryItems, "myfile.json");
-                                picsArtGalleryAdapter.notifyDataSetChanged();
-                                progressBar.setVisibility(View.GONE);
-
-                            }
-                        });*/
-                    }
-                }
-            });
-        } else {
-            if (sharedPreferences.getBoolean("isopen", false) == false) {
-                RequestQueue queue = Volley.newRequestQueue(PicsArtGalleryActvity.this);
-                String url = "https://api.picsart.com/users/me/photos?token=" + LoginManager.getAccessToken();
-
-                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                JSONArray jsonArray = null;
-                                try {
-                                    jsonArray = new JSONArray(response);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    JSONObject jsonObject = null;
-                                    try {
-                                        jsonObject = jsonArray.getJSONObject(i);
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                    try {
-                                        //Log.d("gaga", jsonObject.getString("url") + "");
-                                        PicsArtGalleryItem picsArtGalleryItem = new PicsArtGalleryItem(jsonObject.getString("url"),
-                                                jsonObject.getInt("width"), jsonObject.getInt("height"), false, false);
-                                        picsArtGalleryItems.add(picsArtGalleryItem);
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                                FileUtils.writeListToJson(PicsArtGalleryActvity.this, picsArtGalleryItems, "myfile.json");
-                                picsArtGalleryAdapter.notifyDataSetChanged();
-                                progressBar.setVisibility(View.GONE);
-
-                            }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //perform operation here after getting error
-                    }
-                });
-                queue.add(stringRequest);
-                /*final UserController userController = new UserController(LoginManager.getAccessToken(), PicsArtGalleryActvity.this);
-                userController.requestUserPhotos("me", 0, UserController.MAX_LIMIT);
-                userController.setListener(new RequestListener(0) {
-                    @Override
-                    public void onRequestReady(int i, String s) {
-                        photos = userController.getPhotos();
-                        for (int j = 0; j < photos.size(); j++) {
-                            PicsArtGalleryItem picsArtGalleryItem = new PicsArtGalleryItem(photos.get(j).getUrl(),
-                                    photos.get(j).getWidth(), photos.get(j).getHeight(), false, false);
-                            picsArtGalleryItems.add(picsArtGalleryItem);
-
-                        }
-                        FileUtils.writeListToJson(PicsArtGalleryActvity.this, picsArtGalleryItems, "myfile.json");
-                        picsArtGalleryAdapter.notifyDataSetChanged();
-                        progressBar.setVisibility(View.GONE);
-
-                    }
-                });*/
-            } else {
-
-                FileUtils.readListFromJson(PicsArtGalleryActvity.this, picsArtGalleryItems, "myfile.json");
-                picsArtGalleryAdapter.notifyDataSetChanged();
-                progressBar.setVisibility(View.GONE);
-            }
-        }
-
+         sharedPreferences = this.getSharedPreferences("pics_art_video", MODE_PRIVATE);
 
     }
 
-
-    /*@Override
+    @Override
     protected void onResume() {
         super.onResume();
-        SharedPreferences sharedPreferences = this.getSharedPreferences("pics_art_video", MODE_PRIVATE);
+
         if (!LoginManager.getInstance().hasValidSession(this)) {
             LoginManager.getInstance().openSession(PicsArtGalleryActvity.this, new RequestListener(0) {
                 @Override
                 public void onRequestReady(int reqnumber, String message) {
                     if (reqnumber == 7777) {
-                        Toast.makeText(PicsArtGalleryActvity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                        final UserController userController = new UserController(LoginManager.getAccessToken(), PicsArtGalleryActvity.this);
-                        userController.requestUserPhotos("me", 0, UserController.MAX_LIMIT);
-                        userController.setListener(new RequestListener(0) {
-                            @Override
-                            public void onRequestReady(int i, String s) {
-                                photos = userController.getPhotos();
-                                for (int j = 0; j < photos.size(); j++) {
-                                    PicsArtGalleryItem picsArtGalleryItem = new PicsArtGalleryItem(photos.get(j).getUrl(),
-                                            photos.get(j).getWidth(), photos.get(j).getHeight(), false, false);
-                                    picsArtGalleryItems.add(picsArtGalleryItem);
 
-                                }
-                                FileUtils.writeListToJson(PicsArtGalleryActvity.this, picsArtGalleryItems, "myfile.json");
-                                picsArtGalleryAdapter.notifyDataSetChanged();
-                                progressBar.setVisibility(View.GONE);
+                        Log.d("first onReq", Thread.currentThread().getName() + " " + Thread.currentThread().getId());
+
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                userController = new UserController(PicsArtGalleryActvity.this);
+                                userController.setListener(dloadTriger);
+                                userController.requestUserPhotos("me", 0, Integer.MAX_VALUE);
 
                             }
-                        });
+                        }).start();
+
                     }
                 }
             });
+
+
         } else {
             if (sharedPreferences.getBoolean("isopen", false) == false) {
-                final UserController userController = new UserController(LoginManager.getAccessToken(), PicsArtGalleryActvity.this);
+
+                userController = new UserController(PicsArtGalleryActvity.this);
                 userController.requestUserPhotos("me", 0, UserController.MAX_LIMIT);
-                userController.setListener(new RequestListener(0) {
-                    @Override
-                    public void onRequestReady(int i, String s) {
-                        photos = userController.getPhotos();
-                        for (int j = 0; j < photos.size(); j++) {
-                            PicsArtGalleryItem picsArtGalleryItem = new PicsArtGalleryItem(photos.get(j).getUrl(),
-                                    photos.get(j).getWidth(), photos.get(j).getHeight(), false, false);
-                            picsArtGalleryItems.add(picsArtGalleryItem);
+                userController.setListener(dloadTriger);
 
-                        }
-                        FileUtils.writeListToJson(PicsArtGalleryActvity.this, picsArtGalleryItems, "myfile.json");
-                        picsArtGalleryAdapter.notifyDataSetChanged();
-                        progressBar.setVisibility(View.GONE);
 
-                    }
-                });
-            } else {
-
+            }else{
                 FileUtils.readListFromJson(PicsArtGalleryActvity.this, picsArtGalleryItems, "myfile.json");
                 picsArtGalleryAdapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.GONE);
             }
+
+
         }
-    }*/
+    }
+    final int DLTRIGGER = 852258;
+
+    RequestListener dloadTriger = new RequestListener(DLTRIGGER) {
+        @Override
+        public void onRequestReady(int i, String s) {
+            new AsyncTask<Integer, Void, Void>() {
+                @Override
+                protected void onPostExecute(Void aVoid) {
+                    super.onPostExecute(aVoid);
+                    progressBar.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            picsArtGalleryAdapter.notifyDataSetChanged();
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    });
+                }
+
+                @Override
+                protected Void doInBackground(Integer... integers) {
+                    photos = userController.getPhotos();
+                    for (int j = 0; j < photos.size(); j++) {
+                        PicsArtGalleryItem picsArtGalleryItem = new PicsArtGalleryItem(photos.get(j).getUrl(),
+                                photos.get(j).getWidth(), photos.get(j).getHeight(), false, false);
+                        picsArtGalleryItems.add(picsArtGalleryItem);
+
+                    }
+                    FileUtils.writeListToJson(PicsArtGalleryActvity.this, picsArtGalleryItems, "myfile.json");
+                    Log.d("onRun thread", Thread.currentThread().getName() + " " + Thread.currentThread().getId());
+
+
+                    return null;
+                }
+            }.execute();
+        }
+    };
+
+
 
     private void init() {
 
-        PicsArtConst.CLIENT_ID = "ZetOmniaexo1SNtY52usPTry";
-        PicsArtConst.CLIENT_SECRET = "yY2fEJU8R9rFmuwtOZRQhm4ZK2Kdwqhk";
+        PicsArtConst.CLIENT_ID = "PicsArt_Videos87qaKs7n1l8IeKKJ";
+        PicsArtConst.CLIENT_SECRET = "1q8UtXc1rLGO3SQI67LUg9eLOtgn259w";
         PicsArtConst.REDIRECT_URI = "localhost";
         PicsArtConst.GRANT_TYPE = "authorization_code";
 
-        getSupportActionBar().setTitle("PicsArtVideo");
+        getSupportActionBar().setTitle("PicsArt Videos");
 
         DisplayMetrics displaymetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);

@@ -8,8 +8,6 @@ import com.github.hiteshsondhi88.libffmpeg.FFmpegExecuteResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
 
 import java.io.File;
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  * Created by Arman on 4/22/15.
@@ -24,36 +22,33 @@ public class FFmpegTransitionEncoder extends ModernAsyncTask<Integer, Integer, I
     private static final String TAG = "ffencoder";
 
 
-    public FFmpegTransitionEncoder(android.content.Context ctx, ProgressHandler prhandler) {
+    public FFmpegTransitionEncoder(android.content.Context ctx, ProgressHandler prhandler,IThreadCompleteListener listener) {
         this.ctx = ctx;
         this.progressHandler = prhandler;
+        this.listener=listener;
     }
 
 
-    private final Set<IThreadCompleteListener> listeners
-            = new CopyOnWriteArraySet<IThreadCompleteListener>();
-    public final void addListener(final IThreadCompleteListener listener) {
-        listeners.add(listener);
-    }
+    private final IThreadCompleteListener listener;
+
+
     public void setProgressListener( IProgress prg){
         this.prg = prg;
     }
 
 
-    public final void removeListener(final IThreadCompleteListener listener) {
-        listeners.remove(listener);
-    }
-    private final void notifyListeners(int code) {
-        for (IThreadCompleteListener listener : listeners) {
-            listener.notifyOfThreadComplete(code);
-        }
+
+    private final void notifyListener(int code) {
+
+            this.listener.notifyOfThreadComplete(code);
+
     }
 
     @Override
     protected Integer doInBackground(Integer... params) {
         android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_MORE_FAVORABLE);
 
-
+        imageCount=params[0];
         final int[] counter = {0};
         final String dirNm = Environment.getExternalStorageDirectory().getAbsolutePath()+"/req_images/ts";
         final String outputName = Environment.getExternalStorageDirectory().getAbsolutePath()+"/req_images/transitions/trans";
@@ -75,18 +70,20 @@ public class FFmpegTransitionEncoder extends ModernAsyncTask<Integer, Integer, I
                     public void onSuccess(String message) {
                         File dir = new File(dirNm + ++counter[0]);
                         String vidNm = outputName+counter[0];
-                        publishProgress(counter[0]);
+
                         if (dir.exists()) {
+
                             try {
                                 encoder.execute(getCommand(dir.getAbsolutePath(),vidNm),this);
+                                publishProgress(counter[0]);
                             } catch (FFmpegCommandAlreadyRunningException e) {
                                 e.printStackTrace();
                             }
 
                         }else {
-                             notifyListeners(3); /// notyfing when all chain of enoding transactions are finished
+                             notifyListener(3); /// notyfing when all chain of enoding transactions are finished
                             Log.d(TAG, message);
-                        };
+                        }
                     }
 
                     @Override
@@ -124,7 +121,7 @@ public class FFmpegTransitionEncoder extends ModernAsyncTask<Integer, Integer, I
     @Override
     protected void onProgressUpdate(Integer... values) {
         if (!values[0].equals(null)) {
-            String tmp = (int) (((float) values[0] / (imageCount * 24)) * 100) + "%";
+            Log.d("Adding transitions","prg.progress( "+ progressHandler.updateProgress(imageCount) + "  imageCount "+imageCount+"values..."+ values[0]);
             prg.progress(progressHandler.updateProgress(imageCount),"Adding Transitions");
             //progress.setText(tmp);
         }

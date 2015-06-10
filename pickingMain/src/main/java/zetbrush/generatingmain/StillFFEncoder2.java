@@ -174,7 +174,7 @@ public class StillFFEncoder2 extends ModernAsyncTask<Integer,Integer,Integer> im
     @Override
     protected void onProgressUpdate(Integer... values) {
         if (!values[0].equals(null))
-            Log.d("conf. ", "" + values[0]);
+            Log.d("Making Stills. ", "" + prgs.updateProgress(imgCount));
             progress.progress(prgs.updateProgress(imgCount),"Making Stills");
 
     }

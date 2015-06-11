@@ -4,10 +4,19 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
+
+    <fragment
+        android:id="@+id/fragment_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="zetbrush.com.view.SlidingFragment"/>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_slide_show"
@@ -16,6 +25,7 @@
         android:layout_below="@+id/current_image"
         android:layout_marginTop="5dp"
         android:overScrollMode="never" />
+
 
     <LinearLayout
         android:layout_width="wrap_content"

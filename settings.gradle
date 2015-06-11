@@ -1,2 +1,2 @@
-include  ':oMXPlayer', ':FFmpeg', ':library', ':pickingMain', ':fab_library', ':libraryphoto'
+include ':oMXPlayer', ':FFmpeg', ':library', ':pickingMain', ':fab_library', ':libraryphoto', ':libraryTabSlider', ':utils-v4'
 

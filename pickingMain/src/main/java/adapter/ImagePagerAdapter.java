@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.picsartvideo.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
@@ -69,7 +70,9 @@ public class ImagePagerAdapter extends PagerAdapter {
             path = "file://" + mImages.get(position).getPath();
         }
 
-
+        if(!ImageLoader.getInstance().isInited()){
+            ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(context));
+        }
         ImageLoader.getInstance().displayImage(path , imageView, new ImageLoadingListener() {
             @Override
             public void onLoadingStarted(String s, View view) {

@@ -38,4 +38,11 @@
         <item>Rotate</item>
 
     </string-array>
+
+    <string name="tab_1">Add Music</string>
+    <string name="tab_2">Duration/FX</string>
+    <string name="tab_3">Save/Render </string>
+
+    <string name="demo_title_indicator_trick1">Customise settings</string>
+
 </resources>

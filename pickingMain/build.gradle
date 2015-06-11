@@ -17,13 +17,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:22.1.1'
     compile 'com.android.support:recyclerview-v7:22.0.0'
-    compile 'com.android.support:support-v4:22.1.1'
     compile files('libs/gson-2.3.1.jar')
     compile files('libs/httpmime-4.3.jar')
     compile files('libs/json-simple-1.1.1.jar')
@@ -37,4 +40,6 @@ dependencies {
     compile project(':oMXPlayer')
     compile project(':FFmpeg')
     compile project(':library')
+    compile project(':libraryTabSlider')
+    compile project(':utils-v4')
 }

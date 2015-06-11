@@ -103,6 +103,8 @@
     <orderEntry type="module" module-name="oMXPlayer" exported="" />
     <orderEntry type="module" module-name="fab_library" exported="" />
     <orderEntry type="module" module-name="FFmpeg" exported="" />
+    <orderEntry type="module" module-name="libraryTabSlider" exported="" />
+    <orderEntry type="module" module-name="utils-v4" exported="" />
     <orderEntry type="module" module-name="library" exported="" />
   </component>
 </module>

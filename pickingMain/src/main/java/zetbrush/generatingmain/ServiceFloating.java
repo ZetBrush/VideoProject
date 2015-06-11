@@ -233,7 +233,6 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 		 vidName = pref.getString("name","");
 		 musicPath = pref.getString("musicpath","");
 
-
 	 }
 		setImageCount();
 
@@ -330,13 +329,14 @@ public class ServiceFloating extends Service implements IThreadCompleteListener 
 		PendingIntent pendingIntent = PendingIntent.getService(getApplicationContext(), 0, notificationIntent, 0);
 
 		Notification notification = new Notification(R.drawable.icon, "Click to show Progress head", System.currentTimeMillis());
-		notification.setLatestEventInfo(getApplicationContext(), "Start launcher" ,  "Click to start launcher", pendingIntent);
+		notification.setLatestEventInfo(getApplicationContext(), "Start Header" ,  "Click to show as window", pendingIntent);
 		notification.flags = Notification.FLAG_AUTO_CANCEL | Notification.FLAG_ONGOING_EVENT;
+
 
 		NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
 
 		notificationManager.notify(ID_NOTIFICATION, notification);
-
+		//arcpr.setVisibility(View.GONE);
 	}
 
 	@Override

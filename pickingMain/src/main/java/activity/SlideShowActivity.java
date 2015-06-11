@@ -29,7 +29,7 @@ import adapter.ImagePagerAdapter;
 import adapter.SlideShowAdapter;
 import item.SlideShowItem;
 import service.MyService;
-import zetbrush.generatingmain.MainGenFragment;
+import zetbrush.com.view.SlidingFragment;
 
 
 public class SlideShowActivity extends ActionBarActivity {
@@ -44,6 +44,7 @@ public class SlideShowActivity extends ActionBarActivity {
     private SlideShowAdapter slideShowAdapter;
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
     private RecyclerView.ItemAnimator itemAnimator;
+    SlidingFragment newFragment;
 
     private SlideShow slideShow;
     private Boolean playButtonIsSelected = false;
@@ -78,6 +79,11 @@ public class SlideShowActivity extends ActionBarActivity {
 
         init();
 
+        newFragment = (SlidingFragment)getSupportFragmentManager().findFragmentById( R.id.fragment_bottom );
+
+        if(!newFragment.isHidden()){
+            getSupportFragmentManager().beginTransaction().hide(newFragment).commit();
+        }
     }
 
     private void init() {
@@ -197,8 +203,21 @@ public class SlideShowActivity extends ActionBarActivity {
                 }
 
 
-                MainGenFragment newFragment = new MainGenFragment();
-                newFragment.show(getSupportFragmentManager(), "Configure.");
+
+
+                if (newFragment.isHidden())
+                {
+                    getSupportFragmentManager().beginTransaction().setCustomAnimations(
+                            R.anim.slide_in_left, R.anim.abc_slide_out_bottom
+                    ).show( newFragment ).commit();
+                }
+                else {
+
+                    getSupportFragmentManager().beginTransaction().setCustomAnimations(
+                            R.anim.slide_out_left, R.anim.abc_slide_out_bottom
+                    ).hide(newFragment).commit();
+                }
+
                 Intent intentService = new Intent(this, MyService.class);
                 intentService.putExtra("paths", pathsForDecoding);
                 startService(intentService);

@@ -8,16 +8,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Process;
 import android.provider.MediaStore;
-import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -58,7 +54,7 @@ import zetbrush.com.view.TouchScroll;
  * Created by Arman
  */
 
-public class MainGenFragment extends DialogFragment {
+public class MainGenFragment extends Fragment {
 
     private static final String TAG = "MainGenFrag";
     public static int currentEffect = 0;
@@ -156,11 +152,8 @@ public class MainGenFragment extends DialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        FragmentActivity faActivity  = (FragmentActivity) super.getActivity();
-
-
+         FragmentActivity faActivity  = (FragmentActivity) super.getActivity();
          rlLayout    = (RelativeLayout)    inflater.inflate(R.layout.fragment_main, container, false);
-
 
         dm = new DisplayMetrics();
         super.getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -408,6 +401,7 @@ View.OnClickListener onPlayClick = new View.OnClickListener() {
  };
 
 
+//// settings
 
  View.OnClickListener onSettingsButtonClick = new View.OnClickListener() {
      @Override
@@ -508,7 +502,7 @@ View.OnClickListener onPlayClick = new View.OnClickListener() {
 
 
 
-    ///////  Settings
+    ///////  render
 
 View.OnClickListener makevideoClick = new View.OnClickListener() {
     @Override
@@ -540,52 +534,7 @@ View.OnClickListener makevideoClick = new View.OnClickListener() {
 
                 }
 
-                /*if(musicPath!=null || musicPath!=""){
 
-                    String cmd =
-                            "-i "+musicPath+" -ss "+((int)(startMiliSc/1000))+" -af afade=t=out:st="+((int)((endMiliSc/1000)
-                            - (startMiliSc/1000))-2)+ ":d=2 " + Environment.getExternalStorageDirectory().getPath() + "/req_images/musictoadd.mp3";
-
-                    try {
-                        FFmpeg mmpg = new FFmpeg(MainGenFragment.this);
-
-                        mmpg.execute(cmd, new FFmpegExecuteResponseHandler() {
-                            @Override
-                            public void onSuccess(String message) {
-                                Log.d("FFMusic Success", message);
-                            }
-
-                            @Override
-                            public void onProgress(String message) {
-                                Log.d("FFMusic Progress", message);
-                            }
-
-                            @Override
-                            public void onFailure(String message) {
-                                Log.d("FFMusic Failure", message);
-                            }
-
-                            @Override
-                            public void onStart() {
-
-                            }
-
-                            @Override
-                            public void onFinish() {
-                            Log.d("FFMusic", "music cut finished");
-                            }
-                        });
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }*/
-
-
-               /* File fadfile = new File(filename + "000.png");
-                if (fadfile.exists()) {
-                    new StillVidEncoder().execute(fadfile);
-
-                }*/
 
             }
 
@@ -635,21 +584,6 @@ View.OnClickListener makevideoClick = new View.OnClickListener() {
     ////End of Making Video ///////
 
 
-    public void onBackPressed() {
-       /* try {
-
-            File dir = new File(Environment.getExternalStorageDirectory() + "/req_images");
-            if (dir.isDirectory()) {
-                String[] children = dir.list();
-                for (int i = 0; i < children.length; i++) {
-                    new File(dir, children[i]).delete();
-                }
-            }
-
-        } catch (Exception e) {
-        }
-        finish();*/
-    }
 
     public String getRealPathFromURI(Context context, Uri contentUri) {
         Cursor cursor = null;
@@ -668,98 +602,6 @@ View.OnClickListener makevideoClick = new View.OnClickListener() {
 
 
 
-
-
-    private class TransitionFrameGenerator extends AsyncTask<File, Integer, Integer> {
-
-        private static final String TAG = "ffencoder";
-
-
-        protected Integer doInBackground(File... params) {
-            Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
-
-            try {
-
-
-                int imgallcounter = 0;
-                int transcounter = 0;
-                int imagecounter = 0;
-                String dirNm = params[0].getParentFile().getPath();
-                Effects.EFFECT ef = Effects.EFFECT.FADE;
-                switch (currentEffect) {
-                    case 1:
-                        ef= Effects.EFFECT.FADE;
-                            break;
-                    case 2:
-                        ef = Effects.EFFECT.SlIDE;
-                        break;
-                    case 3:
-                        ef= Effects.EFFECT.ROTATE;
-                        break;
-                        default: ef = Effects.EFFECT.FADE;
-
-                }
-
-                while (true) {
-                    File filedir = new File(Environment.getExternalStorageDirectory().getPath() + "/req_images/ts"+vidcount);
-                    if(!filedir.exists())
-                        filedir.mkdirs();
-
-                    File img = new File(dirNm + "/" + "image_" + String.format("%03d", imagecounter) + ".jpg");
-                    String inptFile = "image_" + String.format("%03d", imagecounter) + ".jpg";
-
-                    Bitmap btm = BitmapFactory.decodeFile(img.getAbsolutePath());
-
-                   /* int width = btm.getWidth();
-                    int height = btm.getHeight();
-                    Bitmap transBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-                    FileOutputStream out = null;*/
-
-
-                    Effects.builder(ef)
-                            .setParams(dm)
-                            .generateFrames(btm, vidcount);
-
-                    publishProgress(transcounter);
-                    transcounter++;
-                    vidcount++;
-                    System.gc();
-                    File imgg = new File(dirNm + "/image_" + String.format("%03d", imagecounter + 1) + ".jpg");
-                    if (!imgg.exists()) {
-                        vidcount = 1;
-                        break;
-                    }
-                    imagecounter++;
-
-                }
-
-            } catch (Exception e) {
-                Log.e(TAG, "IO", e);
-            }
-
-            return 0;
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            if (!values[0].equals(null)) {
-                String tmp = (int) (((float) values[0] / (imageCount * 24)) * 100) + "%";
-                progress.setText(tmp);
-
-            }
-        }
-        @Override
-        protected void onPostExecute(Integer result) {
-            progress.setText("wait..");
-
-            //FFmpegTransitionEncoder ffmpegins = new FFmpegTransitionEncoder(MainGenFragment.this,);
-            //ffmpegins.addListener(MainGenFragment.this);
-           // ffmpegins.execute(imageCount);
-
-        }
-
-
-    }
 
     private static class UIHelper {
         public static void setupTitleBar(Activity c) {

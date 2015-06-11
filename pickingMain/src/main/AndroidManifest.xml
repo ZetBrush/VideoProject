@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.picsartvideo" >
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.picsartvideo">
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -45,6 +46,7 @@
             android:screenOrientation="portrait"
             >
         </activity>
+
         <service
             android:name="zetbrush.generatingmain.ServiceFloating"
             android:exported="true"

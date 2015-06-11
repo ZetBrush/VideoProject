@@ -39,6 +39,7 @@ import android.widget.Toast;
 import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
 import com.github.hiteshsondhi88.libffmpeg.LoadBinaryResponseHandler;
 import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegNotSupportedException;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
 import com.picsartvideo.R;
 
 import net.pocketmagic.android.openmxplayer.OpenMXPlayer;
@@ -155,27 +156,49 @@ public class MainGenFragment extends Fragment {
          FragmentActivity faActivity  = (FragmentActivity) super.getActivity();
          rlLayout    = (RelativeLayout)    inflater.inflate(R.layout.fragment_main, container, false);
 
-        dm = new DisplayMetrics();
-        super.getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
-        makeVideoButton = (Button) rlLayout.findViewById(R.id.makeVideoBut);
-        makeVideoButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_render_button));
+        int position = FragmentPagerItem.getPosition(getArguments());
 
-        playButton = (Button) rlLayout.findViewById(R.id.playButtn);
-        playButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.selectorplaybutton));
-        seekbar = (SeekBar) rlLayout.findViewById(R.id.seekbar);
+        if(position==0){
 
-        pickMusicbtn = (Button) rlLayout.findViewById(R.id.pickMusicbtn);
-        musicNameText = (TextView) rlLayout.findViewById(R.id.musicNameText);
-        musicTimeText = (TextView) rlLayout.findViewById(R.id.musicTimeText);
-        settingsButton = (Button)rlLayout.findViewById(R.id.settingsButton);
-        deleteMusic = (ImageView)rlLayout.findViewById(R.id.deleteMusicImg);
+            rlLayout    = (RelativeLayout)    inflater.inflate(R.layout.fragment_music, container, false);
+            playButton = (Button) rlLayout.findViewById(R.id.playButtn);
+            playButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.selectorplaybutton));
+            seekbar = (SeekBar) rlLayout.findViewById(R.id.seekbar);
+
+            pickMusicbtn = (Button) rlLayout.findViewById(R.id.pickMusicbtn);
+            musicNameText = (TextView) rlLayout.findViewById(R.id.musicNameText);
+            musicTimeText = (TextView) rlLayout.findViewById(R.id.musicTimeText);
+            deleteMusic = (ImageView)rlLayout.findViewById(R.id.deleteMusicImg);
+
+            pickMusicbtn.setOnClickListener(onPickMusicClick);
+            playButton.setOnClickListener(onPlayClick);
+            deleteMusic.setOnClickListener(onDeleteMusicPathClick);
+        }
+
+        else {
+
+            dm = new DisplayMetrics();
+            super.getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+            makeVideoButton = (Button) rlLayout.findViewById(R.id.makeVideoBut);
+            makeVideoButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_render_button));
+
+            playButton = (Button) rlLayout.findViewById(R.id.playButtn);
+            playButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.selectorplaybutton));
+            seekbar = (SeekBar) rlLayout.findViewById(R.id.seekbar);
+
+            pickMusicbtn = (Button) rlLayout.findViewById(R.id.pickMusicbtn);
+            musicNameText = (TextView) rlLayout.findViewById(R.id.musicNameText);
+            musicTimeText = (TextView) rlLayout.findViewById(R.id.musicTimeText);
+            settingsButton = (Button) rlLayout.findViewById(R.id.settingsButton);
+            deleteMusic = (ImageView) rlLayout.findViewById(R.id.deleteMusicImg);
 
 
-        pickMusicbtn.setOnClickListener(onPickMusicClick);
-        makeVideoButton.setOnClickListener(makevideoClick);
-        settingsButton.setOnClickListener(onSettingsButtonClick);
-        playButton.setOnClickListener(onPlayClick);
-        deleteMusic.setOnClickListener(onDeleteMusicPathClick);
+            pickMusicbtn.setOnClickListener(onPickMusicClick);
+            makeVideoButton.setOnClickListener(makevideoClick);
+            settingsButton.setOnClickListener(onSettingsButtonClick);
+            playButton.setOnClickListener(onPlayClick);
+            deleteMusic.setOnClickListener(onDeleteMusicPathClick);
+        }
         return rlLayout; // We must return the loaded Layout
     }
 

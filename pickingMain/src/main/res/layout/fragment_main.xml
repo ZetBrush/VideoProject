@@ -9,7 +9,7 @@
     android:background="@color/background_floating_material_dark"
     >
 
-
+<!--
     <LinearLayout
 
         android:id="@+id/buttons"
@@ -126,6 +126,6 @@
 
             />
 
-    </FrameLayout>
+    </FrameLayout>-->
 
 </RelativeLayout>

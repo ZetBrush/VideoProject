@@ -3,16 +3,47 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:orientation="vertical"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:background="@color/background_floating_material_dark"
                     android:id="@+id/musicfragment">
 
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
+        android:id="@+id/pickingframe"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
+        <SeekBar
+            android:id="@+id/seekbar"
+            android:layout_width="384dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_gravity="right|top"
+            android:indeterminate="false"/>
 
+    </FrameLayout>
 
+    <zetbrush.generatingmain.RangeSeekBar
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rangeSeekbar"
+        android:layout_below="@+id/pickingframe"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:layout_below="@+id/pickMusicbtn"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2"/>
 
     <Button
         android:layout_weight="1"
@@ -28,91 +59,65 @@
         android:layout_width="67dp"
         android:layout_height="64dp"
         android:onClick="onPlayClick"
-        android:layout_marginLeft="20dp"/>
+        android:layout_gravity="left|top"
+        android:layout_alignTop="@+id/pickMusicbtn"
+        android:layout_toLeftOf="@+id/musicTimeText"
+        android:layout_toStartOf="@+id/musicTimeText"/>
 
-
-    <FrameLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/pickMusicbtn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:text="Pick Music"
+
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/pickingframe"
-        android:layout_below="@+id/play_button">
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="21dp"/>
 
-        <TextView
-            android:id="@+id/musicNameText"
-            android:layout_width="match_parent"
-            android:layout_height="15dp"
-            android:layout_marginTop="45dp"
-            android:text="No music selected"
-            android:textSize="14sp"
+    <TextView
+        android:id="@+id/musicNameText"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:text="No music selected"
+        android:textSize="14sp"
+        android:layout_alignTop="@id/rangeSeekbar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
-            />
+    <ImageView
+        android:id="@+id/deleteMusicImg"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:background="@drawable/delete"
+        android:clickable="true"
+        android:onClick="onDeleteMusicPathClick"
+        android:layout_alignTop="@id/rangeSeekbar"
+        android:layout_toRightOf="@+id/playButtn"
+        android:layout_toEndOf="@+id/playButtn"/>
 
-        <ImageView
-            android:id="@+id/deleteMusicImg"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="300dp"
-            android:layout_marginTop="40dp"
-            android:background="@drawable/delete"
-            android:clickable="true"
-            android:onClick="onDeleteMusicPathClick" />
-
-        <Button
-            android:id="@+id/pickMusicbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pick Music"
-
-            />
-
-        <SeekBar
-            android:id="@+id/seekbar"
-            android:layout_width="210dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp" />
-
-        <TextView
-            android:id="@+id/musicTimeText"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="300dp"
-            android:textSize="12sp"
-
-            />
-
-    </FrameLayout>
+    <TextView
+        android:id="@+id/musicTimeText"
+        android:layout_width="52dp"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:layout_below="@+id/playButtn"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="13dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginTop="13dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cut music"
-        android:id="@+id/captionmusic"
-        android:layout_below="@+id/pickingframe"
-        />
-
-    <zetbrush.generatingmain.RangeSeekBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/rangeSeekbar"
-        android:layout_below="@+id/captionmusic"
-        android:layout_alignRight="@+id/scrollpicker"
-        android:layout_alignEnd="@+id/scrollpicker"
-        android:layout_marginTop="20dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="59dp"
-        android:layout_marginEnd="59dp"
-        android:layout_marginTop="502dp"/>
+        android:id="@+id/textView2"
+        android:layout_below="@id/rangeSeekbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"/>
 
 
 </RelativeLayout>

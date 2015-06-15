@@ -1,6 +1,7 @@
 package activity;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -12,6 +13,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,9 +32,10 @@ import adapter.SlideShowAdapter;
 import item.SlideShowItem;
 import service.MyService;
 import zetbrush.com.view.SlidingFragment;
+import zetbrush.generatingmain.IProgress;
 
 
-public class SlideShowActivity extends ActionBarActivity {
+public class SlideShowActivity extends ActionBarActivity implements IProgress {
 
     private ViewPager viewPager;
     private RecyclerView recyclerView;
@@ -60,6 +63,14 @@ public class SlideShowActivity extends ActionBarActivity {
 
     private static final String root = Environment.getExternalStorageDirectory().toString();
     private File myDir = new File(root + "/req_images");
+    Appclass monitoring;
+
+
+
+    @Override
+    public void progress(int prg, String fromTask) {
+        Log.d("AppicationListener",prg +"  " + fromTask);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +95,9 @@ public class SlideShowActivity extends ActionBarActivity {
         if(!newFragment.isHidden()){
             getSupportFragmentManager().beginTransaction().hide(newFragment).commit();
         }
+        monitoring = new Appclass();
+        monitoring.setListener(this);
+
     }
 
     private void init() {
@@ -209,7 +223,7 @@ public class SlideShowActivity extends ActionBarActivity {
                 {
                     getSupportFragmentManager().beginTransaction().setCustomAnimations(
                             R.anim.slide_in_left, R.anim.abc_slide_out_bottom
-                    ).show( newFragment ).commit();
+                    ).show(newFragment).commit();
                 }
                 else {
 
@@ -244,6 +258,8 @@ public class SlideShowActivity extends ActionBarActivity {
         editor.commit();
         super.onDestroy();
     }
+
+
 
     private class SlideShow extends AsyncTask<Void, Integer, Void> {
         protected Void doInBackground(Void... path) {
@@ -284,6 +300,46 @@ public class SlideShowActivity extends ActionBarActivity {
         protected void onPostExecute(Void aVoid) {
             playButtonIsSelected = false;
             super.onPostExecute(aVoid);
+        }
+    }
+
+
+    private class Appclass extends Application implements IProgress{
+        IProgress listener;
+
+
+
+        public void setListener(IProgress listnr){
+            this.listener= listnr;
+
+        }
+
+        @Override
+        public void onTerminate() {
+            super.onTerminate();
+            progress(4,"CalledonTerminate");
+        }
+
+        @Override
+        public void onCreate() {
+            super.onCreate();
+        }
+
+        @Override
+        public void onLowMemory() {
+            super.onLowMemory();
+            progress(2,"calledLowMemory");
+        }
+
+        @Override
+        public void onTrimMemory(int level) {
+            super.onTrimMemory(level);
+            progress(3, "calledTrimMemory");
+        }
+
+        @Override
+        public void progress(int prg, String fromTask) {
+            listener.progress(prg,fromTask);
         }
     }
 

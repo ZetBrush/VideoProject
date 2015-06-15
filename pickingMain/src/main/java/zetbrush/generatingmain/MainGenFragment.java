@@ -80,7 +80,7 @@ public class MainGenFragment extends Fragment {
     private EditText outputEditText;
 
     private String path = null;
-    private String musicPath = null;
+    private static String musicPath = null;
     private Button pickMusicbtn;
     private TextView musicNameText;
 
@@ -91,6 +91,7 @@ public class MainGenFragment extends Fragment {
     RelativeLayout rlLayout;
     private Button settingsButton;
     private ImageView deleteMusic;
+    RangeSeekBar<Long> rengeSeekbar;
 
 
     PlayerEvents events = new PlayerEvents() {
@@ -158,6 +159,7 @@ public class MainGenFragment extends Fragment {
 
         int position = FragmentPagerItem.getPosition(getArguments());
 
+
         if(position==0){
 
             rlLayout    = (RelativeLayout)    inflater.inflate(R.layout.fragment_music, container, false);
@@ -173,31 +175,94 @@ public class MainGenFragment extends Fragment {
             pickMusicbtn.setOnClickListener(onPickMusicClick);
             playButton.setOnClickListener(onPlayClick);
             deleteMusic.setOnClickListener(onDeleteMusicPathClick);
+            rengeSeekbar = (RangeSeekBar) rlLayout.findViewById(R.id.rangeSeekbar);
+
+            rengeSeekbar.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Long>() {
+                @Override
+                public void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar, Long minValue, Long maxValue) {
+                    startMiliSc = minValue;
+                    endMiliSc = maxValue;
+                    //Log.i(TAG, "selected new range values: MIN=" + minValue + ", MAX=" + maxValue);
+
+                    rengeSeekbar.setSelectedMinValue(minValue);
+                    rengeSeekbar.setSelectedMaxValue(maxValue);
+                }
+
+            });
+
+
+
+            seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                }
+
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    if (fromUser && player != null) try {
+                        player.seek(progress);
+                    } catch (NullPointerException e) {
+                    }
+
+                }
+            });
+
+
         }
 
-        else {
+        else if (position==1){
 
+            rlLayout    = (RelativeLayout)    inflater.inflate(R.layout.fragment_fxtiming, container, false);
+            effectPicker = (ScrollPickerView) rlLayout.findViewById(R.id.scrollpicker);
+            Resources res = getResources();
+
+            final String[] labels = res.getStringArray(R.array.effects_list);
+            final String[] secs = res.getStringArray(R.array.seconds_list);
+            effectPicker.addSlot(secs, 2, ScrollPickerView.ScrollType.Loop);
+            effectPicker.addSlot(labels, 3, ScrollPickerView.ScrollType.Loop);
+            effectPicker.setSlotIndex(1, currentEffect);
+            effectPicker.setSlotIndex(0, intervalSec);
+
+
+
+        }
+
+        else if(position==2){
+            rlLayout    = (RelativeLayout)    inflater.inflate(R.layout.fragment_rendersave, container, false);
             dm = new DisplayMetrics();
             super.getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
             makeVideoButton = (Button) rlLayout.findViewById(R.id.makeVideoBut);
             makeVideoButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_render_button));
 
-            playButton = (Button) rlLayout.findViewById(R.id.playButtn);
-            playButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.selectorplaybutton));
-            seekbar = (SeekBar) rlLayout.findViewById(R.id.seekbar);
+            outputEditText = (EditText) rlLayout.findViewById(R.id.videoName);
 
-            pickMusicbtn = (Button) rlLayout.findViewById(R.id.pickMusicbtn);
-            musicNameText = (TextView) rlLayout.findViewById(R.id.musicNameText);
-            musicTimeText = (TextView) rlLayout.findViewById(R.id.musicTimeText);
-            settingsButton = (Button) rlLayout.findViewById(R.id.settingsButton);
-            deleteMusic = (ImageView) rlLayout.findViewById(R.id.deleteMusicImg);
+            outputEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    name[0] = s.toString();
+                }
+            });
 
 
-            pickMusicbtn.setOnClickListener(onPickMusicClick);
+
             makeVideoButton.setOnClickListener(makevideoClick);
-            settingsButton.setOnClickListener(onSettingsButtonClick);
-            playButton.setOnClickListener(onPlayClick);
-            deleteMusic.setOnClickListener(onDeleteMusicPathClick);
+           // settingsButton.setOnClickListener(onSettingsButtonClick);
+           // playButton.setOnClickListener(onPlayClick);
+           // deleteMusic.setOnClickListener(onDeleteMusicPathClick);
         }
         return rlLayout; // We must return the loaded Layout
     }
@@ -271,7 +336,7 @@ public class MainGenFragment extends Fragment {
     }};
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(final int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 5 && data != null) {
@@ -283,6 +348,15 @@ public class MainGenFragment extends Fragment {
              if (!musicPath.equals(newMusicPath)) {
                 newMusicPath = musicPath;
                 try {
+                    long start = 0;
+                    long minv = 20;
+                    player = new OpenMXPlayer();
+
+
+                    if (musicPath != null) {
+
+
+                    }
                     player.stop();
                     player.setDataSource("");
                 } catch (NullPointerException e) {
@@ -293,6 +367,10 @@ public class MainGenFragment extends Fragment {
                 @Override
                 public void onStart(String mime, int sampleRate, int channels, long duration) {
                     musictotalTime = duration / 1000;
+
+                    rengeSeekbar.setRangeValues(0l, musictotalTime);
+                    rengeSeekbar.setSelectedMinValue(30l);
+                    rengeSeekbar.setSelectedMaxValue(musictotalTime-35);
                 }
 
                 @Override
@@ -320,7 +398,7 @@ public class MainGenFragment extends Fragment {
             mplyr.setDataSource(musicPath);
             try {
                 mplyr.play();
-                mplyr.seek(2);
+                mplyr.seek(4);
                 try {
                     Thread.currentThread().wait(20);
                 } catch (InterruptedException e) {
@@ -360,9 +438,11 @@ public class MainGenFragment extends Fragment {
         @Override
         public void onClick(View view) {
             musicPath = null;
+            if(player!=null)
             player.stop();
             musictotalTime = 0;
             musicNameText.setText("No music Selected");
+            rengeSeekbar.resetSelectedValues();
         }
     };
 
@@ -372,27 +452,6 @@ public class MainGenFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-
-        seekbar = (SeekBar) rlLayout.findViewById(R.id.seekbar);
-        seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (fromUser && player != null) try {
-                    player.seek(progress);
-                } catch (NullPointerException e) {
-                }
-
-            }
-        });
 
     }
 

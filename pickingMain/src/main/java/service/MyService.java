@@ -46,7 +46,7 @@ public class MyService extends Service {
 
         mBuilder.setContentTitle("PicsArtVideoGenerator")
                 .setContentText("0 %")
-                .setSmallIcon(R.drawable.ic_action_download);
+                .setSmallIcon(R.drawable.icon);
 
         mBuilder.setProgress(100, 0, false);
         mNotifyManager.notify(id, mBuilder.build());
@@ -76,7 +76,9 @@ public class MyService extends Service {
             public void run() {
 
                 Looper.prepare();
-
+                if (!((new File(Environment.getExternalStorageDirectory().getPath()+"/req_images")).exists()) ){
+                    new File(Environment.getExternalStorageDirectory().getPath()+"/req_images").mkdirs();
+                }
                 for (int i = 0; i < paths.length; i++) {
 
                     if (paths[i].contains("req_images")) {
